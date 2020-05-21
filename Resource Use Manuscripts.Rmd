@@ -1,0 +1,71 @@
+---
+title: "Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape"
+output:
+  html_document:
+    css: style.css
+    df_print: kable
+    theme: spacelab
+    toc: yes
+    toc_float: yes
+    toc_depth: 2
+    number_sections: yes
+subtitle: Analysis for manuscript
+Author: Shawn Dsouza
+---
+
+
+# Introduction
+
+The core message of this manuscripts are as follows:
+
+- Resource use differs between _H. curtus_ and _H. schistosus_
+- Variation in fishing intensity of trawlers and gillnets affects patterns of resource use
+
+This file was last update on `r Sys.Date()`
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+
+options(max.print="75")
+knitr::opts_chunk$set(echo = FALSE, error = T, warning = F, message = F, tidy = T, 
+                      cache = T,
+                      dpi = 300, fig.align = "center")
+
+#Required libraries
+
+library(plyr)
+library(tidyverse)
+library(broom)
+library(lubridate)
+library(viridis)
+
+#Data import
+
+snakes = read.csv("./Data/Sea-snakes_fish-dep_2018-19_070220.csv")
+
+theme_set(theme_bw()+
+            theme(legend.position = "top",
+                  text = element_text(size = 20)
+                  )
+          )#setting ggplot theme
+```
+
+```{r child = 'Fishing intensity.rmd'}
+```
+
+```{r child = 'Habitat use.rmd'}
+```
+
+```{r child = 'Diet.rmd'}
+```
+
+```{r child = 'Isotopic Niche.rmd'}
+```
+
+```{r child = 'Fisheries - spatial overlap.rmd'}
+```
+
+```{r child = 'Fisheries - diet overlap.rmd'}
+```
+
+```{r child = 'Fisheries - isotopic niche.rmd'}
+```
