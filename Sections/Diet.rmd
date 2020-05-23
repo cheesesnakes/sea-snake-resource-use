@@ -110,7 +110,7 @@ gc%>%
   group_by(Snake.Species, Prey.Family, Prey.Species)%>%
   summarise(N = last(N),
             Perc = n()*100/N)%>%
-  write.csv(file = "prey list.csv")
+  write.csv(file = "../Data/prey list.csv")
 
 ```
 ## List of sea snake prey species

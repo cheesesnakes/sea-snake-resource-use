@@ -25,6 +25,8 @@ tonnage_gn = ssf%>%
 tonnage <- bind_rows(tonnage_gn, tonnage_tr)%>%
   filter(Gear.Type == "Gill Net" | Gear.Type == "Trawler")
 
+write.csv(tonnage, "./Data/catch tonnage.csv")
+
 #extracting list of fish families from trawler catch
 
 fish_fam = trawler_lvb%>%

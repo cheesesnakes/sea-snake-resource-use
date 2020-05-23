@@ -13,7 +13,6 @@ subtitle: Analysis for manuscript
 Author: Shawn Dsouza
 ---
 
-
 # Introduction
 
 The core message of this manuscripts are as follows:

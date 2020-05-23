@@ -21,7 +21,7 @@ As it is infeasible to to find sites with little to no fishing pressure on mainl
 ```{r}
 # determining clusters for fishing intensity
 
-fi_den <- read.csv("./data/cell_fish_snake.csv")
+fi_den <- read.csv("../data/cell_fish_snake.csv")
 
 fi_den = fi_den%>%
   mutate(id = 1:nrow(fi_den))
@@ -75,7 +75,7 @@ write.csv(sia_li, "./Data/SIA_fishing intensity.csv")
 ## Sample size
 
 ```{r}
-sia_li <- read.csv("./Data/SIA_fishing intensity.csv")
+sia_li <- read.csv("../Data/SIA_fishing intensity.csv")
 
 sia_li <- sia_li%>%
   inner_join(fi, c("x","y"))
@@ -219,6 +219,6 @@ SEA.B_snakes.fi.df%>%
   scale_fill_discrete(name = "Fishing Intensity")+
   theme(axis.text.x = element_text(face = "italic"))
 
-ggsave(last_plot(), filename = "./Figures/fig6.png", height = 4.5, width = 8, device = "png")
+ggsave(last_plot(), filename = "../Figures and Tables/fig6.png", height = 4.5, width = 8, device = "png")
 ```
 

@@ -13,7 +13,7 @@ sia_snakes = sia%>%
   filter(Tissue.type != "Gut Content")%>%
   left_join(snakes, 'Field.Code')%>%
   mutate(Lab = "CEAS")%>%
-  rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
+  dplyr::rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
   dplyr::select(Date, Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
                 Gear.Type, Fishing.Location, Depth.Caught..m.,
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
@@ -64,7 +64,7 @@ library(SIBER)
 siber_snakes = sia_snakes%>%
   filter()%>%
   dplyr::select(Delta.Carbon, Delta.Nitrogen, Tissue.type, Species)%>%
-  rename(iso1 = Delta.Carbon,
+  dplyr::rename(iso1 = Delta.Carbon,
          iso2 = Delta.Nitrogen,
          group = Tissue.type,
          community = Species)%>%
@@ -155,10 +155,6 @@ n.posts <- 10
 # decide how big an ellipse you want to draw
 p.ell <- pchisq(1,2)
 
-# for a standard ellipse use
-# p.ell <- pchisq(1,2)
-
-
 set.seed(1)
 
 # a list to store the results
@@ -167,31 +163,31 @@ snake_ellipses <- list()
 # loop over groups
 for (i in 1:length(snakes.post)#sgenerating list with length groups*communities
 ){
-
-# a dummy variable to build in the loop
-ell <- NULL
-post.id <- NULL
-
-for ( j in sample(1:4000, n.posts)){#randomlu extracting parameters for n samples from posterior distribution
-
-# covariance matrix
-Sigma  <- matrix(snakes.post[[i]][j,1:4], 2, 2)
-
-# mean
-mu     <- snakes.post[[i]][j,5:6]
-
-# ellipse points
-
-out <- ellipse::ellipse(Sigma, centre = mu , level = p.ell)
-
-
-ell <- rbind(ell, out) #ellipse points from current loop
-post.id <- c(post.id, rep(j, nrow(out))) #adding loop number (rep)
-
-}
-ell <- as.data.frame(ell) # data frame of ellipse points from all draws
-ell$rep <- post.id #adding draw id
-snake_ellipses[[i]] <- ell #creading list of draws from each community.group
+  
+  # a dummy variable to build in the loop
+  ell <- NULL
+  post.id <- NULL
+  
+  for ( j in sample(1:4000, n.posts)){#randomlu extracting parameters for n samples from posterior distribution
+    
+    # covariance matrix
+    Sigma  <- matrix(snakes.post[[i]][j,1:4], 2, 2)
+    
+    # mean
+    mu     <- snakes.post[[i]][j,5:6]
+    
+    # ellipse points
+    
+    out <- ellipse::ellipse(Sigma, centre = mu , level = p.ell)
+    
+    
+    ell <- rbind(ell, out) #ellipse points from current loop
+    post.id <- c(post.id, rep(j, nrow(out))) #adding loop number (rep)
+    
+  }
+  ell <- as.data.frame(ell) # data frame of ellipse points from all draws
+  ell$rep <- post.id #adding draw id
+  snake_ellipses[[i]] <- ell #creading list of draws from each community.group
 }
 
 snake.ellipses <- bind_rows(snake_ellipses, .id = "id")#creating a data frame of post ellipse draws
@@ -204,32 +200,32 @@ group_comm_names <- names(snakes.post)[as.numeric(snake.ellipses$id)]#extractin 
 
 # split them and conver to a matrix, NB byrow = T
 split_group_comm <- matrix(unlist(strsplit(group_comm_names, "[.]")),
-nrow(snake.ellipses), 2, byrow = TRUE)#splitting communit and group
+                           nrow(snake.ellipses), 2, byrow = TRUE)#splitting communit and group
 
 snake.ellipses$community <- split_group_comm[,1]
 snake.ellipses$group     <- split_group_comm[,2]
 
 snake.ellipses <- dplyr::rename(snake.ellipses, iso1 = x, iso2 = y, 
-Species = community, Tissue = group)
+                                Species = community, Tissue = group)
 
 #Plotting 10 randomly sampled ellipses
 
 siber_snakes%>%
   rename(Species = community,
-Tissue = group)%>%
-ggplot(aes(iso1, iso2, col = Species))+
-geom_point(aes(shape = Species), size = 2)+
-ylab(expression(paste(delta^{15}, "N (\u2030)")))+
-xlab(expression(paste(delta^{13}, "C (\u2030)")))+
-geom_polygon(data = snake.ellipses,
-mapping = aes(iso1, iso2, group = rep, linetype = Species, col = Species),
-fill = NA)+
-scale_color_brewer(palette = "Set1", direction = -1)+
-scale_fill_brewer(palette = "Set1", direction = -1)+
-facet_wrap(~Tissue)+
-theme(legend.text = element_text(face = "italic"))
+         Tissue = group)%>%
+  ggplot(aes(iso1, iso2, col = Species))+
+  geom_point(aes(shape = Species), size = 2)+
+  ylab(expression(paste(delta^{15}, "N (\u2030)")))+
+  xlab(expression(paste(delta^{13}, "C (\u2030)")))+
+  geom_polygon(data = snake.ellipses,
+               mapping = aes(iso1, iso2, group = rep, linetype = Species, col = Species),
+               fill = NA)+
+  scale_color_brewer(palette = "Set1", direction = -1)+
+  scale_fill_brewer(palette = "Set1", direction = -1)+
+  facet_wrap(~Tissue)+
+  theme(legend.text = element_text(face = "italic"))
 
-ggsave(last_plot(), filename = "./Figures/figure3.tiff", height = 4.5, width = 8)
+ggsave(last_plot(), filename = "../Figures and Tables/figure3.tiff", height = 4.5, width = 8)
 ```
 
 As seen in the SEA estimation, low sample size for *H. curtus* causes greater uncertainty in the estimation of standar ellipses even with bayesian inference. Both carbon and nitrogen isotpes seem to be enriched in scales when compared to plasma. Degree of overlap appears to be low for both tissues.
@@ -242,40 +238,40 @@ As seen in the SEA estimation, low sample size for *H. curtus* causes greater un
 ```{r, cache = TRUE}
 #Overlap in ellipse based on plasma samples
 snake.p.overlap <- bayesianOverlap(ellipse1 = "Hydrophis schistosus.Plasma" , #Group 1
-ellipse2 = "Hydrophis curtus.Plasma", #Group 2
-snakes.post, #list with posteriour dists
-draws = 100, p.interval = 0.95, n = 100) #params
+                                   ellipse2 = "Hydrophis curtus.Plasma", #Group 2
+                                   snakes.post, #list with posteriour dists
+                                   draws = 100, p.interval = 0.95, n = 100) #params
 
 snake.p.overlap <- snake.p.overlap%>%
-mutate(Turnover = "Short-term")
+  mutate(Turnover = "Short-term")
 
 #overlap in ellipse based on scale samples
 snake.s.overlap <- bayesianOverlap(ellipse1 = "Hydrophis schistosus.Scales" , #Group 1
-ellipse2 = "Hydrophis curtus.Scales", #Group 2
-snakes.post, #list with posteriour dists
-draws = 100, p.interval = 0.95, n = 100) #params
+                                   ellipse2 = "Hydrophis curtus.Scales", #Group 2
+                                   snakes.post, #list with posteriour dists
+                                   draws = 100, p.interval = 0.95, n = 100) #params
 
 snake.s.overlap <- snake.s.overlap%>%
-mutate(Turnover = "Long-term")
+  mutate(Turnover = "Long-term")
 
 snake.overlap <- bind_rows(snake.p.overlap, snake.s.overlap)
 
 snake.overlap%>%
-mutate(prop.overlap = overlap/(area1 + area2 - overlap))%>% #relative overlap
-ggplot(aes(prop.overlap))+
-geom_histogram(bins = 10, col = "black")+
-#geom_vline(aes(xintercept = mean(prop.overlap),  col = "red"), size = 1)+
-labs(x = "Proportion of overlap", y = "Number of samples")+
-scale_color_discrete(name = "Mean")+
-facet_wrap(~Turnover)
+  mutate(prop.overlap = overlap/(area1 + area2 - overlap))%>% #relative overlap
+  ggplot(aes(prop.overlap))+
+  geom_histogram(bins = 10, col = "black")+
+  #geom_vline(aes(xintercept = mean(prop.overlap),  col = "red"), size = 1)+
+  labs(x = "Proportion of overlap", y = "Number of samples")+
+  scale_color_discrete(name = "Mean")+
+  facet_wrap(~Turnover)
 ```
 
 ```{r}
 snake.overlap%>%
-group_by(Turnover)%>%
-mutate(prop.overlap = overlap/(area1 + area2 - overlap))%>%
-summarise(Avg.overlap = mean(prop.overlap),
-sd = sd(prop.overlap))
+  group_by(Turnover)%>%
+  mutate(prop.overlap = overlap/(area1 + area2 - overlap))%>%
+  summarise(Avg.overlap = mean(prop.overlap),
+            sd = sd(prop.overlap))
 ```
 
 Overlap between *H. curtus* and *H. schistosus* seems to be high in when comparing long term resource use, i.e., scales.

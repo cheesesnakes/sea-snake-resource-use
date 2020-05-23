@@ -11,7 +11,6 @@ library(viridis)
 # Varition in fishing intensity along the sindhudurg coast
 
 ```{r}
-
 #importing effort data
 
 effort = read.csv("../Data/Fishing-Effort_111219.csv")%>%
@@ -87,6 +86,7 @@ How do we use location and depth data gathered from fisher surveys to map fishin
 library(sp)
 library(rgdal)
 library(raster)
+library(ggmap)
 
 dep_int = read.csv("../Data/Fishing intensity_dep.csv")
 
@@ -114,6 +114,15 @@ fi <- dep_int%>%
 base <- get_googlemap(center = c(mean(dep_int$lon),mean(dep_int$lat)), 
                       zoom = 10, scale = 2, maptype = "terrain")##Getting basemap
 
+#importing bathymetric data downloaded from GEBCO database
+library(marmap)
+
+depth <- readGEBCO.bathy("../Data/gebco_2019_n16.6_s15.6_w73.1_e73.9.nc")
+
+depth = fortify.bathy(depth)%>%
+  dplyr::rename(lon = x, lat = y, depth = z)%>%
+  filter(depth < 1)
+
 boat_plot <- dep_int%>%
   group_by(Gear.Type)%>%
   nest()%>%
@@ -122,7 +131,7 @@ boat_plot <- dep_int%>%
          plot = map2(mdf, Gear.Type, ~int.plot(mdf = ., Gear.Type, name = "Fishing intensity")))%>%
   gridExtra::grid.arrange(grobs = .$plot, ncol = 2)
 
-ggsave(boat_plot, filename = "../Figures/figure4.tiff", width = 8, height = 4.5, dpi = 300)
+ggsave(boat_plot, filename = "../Figures and Tables/figure4.tiff", width = 8, height = 4.5, dpi = 300)
 ```
 
 

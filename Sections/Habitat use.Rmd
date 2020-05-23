@@ -97,6 +97,14 @@ snakes_den%>%
   unnest()
 
 #Plotting distribution
+library(marmap)
+library(ggmap)
+
+depth <- readGEBCO.bathy("../Data/gebco_2019_n16.6_s15.6_w73.1_e73.9.nc")
+
+depth = fortify.bathy(depth)%>%
+  dplyr::rename(lon = x, lat = y, depth = z)%>%
+  filter(depth < 1)
 
 snake_plot <- snakes_den%>%
   mutate(Species = ifelse(Species == "HC", "Hydrophis curtus", "Hydrophis schistosus"))%>%
@@ -107,7 +115,7 @@ snake_plot <- snakes_den%>%
          plot = map2(mdf, Species, ~int.plot(mdf = ., Species, name = "CPUE")))%>%
   gridExtra::grid.arrange(grobs = .$plot, ncol = 2)
 
-ggsave(snake_plot, filename = "./Figures/figure1.tiff", width = 8, height = 4.5, dpi = 300)
+ggsave(snake_plot, filename = "../Figures and Tables/figure1.tiff", width = 8, height = 4.5, dpi = 300)
 
 ```
 
