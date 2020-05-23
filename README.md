@@ -36,10 +36,11 @@ Sea snakes are a recently evolved lineage of snakes found in the coastal tropica
     
    </details>
  
- ## Packages Used
- ```R
- - Session info -------------------------------------------------------------------------------------------
- setting  value                       
+ ## Software Used
+<details>
+  <summary> R Session info </summary>
+  
+  ```R                      
  version  R version 4.0.0 (2020-04-24)
  os       Windows 10 x64              
  system   x86_64, mingw32             
@@ -49,8 +50,14 @@ Sea snakes are a recently evolved lineage of snakes found in the coastal tropica
  ctype    English_India.1252          
  tz       Asia/Calcutta               
  date     2020-05-23                  
+  ```
 
-- Packages -----------------------------------------------------------------------------------------------
+  </details>
+
+<details>
+  <summary> Packages used </summary>
+  
+  ```R
  package        * version   date       lib source        
  abind            1.4-5     2016-07-21 [1] CRAN (R 4.0.0)
  acepack          1.4.1     2016-10-29 [1] CRAN (R 4.0.0)
@@ -202,5 +209,12 @@ Sea snakes are a recently evolved lineage of snakes found in the coastal tropica
  xml2             1.3.2     2020-04-23 [1] CRAN (R 4.0.0)
  yaml             2.2.1     2020-02-01 [1] CRAN (R 4.0.0)
  zip              2.0.4     2019-09-01 [1] CRAN (R 4.0.0)
- ```
- ## Liscence
+  ```
+  
+  </details>
+  
+ ## Liscence and Copyright
+ 
+ © Shawn Dsouza, Dakshin Foundation
+ 
+Liscensed under [MIT Liscence](LISCENCE)
