@@ -49,23 +49,23 @@ theme_set(theme_bw()+
           )#setting ggplot theme
 ```
 
-```{r child = 'Fishing intensity.rmd'}
+```{r child = './Sections/Fishing intensity.rmd'}
 ```
 
-```{r child = 'Habitat use.rmd'}
+```{r child = './Sections/Habitat use.rmd'}
 ```
 
-```{r child = 'Diet.rmd'}
+```{r child = './Sections/Diet.rmd'}
 ```
 
-```{r child = 'Isotopic Niche.rmd'}
+```{r child = './Sections/Isotopic Niche.rmd'}
 ```
 
-```{r child = 'Fisheries - spatial overlap.rmd'}
+```{r child = './Sections/Fisheries - spatial overlap.rmd'}
 ```
 
-```{r child = 'Fisheries - diet overlap.rmd'}
+```{r child = './Sections/Fisheries - diet overlap.rmd'}
 ```
 
-```{r child = 'Fisheries - isotopic niche.rmd'}
+```{r child = './Sections/Fisheries - isotopic niche.rmd'}
 ```
