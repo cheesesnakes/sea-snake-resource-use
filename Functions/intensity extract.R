@@ -2,6 +2,9 @@
 
 map.extract <- function(df, var, func){
   
+  require(raster)
+  require(sp)
+  
   foo <- df
   
   #Converting to SpatialPointsdf
