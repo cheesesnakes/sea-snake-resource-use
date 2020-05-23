@@ -1,17 +1,3 @@
----
-  title: "Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape"
-output:
-  html_document:
-  css: style.css
-df_print: kable
-theme: spacelab
-toc: yes
-toc_float: yes
-toc_depth: 2
-number_sections: yes
-subtitle: Isotopic niche
-Author: Shawn Dsouza
----
 
 # Difference in resouce use betweek *H. curtus* and *H. schistosus*?
 
@@ -19,7 +5,7 @@ Carbon and Nitrogen isotope ratios were compared accorss species. Plasma and sca
 
 ```{r sia}
 #Stable isotope data
-sia = read.csv("./Data/Stable Isotope Data_CEAS_241119.csv")
+sia = read.csv("../Data/Stable Isotope Data_CEAS_241119.csv")
 
 #joining sia data to snake data
 

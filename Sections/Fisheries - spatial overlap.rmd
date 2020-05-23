@@ -1,26 +1,11 @@
----
-  title: "Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape"
-output:
-  html_document:
-  css: style.css
-df_print: kable
-theme: spacelab
-toc: yes
-toc_float: yes
-toc_depth: 2
-number_sections: yes
-subtitle: FIsheries - spatial overlap
-Author: Shawn Dsouza
----
-
 # Does fishing intensity affect the distribution of *H. curtus* and *H. schistosus*?
 
 ```{r}
-dep_int <- read.csv("./data/Fishing intensity_dep.csv")
+dep_int <- read.csv("../data/Fishing intensity_dep.csv")
 
-depth <- read.csv("./data/sindhudurg depth.csv")
+depth <- read.csv("../data/sindhudurg depth.csv")
 
-snakes_den <- read.csv("./data/snakes-density.csv")
+snakes_den <- read.csv("../data/snakes-density.csv")
 ```
 
 
@@ -28,38 +13,10 @@ snakes_den <- read.csv("./data/snakes-density.csv")
 library(sp)
 library(raster)
 
-ext <- raster::raster("./Data/sampling_extent.tif")
+ext <- raster::raster("../Data/sampling_extent.tif")
 
-#Function for extracting intensity/abundance from points
-
-map.extract <- function(df, var, func){
-  
-  foo <- df
-  
-  #Converting to SpatialPointsdf
-  
-  coordinates(foo) <- ~lon + lat
-  
-  proj4string(foo) <- CRS("+init=epsg:4326")#setting projection to WGS 84 (lon/lat)
-  
-  foo <- spTransform(foo, CRSobj = CRS("+init=epsg:3857"))#using spherical mercator
-  
-  #assigning intensity values to raster
-  
-  m <- rasterize(foo, ext, fun = func, field=var, update=TRUE)
-} 
-
-# Function converting the raster into df for plotting
-
-map.df <- function(m){
-  ##Reprojecting int_map
-  
-  r <- projectRaster(m, crs = CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"))
-  
-  ## Creating dataframe
-  
-  mdf <- as.data.frame(r, xy = T)%>%drop_na()
-}
+source("../Functions/intensity extract.R")
+source("../Functions/raster to df.R")
 
 ```
 
@@ -102,17 +59,6 @@ dep <- depth%>%
 fi_den<- inner_join(fi, den, by = c("x", "y"))%>%
   inner_join(dep, by = c("x", "y"))%>%
   mutate(rel.prop = HC/(HC+HS))
-#filter(intensity>0 | HC > 0 | HS >0)
-
-#Clasifiying intesity
-
-#fi.qntls <- quantile(fi_den$intensity, 
-#                       probs = c(0, 0.25,.75, 1))
-
-#fi_den <- fi_den%>%
-#  mutate(fi.class = cut(intensity, breaks = c(0, 50, 100, 200), 
-#                       labels = c("low", "medium", "high") ))
-
 
 ```
 

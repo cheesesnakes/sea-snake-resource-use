@@ -1,17 +1,3 @@
----
-  title: "Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape"
-output:
-  html_document:
-  css: style.css
-df_print: kable
-theme: spacelab
-toc: yes
-toc_float: yes
-toc_depth: 2
-number_sections: yes
-subtitle: Trophic niche
-Author: Shawn Dsouza
----
 ```{r}
 # libraries
 
@@ -19,7 +5,7 @@ library(tidyverse)
 
 #snakes data
 
-snakes <- read.csv("./data/Sea-snakes_fish-dep_2018-19_070220.csv")
+snakes <- read.csv("../data/Sea-snakes_fish-dep_2018-19_070220.csv")
 ```
 
 # DIfference in diet between *H. curtus* and *H. schsitosus*
@@ -42,7 +28,7 @@ A very low proportion of inviduals had gut content present at the time of sampli
 ## Proportion of unidentified specimens
 
 ```{r}
-gc = read.csv("./Data/Sea_snakes_gut_content_2018-19.csv")%>%
+gc = read.csv("../Data/Sea_snakes_gut_content_2018-19.csv")%>%
   filter(Source == "Gut content")
 
 gc%>%

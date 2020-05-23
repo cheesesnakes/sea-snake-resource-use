@@ -11,17 +11,6 @@ library(viridis)
 # Varition in fishing intensity along the sindhudurg coast
 
 ```{r}
-library(marmap)
-library(ggmap)
-
-#importing bathymetric data downloaded from GEBCO database
-
-depth <- readGEBCO.bathy("../Data/gebco_2019_n16.6_s15.6_w73.1_e73.9.nc")
-
-depth = fortify.bathy(depth)%>%
-  rename(lon = x, lat = y, depth = z)%>%
-  filter(depth < 1)
-
 
 #importing effort data
 
