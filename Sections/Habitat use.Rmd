@@ -1,18 +1,3 @@
----
-title: "Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape"
-output:
-  html_document:
-    css: style.css
-    df_print: kable
-    theme: spacelab
-    toc: yes
-    toc_float: yes
-    toc_depth: 2
-    number_sections: yes
-subtitle: Analysis for manuscript
-Author: Shawn Dsouza
----
-
 # DIfference in distribution and habitat use between _H. curtus_ and _H. shcistosus_
 
 ## Mapping sea snake distribution with fisheries survey data
@@ -41,41 +26,6 @@ snakes_den = snakes%>%
   gather(c("HC", "HS"), value = n, key = "Species")%>%
   mutate(CPUE = n/effort)%>%
   drop_na()
-
-#Geocoding sea snake density
-
-snakes_den = snakes_den%>%
-  ungroup()%>%
-  mutate(Fishing.Location = as.character(Fishing.Location))%>%
-  mutate_geocode(location = Fishing.Location)
-
-#Extracting point data from depth and location
-
-library(fuzzyjoin)
-
-#matching funtions for theta join
-
-depth_match <- function(x,y){
-  x <- -x
-  x <= y+0.5 & x >= y-0.5 #interval for theta matching depth
-}
-
-lat_match <- function(x,y){
-  x <= y+0.005 & x >= y-0.005 #interval for theta matching latitude
-}
-
-snakes_den <- snakes_den%>%
-  mutate(depth = Depth.Caught..m.)%>%
-  fuzzy_inner_join(y = depth, by = c("depth", "lat"), 
-                   match_fun = list(depth = depth_match,
-                                    lat = lat_match))%>%
-  dplyr::select(Date, Boat.Name.Owner, Species, Fishing.Location, Depth.Caught..m., 
-         lon.y, lat.x, CPUE, n)%>%#dplyr::selecting relevant variables
-  rename(lon = lon.y,# longitude from fishing location
-         lat = lat.x)%>%# latitude from depth data
-  distinct(Date, Boat.Name.Owner, Species, Fishing.Location, Depth.Caught..m., .keep_all = T)
-
-write.csv(snakes_den, "./Data/snakes-density.csv")#saved data set to reduce compute time
 ```
 
 ```{r}
@@ -111,9 +61,15 @@ snakes%>%
 ```{r}
 snakes_den <- read.csv("./Data/snakes-density.csv")#saved data set to reduce compute time
 
-#plotting densities
+# plotting densities
 
-# Calculating sea snake CPUE
+## importing functions
+
+source("../Functions/intensity extract.R")
+source("../Functions/raster to df.R")
+source("../Functions/intensity_plot.R")
+
+## Calculating sea snake CPUE
 
 den <- snakes_den%>%
   group_by(Species)%>%
@@ -139,24 +95,6 @@ snakes_den%>%
   dplyr::select(mdf)%>%
   summarise(ext = map(mdf, ~sum(.$layer>0)))%>%
   unnest()
-#Function for creating plot for each Gear/Species
-
-int.plot <- function(mdf, gear, name){
-  ggmap(base)+
-    metR::geom_contour2(data = depth, aes(x = lon, y = lat, z = depth),
-                 breaks=seq(-10, -80, -10), colour="black", size = 0.3
-                 )+
-    metR::geom_text_contour(data = depth, aes(x = lon, y = lat, z = depth), skip = 1,
-                            parse = T,check_overlap = T, size = 3)+
-    geom_raster(data = mdf, aes(x = x, y = y, fill =layer), alpha = 0.6)+
-    coord_quickmap()+
-    scale_fill_viridis(name = name, direction = -1)+
-    #scale_y_continuous(limits = c(73.1, 73.8))+
-    labs(title = gear, x = "Longitude", y = "Latitude")+
-      theme(plot.title = element_text(hjust = 0.5, face = "italic"),
-            legend.text = element_text(size = 10),
-            text = element_text(size = 15))
-}
 
 #Plotting distribution
 
