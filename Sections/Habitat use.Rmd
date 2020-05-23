@@ -59,7 +59,7 @@ snakes%>%
 
 
 ```{r}
-snakes_den <- read.csv("./Data/snakes-density.csv")#saved data set to reduce compute time
+snakes_den <- read.csv("../Data/snakes-density.csv")#saved data set to reduce compute time
 
 # plotting densities
 

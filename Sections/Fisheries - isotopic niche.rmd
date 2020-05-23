@@ -1,18 +1,3 @@
----
-title: "Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape"
-output:
-  html_document:
-  css: style.css
-df_print: kable
-theme: spacelab
-toc: yes
-toc_float: yes
-toc_depth: 2
-number_sections: yes
-subtitle: Fisheries - isotopic niche
-Author: Shawn Dsouza
----
-
 # Does isotopic niche of sea snakes change with local fishing intensity?
 
 As it is infeasible to to find sites with little to no fishing pressure on mainland India. The ultimate objective of this project remains unfulfilled it is nigh impossible to conduct a study with controls and test sites with varying levels of fishing pressure.
@@ -60,7 +45,7 @@ ggplot(fi, aes(x, y, fill = class))+
 ```{r, eval=FALSE, echo=TRUE}
 #Stable isotope data
 
-sia = read.csv("./Data/Stable Isotope Data_CEAS_241119.csv")
+sia = read.csv("../Data/Stable Isotope Data_CEAS_241119.csv")
 
 #joining sia data to snake data
 
@@ -73,66 +58,6 @@ sia_snakes = sia%>%
                 Gear.Type, Fishing.Location, Depth.Caught..m.,
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
                 Tissue.type, Month, Year)
-
-#selecting relavant variables
-
-sia_fi = sia_snakes%>%
-  dplyr::select(Field.Code, Species, Fishing.Location, Depth.Caught..m.,Tissue.type,
-                Delta.Carbon, Delta.Nitrogen)%>%
-  filter(Fishing.Location != "")%>%
-  drop_na()%>%
-  droplevels()
-
-# Geocoding capture location
-
-sia_fi <- sia_fi%>%
-  ungroup()%>%
-  mutate(Fishing.Location = as.character(Fishing.Location))%>%
-  mutate_geocode(location = Fishing.Location)
-
-# Extracting coordinates from depth data
-
-library(fuzzyjoin)
-
-#matching funtions for theta join
-
-depth_match <- function(x,y){
-  x <- -x
-  x <= y+0.5 & x >= y-0.5 #interval for theta matching depth
-}
-
-lat_match <- function(x,y){
-  x <= y+0.005 & x >= y-0.005 #interval for theta matching latitude
-}
-
-sia_fi <- sia_fi%>%
-  mutate(depth = Depth.Caught..m.)%>%
-  fuzzy_inner_join(y = depth, by = c("depth", "lat"), 
-                   match_fun = list(depth = depth_match,
-                                    lat = lat_match))%>%
-  dplyr::select(Field.Code, Species, Fishing.Location, Depth.Caught..m., Tissue.type,
-                Delta.Carbon, Delta.Nitrogen, lon.y, lat.x)%>%#dplyr::selecting relevant variables
-  rename(lon = lon.y,# longitude from fishing location
-         lat = lat.x)%>%# latitude from depth data
-  distinct(Field.Code, Tissue.type, .keep_all = T)
-
-# Finding grid cell in which snake was captured
-
-cell.ext <- function(df){
-  
-  r <- raster::projectRaster(ext, crs = CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"))
-  
-  xy <- df
-  
-  coordinates(xy) <- ~lon + lat
-  
-  proj4string(xy) <- CRS("+init=epsg:4326")#setting projection to WGS 84 (lon/lat)
-  
-  #xy <- spTransform(xy, CRSobj = CRS("+init=epsg:3857"))#using spherical mercator
-  
-  c <- xyFromCell(r, cellFromXY(r, xy))
-  
-}
 
 sia_li <- sia_fi%>%
   group_by(Field.Code, Species, Tissue.type, Delta.Carbon, Delta.Nitrogen)%>%

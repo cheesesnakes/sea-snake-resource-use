@@ -1,0 +1,1398 @@
+"","Gear.Type","Sample","Family","Weight.g","Class","Haul.time","No.hauls"
+"1","Gill Net","GN01","Clupeidae",664,"Target Catch",90,1
+"2","Gill Net","GN01","Lactariidae",56,"Bycatch",90,1
+"3","Gill Net","GN01","Scombridae",45,"Bycatch",90,1
+"4","Gill Net","GN01",NA,347,"Bycatch",90,1
+"5","Gill Net","GN02","Clupeidae",541,"Target Catch",20,1
+"6","Gill Net","GN02","Leiognathidae",20,"Bycatch",20,1
+"7","Gill Net","GN02","Scombridae",56,"Bycatch",20,1
+"8","Gill Net","GN02","Sphyraenidae",92,"Bycatch",20,1
+"9","Gill Net","GN02",NA,183,"Bycatch",20,1
+"10","Gill Net","GN03","Clupeidae",663,"Target Catch",30,1
+"11","Gill Net","GN03","Scombridae",84,"Bycatch",30,1
+"12","Gill Net","GN03","Sphyraenidae",180,"Bycatch",30,1
+"13","Gill Net","GN03","Synodontidae",54,"Bycatch",30,1
+"14","Gill Net","GN03","Terapontidae",52,"Discard",30,1
+"15","Gill Net","GN03","Tetraodontidae",70,"Discard",30,1
+"16","Gill Net","GN03",NA,198,"Bycatch",30,1
+"17","Gill Net","GN04","Carangidae",63,"Bycatch",30,1
+"18","Gill Net","GN04","Clupeidae",688,"Target Catch",30,1
+"19","Gill Net","GN04","Portunidae",82,"Discard",30,1
+"20","Gill Net","GN04","Scombridae",168,"Bycatch",30,1
+"21","Gill Net","GN04","Sphyraenidae",52,"Discard",30,1
+"22","Gill Net","GN04","Synodontidae",86,"Bycatch",30,1
+"23","Gill Net","GN04","Terapontidae",30,"Discard",30,1
+"24","Gill Net","GN04",NA,286,"Bycatch",30,1
+"25","Gill Net","GN05","Clupeidae",640,"Target Catch",30,1
+"26","Gill Net","GN05","Engraulidae",199,"Discard",30,1
+"27","Gill Net","GN05","Scombridae",58,"Bycatch",30,1
+"28","Gill Net","GN05","Tetraodontidae",10,"Discard",30,1
+"29","Gill Net","GN05",NA,400,"Discard",30,1
+"30","Gill Net","GN06","Carangidae",18,"Bycatch",20,1
+"31","Gill Net","GN06","Clupeidae",972,"Target Catch",20,1
+"32","Gill Net","GN06","Engraulidae",0,"Bycatch",20,1
+"33","Gill Net","GN06","Portunidae",75,"Bycatch",20,1
+"34","Gill Net","GN06","Scombridae",216,"Bycatch",20,1
+"35","Gill Net","GN06",NA,1392,"Bycatch",20,1
+"36","Gill Net","GN07","Clupeidae",1670,"Target Catch",45,1
+"37","Gill Net","GN07","Engraulidae",42,"Discard",45,1
+"38","Gill Net","GN07","Leiognathidae",22,"Discard",45,1
+"39","Gill Net","GN07","Scombridae",209,"Bycatch",45,1
+"40","Gill Net","GN07","Serranidae",216,"Discard",45,1
+"41","Gill Net","GN07","Sphyraenidae",0,"Bycatch",45,1
+"42","Gill Net","GN07",NA,487,"Bycatch",45,1
+"43","Gill Net","GN08","Carangidae",133,"Bycatch",120,1
+"44","Gill Net","GN08","Clupeidae",175,"Target Catch",120,1
+"45","Gill Net","GN08","Scombridae",112,"Bycatch",120,1
+"46","Gill Net","GN08","Sphyraenidae",118,"Bycatch",120,1
+"47","Gill Net","GN08",NA,148,"Bycatch",120,1
+"48","Gill Net","GN09","Clupeidae",272,"Target Catch",45,1
+"49","Gill Net","GN09","Scombridae",0,"Bycatch",45,1
+"50","Gill Net","GN09","Tetraodontidae",0,"Bycatch",45,1
+"51","Gill Net","GN09",NA,277,"Bycatch",45,1
+"52","Gill Net","GN10","Clupeidae",167,"Target Catch",30,1
+"53","Gill Net","GN10","Engraulidae",37,"Bycatch",30,1
+"54","Gill Net","GN10","Scombridae",407,"Bycatch",30,1
+"55","Gill Net","GN10","Sphyraenidae",99,"Bycatch",30,1
+"56","Gill Net","GN10",NA,459,"Bycatch",30,1
+"57","Gill Net","GN11","Clupeidae",290,"Bycatch",NA,1
+"58","Gill Net","GN11","Scombridae",89,"Bycatch",NA,1
+"59","Gill Net","GN11","Tetraodontidae",21,"Discard",NA,1
+"60","Gill Net","GN11",NA,71,"Bycatch",NA,1
+"61","Gill Net","GN12","Clupeidae",1052,"Target Catch",15,1
+"62","Gill Net","GN12",NA,320,"Bycatch",15,1
+"63","Gill Net","GN13","Carangidae",57,"Bycatch",75,1
+"64","Gill Net","GN13","Clupeidae",428,"Target Catch",75,1
+"65","Gill Net","GN13","Lactariidae",263,"Target Catch",75,1
+"66","Gill Net","GN13","Leiognathidae",92,"Bycatch",75,1
+"67","Gill Net","GN13","Scombridae",94,"Target Catch",75,1
+"68","Gill Net","GN13","Terapontidae",130,"Discard",75,1
+"69","Gill Net","GN13","Tetraodontidae",99,"Discard",75,1
+"70","Gill Net","GN13",NA,319,"Discard",75,1
+"71","Gill Net","GN14","Carangidae",184,"Bycatch",145,1
+"72","Gill Net","GN14","Clupeidae",819,"Target Catch",145,1
+"73","Gill Net","GN14","Engraulidae",38,"Bycatch",145,1
+"74","Gill Net","GN14","Lactariidae",141,"Target Catch",145,1
+"75","Gill Net","GN14","Leiognathidae",63,"Discard",145,1
+"76","Gill Net","GN14","Serranidae",55,"Discard",145,1
+"77","Gill Net","GN14","Synodontidae",120,"Bycatch",145,1
+"78","Gill Net","GN14","Terapontidae",129,"Bycatch",145,1
+"79","Gill Net","GN14","Tetraodontidae",125,"Discard",145,1
+"80","Gill Net","GN14",NA,402,"Bycatch",145,1
+"81","Gill Net","GN15","Clupeidae",345,"Target Catch",30,1
+"82","Gill Net","GN15","Lactariidae",440,"Target Catch",30,1
+"83","Gill Net","GN15","Leiognathidae",97,"Discard",30,1
+"84","Gill Net","GN15","Scombridae",1194,"Target Catch",30,1
+"85","Gill Net","GN15","Serranidae",72,"Discard",30,1
+"86","Gill Net","GN15","Synodontidae",126,"Bycatch",30,1
+"87","Gill Net","GN15","Terapontidae",64,"Bycatch",30,1
+"88","Gill Net","GN15","Tetraodontidae",92,"Discard",30,1
+"89","Gill Net","GN15",NA,5032,"Discard",30,1
+"90","Gill Net","GN16","Carangidae",311,"Bycatch",30,1
+"91","Gill Net","GN16","Clupeidae",755,"Target Catch",30,1
+"92","Gill Net","GN16","Engraulidae",91,"Bycatch",30,1
+"93","Gill Net","GN16","Lactariidae",862,"Target Catch",30,1
+"94","Gill Net","GN16","Synodontidae",40,"Bycatch",30,1
+"95","Gill Net","GN16","Terapontidae",83,"Bycatch",30,1
+"96","Gill Net","GN16",NA,981,"Discard",30,1
+"97","Gill Net","GN17","Carangidae",80,"Bycatch",30,1
+"98","Gill Net","GN17","Clupeidae",940,"Target Catch",30,1
+"99","Gill Net","GN17","Leiognathidae",378,"Discard",30,1
+"100","Gill Net","GN17","Synanceiidae",61,"Discard",30,1
+"101","Gill Net","GN17","Synodontidae",42,"Bycatch",30,1
+"102","Gill Net","GN17",NA,179,"Discard",30,1
+"103","Gill Net","GN18","Engraulidae",85,"Bycatch",30,1
+"104","Gill Net","GN18","Lactariidae",197,"Target Catch",30,1
+"105","Gill Net","GN18","Portunidae",121,"Bycatch",30,1
+"106","Gill Net","GN18","Scombridae",415,"Target Catch",30,1
+"107","Gill Net","GN18","Synanceiidae",18,"Discard",30,1
+"108","Gill Net","GN18","Tetraodontidae",199,"Discard",30,1
+"109","Gill Net","GN18",NA,1497,"Target Catch",30,1
+"110","Gill Net","GN19","Carangidae",67,"Target Catch",60,1
+"111","Gill Net","GN19","Clupeidae",820,"Target Catch",60,1
+"112","Gill Net","GN19","Engraulidae",34,"Bycatch",60,1
+"113","Gill Net","GN19","Lactariidae",146,"Target Catch",60,1
+"114","Gill Net","GN19","Leiognathidae",112,"Discard",60,1
+"115","Gill Net","GN19","Scombridae",244,"Target Catch",60,1
+"116","Gill Net","GN19","Serranidae",188,"Discard",60,1
+"117","Gill Net","GN19","Sphyraenidae",184,"Bycatch",60,1
+"118","Gill Net","GN19","Synodontidae",149,"Bycatch",60,1
+"119","Gill Net","GN19","Terapontidae",57,"Bycatch",60,1
+"120","Gill Net","GN19",NA,1082,"Bycatch",60,1
+"121","Gill Net","GN20","Clupeidae",125,"Bycatch",60,1
+"122","Gill Net","GN20","Portunidae",348,"Bycatch",60,1
+"123","Gill Net","GN20","Scombridae",607,"Target Catch",60,1
+"124","Gill Net","GN20","Synodontidae",197,"Bycatch",60,1
+"125","Gill Net","GN20","Tetraodontidae",53,"Bycatch",60,1
+"126","Gill Net","GN20",NA,211,"Bycatch",60,1
+"127","Gill Net","GN21","Clupeidae",411,"Target Catch",90,1
+"128","Gill Net","GN21","Engraulidae",53,"Bycatch",90,1
+"129","Gill Net","GN21","Lactariidae",410,"Target Catch",90,1
+"130","Gill Net","GN21","Leiognathidae",41,"Discard",90,1
+"131","Gill Net","GN21","Polynemidae",44,"Bycatch",90,1
+"132","Gill Net","GN21","Scombridae",552,"Target Catch",90,1
+"133","Gill Net","GN21","Synodontidae",71,"Bycatch",90,1
+"134","Gill Net","GN21",NA,1113,"Bycatch",90,1
+"135","Gill Net","GN22","Clupeidae",673,"Target Catch",60,1
+"136","Gill Net","GN22","Lactariidae",964,"Target Catch",60,1
+"137","Gill Net","GN22","Leiognathidae",28,"Discard",60,1
+"138","Gill Net","GN22","Polynemidae",48,"Bycatch",60,1
+"139","Gill Net","GN22","Scombridae",890,"Target Catch",60,1
+"140","Gill Net","GN22","Serranidae",91,"Bycatch",60,1
+"141","Gill Net","GN22","Synanceiidae",83,"Discard",60,1
+"142","Gill Net","GN22","Synodontidae",111,"Bycatch",60,1
+"143","Gill Net","GN22",NA,1761,"Bycatch",60,1
+"144","Gill Net","GN23","Carangidae",561,"Bycatch",60,1
+"145","Gill Net","GN23","Clupeidae",788,"Target Catch",60,1
+"146","Gill Net","GN23","Lactariidae",660,"Target Catch",60,1
+"147","Gill Net","GN23","Leiognathidae",79,"Discard",60,1
+"148","Gill Net","GN23","Portunidae",223,"Bycatch",60,1
+"149","Gill Net","GN23","Scombridae",764,"Target Catch",60,1
+"150","Gill Net","GN23","Synodontidae",159,"Bycatch",60,1
+"151","Gill Net","GN23","Terapontidae",563,"Discard",60,1
+"152","Gill Net","GN23",NA,2659,"Bycatch",60,1
+"153","Gill Net","GN24","Clupeidae",298,"Target Catch",30,1
+"154","Gill Net","GN24","Engraulidae",26,"Bycatch",30,1
+"155","Gill Net","GN24","Leiognathidae",67,"Discard",30,1
+"156","Gill Net","GN24","Scombridae",483,"Target Catch",30,1
+"157","Gill Net","GN24",NA,2268,"Bycatch",30,1
+"158","Gill Net","GN25","Carangidae",70,"Bycatch",45,1
+"159","Gill Net","GN25","Clupeidae",507,"Bycatch",45,1
+"160","Gill Net","GN25","Engraulidae",70,"Bycatch",45,1
+"161","Gill Net","GN25","Lactariidae",420,"Target Catch",45,1
+"162","Gill Net","GN25","Leiognathidae",32,"Discard",45,1
+"163","Gill Net","GN25","Portunidae",89,"Bycatch",45,1
+"164","Gill Net","GN25","Scombridae",780,"Target Catch",45,1
+"165","Gill Net","GN25","Synanceiidae",45,"Discard",45,1
+"166","Gill Net","GN25",NA,1622,"Bycatch",45,1
+"167","Gill Net","GN26","Carangidae",343,"Bycatch",30,1
+"168","Gill Net","GN26","Clupeidae",1144,"Bycatch",30,1
+"169","Gill Net","GN26","Engraulidae",105,"Bycatch",30,1
+"170","Gill Net","GN26","Lactariidae",289,"Target Catch",30,1
+"171","Gill Net","GN26","Scombridae",510,"Target Catch",30,1
+"172","Gill Net","GN26","Serranidae",75,"Discard",30,1
+"173","Gill Net","GN26","Terapontidae",55,"Discard",30,1
+"174","Gill Net","GN26",NA,1024,"Target Catch",30,1
+"175","Gill Net","GN27","Clupeidae",873,"Target Catch",60,1
+"176","Gill Net","GN27","Engraulidae",140,"Bycatch",60,1
+"177","Gill Net","GN27","Lactariidae",283,"Target Catch",60,1
+"178","Gill Net","GN27","Leiognathidae",9,"Discard",60,1
+"179","Gill Net","GN27","Paralichthyidae",70,"Bycatch",60,1
+"180","Gill Net","GN27","Scombridae",824,"Target Catch",60,1
+"181","Gill Net","GN27","Synanceiidae",67,"Discard",60,1
+"182","Gill Net","GN27","Synodontidae",135,"Bycatch",60,1
+"183","Gill Net","GN27",NA,1462,"Bycatch",60,1
+"184","Gill Net","GN28","Clupeidae",150,"Target Catch",60,1
+"185","Gill Net","GN28","Engraulidae",150,"Bycatch",60,1
+"186","Gill Net","GN28","Lactariidae",198,"Target Catch",60,1
+"187","Gill Net","GN28","Leiognathidae",25,"Discard",60,1
+"188","Gill Net","GN28","Portunidae",295,"Bycatch",60,1
+"189","Gill Net","GN28","Serranidae",48,"Bycatch",60,1
+"190","Gill Net","GN28","Synodontidae",80,"Bycatch",60,1
+"191","Gill Net","GN28",NA,1064,"Bycatch",60,1
+"192","Gill Net","GN29","Carangidae",248,"Bycatch",120,1
+"193","Gill Net","GN29","Portunidae",412,"Bycatch",120,1
+"194","Gill Net","GN29","Scombridae",1901,"Target Catch",120,1
+"195","Gill Net","GN29","Serranidae",170,"Discard",120,1
+"196","Gill Net","GN29","Tetraodontidae",64,"Discard",120,1
+"197","Gill Net","GN29",NA,217,"Bycatch",120,1
+"198","Gill Net","GN30","Carangidae",34,"Bycatch",60,1
+"199","Gill Net","GN30","Clupeidae",49,"Target Catch",60,1
+"200","Gill Net","GN30","Leiognathidae",33,"Discard",60,1
+"201","Gill Net","GN30","Scombridae",1231,"Target Catch",60,1
+"202","Gill Net","GN30",NA,246,"Bycatch",60,1
+"203","Gill Net","GN31","Carangidae",176,"Bycatch",60,1
+"204","Gill Net","GN31","Clupeidae",65,"Bycatch",60,1
+"205","Gill Net","GN31","Engraulidae",30,"Bycatch",60,1
+"206","Gill Net","GN31","Lactariidae",61,"Target Catch",60,1
+"207","Gill Net","GN31","Scombridae",508,"Target Catch",60,1
+"208","Gill Net","GN31","Synodontidae",89,"Bycatch",60,1
+"209","Gill Net","GN31",NA,306,"Bycatch",60,1
+"210","Gill Net","GN32","Clupeidae",1577,"Bycatch",15,1
+"211","Gill Net","GN32","Lactariidae",30,"Target Catch",15,1
+"212","Gill Net","GN32","Leiognathidae",16,"Discard",15,1
+"213","Gill Net","GN32",NA,27,"Discard",15,1
+"214","Gill Net","GN33","Clupeidae",979,"Target Catch",60,1
+"215","Gill Net","GN33","Lactariidae",156,"Bycatch",60,1
+"216","Gill Net","GN33","Leiognathidae",45,"Discard",60,1
+"217","Gill Net","GN33","Scombridae",554,"Bycatch",60,1
+"218","Gill Net","GN33",NA,38,"Bycatch",60,1
+"219","Gill Net","GN34","Carangidae",35,"Bycatch",20,1
+"220","Gill Net","GN34","Clupeidae",607,"Target Catch",20,1
+"221","Gill Net","GN34","Engraulidae",99,"Bycatch",20,1
+"222","Gill Net","GN34","Leiognathidae",98,"Bycatch",20,1
+"223","Gill Net","GN34","Scombridae",106,"Bycatch",20,1
+"224","Gill Net","GN34","Sphyraenidae",141,"Bycatch",20,1
+"225","Gill Net","GN34",NA,64,"Bycatch",20,1
+"226","Gill Net","GN35","Carangidae",81,"Bycatch",30,1
+"227","Gill Net","GN35","Clupeidae",1856,"Target Catch",30,1
+"228","Gill Net","GN35","Scombridae",67,"Bycatch",30,1
+"229","Gill Net","GN35",NA,54,"Bycatch",30,1
+"230","Gill Net","GN36","Clupeidae",313,"Bycatch",240,1
+"231","Gill Net","GN36","Lactariidae",155,"Bycatch",240,1
+"232","Gill Net","GN36","Leiognathidae",22,"Discard",240,1
+"233","Gill Net","GN36","Scombridae",193,"Bycatch",240,1
+"234","Gill Net","GN36","Sphyraenidae",180,"Bycatch",240,1
+"235","Gill Net","GN36",NA,37,"Bycatch",240,1
+"236","Gill Net","GN37","Clupeidae",44,"Bycatch",30,1
+"237","Gill Net","GN37","Leiognathidae",987,"Target Catch",30,1
+"238","Gill Net","GN37",NA,106,"Target Catch",30,1
+"239","Gill Net","GN38","Clupeidae",2046,"Target Catch",120,1
+"240","Gill Net","GN38","Lactariidae",30,"Bycatch",120,1
+"241","Gill Net","GN38","Scombridae",109,"Bycatch",120,1
+"242","Gill Net","GN38",NA,134,"Bycatch",120,1
+"243","Trawler","2018-01-01_A","Ariidae",305,"Trash",NA,NA
+"244","Trawler","2018-01-01_A","Engraulidae",70,"Trash",NA,NA
+"245","Trawler","2018-01-01_A","Leiognathidae",515,"Trash",NA,NA
+"246","Trawler","2018-01-01_A","Muraenesocidae",190,"Trash",NA,NA
+"247","Trawler","2018-01-01_A","Platycephalidae",110,"Trash",NA,NA
+"248","Trawler","2018-01-01_A","Sciaenidae",85,"Trash",NA,NA
+"249","Trawler","2018-01-01_A","Serranidae",245,"Trash",NA,NA
+"250","Trawler","2018-01-01_A","Terapontidae",200,"Trash",NA,NA
+"251","Trawler","2018-01-03_B","Clupeidae",85,"Trash",NA,NA
+"252","Trawler","2018-01-03_B","Engraulidae",70,"Trash",NA,NA
+"253","Trawler","2018-01-03_B","Leiognathidae",280,"Trash",NA,NA
+"254","Trawler","2018-01-03_B","Mugilidae",70,"Trash",NA,NA
+"255","Trawler","2018-01-03_B","Platycephalidae",120,"Trash",NA,NA
+"256","Trawler","2018-01-03_B","Serranidae",110,"Trash",NA,NA
+"257","Trawler","2018-01-03_B","Sphyraenidae",85,"Trash",NA,NA
+"258","Trawler","2018-01-03_B","Synodontidae",70,"Trash",NA,NA
+"259","Trawler","2018-01-04_C","Clupeidae",85,"Trash",NA,NA
+"260","Trawler","2018-01-04_C","Engraulidae",350,"Trash",NA,NA
+"261","Trawler","2018-01-04_C","Leiognathidae",80,"Trash",NA,NA
+"262","Trawler","2018-01-04_C","Sciaenidae",55,"Trash",NA,NA
+"263","Trawler","2018-01-04_C","Serranidae",50,"Trash",NA,NA
+"264","Trawler","2018-01-04_C","Tetraodontidae",60,"Trash",NA,NA
+"265","Trawler","2018-01-04_C","Trichiuridae",170,"Trash",NA,NA
+"266","Trawler","2018-01-06_D","Clupeidae",0,"Trash",NA,NA
+"267","Trawler","2018-01-06_D","Engraulidae",23,"Trash",NA,NA
+"268","Trawler","2018-01-06_D","Leiognathidae",63,"Trash",NA,NA
+"269","Trawler","2018-01-06_D","Platycephalidae",184,"Trash",NA,NA
+"270","Trawler","2018-01-06_D","Serranidae",138,"Trash",NA,NA
+"271","Trawler","2018-01-06_D","Terapontidae",40,"Trash",NA,NA
+"272","Trawler","2018-01-06_E","Nemipteridae",100,"Trash",NA,NA
+"273","Trawler","2018-01-06_F","Carangidae",70,"Trash",NA,NA
+"274","Trawler","2018-01-06_F","Carcharhinidae",66,"Trash",NA,NA
+"275","Trawler","2018-01-06_F","Clupeidae",68,"Trash",NA,NA
+"276","Trawler","2018-01-06_F","Engraulidae",16,"Trash",NA,NA
+"277","Trawler","2018-01-06_F","Platycephalidae",132,"Trash",NA,NA
+"278","Trawler","2018-01-06_F","Synodontidae",22,"Trash",NA,NA
+"279","Trawler","2018-01-06_F","Terapontidae",16,"Trash",NA,NA
+"280","Trawler","2018-01-06_F","Trichiuridae",224,"Trash",NA,NA
+"281","Trawler","2018-01-07_Ekdant, Siddhivinayak","Nemipteridae",100,"Trash",NA,NA
+"282","Trawler","2018-01-07_G","Nemipteridae",100,"Trash",NA,NA
+"283","Trawler","2018-01-07_H","Carangidae",118,"Trash",NA,NA
+"284","Trawler","2018-01-07_H","Clupeidae",9,"Trash",NA,NA
+"285","Trawler","2018-01-07_H","Engraulidae",23,"Trash",NA,NA
+"286","Trawler","2018-01-07_H","Hemiscylliidae",177,"Trash",NA,NA
+"287","Trawler","2018-01-07_H","Paralichthyidae",83,"Trash",NA,NA
+"288","Trawler","2018-01-07_H","Platycephalidae",147,"Trash",NA,NA
+"289","Trawler","2018-01-07_H","Serranidae",52,"Trash",NA,NA
+"290","Trawler","2018-01-07_H","Squillidae",7,"Trash",NA,NA
+"291","Trawler","2018-01-07_Pratamesh","Carangidae",27,"Trash",NA,NA
+"292","Trawler","2018-01-07_Pratamesh","Cynoglossidae",0,"Trash",NA,NA
+"293","Trawler","2018-01-07_Pratamesh","Leiognathidae",10,"Trash",NA,NA
+"294","Trawler","2018-01-07_Pratamesh","Loliginidae",22,"Trash",NA,NA
+"295","Trawler","2018-01-07_Pratamesh","Platycephalidae",173,"Trash",NA,NA
+"296","Trawler","2018-01-07_Pratamesh","Portunidae",45,"Trash",NA,NA
+"297","Trawler","2018-01-07_Pratamesh","Sciaenidae",41,"Trash",NA,NA
+"298","Trawler","2018-01-07_Pratamesh","Tetraodontidae",46,"Trash",NA,NA
+"299","Trawler","2018-01-09_Valjai/Valbai","Clupeidae",40,"Trash",NA,NA
+"300","Trawler","2018-01-09_Valjai/Valbai","Paralichthyidae",68,"Trash",NA,NA
+"301","Trawler","2018-01-09_Valjai/Valbai","Platycephalidae",92,"Trash",NA,NA
+"302","Trawler","2018-01-09_Valjai/Valbai","Scombridae",40,"Trash",NA,NA
+"303","Trawler","2018-01-09_Valjai/Valbai","Serranidae",147,"Trash",NA,NA
+"304","Trawler","2018-01-09_Valjai/Valbai","Squillidae",3,"Trash",NA,NA
+"305","Trawler","2018-01-09_Valjai/Valbai","Terapontidae",195,"Trash",NA,NA
+"306","Trawler","2018-01-16_J","Carangidae",54,"Trash",NA,NA
+"307","Trawler","2018-01-16_J","Clupeidae",55,"Trash",NA,NA
+"308","Trawler","2018-01-16_J","Engraulidae",536,"Trash",NA,NA
+"309","Trawler","2018-01-16_J","Serranidae",21,"Trash",NA,NA
+"310","Trawler","2018-01-16_J","Terapontidae",111,"Trash",NA,NA
+"311","Trawler","2018-01-16_J","Tetraodontidae",10,"Trash",NA,NA
+"312","Trawler","2018-01-18_Hemavati","Carangidae",31,"Trash",NA,NA
+"313","Trawler","2018-01-18_Hemavati","Engraulidae",495,"Trash",NA,NA
+"314","Trawler","2018-01-18_Hemavati","Leiognathidae",17,"Trash",NA,NA
+"315","Trawler","2018-01-18_Hemavati","Nemipteridae",5,"Trash",NA,NA
+"316","Trawler","2018-01-18_Hemavati","Serranidae",162,"Trash",NA,NA
+"317","Trawler","2018-01-18_Hemavati","Terapontidae",40,"Trash",NA,NA
+"318","Trawler","2018-01-18_Hemavati","Trichiuridae",84,"Trash",NA,NA
+"319","Trawler","2018-01-19_Mahalakshmi","Carangidae",216,"Trash",NA,NA
+"320","Trawler","2018-01-19_Mahalakshmi","Clupeidae",301,"Trash",NA,NA
+"321","Trawler","2018-01-19_Mahalakshmi","Engraulidae",334,"Trash",NA,NA
+"322","Trawler","2018-01-19_Mahalakshmi","Tetraodontidae",34,"Trash",NA,NA
+"323","Trawler","2018-01-20_Judith","Priacanthidae",431,"Trash",NA,NA
+"324","Trawler","2018-01-20_N","Leiognathidae",100,"Trash",NA,NA
+"325","Trawler","2018-01-21_Pratamesh","Clupeidae",22,"Trash",NA,NA
+"326","Trawler","2018-01-21_Pratamesh","Cynoglossidae",10,"Trash",NA,NA
+"327","Trawler","2018-01-21_Pratamesh","Gerreidae",30,"Trash",NA,NA
+"328","Trawler","2018-01-21_Pratamesh","Leiognathidae",6,"Trash",NA,NA
+"329","Trawler","2018-01-21_Pratamesh","Loliginidae",61,"Trash",NA,NA
+"330","Trawler","2018-01-21_Pratamesh","Nemipteridae",4,"Trash",NA,NA
+"331","Trawler","2018-01-21_Pratamesh","Plotosidae",113,"Trash",NA,NA
+"332","Trawler","2018-01-21_Pratamesh","Sciaenidae",11,"Trash",NA,NA
+"333","Trawler","2018-01-21_Pratamesh","Serranidae",173,"Trash",NA,NA
+"334","Trawler","2018-01-21_Pratamesh","Terapontidae",5,"Trash",NA,NA
+"335","Trawler","2018-01-21_Pratamesh","Tetraodontidae",220,"Trash",NA,NA
+"336","Trawler","2018-01-21_Shree Siddhivinayak","Carangidae",67,"Trash",NA,NA
+"337","Trawler","2018-01-21_Shree Siddhivinayak","Engraulidae",164,"Trash",NA,NA
+"338","Trawler","2018-01-21_Shree Siddhivinayak","Leiognathidae",266,"Trash",NA,NA
+"339","Trawler","2018-01-21_Shree Siddhivinayak","Trichiuridae",87,"Trash",NA,NA
+"340","Trawler","2018-01-21_Shreepad Vallabh","Nemipteridae",100,"Trash",NA,NA
+"341","Trawler","2018-01-23_Gajannan Maharaj","Engraulidae",78,"Trash",NA,NA
+"342","Trawler","2018-01-23_Gajannan Maharaj","Leiognathidae",10,"Trash",NA,NA
+"343","Trawler","2018-01-23_Gajannan Maharaj","Loliginidae",69,"Trash",NA,NA
+"344","Trawler","2018-01-23_Gajannan Maharaj","Menidae",50,"Trash",NA,NA
+"345","Trawler","2018-01-23_Gajannan Maharaj","Nemipteridae",93,"Trash",NA,NA
+"346","Trawler","2018-01-23_Gajannan Maharaj","Penaeidae",9,"Trash",NA,NA
+"347","Trawler","2018-01-23_Gajannan Maharaj","Tetraodontidae",210,"Trash",NA,NA
+"348","Trawler","2018-01-23_Gajannan Maharaj","Trichiuridae",87,"Trash",NA,NA
+"349","Trawler","2018-01-23_Saumi","",100,"Trash",NA,NA
+"350","Trawler","2018-01-23_Saumi","Nemipteridae",100,"Trash",NA,NA
+"351","Trawler","2018-01-24_Shreepad Vallabh","Engraulidae",3,"Trash",NA,NA
+"352","Trawler","2018-01-24_Shreepad Vallabh","Leiognathidae",0,"Trash",NA,NA
+"353","Trawler","2018-01-24_Shreepad Vallabh","Loliginidae",15,"Trash",NA,NA
+"354","Trawler","2018-01-24_Shreepad Vallabh","Menidae",207,"Trash",NA,NA
+"355","Trawler","2018-01-24_Shreepad Vallabh","Nemipteridae",15,"Trash",NA,NA
+"356","Trawler","2018-01-24_Shreepad Vallabh","Penaeidae",0,"Trash",NA,NA
+"357","Trawler","2018-01-24_Shreepad Vallabh","Tetraodontidae",310,"Trash",NA,NA
+"358","Trawler","2018-01-26_Anand Prasad","Bregmacerotidae",0,"Trash",NA,NA
+"359","Trawler","2018-01-26_Anand Prasad","Carangidae",369,"Trash",NA,NA
+"360","Trawler","2018-01-26_Anand Prasad","Lactariidae",16,"Trash",NA,NA
+"361","Trawler","2018-01-26_Anand Prasad","Loliginidae",8,"Trash",NA,NA
+"362","Trawler","2018-01-26_Anand Prasad","Menidae",52,"Trash",NA,NA
+"363","Trawler","2018-01-26_Anand Prasad","Penaeidae",3,"Trash",NA,NA
+"364","Trawler","2018-01-26_Anand Prasad","Sepiidae",57,"Trash",NA,NA
+"365","Trawler","2018-01-26_Anand Prasad","Terapontidae",26,"Trash",NA,NA
+"366","Trawler","2018-01-26_Anand Prasad","Tetraodontidae",21,"Trash",NA,NA
+"367","Trawler","2018-01-26_Anand Prasad","Trichiuridae",38,"Trash",NA,NA
+"368","Trawler","2018-01-26_Om Sai","Engraulidae",469,"Trash",NA,NA
+"369","Trawler","2018-01-26_Om Sai","Lactariidae",0,"Trash",NA,NA
+"370","Trawler","2018-01-26_Om Sai","Leiognathidae",8,"Trash",NA,NA
+"371","Trawler","2018-01-26_Om Sai","Menidae",84,"Trash",NA,NA
+"372","Trawler","2018-01-26_Om Sai","Tetraodontidae",34,"Trash",NA,NA
+"373","Trawler","2018-01-26_Om Sai","Trichiuridae",13,"Trash",NA,NA
+"374","Trawler","2018-01-26_Vishnudatta","Carangidae",100,"Trash",NA,NA
+"375","Trawler","2018-01-27_Om Sai","Carangidae",150,"Trash",NA,NA
+"376","Trawler","2018-01-27_Om Sai","Clupeidae",59,"Trash",NA,NA
+"377","Trawler","2018-01-27_Om Sai","Engraulidae",229,"Trash",NA,NA
+"378","Trawler","2018-01-27_Om Sai","Leiognathidae",0,"Trash",NA,NA
+"379","Trawler","2018-01-27_Om Sai","Loliginidae",12,"Trash",NA,NA
+"380","Trawler","2018-01-27_Om Sai","Tetraodontidae",366,"Trash",NA,NA
+"381","Trawler","2018-01-27_Rishikesh","Carangidae",100,"Trash",NA,NA
+"382","Trawler","2018-01-29_Vijayalakshmi + Audumbar","Nemipteridae",398,"Trash",NA,NA
+"383","Trawler","2018-02-01_Anand","Carangidae",815,"Trash",NA,NA
+"384","Trawler","2018-02-01_Anand","Engraulidae",223,"Trash",NA,NA
+"385","Trawler","2018-02-01_Anand","Leiognathidae",0,"Trash",NA,NA
+"386","Trawler","2018-02-01_Anand","Loliginidae",25,"Trash",NA,NA
+"387","Trawler","2018-02-01_Anand","Menidae",28,"Trash",NA,NA
+"388","Trawler","2018-02-01_Anand","Nemipteridae",21,"Trash",NA,NA
+"389","Trawler","2018-02-01_Anand","Sciaenidae",14,"Trash",NA,NA
+"390","Trawler","2018-02-01_Anand","Sepiidae",124,"Trash",NA,NA
+"391","Trawler","2018-02-01_Anand","Synodontidae",26,"Trash",NA,NA
+"392","Trawler","2018-02-01_Anand","Tetraodontidae",79,"Trash",NA,NA
+"393","Trawler","2018-02-01_Anand","Trichiuridae",182,"Trash",NA,NA
+"394","Trawler","2018-02-02_Om Sai","Carangidae",585,"Trash",180,4
+"395","Trawler","2018-02-04_Hemangi","Leiognathidae",94,"Trash",180,3
+"396","Trawler","2018-02-04_Hemangi","Nemipteridae",270,"Trash",180,3
+"397","Trawler","2018-02-04_Mangal Moorthi","Carangidae",326,"Trash",240,3
+"398","Trawler","2018-02-04_Mangal Moorthi","Clupeidae",7,"Trash",240,3
+"399","Trawler","2018-02-04_Mangal Moorthi","Engraulidae",63,"Trash",240,3
+"400","Trawler","2018-02-04_Mangal Moorthi","Lactariidae",26,"Trash",240,3
+"401","Trawler","2018-02-04_Mangal Moorthi","Leiognathidae",15,"Trash",240,3
+"402","Trawler","2018-02-04_Mangal Moorthi","Menidae",126,"Trash",240,3
+"403","Trawler","2018-02-04_Mangal Moorthi","Nemipteridae",32,"Trash",240,3
+"404","Trawler","2018-02-04_Mangal Moorthi","Priacanthidae",4,"Trash",240,3
+"405","Trawler","2018-02-04_Mangal Moorthi","Sciaenidae",14,"Trash",240,3
+"406","Trawler","2018-02-04_Mangal Moorthi","Tetraodontidae",217,"Trash",240,3
+"407","Trawler","2018-02-04_Mangal Moorthi","Trichiuridae",73,"Trash",240,3
+"408","Trawler","2018-02-05_Shreepad Vallabh","Carangidae",17,"Trash",150,4
+"409","Trawler","2018-02-05_Shreepad Vallabh","Clupeidae",49,"Trash",150,4
+"410","Trawler","2018-02-05_Shreepad Vallabh","Leiognathidae",45,"Trash",150,4
+"411","Trawler","2018-02-05_Shreepad Vallabh","Penaeidae",0,"Trash",150,4
+"412","Trawler","2018-02-05_Shreepad Vallabh","Platycephalidae",36,"Trash",150,4
+"413","Trawler","2018-02-05_Shreepad Vallabh","Sepiidae",87,"Trash",150,4
+"414","Trawler","2018-02-05_Shreepad Vallabh","Tetraodontidae",426,"Trash",150,4
+"415","Trawler","2018-02-06_Om Sai","Ariidae",81,"Trash",180,4
+"416","Trawler","2018-02-06_Om Sai","Carangidae",264,"Trash",180,4
+"417","Trawler","2018-02-06_Om Sai","Clupeidae",113,"Trash",180,4
+"418","Trawler","2018-02-06_Om Sai","Engraulidae",21,"Trash",180,4
+"419","Trawler","2018-02-06_Om Sai","Haemulidae",22,"Trash",180,4
+"420","Trawler","2018-02-06_Om Sai","Leiognathidae",25,"Trash",180,4
+"421","Trawler","2018-02-06_Om Sai","Loliginidae",12,"Trash",180,4
+"422","Trawler","2018-02-06_Om Sai","Plotosidae",37,"Trash",180,4
+"423","Trawler","2018-02-06_Om Sai","Sepiidae",49,"Trash",180,4
+"424","Trawler","2018-02-06_Om Sai","Tetraodontidae",527,"Trash",180,4
+"425","Trawler","2018-02-06_Om Sai","Triacanthidae",53,"Trash",180,4
+"426","Trawler","2018-02-08_Om Sai","Carangidae",301,"Trash",180,4
+"427","Trawler","2018-02-08_Om Sai","Clupeidae",42,"Trash",180,4
+"428","Trawler","2018-02-08_Om Sai","Drepaneidae",17,"Trash",180,4
+"429","Trawler","2018-02-08_Om Sai","Engraulidae",127,"Trash",180,4
+"430","Trawler","2018-02-08_Om Sai","Leiognathidae",14,"Trash",180,4
+"431","Trawler","2018-02-08_Om Sai","Terapontidae",72,"Trash",180,4
+"432","Trawler","2018-02-08_Om Sai","Tetraodontidae",46,"Trash",180,4
+"433","Trawler","2018-02-08_Om Sai","Triacanthidae",67,"Trash",180,4
+"434","Trawler","2018-02-08_Om Sai","Trichiuridae",31,"Trash",180,4
+"435","Trawler","2018-02-09_Gajannan Maharaj","Congridae",40,"Trash",195,3
+"436","Trawler","2018-02-09_Gajannan Maharaj","Cynoglossidae",0,"Trash",195,3
+"437","Trawler","2018-02-09_Gajannan Maharaj","Leiognathidae",14,"Trash",195,3
+"438","Trawler","2018-02-09_Gajannan Maharaj","Nemipteridae",201,"Trash",195,3
+"439","Trawler","2018-02-09_Gajannan Maharaj","Platycephalidae",49,"Trash",195,3
+"440","Trawler","2018-02-09_Gajannan Maharaj","Terapontidae",26,"Trash",195,3
+"441","Trawler","2018-02-09_Gajannan Maharaj","Tetraodontidae",654,"Trash",195,3
+"442","Trawler","2018-02-09_Gajannan Maharaj","Trichiuridae",168,"Trash",195,3
+"443","Trawler","2018-02-10_Om Sai","Carangidae",496,"Trash",180,3
+"444","Trawler","2018-02-10_Om Sai","Clupeidae",65,"Trash",180,3
+"445","Trawler","2018-02-10_Om Sai","Engraulidae",375,"Trash",180,3
+"446","Trawler","2018-02-10_Om Sai","Lactariidae",11,"Trash",180,3
+"447","Trawler","2018-02-10_Om Sai","Leiognathidae",63,"Trash",180,3
+"448","Trawler","2018-02-10_Om Sai","Priacanthidae",3,"Trash",180,3
+"449","Trawler","2018-02-10_Om Sai","Terapontidae",16,"Trash",180,3
+"450","Trawler","2018-02-10_Om Sai","Tetraodontidae",201,"Trash",180,3
+"451","Trawler","2018-02-11_Shreepad Vallabh","Cynoglossidae",10,"Trash",135,3
+"452","Trawler","2018-02-11_Shreepad Vallabh","Leiognathidae",19,"Trash",135,3
+"453","Trawler","2018-02-11_Shreepad Vallabh","Platycephalidae",73,"Trash",135,3
+"454","Trawler","2018-02-11_Shreepad Vallabh","Sciaenidae",30,"Trash",135,3
+"455","Trawler","2018-02-11_Shreepad Vallabh","Sepiidae",124,"Trash",135,3
+"456","Trawler","2018-02-11_Shreepad Vallabh","Tetraodontidae",649,"Trash",135,3
+"457","Trawler","2018-02-14_Gajannan Maharaj","Carangidae",285,"Trash",180,3
+"458","Trawler","2018-02-14_Gajannan Maharaj","Carcharhinidae",41,"Trash",180,3
+"459","Trawler","2018-02-14_Gajannan Maharaj","Clupeidae",192,"Trash",180,3
+"460","Trawler","2018-02-14_Gajannan Maharaj","Engraulidae",74,"Trash",180,3
+"461","Trawler","2018-02-14_Gajannan Maharaj","Haemulidae",17,"Trash",180,3
+"462","Trawler","2018-02-14_Gajannan Maharaj","Lactariidae",29,"Trash",180,3
+"463","Trawler","2018-02-14_Gajannan Maharaj","Leiognathidae",26,"Trash",180,3
+"464","Trawler","2018-02-14_Gajannan Maharaj","Paralichthyidae",22,"Trash",180,3
+"465","Trawler","2018-02-14_Gajannan Maharaj","Platycephalidae",42,"Trash",180,3
+"466","Trawler","2018-02-14_Gajannan Maharaj","Serranidae",99,"Trash",180,3
+"467","Trawler","2018-02-14_Gajannan Maharaj","Sillaginidae",7,"Trash",180,3
+"468","Trawler","2018-02-14_Gajannan Maharaj","Terapontidae",0,"Trash",180,3
+"469","Trawler","2018-02-14_Gajannan Maharaj","Tetraodontidae",1065,"Trash",180,3
+"470","Trawler","2018-02-14_Gajannan Maharaj","Trichiuridae",130,"Trash",180,3
+"471","Trawler","2018-02-16_Omkar","Carangidae",506,"Trash",NA,3
+"472","Trawler","2018-02-17_Om Sai","Carangidae",66,"Trash",180,3
+"473","Trawler","2018-02-17_Om Sai","Clupeidae",148,"Trash",180,3
+"474","Trawler","2018-02-17_Om Sai","Engraulidae",193,"Trash",180,3
+"475","Trawler","2018-02-17_Om Sai","Haemulidae",36,"Trash",180,3
+"476","Trawler","2018-02-17_Om Sai","Lactariidae",75,"Trash",180,3
+"477","Trawler","2018-02-17_Om Sai","Leiognathidae",622,"Trash",180,3
+"478","Trawler","2018-02-17_Om Sai","Sciaenidae",8,"Trash",180,3
+"479","Trawler","2018-02-17_Om Sai","Tetraodontidae",235,"Trash",180,3
+"480","Trawler","2018-02-17_Om Sai","Trichiuridae",4,"Trash",180,3
+"481","Trawler","2018-02-19_Shreepad Vallabh","Cynoglossidae",0,"Trash",150,3
+"482","Trawler","2018-02-19_Shreepad Vallabh","Haemulidae",21,"Trash",150,3
+"483","Trawler","2018-02-19_Shreepad Vallabh","Loliginidae",13,"Trash",150,3
+"484","Trawler","2018-02-19_Shreepad Vallabh","Sepiidae",21,"Trash",150,3
+"485","Trawler","2018-02-19_Shreepad Vallabh","Squillidae",4,"Trash",150,3
+"486","Trawler","2018-02-19_Shreepad Vallabh","Tetraodontidae",745,"Trash",150,3
+"487","Trawler","2018-02-28_Gajannan Maharaj","Cynoglossidae",8,"Trash",180,3.5
+"488","Trawler","2018-02-28_Gajannan Maharaj","Leiognathidae",444,"Trash",180,3.5
+"489","Trawler","2018-02-28_Gajannan Maharaj","Menidae",68,"Trash",180,3.5
+"490","Trawler","2018-02-28_Gajannan Maharaj","Platycephalidae",139,"Trash",180,3.5
+"491","Trawler","2018-02-28_Gajannan Maharaj","Serranidae",26,"Trash",180,3.5
+"492","Trawler","2018-02-28_Gajannan Maharaj","Synodontidae",0,"Trash",180,3.5
+"493","Trawler","2018-02-28_Gajannan Maharaj","Tetraodontidae",177,"Trash",180,3.5
+"494","Trawler","2018-02-28_Gajannan Maharaj","Trichiuridae",73,"Trash",180,3.5
+"495","Trawler","2018-03-01_Om Sai","Carangidae",461,"Trash",210,3
+"496","Trawler","2018-03-01_Om Sai","Clupeidae",56,"Trash",210,3
+"497","Trawler","2018-03-01_Om Sai","Engraulidae",15,"Trash",210,3
+"498","Trawler","2018-03-01_Om Sai","Leiognathidae",321,"Trash",210,3
+"499","Trawler","2018-03-02_Mangal Moorthi","Carangidae",168,"Trash",210,3
+"500","Trawler","2018-03-02_Mangal Moorthi","Clupeidae",112,"Trash",210,3
+"501","Trawler","2018-03-02_Mangal Moorthi","Engraulidae",207,"Trash",210,3
+"502","Trawler","2018-03-02_Mangal Moorthi","Lactariidae",7,"Trash",210,3
+"503","Trawler","2018-03-02_Mangal Moorthi","Leiognathidae",16,"Trash",210,3
+"504","Trawler","2018-03-02_Mangal Moorthi","Loliginidae",13,"Trash",210,3
+"505","Trawler","2018-03-02_Mangal Moorthi","Menidae",527,"Trash",210,3
+"506","Trawler","2018-03-02_Mangal Moorthi","Monacanthidae",201,"Trash",210,3
+"507","Trawler","2018-03-02_Mangal Moorthi","Polynemidae",50,"Trash",210,3
+"508","Trawler","2018-03-02_Mangal Moorthi","Sepiidae",4,"Trash",210,3
+"509","Trawler","2018-03-02_Mangal Moorthi","Tetraodontidae",7,"Trash",210,3
+"510","Trawler","2018-03-02_Shreepad Vallabh","Carangidae",103,"Trash",135,3
+"511","Trawler","2018-03-02_Shreepad Vallabh","Clupeidae",53,"Trash",135,3
+"512","Trawler","2018-03-02_Shreepad Vallabh","Engraulidae",61,"Trash",135,3
+"513","Trawler","2018-03-02_Shreepad Vallabh","Leiognathidae",113,"Trash",135,3
+"514","Trawler","2018-03-02_Shreepad Vallabh","Platycephalidae",134,"Trash",135,3
+"515","Trawler","2018-03-02_Shreepad Vallabh","Sciaenidae",25,"Trash",135,3
+"516","Trawler","2018-03-02_Shreepad Vallabh","Terapontidae",26,"Trash",135,3
+"517","Trawler","2018-03-05_Mangal Moorthi","Carangidae",65,"Trash",240,3.5
+"518","Trawler","2018-03-05_Mangal Moorthi","Clupeidae",40,"Trash",240,3.5
+"519","Trawler","2018-03-05_Mangal Moorthi","Engraulidae",242,"Trash",240,3.5
+"520","Trawler","2018-03-05_Mangal Moorthi","Lactariidae",0,"Trash",240,3.5
+"521","Trawler","2018-03-05_Mangal Moorthi","Leiognathidae",484,"Trash",240,3.5
+"522","Trawler","2018-03-05_Mangal Moorthi","Loliginidae",29,"Trash",240,3.5
+"523","Trawler","2018-03-05_Mangal Moorthi","Menidae",248,"Trash",240,3.5
+"524","Trawler","2018-03-05_Mangal Moorthi","Nemipteridae",25,"Trash",240,3.5
+"525","Trawler","2018-03-05_Mangal Moorthi","Sepiidae",12,"Trash",240,3.5
+"526","Trawler","2018-03-05_Mangal Moorthi","Terapontidae",75,"Trash",240,3.5
+"527","Trawler","2018-03-05_Mangal Moorthi","Tetraodontidae",266,"Trash",240,3.5
+"528","Trawler","2018-03-05_Mangal Moorthi","Trichiuridae",8,"Trash",240,3.5
+"529","Trawler","2018-03-06_Shreepad Vallabh","Carangidae",25,"Trash",135,3
+"530","Trawler","2018-03-06_Shreepad Vallabh","Clupeidae",126,"Trash",135,3
+"531","Trawler","2018-03-06_Shreepad Vallabh","Congridae",92,"Trash",135,3
+"532","Trawler","2018-03-06_Shreepad Vallabh","Cynoglossidae",0,"Trash",135,3
+"533","Trawler","2018-03-06_Shreepad Vallabh","Engraulidae",26,"Trash",135,3
+"534","Trawler","2018-03-06_Shreepad Vallabh","Lactariidae",18,"Trash",135,3
+"535","Trawler","2018-03-06_Shreepad Vallabh","Leiognathidae",31,"Trash",135,3
+"536","Trawler","2018-03-06_Shreepad Vallabh","Platycephalidae",265,"Trash",135,3
+"537","Trawler","2018-03-06_Shreepad Vallabh","Portunidae",40,"Trash",135,3
+"538","Trawler","2018-03-06_Shreepad Vallabh","Sciaenidae",8,"Trash",135,3
+"539","Trawler","2018-03-06_Shreepad Vallabh","Serranidae",38,"Trash",135,3
+"540","Trawler","2018-03-06_Shreepad Vallabh","Terapontidae",288,"Trash",135,3
+"541","Trawler","2018-03-06_Shreepad Vallabh","Tetraodontidae",479,"Trash",135,3
+"542","Trawler","2018-03-08_Om Sai","Carangidae",5,"Trash",180,4
+"543","Trawler","2018-03-08_Om Sai","Clupeidae",13,"Trash",180,4
+"544","Trawler","2018-03-08_Om Sai","Echeneidae",28,"Trash",180,4
+"545","Trawler","2018-03-08_Om Sai","Engraulidae",202,"Trash",180,4
+"546","Trawler","2018-03-08_Om Sai","Lactariidae",23,"Trash",180,4
+"547","Trawler","2018-03-08_Om Sai","Leiognathidae",335,"Trash",180,4
+"548","Trawler","2018-03-08_Om Sai","Loliginidae",30,"Trash",180,4
+"549","Trawler","2018-03-08_Om Sai","Menidae",286,"Trash",180,4
+"550","Trawler","2018-03-08_Om Sai","Terapontidae",162,"Trash",180,4
+"551","Trawler","2018-03-08_Om Sai","Tetraodontidae",26,"Trash",180,4
+"552","Trawler","2018-03-08_Om Sai","Triacanthidae",96,"Trash",180,4
+"553","Trawler","2018-03-08_Om Sai","Trichiuridae",23,"Trash",180,4
+"554","Trawler","2018-03-09_Gajannan Maharaj","Carangidae",45,"Trash",180,3
+"555","Trawler","2018-03-09_Gajannan Maharaj","Clupeidae",30,"Trash",180,3
+"556","Trawler","2018-03-09_Gajannan Maharaj","Congridae",89,"Trash",180,3
+"557","Trawler","2018-03-09_Gajannan Maharaj","Cynoglossidae",24,"Trash",180,3
+"558","Trawler","2018-03-09_Gajannan Maharaj","Engraulidae",23,"Trash",180,3
+"559","Trawler","2018-03-09_Gajannan Maharaj","Leiognathidae",325,"Trash",180,3
+"560","Trawler","2018-03-09_Gajannan Maharaj","Sciaenidae",37,"Trash",180,3
+"561","Trawler","2018-03-09_Gajannan Maharaj","Serranidae",152,"Trash",180,3
+"562","Trawler","2018-03-09_Gajannan Maharaj","Sphyraenidae",18,"Trash",180,3
+"563","Trawler","2018-03-09_Gajannan Maharaj","Terapontidae",477,"Trash",180,3
+"564","Trawler","2018-03-09_Gajannan Maharaj","Tetraodontidae",191,"Trash",180,3
+"565","Trawler","2018-03-12_Shreepad Vallabh","Carangidae",151,"Trash",180,3
+"566","Trawler","2018-03-12_Shreepad Vallabh","Clupeidae",98,"Trash",180,3
+"567","Trawler","2018-03-12_Shreepad Vallabh","Cynoglossidae",100,"Trash",180,3
+"568","Trawler","2018-03-12_Shreepad Vallabh","Engraulidae",41,"Trash",180,3
+"569","Trawler","2018-03-12_Shreepad Vallabh","Leiognathidae",397,"Trash",180,3
+"570","Trawler","2018-03-12_Shreepad Vallabh","Nemipteridae",217,"Trash",180,3
+"571","Trawler","2018-03-12_Shreepad Vallabh","Platycephalidae",153,"Trash",180,3
+"572","Trawler","2018-03-12_Shreepad Vallabh","Serranidae",70,"Trash",180,3
+"573","Trawler","2018-03-12_Shreepad Vallabh","Terapontidae",28,"Trash",180,3
+"574","Trawler","2018-03-13_Om Sai","Ariidae",376,"Trash",180,4
+"575","Trawler","2018-03-13_Om Sai","Carangidae",217,"Trash",180,4
+"576","Trawler","2018-03-13_Om Sai","Clupeidae",38,"Trash",180,4
+"577","Trawler","2018-03-13_Om Sai","Engraulidae",155,"Trash",180,4
+"578","Trawler","2018-03-13_Om Sai","Haemulidae",38,"Trash",180,4
+"579","Trawler","2018-03-13_Om Sai","Lactariidae",11,"Trash",180,4
+"580","Trawler","2018-03-13_Om Sai","Leiognathidae",151,"Trash",180,4
+"581","Trawler","2018-03-13_Om Sai","Loliginidae",4,"Trash",180,4
+"582","Trawler","2018-03-13_Om Sai","Nemipteridae",12,"Trash",180,4
+"583","Trawler","2018-03-13_Om Sai","Penaeidae",0,"Trash",180,4
+"584","Trawler","2018-03-13_Om Sai","Squillidae",18,"Trash",180,4
+"585","Trawler","2018-03-13_Om Sai","Terapontidae",306,"Trash",180,4
+"586","Trawler","2018-03-13_Om Sai","Tetraodontidae",14,"Trash",180,4
+"587","Trawler","2018-03-13_Om Sai","Trichiuridae",44,"Trash",180,4
+"588","Trawler","2018-03-15_Om Sai","Clupeidae",42,"Trash",180,4
+"589","Trawler","2018-03-15_Om Sai","Congridae",11,"Trash",180,4
+"590","Trawler","2018-03-15_Om Sai","Engraulidae",91,"Trash",180,4
+"591","Trawler","2018-03-15_Om Sai","Haemulidae",17,"Trash",180,4
+"592","Trawler","2018-03-15_Om Sai","Leiognathidae",31,"Trash",180,4
+"593","Trawler","2018-03-15_Om Sai","Platycephalidae",69,"Trash",180,4
+"594","Trawler","2018-03-15_Om Sai","Synanceiidae",13,"Trash",180,4
+"595","Trawler","2018-03-15_Om Sai","Terapontidae",668,"Trash",180,4
+"596","Trawler","2018-03-17_Gajannan Maharaj","Carangidae",122,"Trash",180,3
+"597","Trawler","2018-03-17_Gajannan Maharaj","Clupeidae",611,"Trash",180,3
+"598","Trawler","2018-03-17_Gajannan Maharaj","Congridae",16,"Trash",180,3
+"599","Trawler","2018-03-17_Gajannan Maharaj","Engraulidae",332,"Trash",180,3
+"600","Trawler","2018-03-17_Gajannan Maharaj","Leiognathidae",535,"Trash",180,3
+"601","Trawler","2018-03-17_Gajannan Maharaj","Penaeidae",0,"Trash",180,3
+"602","Trawler","2018-03-17_Gajannan Maharaj","Platycephalidae",46,"Trash",180,3
+"603","Trawler","2018-03-17_Gajannan Maharaj","Terapontidae",28,"Trash",180,3
+"604","Trawler","2018-03-17_Gajannan Maharaj","Tetraodontidae",13,"Trash",180,3
+"605","Trawler","2018-03-18_Hemavati","Cynoglossidae",3,"Trash",180,3
+"606","Trawler","2018-03-18_Hemavati","Nemipteridae",1289,"Trash",180,3
+"607","Trawler","2018-03-18_Hemavati","Portunidae",0,"Trash",180,3
+"608","Trawler","2018-03-18_Hemavati","Sepiidae",0,"Trash",180,3
+"609","Trawler","2018-03-23_Shreepad Vallabh","Clupeidae",54,"Trash",126,1.5
+"610","Trawler","2018-03-23_Shreepad Vallabh","Leiognathidae",522,"Trash",126,1.5
+"611","Trawler","2018-03-23_Shreepad Vallabh","Nemipteridae",95,"Trash",126,1.5
+"612","Trawler","2018-03-23_Shreepad Vallabh","Platycephalidae",61,"Trash",126,1.5
+"613","Trawler","2018-03-23_Shreepad Vallabh","Serranidae",48,"Trash",126,1.5
+"614","Trawler","2018-03-23_Shreepad Vallabh","Terapontidae",15,"Trash",126,1.5
+"615","Trawler","2018-03-28_Shreepad Vallabh","Carangidae",243,"Trash",180,2
+"616","Trawler","2018-03-28_Shreepad Vallabh","Clupeidae",76,"Trash",180,2
+"617","Trawler","2018-03-28_Shreepad Vallabh","Cynoglossidae",8,"Trash",180,2
+"618","Trawler","2018-03-28_Shreepad Vallabh","Engraulidae",306,"Trash",180,2
+"619","Trawler","2018-03-28_Shreepad Vallabh","Leiognathidae",107,"Trash",180,2
+"620","Trawler","2018-03-28_Shreepad Vallabh","Sciaenidae",22,"Trash",180,2
+"621","Trawler","2018-03-28_Shreepad Vallabh","Sepiidae",0,"Trash",180,2
+"622","Trawler","2018-03-28_Shreepad Vallabh","Serranidae",85,"Trash",180,2
+"623","Trawler","2018-03-28_Shreepad Vallabh","Tetraodontidae",27,"Trash",180,2
+"624","Trawler","2018-03-29_Gajannan Maharaj","Ariidae",51,"Trash",240,2.5
+"625","Trawler","2018-03-29_Gajannan Maharaj","Carangidae",57,"Trash",240,2.5
+"626","Trawler","2018-03-29_Gajannan Maharaj","Clupeidae",103,"Trash",240,2.5
+"627","Trawler","2018-03-29_Gajannan Maharaj","Engraulidae",96,"Trash",240,2.5
+"628","Trawler","2018-03-29_Gajannan Maharaj","Leiognathidae",116,"Trash",240,2.5
+"629","Trawler","2018-03-29_Gajannan Maharaj","Nemipteridae",15,"Trash",240,2.5
+"630","Trawler","2018-03-29_Gajannan Maharaj","Penaeidae",0,"Trash",240,2.5
+"631","Trawler","2018-03-29_Gajannan Maharaj","Terapontidae",19,"Trash",240,2.5
+"632","Trawler","2018-03-29_Gajannan Maharaj","Trichiuridae",234,"Trash",240,2.5
+"633","Trawler","2018-04-01_Om Sai","Carangidae",44,"Trash",NA,3
+"634","Trawler","2018-04-01_Om Sai","Clupeidae",37,"Trash",NA,3
+"635","Trawler","2018-04-01_Om Sai","Engraulidae",91,"Trash",NA,3
+"636","Trawler","2018-04-01_Om Sai","Lactariidae",38,"Trash",NA,3
+"637","Trawler","2018-04-01_Om Sai","Leiognathidae",332,"Trash",NA,3
+"638","Trawler","2018-04-01_Om Sai","Loliginidae",31,"Trash",NA,3
+"639","Trawler","2018-04-04_Badrakali","Carangidae",186,"Trash",180,3
+"640","Trawler","2018-04-04_Badrakali","Clupeidae",47,"Trash",180,3
+"641","Trawler","2018-04-04_Badrakali","Congridae",45,"Trash",180,3
+"642","Trawler","2018-04-04_Badrakali","Dasyatidae",48,"Trash",180,3
+"643","Trawler","2018-04-04_Badrakali","Engraulidae",123,"Trash",180,3
+"644","Trawler","2018-04-04_Badrakali","Lactariidae",4,"Trash",180,3
+"645","Trawler","2018-04-04_Badrakali","Muraenesocidae",71,"Trash",180,3
+"646","Trawler","2018-04-04_Badrakali","Platycephalidae",57,"Trash",180,3
+"647","Trawler","2018-04-04_Badrakali","Synanceiidae",50,"Trash",180,3
+"648","Trawler","2018-04-04_Badrakali","Terapontidae",41,"Trash",180,3
+"649","Trawler","2018-04-04_Badrakali","Trichiuridae",19,"Trash",180,3
+"650","Trawler","2018-04-05_Gajannan Maharaj","Engraulidae",60,"Trash",180,2
+"651","Trawler","2018-04-05_Gajannan Maharaj","Leiognathidae",11,"Trash",180,2
+"652","Trawler","2018-04-05_Gajannan Maharaj","Nemipteridae",25,"Trash",180,2
+"653","Trawler","2018-04-05_Gajannan Maharaj","Penaeidae",0,"Trash",180,2
+"654","Trawler","2018-04-05_Gajannan Maharaj","Platycephalidae",41,"Trash",180,2
+"655","Trawler","2018-04-05_Gajannan Maharaj","Sepiidae",153,"Trash",180,2
+"656","Trawler","2018-04-05_Gajannan Maharaj","Tetraodontidae",525,"Trash",180,2
+"657","Trawler","2018-04-05_Gajannan Maharaj","Trichiuridae",44,"Trash",180,2
+"658","Trawler","2018-04-07_Gandharva","Apogonidae",0,"Trash",180,3
+"659","Trawler","2018-04-07_Gandharva","Carangidae",20,"Trash",180,3
+"660","Trawler","2018-04-07_Gandharva","Clupeidae",269,"Trash",180,3
+"661","Trawler","2018-04-07_Gandharva","Engraulidae",223,"Trash",180,3
+"662","Trawler","2018-04-07_Gandharva","Lactariidae",35,"Trash",180,3
+"663","Trawler","2018-04-07_Gandharva","Leiognathidae",324,"Trash",180,3
+"664","Trawler","2018-04-07_Gandharva","Loliginidae",127,"Trash",180,3
+"665","Trawler","2018-04-07_Gandharva","Sciaenidae",12,"Trash",180,3
+"666","Trawler","2018-04-07_Gandharva","Squillidae",6,"Trash",180,3
+"667","Trawler","2018-04-07_Gandharva","Tetraodontidae",34,"Trash",180,3
+"668","Trawler","2018-04-07_Gandharva","Trichiuridae",37,"Trash",180,3
+"669","Trawler","2018-04-09_Om Sai","Carangidae",70,"Trash",NA,3
+"670","Trawler","2018-04-09_Om Sai","Engraulidae",215,"Trash",NA,3
+"671","Trawler","2018-04-09_Om Sai","Lactariidae",4,"Trash",NA,3
+"672","Trawler","2018-04-09_Om Sai","Leiognathidae",398,"Trash",NA,3
+"673","Trawler","2018-04-09_Om Sai","Loliginidae",11,"Trash",NA,3
+"674","Trawler","2018-04-09_Om Sai","Mugilidae",32,"Trash",NA,3
+"675","Trawler","2018-04-09_Om Sai","Trichiuridae",28,"Trash",NA,3
+"676","Trawler","2018-04-11_Shreepad Vallabh","Carangidae",156,"Trash",NA,NA
+"677","Trawler","2018-04-11_Shreepad Vallabh","Haemulidae",30,"Trash",NA,NA
+"678","Trawler","2018-04-11_Shreepad Vallabh","Lactariidae",30,"Trash",NA,NA
+"679","Trawler","2018-04-11_Shreepad Vallabh","Leiognathidae",248,"Trash",NA,NA
+"680","Trawler","2018-04-11_Shreepad Vallabh","Nemipteridae",100,"Trash",NA,NA
+"681","Trawler","2018-04-11_Shreepad Vallabh","Sciaenidae",0,"Trash",NA,NA
+"682","Trawler","2018-04-11_Shreepad Vallabh","Terapontidae",46,"Trash",NA,NA
+"683","Trawler","2018-04-11_Shreepad Vallabh","Trichiuridae",142,"Trash",NA,NA
+"684","Trawler","2018-04-15_Badrakali","Apogonidae",8,"Trash",180,2.5
+"685","Trawler","2018-04-15_Badrakali","Clupeidae",35,"Trash",180,2.5
+"686","Trawler","2018-04-15_Badrakali","Engraulidae",30,"Trash",180,2.5
+"687","Trawler","2018-04-15_Badrakali","Haemulidae",24,"Trash",180,2.5
+"688","Trawler","2018-04-15_Badrakali","Leiognathidae",20,"Trash",180,2.5
+"689","Trawler","2018-04-15_Badrakali","Platycephalidae",307,"Trash",180,2.5
+"690","Trawler","2018-04-15_Badrakali","Sepiidae",0,"Trash",180,2.5
+"691","Trawler","2018-04-15_Badrakali","Synanceiidae",23,"Trash",180,2.5
+"692","Trawler","2018-04-15_Badrakali","Terapontidae",28,"Trash",180,2.5
+"693","Trawler","2018-04-15_Badrakali","Triacanthidae",82,"Trash",180,2.5
+"694","Trawler","2018-04-15_Badrakali","Trichiuridae",85,"Trash",180,2.5
+"695","Trawler","2018-04-17_Gajannan Maharaj","Clupeidae",46,"Trash",180,2.5
+"696","Trawler","2018-04-17_Gajannan Maharaj","Engraulidae",677,"Trash",180,2.5
+"697","Trawler","2018-04-17_Gajannan Maharaj","Sciaenidae",15,"Trash",180,2.5
+"698","Trawler","2018-04-17_Gajannan Maharaj","Sepiidae",89,"Trash",180,2.5
+"699","Trawler","2018-04-17_Gajannan Maharaj","Trichiuridae",77,"Trash",180,2.5
+"700","Trawler","2018-04-18_Shreepad Vallabh","Nemipteridae",215,"Trash",NA,3.5
+"701","Trawler","2018-04-21_Om Sai","Carangidae",30,"Trash",165,4
+"702","Trawler","2018-04-21_Om Sai","Clupeidae",95,"Trash",165,4
+"703","Trawler","2018-04-21_Om Sai","Engraulidae",119,"Trash",165,4
+"704","Trawler","2018-04-21_Om Sai","Haemulidae",66,"Trash",165,4
+"705","Trawler","2018-04-21_Om Sai","Leiognathidae",441,"Trash",165,4
+"706","Trawler","2018-04-21_Om Sai","Loliginidae",33,"Trash",165,4
+"707","Trawler","2018-04-21_Om Sai","Menidae",9,"Trash",165,4
+"708","Trawler","2018-04-21_Om Sai","Scombridae",0,"Trash",165,4
+"709","Trawler","2018-04-21_Om Sai","Sphyraenidae",0,"Trash",165,4
+"710","Trawler","2018-04-26_Shreepad Vallabh","Nemipteridae",207,"Trash",180,3
+"711","Trawler","2018-04-28_Gajannan Maharaj","Engraulidae",46,"Trash",240,4
+"712","Trawler","2018-04-28_Gajannan Maharaj","Leiognathidae",199,"Trash",240,4
+"713","Trawler","2018-04-28_Gajannan Maharaj","Loliginidae",64,"Trash",240,4
+"714","Trawler","2018-04-28_Gajannan Maharaj","Menidae",54,"Trash",240,4
+"715","Trawler","2018-04-28_Gajannan Maharaj","Scombridae",0,"Trash",240,4
+"716","Trawler","2018-04-28_Gajannan Maharaj","Squillidae",6,"Trash",240,4
+"717","Trawler","2018-04-28_Gajannan Maharaj","Tetraodontidae",7,"Trash",240,4
+"718","Trawler","2018-04-28_Gajannan Maharaj","Trichiuridae",45,"Trash",240,4
+"719","Trawler","2018-04-29_Rishikesh","Carangidae",103,"Trash",300,3
+"720","Trawler","2018-04-29_Rishikesh","Engraulidae",64,"Trash",300,3
+"721","Trawler","2018-04-29_Rishikesh","Leiognathidae",77,"Trash",300,3
+"722","Trawler","2018-04-29_Rishikesh","Loliginidae",37,"Trash",300,3
+"723","Trawler","2018-04-29_Rishikesh","Menidae",87,"Trash",300,3
+"724","Trawler","2018-04-29_Rishikesh","Nemipteridae",22,"Trash",300,3
+"725","Trawler","2018-04-29_Rishikesh","Penaeidae",3,"Trash",300,3
+"726","Trawler","2018-04-29_Rishikesh","Scombridae",3,"Trash",300,3
+"727","Trawler","2018-04-29_Rishikesh","Sepiidae",30,"Trash",300,3
+"728","Trawler","2018-04-29_Rishikesh","Tetraodontidae",97,"Trash",300,3
+"729","Trawler","2018-04-29_Rishikesh","Trichiuridae",59,"Trash",300,3
+"730","Trawler","2018-05-03_Om Sai","Carangidae",230,"Trash",NA,4
+"731","Trawler","2018-05-07_Om Sai","Carangidae",197,"Trash",NA,4
+"732","Trawler","2018-05-07_Om Sai","Clupeidae",58,"Trash",NA,4
+"733","Trawler","2018-05-07_Om Sai","Engraulidae",160,"Trash",NA,4
+"734","Trawler","2018-05-07_Om Sai","Lactariidae",226,"Trash",NA,4
+"735","Trawler","2018-05-07_Om Sai","Leiognathidae",140,"Trash",NA,4
+"736","Trawler","2018-05-07_Om Sai","Loliginidae",130,"Trash",NA,4
+"737","Trawler","2018-05-07_Om Sai","Penaeidae",0,"Trash",NA,4
+"738","Trawler","2018-05-07_Om Sai","Scombridae",29,"Trash",NA,4
+"739","Trawler","2018-05-07_Om Sai","Sepiidae",15,"Trash",NA,4
+"740","Trawler","2018-05-07_Om Sai","Terapontidae",12,"Trash",NA,4
+"741","Trawler","2018-05-07_Om Sai","Tetraodontidae",33,"Trash",NA,4
+"742","Trawler","2018-05-07_Om Sai","Trichiuridae",14,"Trash",NA,4
+"743","Trawler","2018-05-09_Gajannan Maharaj","Trichiuridae",100,"Trash",180,3
+"744","Trawler","2018-10-19_Omkar","Carangidae",706,"Trash",210,4
+"745","Trawler","2018-10-19_Omkar","Clupeidae",119,"Trash",210,4
+"746","Trawler","2018-10-19_Omkar","Engraulidae",51,"Trash",210,4
+"747","Trawler","2018-10-19_Omkar","Loliginidae",27,"Trash",210,4
+"748","Trawler","2018-10-19_Omkar","Menidae",76,"Trash",210,4
+"749","Trawler","2018-10-19_Omkar","Scatophagidae",73,"Trash",210,4
+"750","Trawler","2018-10-19_Omkar","Sphyraenidae",41,"Trash",210,4
+"751","Trawler","2018-10-19_Omkar","Trichiuridae",86,"Trash",210,4
+"752","Trawler","2018-10-21_Hemavati","Carangidae",425,"Trash",120,3.5
+"753","Trawler","2018-10-21_Hemavati","Clupeidae",70,"Trash",120,3.5
+"754","Trawler","2018-10-21_Hemavati","Engraulidae",109,"Trash",120,3.5
+"755","Trawler","2018-10-21_Hemavati","Lactariidae",3,"Trash",120,3.5
+"756","Trawler","2018-10-21_Hemavati","Leiognathidae",11,"Trash",120,3.5
+"757","Trawler","2018-10-21_Hemavati","Loliginidae",46,"Trash",120,3.5
+"758","Trawler","2018-10-21_Hemavati","Scombridae",50,"Trash",120,3.5
+"759","Trawler","2018-10-21_Hemavati","Terapontidae",134,"Trash",120,3.5
+"760","Trawler","2018-10-21_Hemavati","Trichiuridae",97,"Trash",120,3.5
+"761","Trawler","2018-10-23_Dwarkadish","Carangidae",224,"Trash",150,3
+"762","Trawler","2018-10-23_Dwarkadish","Clupeidae",108,"Trash",150,3
+"763","Trawler","2018-10-23_Dwarkadish","Engraulidae",361,"Trash",150,3
+"764","Trawler","2018-10-23_Dwarkadish","Lactariidae",4,"Trash",150,3
+"765","Trawler","2018-10-23_Dwarkadish","Loliginidae",15,"Trash",150,3
+"766","Trawler","2018-10-23_Dwarkadish","Penaeidae",1,"Trash",150,3
+"767","Trawler","2018-10-23_Dwarkadish","Trichiuridae",36,"Trash",150,3
+"768","Trawler","2018-10-25_Ratna Bharti","Carangidae",1001,"Trash",180,3
+"769","Trawler","2018-10-25_Ratna Bharti","Scombridae",27,"Trash",180,3
+"770","Trawler","2018-10-27_Sagar Samra","Ariidae",44,"Trash",240,3
+"771","Trawler","2018-10-27_Sagar Samra","Carangidae",748,"Trash",240,3
+"772","Trawler","2018-10-27_Sagar Samra","Engraulidae",96,"Trash",240,3
+"773","Trawler","2018-10-27_Sagar Samra","Lactariidae",1,"Trash",240,3
+"774","Trawler","2018-10-27_Sagar Samra","Loliginidae",23,"Trash",240,3
+"775","Trawler","2018-10-27_Sagar Samra","Scombridae",21,"Trash",240,3
+"776","Trawler","2018-10-27_Sagar Samra","Serranidae",64,"Trash",240,3
+"777","Trawler","2018-11-01_Kelbai","Carangidae",6,"Trash",240,3
+"778","Trawler","2018-11-01_Kelbai","Engraulidae",174,"Trash",240,3
+"779","Trawler","2018-11-01_Kelbai","Sergestidae",40,"Trash",240,3
+"780","Trawler","2018-11-02_Vishaka","Carangidae",196,"Trash",240,3
+"781","Trawler","2018-11-02_Vishaka","Engraulidae",144,"Trash",240,3
+"782","Trawler","2018-11-02_Vishaka","Leiognathidae",51,"Trash",240,3
+"783","Trawler","2018-11-02_Vishaka","Priacanthidae",285,"Trash",240,3
+"784","Trawler","2018-11-02_Vishaka","Scombridae",106,"Trash",240,3
+"785","Trawler","2018-11-02_Vishaka","Tetraodontidae",191,"Trash",240,3
+"786","Trawler","2018-11-02_Vishaka","Trichiuridae",100,"Trash",240,3
+"787","Trawler","2018-11-03_Shri Siddesh","Clupeidae",100,"Trash",180,3
+"788","Trawler","2018-11-03_Shri Siddesh","Sergestidae",100,"Trash",180,3
+"789","Trawler","2018-11-13_Gandharva","Carangidae",199,"Trash",180,3
+"790","Trawler","2018-11-13_Gandharva","Clupeidae",571,"Trash",180,3
+"791","Trawler","2018-11-13_Gandharva","Engraulidae",67,"Trash",180,3
+"792","Trawler","2018-11-13_Gandharva","Terapontidae",26,"Trash",180,3
+"793","Trawler","2018-11-13_Gandharva","Trichiuridae",11,"Trash",180,3
+"794","Trawler","2018-11-15_Dwarkadish","Ariidae",70,"Trash",180,3
+"795","Trawler","2018-11-15_Dwarkadish","Carangidae",139,"Trash",180,3
+"796","Trawler","2018-11-15_Dwarkadish","Haemulidae",19,"Trash",180,3
+"797","Trawler","2018-11-15_Dwarkadish","Leiognathidae",13,"Trash",180,3
+"798","Trawler","2018-11-15_Dwarkadish","Sciaenidae",18,"Trash",180,3
+"799","Trawler","2018-11-15_Dwarkadish","Serranidae",30,"Trash",180,3
+"800","Trawler","2018-11-15_Dwarkadish","Terapontidae",58,"Trash",180,3
+"801","Trawler","2018-11-15_Dwarkadish","Tetraodontidae",221,"Trash",180,3
+"802","Trawler","2018-11-16_Om Sai","Nemipteridae",21,"Discards",NA,NA
+"803","Trawler","2018-11-16_Om Sai","Penaeidae",30,"Discards",NA,NA
+"804","Trawler","2018-11-16_Om Sai","Portunidae",12,"Discards",NA,NA
+"805","Trawler","2018-11-16_Om Sai","Serranidae",14,"Discards",NA,NA
+"806","Trawler","2018-11-16_Om Sai","Squillidae",130,"Discards",NA,NA
+"807","Trawler","2018-11-23_Pratamesh","Carangidae",7,"Trash",NA,NA
+"808","Trawler","2018-11-23_Pratamesh","Cynoglossidae",33,"Trash",NA,NA
+"809","Trawler","2018-11-23_Pratamesh","Hemiscylliidae",141,"Trash",NA,NA
+"810","Trawler","2018-11-23_Pratamesh","Leiognathidae",14,"Trash",NA,NA
+"811","Trawler","2018-11-23_Pratamesh","Platycephalidae",148,"Trash",NA,NA
+"812","Trawler","2018-11-23_Pratamesh","Sciaenidae",184,"Trash",NA,NA
+"813","Trawler","2018-11-23_Pratamesh","Scombridae",22,"Trash",NA,NA
+"814","Trawler","2018-11-23_Pratamesh","Serranidae",21,"Trash",NA,NA
+"815","Trawler","2018-11-23_Pratamesh","Squillidae",3,"Trash",NA,NA
+"816","Trawler","2018-11-23_Pratamesh","Synanceiidae",26,"Trash",NA,NA
+"817","Trawler","2018-11-23_Pratamesh","Terapontidae",4,"Trash",NA,NA
+"818","Trawler","2018-11-23_Pratamesh","Trichiuridae",58,"Trash",NA,NA
+"819","Trawler","2018-11-24_Om Sai","Carangidae",30,"Trash",NA,4
+"820","Trawler","2018-11-24_Om Sai","Clupeidae",67,"Trash",NA,4
+"821","Trawler","2018-11-24_Om Sai","Cynoglossidae",21,"Trash",NA,4
+"822","Trawler","2018-11-24_Om Sai","Engraulidae",420,"Trash",NA,4
+"823","Trawler","2018-11-24_Om Sai","Portunidae",27,"Trash",NA,4
+"824","Trawler","2018-11-24_Om Sai","Terapontidae",106,"Trash",NA,4
+"825","Trawler","2018-11-24_Om Sai","Tetraodontidae",153,"Trash",NA,4
+"826","Trawler","2018-11-27_Kohinoor","Carangidae",362,"Trash",NA,NA
+"827","Trawler","2018-11-27_Kohinoor","Clupeidae",141,"Trash",NA,NA
+"828","Trawler","2018-11-27_Kohinoor","Engraulidae",21,"Trash",NA,NA
+"829","Trawler","2018-11-27_Kohinoor","Lactariidae",30,"Trash",NA,NA
+"830","Trawler","2018-11-29_Ratna Bharti","Carangidae",604,"Trash",180,3
+"831","Trawler","2018-11-29_Ratna Bharti","Clupeidae",110,"Trash",180,3
+"832","Trawler","2018-11-29_Ratna Bharti","Engraulidae",86,"Trash",180,3
+"833","Trawler","2018-11-29_Ratna Bharti","Lactariidae",23,"Trash",180,3
+"834","Trawler","2018-11-29_Ratna Bharti","Trichiuridae",1,"Trash",180,3
+"835","Trawler","2018-12-05_Dolphin","Carangidae",728,"Trash",180,3
+"836","Trawler","2018-12-05_Dolphin","Priacanthidae",156,"Trash",180,3
+"837","Trawler","2018-12-05_Dolphin","Scombridae",4,"Trash",180,3
+"838","Trawler","2018-12-05_Dolphin","Sepiidae",16,"Trash",180,3
+"839","Trawler","2018-12-05_Dolphin","Serranidae",63,"Trash",180,3
+"840","Trawler","2018-12-05_Dolphin","Sphyraenidae",21,"Trash",180,3
+"841","Trawler","2018-12-11_Dhanalakshmi","Carangidae",110,"Trash",180,2
+"842","Trawler","2018-12-11_Dhanalakshmi","Clupeidae",87,"Trash",180,2
+"843","Trawler","2018-12-11_Dhanalakshmi","Dasyatidae",113,"Trash",180,2
+"844","Trawler","2018-12-11_Dhanalakshmi","Engraulidae",178,"Trash",180,2
+"845","Trawler","2018-12-11_Dhanalakshmi","Leiognathidae",23,"Trash",180,2
+"846","Trawler","2018-12-11_Dhanalakshmi","Nemipteridae",18,"Trash",180,2
+"847","Trawler","2018-12-11_Dhanalakshmi","Platycephalidae",49,"Trash",180,2
+"848","Trawler","2018-12-11_Dhanalakshmi","Serranidae",149,"Trash",180,2
+"849","Trawler","2018-12-11_Dhanalakshmi","Terapontidae",108,"Trash",180,2
+"850","Trawler","2018-12-12_Omkar Ishwar","Carangidae",23,"Trash",240,2
+"851","Trawler","2018-12-12_Omkar Ishwar","Clupeidae",418,"Trash",240,2
+"852","Trawler","2018-12-12_Omkar Ishwar","Engraulidae",149,"Trash",240,2
+"853","Trawler","2018-12-12_Omkar Ishwar","Loliginidae",0,"Trash",240,2
+"854","Trawler","2018-12-12_Omkar Ishwar","Nemipteridae",19,"Trash",240,2
+"855","Trawler","2018-12-12_Omkar Ishwar","Priacanthidae",71,"Trash",240,2
+"856","Trawler","2018-12-12_Omkar Ishwar","Trichiuridae",39,"Trash",240,2
+"857","Trawler","2018-12-18_Dwarkadish","Cynoglossidae",100,"Trash",120,3
+"858","Trawler","2018-12-24_Soumya","Carangidae",46,"Trash",150,3.4
+"859","Trawler","2018-12-24_Soumya","Engraulidae",34,"Trash",150,3.4
+"860","Trawler","2018-12-24_Soumya","Haemulidae",18,"Trash",150,3.4
+"861","Trawler","2018-12-24_Soumya","Nemipteridae",70,"Trash",150,3.4
+"862","Trawler","2018-12-24_Soumya","Platycephalidae",128,"Trash",150,3.4
+"863","Trawler","2018-12-24_Soumya","Sciaenidae",71,"Trash",150,3.4
+"864","Trawler","2018-12-24_Soumya","Serranidae",36,"Trash",150,3.4
+"865","Trawler","2018-12-24_Soumya","Sphyraenidae",60,"Trash",150,3.4
+"866","Trawler","2018-12-24_Soumya","Terapontidae",154,"Trash",150,3.4
+"867","Trawler","2018-12-24_Soumya","Tetraodontidae",18,"Trash",150,3.4
+"868","Trawler","2018-12-24_Soumya","Trichiuridae",161,"Trash",150,3.4
+"869","Trawler","2018-12-25_Darya Sagar","Carangidae",100,"Trash",NA,NA
+"870","Trawler","2018-12-25_Darya Sagar","Nemipteridae",100,"Trash",NA,NA
+"871","Trawler","2019-01-02_Hemavati","Carangidae",40,"Trash",180,3
+"872","Trawler","2019-01-02_Hemavati","Clupeidae",99,"Trash",180,3
+"873","Trawler","2019-01-02_Hemavati","Engraulidae",21,"Trash",180,3
+"874","Trawler","2019-01-02_Hemavati","Lactariidae",12,"Trash",180,3
+"875","Trawler","2019-01-02_Hemavati","Nemipteridae",121,"Trash",180,3
+"876","Trawler","2019-01-02_Hemavati","Platycephalidae",67,"Trash",180,3
+"877","Trawler","2019-01-02_Hemavati","Sciaenidae",74,"Trash",180,3
+"878","Trawler","2019-01-02_Hemavati","Serranidae",51,"Trash",180,3
+"879","Trawler","2019-01-02_Hemavati","Terapontidae",60,"Trash",180,3
+"880","Trawler","2019-01-02_Hemavati","Trichiuridae",71,"Trash",180,3
+"881","Trawler","2019-01-04_Soumya","Carangidae",147,"Trash",NA,2.5
+"882","Trawler","2019-01-04_Soumya","Cynoglossidae",1,"Trash",NA,2.5
+"883","Trawler","2019-01-04_Soumya","Engraulidae",16,"Trash",NA,2.5
+"884","Trawler","2019-01-04_Soumya","Haemulidae",40,"Trash",NA,2.5
+"885","Trawler","2019-01-04_Soumya","Nemipteridae",79,"Trash",NA,2.5
+"886","Trawler","2019-01-04_Soumya","Platycephalidae",185,"Trash",NA,2.5
+"887","Trawler","2019-01-04_Soumya","Serranidae",102,"Trash",NA,2.5
+"888","Trawler","2019-01-04_Soumya","Synodontidae",13,"Trash",NA,2.5
+"889","Trawler","2019-01-04_Soumya","Terapontidae",201,"Trash",NA,2.5
+"890","Trawler","2019-01-28_Mangal Moorthi","Carangidae",65,"Trash",120,3
+"891","Trawler","2019-01-28_Mangal Moorthi","Clupeidae",45,"Trash",120,3
+"892","Trawler","2019-01-28_Mangal Moorthi","Congridae",51,"Trash",120,3
+"893","Trawler","2019-01-28_Mangal Moorthi","Engraulidae",71,"Trash",120,3
+"894","Trawler","2019-01-28_Mangal Moorthi","Haemulidae",17,"Trash",120,3
+"895","Trawler","2019-01-28_Mangal Moorthi","Leiognathidae",14,"Trash",120,3
+"896","Trawler","2019-01-28_Mangal Moorthi","Nemipteridae",100,"Trash",120,3
+"897","Trawler","2019-01-28_Mangal Moorthi","Penaeidae",18,"Trash",120,3
+"898","Trawler","2019-01-28_Mangal Moorthi","Platycephalidae",271,"Trash",120,3
+"899","Trawler","2019-01-28_Mangal Moorthi","Serranidae",283,"Trash",120,3
+"900","Trawler","2019-01-28_Mangal Moorthi","Terapontidae",57,"Trash",120,3
+"901","Trawler","2019-01-28_Mangal Moorthi","Tetraodontidae",40,"Trash",120,3
+"902","Trawler","2019-01-30_Omkar2","Carangidae",132,"Trash",180,3
+"903","Trawler","2019-01-30_Omkar2","Clupeidae",114,"Trash",180,3
+"904","Trawler","2019-01-30_Omkar2","Congridae",19,"Trash",180,3
+"905","Trawler","2019-01-30_Omkar2","Engraulidae",20,"Trash",180,3
+"906","Trawler","2019-01-30_Omkar2","Nemipteridae",109,"Trash",180,3
+"907","Trawler","2019-01-30_Omkar2","Platycephalidae",66,"Trash",180,3
+"908","Trawler","2019-01-30_Omkar2","Sciaenidae",8,"Trash",180,3
+"909","Trawler","2019-01-30_Omkar2","Serranidae",33,"Trash",180,3
+"910","Trawler","2019-01-30_Omkar2","Tetraodontidae",234,"Trash",180,3
+"911","Trawler","2019-02-01_Omkar2","",17,"Trash",180,3
+"912","Trawler","2019-02-01_Omkar2","Carangidae",108,"Trash",180,3
+"913","Trawler","2019-02-01_Omkar2","Clupeidae",173,"Trash",180,3
+"914","Trawler","2019-02-01_Omkar2","Congridae",80,"Trash",180,3
+"915","Trawler","2019-02-01_Omkar2","Engraulidae",19,"Trash",180,3
+"916","Trawler","2019-02-01_Omkar2","Lactariidae",12,"Trash",180,3
+"917","Trawler","2019-02-01_Omkar2","Loliginidae",42,"Trash",180,3
+"918","Trawler","2019-02-01_Omkar2","Nemipteridae",9,"Trash",180,3
+"919","Trawler","2019-02-01_Omkar2","Serranidae",146,"Trash",180,3
+"920","Trawler","2019-02-01_Omkar2","Squillidae",12,"Trash",180,3
+"921","Trawler","2019-02-01_Omkar2","Terapontidae",63,"Trash",180,3
+"922","Trawler","2019-02-01_Omkar2","Tetraodontidae",153,"Trash",180,3
+"923","Trawler","2019-02-07_Krantiveer","Carangidae",319,"Trash",180,1
+"924","Trawler","2019-02-07_Krantiveer","Clupeidae",177,"Trash",180,1
+"925","Trawler","2019-02-07_Krantiveer","Engraulidae",188,"Trash",180,1
+"926","Trawler","2019-02-07_Krantiveer","Leiognathidae",3,"Trash",180,1
+"927","Trawler","2019-02-07_Krantiveer","Loliginidae",23,"Trash",180,1
+"928","Trawler","2019-02-07_Krantiveer","Nemipteridae",22,"Trash",180,1
+"929","Trawler","2019-02-07_Krantiveer","Sciaenidae",21,"Trash",180,1
+"930","Trawler","2019-02-07_Krantiveer","Squillidae",6,"Trash",180,1
+"931","Trawler","2019-02-07_Krantiveer","Tetraodontidae",1,"Trash",180,1
+"932","Trawler","2019-02-11_Soumya","Carangidae",560,"Trash",NA,3
+"933","Trawler","2019-02-11_Soumya","Clupeidae",68,"Trash",NA,3
+"934","Trawler","2019-02-11_Soumya","Congridae",33,"Trash",NA,3
+"935","Trawler","2019-02-11_Soumya","Dasyatidae",34,"Trash",NA,3
+"936","Trawler","2019-02-11_Soumya","Engraulidae",32,"Trash",NA,3
+"937","Trawler","2019-02-11_Soumya","Nemipteridae",100,"Trash",NA,3
+"938","Trawler","2019-02-11_Soumya","Platycephalidae",43,"Trash",NA,3
+"939","Trawler","2019-02-11_Soumya","Plotosidae",90,"Trash",NA,3
+"940","Trawler","2019-02-11_Soumya","Sphyraenidae",13,"Trash",NA,3
+"941","Trawler","2019-02-11_Soumya","Terapontidae",30,"Trash",NA,3
+"942","Trawler","2019-02-13_Mansarovar","Carangidae",343,"Trash",270,2
+"943","Trawler","2019-02-13_Mansarovar","Clupeidae",38,"Trash",270,2
+"944","Trawler","2019-02-13_Mansarovar","Congridae",16,"Trash",270,2
+"945","Trawler","2019-02-13_Mansarovar","Engraulidae",94,"Trash",270,2
+"946","Trawler","2019-02-13_Mansarovar","Leiognathidae",27,"Trash",270,2
+"947","Trawler","2019-02-13_Mansarovar","Nemipteridae",100,"Trash",270,2
+"948","Trawler","2019-02-13_Mansarovar","Platycephalidae",39,"Trash",270,2
+"949","Trawler","2019-02-13_Mansarovar","Priacanthidae",3,"Trash",270,2
+"950","Trawler","2019-02-13_Mansarovar","Serranidae",25,"Trash",270,2
+"951","Trawler","2019-02-13_Mansarovar","Synodontidae",1,"Trash",270,2
+"952","Trawler","2019-02-13_Mansarovar","Tetraodontidae",313,"Trash",270,2
+"953","Trawler","2019-02-19_Audumbar","Bregmacerotidae",1,"Trash",210,3.5
+"954","Trawler","2019-02-19_Audumbar","Carangidae",111,"Trash",210,3.5
+"955","Trawler","2019-02-19_Audumbar","Clupeidae",27,"Trash",210,3.5
+"956","Trawler","2019-02-19_Audumbar","Engraulidae",51,"Trash",210,3.5
+"957","Trawler","2019-02-19_Audumbar","Menidae",95,"Trash",210,3.5
+"958","Trawler","2019-02-19_Audumbar","Sciaenidae",13,"Trash",210,3.5
+"959","Trawler","2019-02-21_Shri Ganesh","Carangidae",625,"Trash",NA,3
+"960","Trawler","2019-02-21_Shri Ganesh","Engraulidae",194,"Trash",NA,3
+"961","Trawler","2019-02-21_Shri Ganesh","Menidae",29,"Trash",NA,3
+"962","Trawler","2019-02-23_Wagdai Prasann","Carangidae",211,"Trash",NA,NA
+"963","Trawler","2019-02-23_Wagdai Prasann","Clupeidae",73,"Trash",NA,NA
+"964","Trawler","2019-02-23_Wagdai Prasann","Congridae",78,"Trash",NA,NA
+"965","Trawler","2019-02-23_Wagdai Prasann","Engraulidae",53,"Trash",NA,NA
+"966","Trawler","2019-02-23_Wagdai Prasann","Leiognathidae",36,"Trash",NA,NA
+"967","Trawler","2019-02-23_Wagdai Prasann","Nemipteridae",8,"Trash",NA,NA
+"968","Trawler","2019-02-23_Wagdai Prasann","Platycephalidae",9,"Trash",NA,NA
+"969","Trawler","2019-02-23_Wagdai Prasann","Serranidae",14,"Trash",NA,NA
+"970","Trawler","2019-02-23_Wagdai Prasann","Sphyraenidae",28,"Trash",NA,NA
+"971","Trawler","2019-02-23_Wagdai Prasann","Squillidae",11,"Trash",NA,NA
+"972","Trawler","2019-02-23_Wagdai Prasann","Tetraodontidae",193,"Trash",NA,NA
+"973","Trawler","2019-02-25_Vittal Krupa","Carangidae",214,"Trash",NA,3
+"974","Trawler","2019-02-25_Vittal Krupa","Congridae",53,"Trash",NA,3
+"975","Trawler","2019-02-25_Vittal Krupa","Cynoglossidae",1,"Trash",NA,3
+"976","Trawler","2019-02-25_Vittal Krupa","Haemulidae",25,"Trash",NA,3
+"977","Trawler","2019-02-25_Vittal Krupa","Leiognathidae",13,"Trash",NA,3
+"978","Trawler","2019-02-25_Vittal Krupa","Mullidae",30,"Trash",NA,3
+"979","Trawler","2019-02-25_Vittal Krupa","Nemipteridae",100,"Trash",NA,3
+"980","Trawler","2019-02-25_Vittal Krupa","Platycephalidae",65,"Trash",NA,3
+"981","Trawler","2019-02-25_Vittal Krupa","Plotosidae",146,"Trash",NA,3
+"982","Trawler","2019-02-25_Vittal Krupa","Serranidae",43,"Trash",NA,3
+"983","Trawler","2019-02-25_Vittal Krupa","Terapontidae",9,"Trash",NA,3
+"984","Trawler","2019-02-25_Vittal Krupa","Tetraodontidae",286,"Trash",NA,3
+"985","Trawler","2019-02-25_Vittal Krupa","Trichiuridae",31,"Trash",NA,3
+"986","Trawler","2019-02-27_Dhanalakshmi3","Carangidae",183,"Trash",180,1
+"987","Trawler","2019-02-27_Dhanalakshmi3","Clupeidae",168,"Trash",180,1
+"988","Trawler","2019-02-27_Dhanalakshmi3","Engraulidae",64,"Trash",180,1
+"989","Trawler","2019-02-27_Dhanalakshmi3","Leiognathidae",13,"Trash",180,1
+"990","Trawler","2019-02-27_Dhanalakshmi3","Loliginidae",6,"Trash",180,1
+"991","Trawler","2019-02-27_Dhanalakshmi3","Menidae",114,"Trash",180,1
+"992","Trawler","2019-02-27_Dhanalakshmi3","Priacanthidae",21,"Trash",180,1
+"993","Trawler","2019-02-27_Dhanalakshmi3","Sepiidae",16,"Trash",180,1
+"994","Trawler","2019-02-27_Dhanalakshmi3","Tetraodontidae",143,"Trash",180,1
+"995","Trawler","2019-03-01_Agastamuni","Carangidae",530,"Trash",180,3
+"996","Trawler","2019-03-01_Agastamuni","Clupeidae",12,"Trash",180,3
+"997","Trawler","2019-03-01_Agastamuni","Engraulidae",26,"Trash",180,3
+"998","Trawler","2019-03-01_Agastamuni","Loliginidae",12,"Trash",180,3
+"999","Trawler","2019-03-01_Agastamuni","Scombridae",26,"Trash",180,3
+"1000","Trawler","2019-03-04_Kelbai","",1,"Trash",NA,3
+"1001","Trawler","2019-03-04_Kelbai","Congridae",101,"Trash",NA,3
+"1002","Trawler","2019-03-04_Kelbai","Cynoglossidae",59,"Trash",NA,3
+"1003","Trawler","2019-03-04_Kelbai","Engraulidae",15,"Trash",NA,3
+"1004","Trawler","2019-03-04_Kelbai","Nemipteridae",100,"Trash",NA,3
+"1005","Trawler","2019-03-04_Kelbai","Platycephalidae",12,"Trash",NA,3
+"1006","Trawler","2019-03-04_Kelbai","Synanceiidae",58,"Trash",NA,3
+"1007","Trawler","2019-03-04_Kelbai","Terapontidae",25,"Trash",NA,3
+"1008","Trawler","2019-03-04_Kelbai","Tetraodontidae",592,"Trash",NA,3
+"1009","Trawler","2019-03-08_Siddaprasad","Carangidae",264,"Trash",NA,NA
+"1010","Trawler","2019-03-08_Siddaprasad","Engraulidae",15,"Trash",NA,NA
+"1011","Trawler","2019-03-08_Siddaprasad","Leiognathidae",1,"Trash",NA,NA
+"1012","Trawler","2019-03-08_Siddaprasad","Loliginidae",116,"Trash",NA,NA
+"1013","Trawler","2019-03-08_Siddaprasad","Menidae",12,"Trash",NA,NA
+"1014","Trawler","2019-03-08_Siddaprasad","Terapontidae",19,"Trash",NA,NA
+"1015","Trawler","2019-03-08_Siddaprasad","Tetraodontidae",456,"Trash",NA,NA
+"1016","Trawler","2019-03-08_Siddaprasad","Trichiuridae",101,"Trash",NA,NA
+"1017","Trawler","2019-03-11_Badrakali","",224,"Trash",NA,2.5
+"1018","Trawler","2019-03-11_Badrakali","Congridae",163,"Trash",NA,2.5
+"1019","Trawler","2019-03-11_Badrakali","Cynoglossidae",8,"Trash",NA,2.5
+"1020","Trawler","2019-03-11_Badrakali","Serranidae",42,"Trash",NA,2.5
+"1021","Trawler","2019-03-11_Badrakali","Synodontidae",82,"Trash",NA,2.5
+"1022","Trawler","2019-03-11_Badrakali","Terapontidae",30,"Trash",NA,2.5
+"1023","Trawler","2019-03-11_Badrakali","Tetraodontidae",257,"Trash",NA,2.5
+"1024","Trawler","2019-03-13_Chintamani","Carangidae",126,"Trash",195,3
+"1025","Trawler","2019-03-13_Chintamani","Congridae",46,"Trash",195,3
+"1026","Trawler","2019-03-13_Chintamani","Cynoglossidae",4,"Trash",195,3
+"1027","Trawler","2019-03-13_Chintamani","Platycephalidae",16,"Trash",195,3
+"1028","Trawler","2019-03-13_Chintamani","Serranidae",51,"Trash",195,3
+"1029","Trawler","2019-03-13_Chintamani","Synodontidae",11,"Trash",195,3
+"1030","Trawler","2019-03-13_Chintamani","Terapontidae",37,"Trash",195,3
+"1031","Trawler","2019-03-13_Chintamani","Tetraodontidae",630,"Trash",195,3
+"1032","Trawler","2019-03-15_Kohinoor","Carangidae",274,"Trash",180,3
+"1033","Trawler","2019-03-15_Kohinoor","Engraulidae",73,"Trash",180,3
+"1034","Trawler","2019-03-15_Kohinoor","Leiognathidae",43,"Trash",180,3
+"1035","Trawler","2019-03-15_Kohinoor","Loliginidae",24,"Trash",180,3
+"1036","Trawler","2019-03-15_Kohinoor","Sepiidae",340,"Trash",180,3
+"1037","Trawler","2019-03-15_Kohinoor","Squillidae",1,"Trash",180,3
+"1038","Trawler","2019-03-15_Kohinoor","Terapontidae",17,"Trash",180,3
+"1039","Trawler","2019-03-18_Badrakali","Ariidae",53,"Trash",NA,2.5
+"1040","Trawler","2019-03-18_Badrakali","Clupeidae",28,"Trash",NA,2.5
+"1041","Trawler","2019-03-18_Badrakali","Congridae",25,"Trash",NA,2.5
+"1042","Trawler","2019-03-18_Badrakali","Cynoglossidae",19,"Trash",NA,2.5
+"1043","Trawler","2019-03-18_Badrakali","Sepiidae",18,"Trash",NA,2.5
+"1044","Trawler","2019-03-18_Badrakali","Serranidae",165,"Trash",NA,2.5
+"1045","Trawler","2019-03-18_Badrakali","Terapontidae",10,"Trash",NA,2.5
+"1046","Trawler","2019-03-18_Badrakali","Tetraodontidae",499,"Trash",NA,2.5
+"1047","Trawler","2019-03-21_Nageshwar Prasad","Clupeidae",202,"Trash",NA,NA
+"1048","Trawler","2019-03-21_Nageshwar Prasad","Engraulidae",44,"Trash",NA,NA
+"1049","Trawler","2019-03-21_Nageshwar Prasad","Menidae",499,"Trash",NA,NA
+"1050","Trawler","2019-03-23_Arundaye","Carangidae",76,"Trash",NA,NA
+"1051","Trawler","2019-03-23_Arundaye","Congridae",28,"Trash",NA,NA
+"1052","Trawler","2019-03-23_Arundaye","Cynoglossidae",1,"Trash",NA,NA
+"1053","Trawler","2019-03-23_Arundaye","Haemulidae",23,"Trash",NA,NA
+"1054","Trawler","2019-03-23_Arundaye","Leiognathidae",62,"Trash",NA,NA
+"1055","Trawler","2019-03-23_Arundaye","Loliginidae",1,"Trash",NA,NA
+"1056","Trawler","2019-03-23_Arundaye","Platycephalidae",95,"Trash",NA,NA
+"1057","Trawler","2019-03-23_Arundaye","Sciaenidae",1,"Trash",NA,NA
+"1058","Trawler","2019-03-23_Arundaye","Serranidae",4,"Trash",NA,NA
+"1059","Trawler","2019-03-23_Arundaye","Squillidae",5,"Trash",NA,NA
+"1060","Trawler","2019-03-23_Arundaye","Terapontidae",231,"Trash",NA,NA
+"1061","Trawler","2019-03-23_Arundaye","Tetraodontidae",253,"Trash",NA,NA
+"1062","Trawler","2019-03-23_Arundaye","Triacanthidae",63,"Trash",NA,NA
+"1063","Trawler","2019-03-25_Badrakali","Carangidae",13,"Trash",NA,3
+"1064","Trawler","2019-03-25_Badrakali","Clupeidae",39,"Trash",NA,3
+"1065","Trawler","2019-03-25_Badrakali","Engraulidae",33,"Trash",NA,3
+"1066","Trawler","2019-03-25_Badrakali","Haemulidae",156,"Trash",NA,3
+"1067","Trawler","2019-03-25_Badrakali","Loliginidae",1,"Trash",NA,3
+"1068","Trawler","2019-03-25_Badrakali","Nemipteridae",100,"Trash",NA,3
+"1069","Trawler","2019-03-25_Badrakali","Platycephalidae",57,"Trash",NA,3
+"1070","Trawler","2019-03-25_Badrakali","Serranidae",72,"Trash",NA,3
+"1071","Trawler","2019-03-25_Badrakali","Terapontidae",67,"Trash",NA,3
+"1072","Trawler","2019-03-25_Badrakali","Tetraodontidae",404,"Trash",NA,3
+"1073","Trawler","2019-03-29_Gurudutt","Carangidae",169,"Trash",180,3
+"1074","Trawler","2019-03-29_Gurudutt","Clupeidae",15,"Trash",180,3
+"1075","Trawler","2019-03-29_Gurudutt","Engraulidae",69,"Trash",180,3
+"1076","Trawler","2019-03-29_Gurudutt","Leiognathidae",7,"Trash",180,3
+"1077","Trawler","2019-03-29_Gurudutt","Menidae",507,"Trash",180,3
+"1078","Trawler","2019-04-01_Badrakali","Ariidae",61,"Trash",NA,3
+"1079","Trawler","2019-04-01_Badrakali","Clupeidae",66,"Trash",NA,3
+"1080","Trawler","2019-04-01_Badrakali","Congridae",89,"Trash",NA,3
+"1081","Trawler","2019-04-01_Badrakali","Engraulidae",19,"Trash",NA,3
+"1082","Trawler","2019-04-01_Badrakali","Gerreidae",24,"Trash",NA,3
+"1083","Trawler","2019-04-01_Badrakali","Haemulidae",19,"Trash",NA,3
+"1084","Trawler","2019-04-01_Badrakali","Serranidae",59,"Trash",NA,3
+"1085","Trawler","2019-04-01_Badrakali","Terapontidae",37,"Trash",NA,3
+"1086","Trawler","2019-04-01_Badrakali","Tetraodontidae",467,"Trash",NA,3
+"1087","Trawler","2019-04-04_Mansarovar","Menidae",100,"Trash",180,3
+"1088","Trawler","2019-04-17_Dhanalakshmi2","Astropectinidae",1,"Trash",NA,3
+"1089","Trawler","2019-04-17_Dhanalakshmi2","Carangidae",81,"Trash",NA,3
+"1090","Trawler","2019-04-17_Dhanalakshmi2","Congridae",160,"Trash",NA,3
+"1091","Trawler","2019-04-17_Dhanalakshmi2","Cynoglossidae",217,"Trash",NA,3
+"1092","Trawler","2019-04-17_Dhanalakshmi2","Engraulidae",17,"Trash",NA,3
+"1093","Trawler","2019-04-17_Dhanalakshmi2","Platycephalidae",25,"Trash",NA,3
+"1094","Trawler","2019-04-17_Dhanalakshmi2","Sciaenidae",76,"Trash",NA,3
+"1095","Trawler","2019-04-19_Vishaka","",160,"Trash",NA,NA
+"1096","Trawler","2019-04-19_Vishaka","Clupeidae",32,"Trash",NA,NA
+"1097","Trawler","2019-04-19_Vishaka","Congridae",68,"Trash",NA,NA
+"1098","Trawler","2019-04-19_Vishaka","Platycephalidae",79,"Trash",NA,NA
+"1099","Trawler","2019-04-19_Vishaka","Portunidae",19,"Trash",NA,NA
+"1100","Trawler","2019-04-19_Vishaka","Squillidae",7,"Trash",NA,NA
+"1101","Trawler","2019-04-19_Vishaka","Tetraodontidae",382,"Trash",NA,NA
+"1102","Trawler","2019-04-19_Vishaka","Trichiuridae",50,"Trash",NA,NA
+"1103","Trawler","2019-04-26_Badrakali","",123,"Trash",NA,NA
+"1104","Trawler","2019-04-26_Badrakali","Apogonidae",20,"Trash",NA,NA
+"1105","Trawler","2019-04-26_Badrakali","Congridae",116,"Trash",NA,NA
+"1106","Trawler","2019-04-26_Badrakali","Cynoglossidae",122,"Trash",NA,NA
+"1107","Trawler","2019-04-26_Badrakali","Engraulidae",5,"Trash",NA,NA
+"1108","Trawler","2019-04-26_Badrakali","Gobiidae",206,"Trash",NA,NA
+"1109","Trawler","2019-04-26_Badrakali","Nemipteridae",23,"Trash",NA,NA
+"1110","Trawler","2019-04-26_Badrakali","Platycephalidae",13,"Trash",NA,NA
+"1111","Trawler","2019-04-26_Badrakali","Serranidae",64,"Trash",NA,NA
+"1112","Trawler","2019-04-26_Badrakali","Terapontidae",15,"Trash",NA,NA
+"1113","Trawler","2018-11-01_Kelbai","Engraulidae",24000,"High Value Species",NA,NA
+"1114","Trawler","2018-11-01_Kelbai","Loliginidae",5000,"Shrimp",NA,NA
+"1115","Trawler","2018-11-01_Kelbai","Scombridae",5500,"High Value Species",NA,NA
+"1116","Trawler","2018-11-01_Kelbai","Sergestidae",224000,"High Value Species",NA,NA
+"1117","Trawler","2018-11-01_Kelbai",NA,103000,"High Value Species",NA,NA
+"1118","Trawler","2018-11-02_Vishaka","Engraulidae",36000,"High Value Species",NA,NA
+"1119","Trawler","2018-11-02_Vishaka","Lactariidae",2000,"High Value Species",NA,NA
+"1120","Trawler","2018-11-02_Vishaka","Scombridae",45000,"High Value Species",NA,NA
+"1121","Trawler","2018-11-02_Vishaka","Sphyraenidae",4000,"High Value Species",NA,NA
+"1122","Trawler","2018-11-02_Vishaka",NA,610500,"High Value Species",NA,NA
+"1123","Trawler","2018-11-03_Shri Siddesh","Carangidae",56000,"High Value Species",NA,NA
+"1124","Trawler","2018-11-03_Shri Siddesh","Engraulidae",28000,"High Value Species",NA,NA
+"1125","Trawler","2018-11-03_Shri Siddesh","Loliginidae",10000,"Shrimp",NA,NA
+"1126","Trawler","2018-11-03_Shri Siddesh","Scombridae",22000,"High Value Species",NA,NA
+"1127","Trawler","2018-11-03_Shri Siddesh","Sergestidae",18000,"High Value Species",NA,NA
+"1128","Trawler","2018-11-03_Shri Siddesh","Sphyraenidae",2000,"High Value Species",NA,NA
+"1129","Trawler","2018-11-03_Shri Siddesh",NA,49500,"High Value Species",NA,NA
+"1130","Trawler","2018-11-06_Pavnai",NA,1089000,"High Value Species",NA,NA
+"1131","Trawler","2018-11-07_Lakshmi","Scombridae",168000,"High Value Species",NA,NA
+"1132","Trawler","2018-11-07_Lakshmi",NA,1019500,"High Value Species",NA,NA
+"1133","Trawler","2018-11-09_Kelbai","Loliginidae",1500,"Shrimp",NA,NA
+"1134","Trawler","2018-11-09_Kelbai","Scombridae",72000,"High Value Species",NA,NA
+"1135","Trawler","2018-11-09_Kelbai",NA,807000,"High Value Species",NA,NA
+"1136","Trawler","2018-11-13_Gandharva","Lactariidae",5000,"High Value Species",NA,NA
+"1137","Trawler","2018-11-13_Gandharva","Loliginidae",9000,"Shrimp",NA,NA
+"1138","Trawler","2018-11-13_Gandharva","Scombridae",126000,"High Value Species",NA,NA
+"1139","Trawler","2018-11-13_Gandharva","Sphyraenidae",2000,"High Value Species",NA,NA
+"1140","Trawler","2018-11-13_Gandharva",NA,435500,"High Value Species",NA,NA
+"1141","Trawler","2018-11-15_Dwarkadish","Carcharhinidae",2500,"Shrimp",NA,NA
+"1142","Trawler","2018-11-15_Dwarkadish","Cynoglossidae",40000,"High Value Species",NA,NA
+"1143","Trawler","2018-11-15_Dwarkadish","Lactariidae",3000,"High Value Species",NA,NA
+"1144","Trawler","2018-11-15_Dwarkadish","Loliginidae",1000,"Shrimp",NA,NA
+"1145","Trawler","2018-11-15_Dwarkadish","Scombridae",14000,"High Value Species",NA,NA
+"1146","Trawler","2018-11-15_Dwarkadish","Sergestidae",252000,"High Value Species",NA,NA
+"1147","Trawler","2018-11-15_Dwarkadish",NA,412500,"High Value Species",NA,NA
+"1148","Trawler","2018-11-16_Om Sai",NA,89000,"Shrimp",NA,NA
+"1149","Trawler","2018-11-19_Vittal Krupa","Sphyraenidae",1000,"High Value Species",NA,NA
+"1150","Trawler","2018-11-19_Vittal Krupa",NA,45500,"Elasmobranchs",NA,NA
+"1151","Trawler","2018-11-23_Nageshwar Prasad","Cynoglossidae",220000,"High Value Species",NA,NA
+"1152","Trawler","2018-11-23_Nageshwar Prasad",NA,45100,"High Value Species",NA,NA
+"1153","Trawler","2018-11-24_Om Sai","Cynoglossidae",0,"High Value Species",NA,NA
+"1154","Trawler","2018-11-24_Om Sai","Scombridae",1000,"High Value Species",NA,NA
+"1155","Trawler","2018-11-24_Om Sai","Sphyraenidae",2000,"High Value Species",NA,NA
+"1156","Trawler","2018-11-24_Om Sai",NA,151000,"High Value Species",NA,NA
+"1157","Trawler","2018-11-27_Kohinoor","Carcharhinidae",3000,"Shrimp",NA,NA
+"1158","Trawler","2018-11-27_Kohinoor","Clupeidae",29000,"High Value Species",NA,NA
+"1159","Trawler","2018-11-27_Kohinoor","Lactariidae",31000,"High Value Species",NA,NA
+"1160","Trawler","2018-11-27_Kohinoor","Loliginidae",12000,"Shrimp",NA,NA
+"1161","Trawler","2018-11-27_Kohinoor","Scombridae",17000,"High Value Species",NA,NA
+"1162","Trawler","2018-11-27_Kohinoor","Sphyraenidae",5000,"High Value Species",NA,NA
+"1163","Trawler","2018-11-27_Kohinoor",NA,756000,"High Value Species",NA,NA
+"1164","Trawler","2018-11-29_Ratna Bharti","Carcharhinidae",4500,"Shrimp",NA,NA
+"1165","Trawler","2018-11-29_Ratna Bharti","Lactariidae",2000,"High Value Species",NA,NA
+"1166","Trawler","2018-11-29_Ratna Bharti","Loliginidae",2000,"Shrimp",NA,NA
+"1167","Trawler","2018-11-29_Ratna Bharti","Scombridae",40000,"High Value Species",NA,NA
+"1168","Trawler","2018-11-29_Ratna Bharti",NA,965500,"Elasmobranchs",NA,NA
+"1169","Trawler","2018-12-03_Ganadish","Carangidae",10500,"High Value Species",NA,NA
+"1170","Trawler","2018-12-03_Ganadish","Cynoglossidae",3000,"High Value Species",NA,NA
+"1171","Trawler","2018-12-03_Ganadish","Lactariidae",14000,"High Value Species",NA,NA
+"1172","Trawler","2018-12-03_Ganadish","Loliginidae",3000,"Shrimp",NA,NA
+"1173","Trawler","2018-12-03_Ganadish","Scombridae",81500,"High Value Species",NA,NA
+"1174","Trawler","2018-12-03_Ganadish","Sphyraenidae",5000,"High Value Species",NA,NA
+"1175","Trawler","2018-12-03_Ganadish",NA,1006500,"High Value Species",NA,NA
+"1176","Trawler","2018-12-05_Dolphin","Lactariidae",5000,"High Value Species",NA,NA
+"1177","Trawler","2018-12-05_Dolphin","Loliginidae",212000,"Shrimp",NA,NA
+"1178","Trawler","2018-12-05_Dolphin","Scombridae",12000,"High Value Species",NA,NA
+"1179","Trawler","2018-12-05_Dolphin",NA,75500,"High Value Species",NA,NA
+"1180","Trawler","2018-12-06_Omkar2","Loliginidae",1000,"Shrimp",NA,NA
+"1181","Trawler","2018-12-06_Omkar2",NA,42300,"High Value Species",NA,NA
+"1182","Trawler","2018-12-11_Dhanalakshmi","Cynoglossidae",11000,"High Value Species",NA,NA
+"1183","Trawler","2018-12-11_Dhanalakshmi","Loliginidae",3000,"Shrimp",NA,NA
+"1184","Trawler","2018-12-11_Dhanalakshmi","Scombridae",1000,"High Value Species",NA,NA
+"1185","Trawler","2018-12-11_Dhanalakshmi","Sphyraenidae",500,"High Value Species",NA,NA
+"1186","Trawler","2018-12-11_Dhanalakshmi",NA,43000,"High Value Species",NA,NA
+"1187","Trawler","2018-12-12_Omkar Ishwar","Carangidae",56000,"High Value Species",NA,NA
+"1188","Trawler","2018-12-12_Omkar Ishwar","Lactariidae",2000,"High Value Species",NA,NA
+"1189","Trawler","2018-12-12_Omkar Ishwar","Loliginidae",10000,"Shrimp",NA,NA
+"1190","Trawler","2018-12-12_Omkar Ishwar","Nemipteridae",1000,"High Value Species",NA,NA
+"1191","Trawler","2018-12-12_Omkar Ishwar","Scombridae",5500,"High Value Species",NA,NA
+"1192","Trawler","2018-12-12_Omkar Ishwar","Sphyraenidae",1000,"High Value Species",NA,NA
+"1193","Trawler","2018-12-12_Omkar Ishwar",NA,111500,"High Value Species",NA,NA
+"1194","Trawler","2018-12-18_Dwarkadish","Cynoglossidae",5500,"High Value Species",NA,NA
+"1195","Trawler","2018-12-18_Dwarkadish",NA,67000,"High Value Species",NA,NA
+"1196","Trawler","2018-12-20_Hemavati","Clupeidae",500,"High Value Species",NA,NA
+"1197","Trawler","2018-12-20_Hemavati","Cynoglossidae",56000,"High Value Species",NA,NA
+"1198","Trawler","2018-12-20_Hemavati","Sphyraenidae",1000,"High Value Species",NA,NA
+"1199","Trawler","2018-12-20_Hemavati",NA,146000,"Shrimp",NA,NA
+"1200","Trawler","2018-12-24_Soumya","Cynoglossidae",90000,"High Value Species",NA,NA
+"1201","Trawler","2018-12-24_Soumya","Lactariidae",2000,"High Value Species",NA,NA
+"1202","Trawler","2018-12-24_Soumya","Loliginidae",25500,"Shrimp",NA,NA
+"1203","Trawler","2018-12-24_Soumya","Scombridae",5000,"High Value Species",NA,NA
+"1204","Trawler","2018-12-24_Soumya",NA,112000,"Shrimp",NA,NA
+"1205","Trawler","2018-12-25_Darya Sagar","Carangidae",105000,"High Value Species",NA,NA
+"1206","Trawler","2018-12-25_Darya Sagar","Lactariidae",35000,"High Value Species",NA,NA
+"1207","Trawler","2018-12-25_Darya Sagar","Loliginidae",83000,"Shrimp",NA,NA
+"1208","Trawler","2018-12-25_Darya Sagar","Nemipteridae",56000,"Low Value Bycatch",NA,NA
+"1209","Trawler","2018-12-25_Darya Sagar","Scombridae",65500,"High Value Species",NA,NA
+"1210","Trawler","2018-12-25_Darya Sagar","Serranidae",1000,"Shrimp",NA,NA
+"1211","Trawler","2018-12-25_Darya Sagar","Sphyraenidae",10000,"High Value Species",NA,NA
+"1212","Trawler","2018-12-25_Darya Sagar",NA,65500,"High Value Species",NA,NA
+"1213","Trawler","2019-01-02_Hemavati","Cynoglossidae",41000,"High Value Species",NA,NA
+"1214","Trawler","2019-01-02_Hemavati","Lactariidae",1000,"High Value Species",NA,NA
+"1215","Trawler","2019-01-02_Hemavati","Loliginidae",6000,"Shrimp",NA,NA
+"1216","Trawler","2019-01-02_Hemavati","Nemipteridae",7000,"High Value Species",NA,NA
+"1217","Trawler","2019-01-02_Hemavati","Scombridae",1000,"High Value Species",NA,NA
+"1218","Trawler","2019-01-02_Hemavati",NA,97000,"High Value Species",NA,NA
+"1219","Trawler","2019-01-04_Soumya","Carangidae",54000,"Low Value Bycatch",NA,NA
+"1220","Trawler","2019-01-04_Soumya","Cynoglossidae",16500,"High Value Species",NA,NA
+"1221","Trawler","2019-01-04_Soumya","Loliginidae",6000,"Shrimp",NA,NA
+"1222","Trawler","2019-01-04_Soumya","Nemipteridae",2000,"High Value Species",NA,NA
+"1223","Trawler","2019-01-04_Soumya","Scombridae",4500,"High Value Species",NA,NA
+"1224","Trawler","2019-01-04_Soumya",NA,51300,"High Value Species",NA,NA
+"1225","Trawler","2019-01-09_Vishaka","Cynoglossidae",5000,"High Value Species",NA,NA
+"1226","Trawler","2019-01-09_Vishaka","Loliginidae",8000,"Shrimp",NA,NA
+"1227","Trawler","2019-01-09_Vishaka","Nemipteridae",2000,"High Value Species",NA,NA
+"1228","Trawler","2019-01-09_Vishaka","Scombridae",34000,"High Value Species",NA,NA
+"1229","Trawler","2019-01-09_Vishaka","Sphyraenidae",1000,"High Value Species",NA,NA
+"1230","Trawler","2019-01-09_Vishaka",NA,276000,"High Value Species",NA,NA
+"1231","Trawler","2019-01-17_Kelbai",NA,29000,"Shrimp",NA,NA
+"1232","Trawler","2019-01-19_Om Sai","Leiognathidae",56000,"High Value Species",NA,NA
+"1233","Trawler","2019-01-28_Mangal Moorthi","Cynoglossidae",140000,"High Value Species",NA,NA
+"1234","Trawler","2019-01-28_Mangal Moorthi","Lactariidae",1000,"High Value Species",NA,NA
+"1235","Trawler","2019-01-28_Mangal Moorthi","Loliginidae",2000,"Shrimp",NA,NA
+"1236","Trawler","2019-01-28_Mangal Moorthi","Nemipteridae",40000,"Low Value Bycatch",NA,NA
+"1237","Trawler","2019-01-28_Mangal Moorthi","Sepiidae",10000,"High Value Species",NA,NA
+"1238","Trawler","2019-01-28_Mangal Moorthi",NA,125250,"Elasmobranchs",NA,NA
+"1239","Trawler","2019-01-30_Omkar2","Hemiscylliidae",2000,"Elasmobranchs",NA,NA
+"1240","Trawler","2019-01-30_Omkar2",NA,116500,"Shrimp",NA,NA
+"1241","Trawler","2019-02-05_Kohinoor","Carangidae",56000,"High Value Species",NA,NA
+"1242","Trawler","2019-02-05_Kohinoor","Lactariidae",3000,"High Value Species",NA,NA
+"1243","Trawler","2019-02-05_Kohinoor","Loliginidae",19600,"Shrimp",NA,NA
+"1244","Trawler","2019-02-05_Kohinoor","Nemipteridae",14000,"High Value Species",NA,NA
+"1245","Trawler","2019-02-05_Kohinoor","Scombridae",30000,"High Value Species",NA,NA
+"1246","Trawler","2019-02-05_Kohinoor",NA,335000,"High Value Species",NA,NA
+"1247","Trawler","2019-02-07_Krantiveer","Carcharhinidae",500,"Shrimp",NA,NA
+"1248","Trawler","2019-02-07_Krantiveer","Loliginidae",6000,"Shrimp",NA,NA
+"1249","Trawler","2019-02-07_Krantiveer","Nemipteridae",9000,"High Value Species",NA,NA
+"1250","Trawler","2019-02-07_Krantiveer","Scombridae",4000,"High Value Species",NA,NA
+"1251","Trawler","2019-02-07_Krantiveer",NA,77000,"High Value Species",NA,NA
+"1252","Trawler","2019-02-10_Akash","Clupeidae",2000,"High Value Species",NA,NA
+"1253","Trawler","2019-02-10_Akash","Cynoglossidae",40000,"High Value Species",NA,NA
+"1254","Trawler","2019-02-10_Akash","Lactariidae",3000,"High Value Species",NA,NA
+"1255","Trawler","2019-02-10_Akash","Nemipteridae",1000,"High Value Species",NA,NA
+"1256","Trawler","2019-02-10_Akash",NA,42600,"High Value Species",NA,NA
+"1257","Trawler","2019-02-11_Soumya","Carangidae",1000,"High Value Species",NA,NA
+"1258","Trawler","2019-02-11_Soumya","Clupeidae",2000,"High Value Species",NA,NA
+"1259","Trawler","2019-02-11_Soumya","Cynoglossidae",45000,"High Value Species",NA,NA
+"1260","Trawler","2019-02-11_Soumya","Hemiscylliidae",1000,"Elasmobranchs",NA,NA
+"1261","Trawler","2019-02-11_Soumya","Lactariidae",4500,"High Value Species",NA,NA
+"1262","Trawler","2019-02-11_Soumya","Loliginidae",5200,"Shrimp",NA,NA
+"1263","Trawler","2019-02-11_Soumya","Nemipteridae",14000,"High Value Species",NA,NA
+"1264","Trawler","2019-02-11_Soumya","Sphyraenidae",1000,"High Value Species",NA,NA
+"1265","Trawler","2019-02-11_Soumya",NA,107000,"High Value Species",NA,NA
+"1266","Trawler","2019-02-13_Mansarovar","Carangidae",9000,"High Value Species",NA,NA
+"1267","Trawler","2019-02-13_Mansarovar","Lactariidae",18000,"High Value Species",NA,NA
+"1268","Trawler","2019-02-13_Mansarovar","Loliginidae",12000,"Shrimp",NA,NA
+"1269","Trawler","2019-02-13_Mansarovar","Nemipteridae",14000,"High Value Species",NA,NA
+"1270","Trawler","2019-02-13_Mansarovar","Scombridae",72000,"High Value Species",NA,NA
+"1271","Trawler","2019-02-13_Mansarovar","Sphyraenidae",7000,"High Value Species",NA,NA
+"1272","Trawler","2019-02-13_Mansarovar",NA,304300,"High Value Species",NA,NA
+"1273","Trawler","2019-02-19_Audumbar","Clupeidae",2000,"High Value Species",NA,NA
+"1274","Trawler","2019-02-19_Audumbar","Nemipteridae",7000,"High Value Species",NA,NA
+"1275","Trawler","2019-02-19_Audumbar","Scombridae",14000,"High Value Species",NA,NA
+"1276","Trawler","2019-02-19_Audumbar",NA,185000,"High Value Species",NA,NA
+"1277","Trawler","2019-02-21_Shri Ganesh","Lactariidae",2000,"High Value Species",NA,NA
+"1278","Trawler","2019-02-21_Shri Ganesh","Loliginidae",40800,"Shrimp",NA,NA
+"1279","Trawler","2019-02-21_Shri Ganesh","Nemipteridae",20000,"High Value Species",NA,NA
+"1280","Trawler","2019-02-21_Shri Ganesh","Scombridae",18000,"High Value Species",NA,NA
+"1281","Trawler","2019-02-21_Shri Ganesh","Sepiidae",6000,"High Value Species",NA,NA
+"1282","Trawler","2019-02-21_Shri Ganesh",NA,309200,"High Value Species",NA,NA
+"1283","Trawler","2019-02-25_Vittal Krupa","Cynoglossidae",30000,"High Value Species",NA,NA
+"1284","Trawler","2019-02-25_Vittal Krupa","Loliginidae",27000,"Shrimp",NA,NA
+"1285","Trawler","2019-02-25_Vittal Krupa","Nemipteridae",14000,"High Value Species",NA,NA
+"1286","Trawler","2019-02-25_Vittal Krupa","Scombridae",2500,"High Value Species",NA,NA
+"1287","Trawler","2019-02-25_Vittal Krupa","Sepiidae",4000,"High Value Species",NA,NA
+"1288","Trawler","2019-02-25_Vittal Krupa",NA,100900,"High Value Species",NA,NA
+"1289","Trawler","2019-02-27_Dhanalakshmi3","Engraulidae",28000,"High Value Species",NA,NA
+"1290","Trawler","2019-02-27_Dhanalakshmi3","Loliginidae",18000,"Shrimp",NA,NA
+"1291","Trawler","2019-02-27_Dhanalakshmi3","Nemipteridae",30000,"High Value Species",NA,NA
+"1292","Trawler","2019-02-27_Dhanalakshmi3","Scombridae",4500,"High Value Species",NA,NA
+"1293","Trawler","2019-02-27_Dhanalakshmi3","Serranidae",1500,"Shrimp",NA,NA
+"1294","Trawler","2019-02-27_Dhanalakshmi3",NA,47000,"High Value Species",NA,NA
+"1295","Trawler","2019-03-04_Kelbai","Lactariidae",7000,"High Value Species",NA,NA
+"1296","Trawler","2019-03-04_Kelbai","Loliginidae",25000,"Shrimp",NA,NA
+"1297","Trawler","2019-03-04_Kelbai","Nemipteridae",30000,"High Value Species",NA,NA
+"1298","Trawler","2019-03-04_Kelbai","Scombridae",3000,"High Value Species",NA,NA
+"1299","Trawler","2019-03-04_Kelbai","Sepiidae",5500,"High Value Species",NA,NA
+"1300","Trawler","2019-03-04_Kelbai","Serranidae",3000,"Shrimp",NA,NA
+"1301","Trawler","2019-03-04_Kelbai","Sphyraenidae",1000,"High Value Species",NA,NA
+"1302","Trawler","2019-03-04_Kelbai",NA,135300,"Elasmobranchs",NA,NA
+"1303","Trawler","2019-03-08_Siddaprasad","Loliginidae",9500,"Shrimp",NA,NA
+"1304","Trawler","2019-03-08_Siddaprasad","Nemipteridae",3000,"High Value Species",NA,NA
+"1305","Trawler","2019-03-08_Siddaprasad","Scombridae",5500,"High Value Species",NA,NA
+"1306","Trawler","2019-03-08_Siddaprasad","Serranidae",1000,"Shrimp",NA,NA
+"1307","Trawler","2019-03-08_Siddaprasad",NA,109000,"High Value Species",NA,NA
+"1308","Trawler","2019-03-11_Badrakali","Carangidae",7000,"High Value Species",NA,NA
+"1309","Trawler","2019-03-11_Badrakali","Hemiscylliidae",1000,"Elasmobranchs",NA,NA
+"1310","Trawler","2019-03-11_Badrakali","Lactariidae",1000,"High Value Species",NA,NA
+"1311","Trawler","2019-03-11_Badrakali","Nemipteridae",21500,"High Value Species",NA,NA
+"1312","Trawler","2019-03-11_Badrakali","Scombridae",2000,"High Value Species",NA,NA
+"1313","Trawler","2019-03-11_Badrakali",NA,197100,"Elasmobranchs",NA,NA
+"1314","Trawler","2019-03-13_Chintamani","Carangidae",500,"High Value Species",NA,NA
+"1315","Trawler","2019-03-13_Chintamani","Cynoglossidae",7000,"High Value Species",NA,NA
+"1316","Trawler","2019-03-13_Chintamani","Loliginidae",33200,"Shrimp",NA,NA
+"1317","Trawler","2019-03-13_Chintamani","Nemipteridae",8000,"High Value Species",NA,NA
+"1318","Trawler","2019-03-13_Chintamani","Scombridae",1000,"High Value Species",NA,NA
+"1319","Trawler","2019-03-13_Chintamani",NA,163500,"Shrimp",NA,NA
+"1320","Trawler","2019-03-15_Kohinoor","Carangidae",14000,"High Value Species",NA,NA
+"1321","Trawler","2019-03-15_Kohinoor","Clupeidae",1000,"High Value Species",NA,NA
+"1322","Trawler","2019-03-15_Kohinoor","Engraulidae",37000,"High Value Species",NA,NA
+"1323","Trawler","2019-03-15_Kohinoor","Hemiscylliidae",500,"Elasmobranchs",NA,NA
+"1324","Trawler","2019-03-15_Kohinoor","Loliginidae",27500,"Shrimp",NA,NA
+"1325","Trawler","2019-03-15_Kohinoor","Scombridae",10000,"High Value Species",NA,NA
+"1326","Trawler","2019-03-15_Kohinoor","Sphyraenidae",1000,"High Value Species",NA,NA
+"1327","Trawler","2019-03-15_Kohinoor",NA,131750,"High Value Species",NA,NA
+"1328","Trawler","2019-03-18_Badrakali","Cynoglossidae",28000,"High Value Species",NA,NA
+"1329","Trawler","2019-03-18_Badrakali","Lactariidae",4000,"High Value Species",NA,NA
+"1330","Trawler","2019-03-18_Badrakali","Loliginidae",1000,"Shrimp",NA,NA
+"1331","Trawler","2019-03-18_Badrakali","Nemipteridae",28000,"High Value Species",NA,NA
+"1332","Trawler","2019-03-18_Badrakali",NA,183000,"High Value Species",NA,NA
+"1333","Trawler","2019-03-21_Nageshwar Prasad","Carangidae",25000,"High Value Species",NA,NA
+"1334","Trawler","2019-03-21_Nageshwar Prasad","Engraulidae",5000,"High Value Species",NA,NA
+"1335","Trawler","2019-03-21_Nageshwar Prasad","Lactariidae",2000,"High Value Species",NA,NA
+"1336","Trawler","2019-03-21_Nageshwar Prasad","Loliginidae",47500,"Shrimp",NA,NA
+"1337","Trawler","2019-03-21_Nageshwar Prasad","Nemipteridae",4500,"High Value Species",NA,NA
+"1338","Trawler","2019-03-21_Nageshwar Prasad","Scombridae",9000,"High Value Species",NA,NA
+"1339","Trawler","2019-03-21_Nageshwar Prasad",NA,70000,"High Value Species",NA,NA
+"1340","Trawler","2019-03-23_Arundaye","Carangidae",3000,"High Value Species",NA,NA
+"1341","Trawler","2019-03-23_Arundaye","Clupeidae",1000,"High Value Species",NA,NA
+"1342","Trawler","2019-03-23_Arundaye","Cynoglossidae",15000,"High Value Species",NA,NA
+"1343","Trawler","2019-03-23_Arundaye","Hemiscylliidae",500,"Elasmobranchs",NA,NA
+"1344","Trawler","2019-03-23_Arundaye","Lactariidae",2000,"High Value Species",NA,NA
+"1345","Trawler","2019-03-23_Arundaye","Loliginidae",27800,"Shrimp",NA,NA
+"1346","Trawler","2019-03-23_Arundaye","Nemipteridae",9000,"High Value Species",NA,NA
+"1347","Trawler","2019-03-23_Arundaye","Scombridae",3000,"High Value Species",NA,NA
+"1348","Trawler","2019-03-23_Arundaye","Serranidae",3500,"Shrimp",NA,NA
+"1349","Trawler","2019-03-23_Arundaye",NA,280000,"High Value Species",NA,NA
+"1350","Trawler","2019-03-25_Badrakali","Carangidae",5000,"High Value Species",NA,NA
+"1351","Trawler","2019-03-25_Badrakali","Cynoglossidae",13000,"High Value Species",NA,NA
+"1352","Trawler","2019-03-25_Badrakali","Hemiscylliidae",500,"Elasmobranchs",NA,NA
+"1353","Trawler","2019-03-25_Badrakali","Loliginidae",2500,"Shrimp",NA,NA
+"1354","Trawler","2019-03-25_Badrakali","Nemipteridae",21000,"High Value Species",NA,NA
+"1355","Trawler","2019-03-25_Badrakali","Scombridae",2000,"High Value Species",NA,NA
+"1356","Trawler","2019-03-25_Badrakali",NA,91200,"High Value Species",NA,NA
+"1357","Trawler","2019-03-29_Gurudutt","Carangidae",9000,"High Value Species",NA,NA
+"1358","Trawler","2019-03-29_Gurudutt","Clupeidae",56000,"High Value Species",NA,NA
+"1359","Trawler","2019-03-29_Gurudutt","Loliginidae",10000,"Shrimp",NA,NA
+"1360","Trawler","2019-03-29_Gurudutt","Menidae",56000,"High Value Species",NA,NA
+"1361","Trawler","2019-03-29_Gurudutt","Nemipteridae",7000,"High Value Species",NA,NA
+"1362","Trawler","2019-03-29_Gurudutt","Scombridae",84500,"High Value Species",NA,NA
+"1363","Trawler","2019-03-29_Gurudutt",NA,768000,"High Value Species",NA,NA
+"1364","Trawler","2019-04-04_Mansarovar","Clupeidae",1000,"High Value Species",NA,NA
+"1365","Trawler","2019-04-04_Mansarovar","Hemiscylliidae",1000,"Elasmobranchs",NA,NA
+"1366","Trawler","2019-04-04_Mansarovar","Lactariidae",14000,"High Value Species",NA,NA
+"1367","Trawler","2019-04-04_Mansarovar","Loliginidae",7800,"Shrimp",NA,NA
+"1368","Trawler","2019-04-04_Mansarovar","Menidae",28000,"Low Value Bycatch",NA,NA
+"1369","Trawler","2019-04-04_Mansarovar","Scombridae",2000,"High Value Species",NA,NA
+"1370","Trawler","2019-04-04_Mansarovar",NA,260500,"Elasmobranchs",NA,NA
+"1371","Trawler","2019-04-08_Dhanalakshmi","Cynoglossidae",23000,"High Value Species",NA,NA
+"1372","Trawler","2019-04-08_Dhanalakshmi","Loliginidae",1200,"Shrimp",NA,NA
+"1373","Trawler","2019-04-08_Dhanalakshmi","Menidae",9000,"High Value Species",NA,NA
+"1374","Trawler","2019-04-08_Dhanalakshmi","Scombridae",2000,"High Value Species",NA,NA
+"1375","Trawler","2019-04-08_Dhanalakshmi","Sphyraenidae",2000,"High Value Species",NA,NA
+"1376","Trawler","2019-04-08_Dhanalakshmi",NA,124700,"Elasmobranchs",NA,NA
+"1377","Trawler","2019-04-17_Dhanalakshmi2","Clupeidae",500,"High Value Species",NA,NA
+"1378","Trawler","2019-04-17_Dhanalakshmi2","Cynoglossidae",70000,"High Value Species",NA,NA
+"1379","Trawler","2019-04-17_Dhanalakshmi2","Lactariidae",1000,"High Value Species",NA,NA
+"1380","Trawler","2019-04-17_Dhanalakshmi2","Loliginidae",1000,"Shrimp",NA,NA
+"1381","Trawler","2019-04-17_Dhanalakshmi2",NA,108000,"High Value Species",NA,NA
+"1382","Trawler","2019-04-19_Vishaka","Carcharhinidae",250,"Shrimp",NA,NA
+"1383","Trawler","2019-04-19_Vishaka","Cynoglossidae",46000,"High Value Species",NA,NA
+"1384","Trawler","2019-04-19_Vishaka","Lactariidae",1000,"High Value Species",NA,NA
+"1385","Trawler","2019-04-19_Vishaka","Nemipteridae",19500,"High Value Species",NA,NA
+"1386","Trawler","2019-04-19_Vishaka",NA,91500,"High Value Species",NA,NA
+"1387","Trawler","2019-04-26_Badrakali","Cynoglossidae",64000,"High Value Species",NA,NA
+"1388","Trawler","2019-04-26_Badrakali","Hemiscylliidae",1500,"Elasmobranchs",NA,NA
+"1389","Trawler","2019-04-26_Badrakali","Lactariidae",1000,"High Value Species",NA,NA
+"1390","Trawler","2019-04-26_Badrakali","Loliginidae",750,"Shrimp",NA,NA
+"1391","Trawler","2019-04-26_Badrakali","Nemipteridae",1000,"High Value Species",NA,NA
+"1392","Trawler","2019-04-26_Badrakali",NA,96500,"Elasmobranchs",NA,NA
+"1393","Trawler","2019-04-29_Bahubali","Loliginidae",8000,"Shrimp",NA,NA
+"1394","Trawler","2019-04-29_Bahubali",NA,76000,"High Value Species",NA,NA
+"1395","Trawler","NA_","Loliginidae",28500,"Shrimp",NA,NA
+"1396","Trawler","NA_","Scombridae",14000,"High Value Species",NA,NA
+"1397","Trawler","NA_",NA,126000,"High Value Species",NA,NA
