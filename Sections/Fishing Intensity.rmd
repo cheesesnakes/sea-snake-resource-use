@@ -1,19 +1,7 @@
----
-title: "Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape"
-output:
-  html_document:
-  css: style.css
-df_print: kable
-theme: spacelab
-toc: yes
-toc_float: yes
-toc_depth: 2
-number_sections: yes
-subtitle: Fishing intensity analysis
-Author: Shawn Dsouza
----
 
 ```{r}
+# importing libraries
+
 library(tidyverse)
 library(lubridate)
 library(viridis)
@@ -22,20 +10,13 @@ library(viridis)
   
 # Varition in fishing intensity along the sindhudurg coast
 
-How do we use location and depth data gathered from fisher surveys to map fishing intensity?
-  
-- Nearest landmarks are geocoded from google maps API 
-- Latitude is extracted from landmark geocode
-- Match landmark latitude and depth from survey to GEBCO data
-- Extract final longitude from GEBCO data
-
 ```{r}
 library(marmap)
 library(ggmap)
 
 #importing bathymetric data downloaded from GEBCO database
 
-depth <- readGEBCO.bathy("./Data/gebco_2019_n16.6_s15.6_w73.1_e73.9.nc")
+depth <- readGEBCO.bathy("../Data/gebco_2019_n16.6_s15.6_w73.1_e73.9.nc")
 
 depth = fortify.bathy(depth)%>%
   rename(lon = x, lat = y, depth = z)%>%
@@ -44,7 +25,7 @@ depth = fortify.bathy(depth)%>%
 
 #importing effort data
 
-effort = read.csv("./Data/Fishing-Effort_111219.csv")%>%
+effort = read.csv("../Data/Fishing-Effort_111219.csv")%>%
   group_by(Date, Gear.Type)%>%
   distinct(Boat.name, .keep_all = T)%>%# fixing repetitions in effort data
   mutate(Month = factor(months(dmy(Date)), 
@@ -85,10 +66,7 @@ dep_int = effort%>%
 ```
 
 ```{r}
-library(ggsn)
-library(metR)
-
-dep_int = read.csv("./Data/Fishing intensity_dep.csv")
+dep_int = read.csv("../Data/Fishing intensity_dep.csv")
 
 knitr::kable(table(dep_int$Gear.Type))#sample size
 
@@ -109,139 +87,27 @@ lsr::cohensD(effort ~ Gear.Type, data = dep_int) # effect size
 
 ## Mapping fishing intensity
 
-```{r, echo = TRUE, eval = FALSE}
-
-# Geocoding local intensity data with depth
-dep_int = dep_int%>%
-  ungroup()%>%
-  mutate(Fishing.Location = as.character(Fishing.Location))%>%
-  mutate_geocode(location = Fishing.Location)
-
-# Extracting coordinates from depth data
-
-library(fuzzyjoin)
-
-#matching funtions for theta join
-
-depth_match <- function(x,y){
-  x <- -x
-  x <= y+0.5 & x >= y-0.5 #interval for theta matching depth
-}
-
-lat_match <- function(x,y){
-  x <= y+0.005 & x >= y-0.005 #interval for theta matching latitude
-}
-
-dep_int <- dep_int%>%
-  mutate(depth = Depth.m)%>%
-  fuzzy_inner_join(y = depth, by = c("depth", "lat"), 
-                   match_fun = list(depth = depth_match,
-                                    lat = lat_match))%>%
-  dplyr::select(Date, Boat.name, Fishing.Location, Gear.Type, Depth.m, 
-                effort, lon.y, lat.x)%>%#dplyr::selecting relevant variables
-  rename(lon = lon.y,# longitude from fishing location
-         lat = lat.x)# latitude from depth data
-
-dep_int <- distinct(dep_int, Date, Boat.name, .keep_all = T)
-
-#Saving geocoded depth data to save computation time
-
-write.csv(dep_int, "./Data/Fishing intensity_dep.csv")
-
-```
-
-```{r, eval = FALSE}
-#Creating an empty raster with sampling extent
-
-library(sp)
-library(rgdal)
-library(raster)
-
-dep_int = read.csv("./Data/Fishing intensity_dep.csv")
-
-#Converting to SpatialPointsdf
-
-coordinates(dep_int) <- ~lon + lat
-
-proj4string(dep_int) <- CRS("+init=epsg:4326")#setting projection to WGS 84 (lon/lat)
-
-dep_int <- spTransform(dep_int, CRSobj = CRS("+init=epsg:3857"))#using spherical mercator
-#spherical mercator enables accurate distance mesaurement in meters
-
-# Define the resolution to be 10000 sq. meters
-cell_size <- sqrt(1e+7)
-
-# Initialize a raster layer
-ras <- raster(extent(dep_int))
-
-# Set the resolution to be
-
-res(ras) <- c(cell_size, cell_size)
-ras[] <- 0
-
-projection(ras) <- CRS("+init=epsg:3857")
-
-writeRaster(ras, "./Data/sampling_extent.tiff", format="GTiff", overwrite=TRUE)
-```
+How do we use location and depth data gathered from fisher surveys to map fishing intensity?
+  
+- Nearest landmarks are geocoded from google maps API 
+- Latitude is extracted from landmark geocode
+- Match landmark latitude and depth from survey to GEBCO data
+- Extract final longitude from GEBCO data
 
 ```{r fp}
 library(sp)
 library(rgdal)
 library(raster)
 
-dep_int = read.csv("./Data/Fishing intensity_dep.csv")
+dep_int = read.csv("../Data/Fishing intensity_dep.csv")
 
-ext <- raster("./Data/sampling_extent.tif")
+ext <- raster("../Data/sampling_extent.tif")
 
-#Function for extracting intensity/abundance from points
+#importing functions
 
-map.extract <- function(df, var, func){
-  
-  foo <- df
-  
-  #Converting to SpatialPointsdf
-  
-  coordinates(foo) <- ~lon + lat
-  
-  proj4string(foo) <- CRS("+init=epsg:4326")#setting projection to WGS 84 (lon/lat)
-  
-  foo <- spTransform(foo, CRSobj = CRS("+init=epsg:3857"))#using spherical mercator
-  
-  #assigning intensity values to raster
-  
-  m <- rasterize(foo, ext, fun = func, field=var, update=TRUE)
-} 
-
-# Function converting the raster into df for plotting
-
-map.df <- function(m){
-  ##Reprojecting int_map
-  
-  r <- projectRaster(m, crs = CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"))
-  
-  ## Creating dataframe
-  
-  mdf <- as.data.frame(r, xy = T)%>%drop_na()
-}
-
-#Function for creating plot for each Gear/Species
-
-int.plot <- function(mdf, gear, name){
-  ggmap(base)+
-    metR::geom_contour2(data = depth, aes(x = lon, y = lat, z = depth),
-                 breaks=seq(-10, -80, -10), colour="black", size = 0.3
-                 )+
-    metR::geom_text_contour(data = depth, aes(x = lon, y = lat, z = depth), skip = 1,
-                            parse = T,check_overlap = T, size = 3)+
-    geom_raster(data = mdf, aes(x = x, y = y, fill =layer), alpha = 0.6)+
-    coord_quickmap()+
-    scale_fill_viridis(name = name, direction = -1)+
-    #scale_y_continuous(limits = c(73.1, 73.8))+
-    labs(title = gear, x = "Longitude", y = "Latitude")+
-      theme(plot.title = element_text(hjust = 0.5),
-            legend.text = element_text(size = 10),
-            text = element_text(size = 15))
-}
+source("../Functions/intensity extract.R")
+source("../Functions/raster to df.R")
+source("../Functions/intensity_plot.R")
 
 #Calculating fishing intensity
 
@@ -253,14 +119,11 @@ fi <- dep_int%>%
   dplyr::select(mdf)%>%
   unnest()%>%
   spread(Gear.Type, layer)
-#rename(intensity = layer)
 
 # Plotting intensity of fishing by gear type
 
 base <- get_googlemap(center = c(mean(dep_int$lon),mean(dep_int$lat)), 
                       zoom = 10, scale = 2, maptype = "terrain")##Getting basemap
-
-
 
 boat_plot <- dep_int%>%
   group_by(Gear.Type)%>%
@@ -270,107 +133,7 @@ boat_plot <- dep_int%>%
          plot = map2(mdf, Gear.Type, ~int.plot(mdf = ., Gear.Type, name = "Fishing intensity")))%>%
   gridExtra::grid.arrange(grobs = .$plot, ncol = 2)
 
-ggsave(boat_plot, filename = "./Figures/figure4.tiff", width = 8, height = 4.5, dpi = 300)
-```
-
-```{r}
-## pretty map with tmap and osmdata
-library(sf)
-
-dep_int <- st_as_sf(dep_int, coords = c("lon", "lat"))
-
-st_crs(dep_int) <- 4326
-
-study_ext <- st_bbox(dep_int)# bbox for osmdata
-
-## getting osmdata for study site
-library(osmdata)
-
-## maharshtra polygon
-
-mah <- opq(bbox = study_ext)%>%
-  add_osm_feature(key = 'admin_level', value = '4')%>%
-  osmdata_sf()%>%
-  unique_osmdata()
-
-mah_poly <- mah$osm_multipolygons
-
-st_crs(mah_poly) <- 4326
-
-## sindhudurg polygon
-
-sindhudurg<- opq(bbox = study_ext)%>%
-  add_osm_feature(key = 'admin_level', value = '5')%>%
-  osmdata_sf()%>%
-  unique_osmdata()
-
-sind_poly <- sindhudurg$osm_multipolygons
-
-st_crs(sind_poly) <- 4326
-
-## city names
-
-places<- opq(bbox = study_ext)%>%
-  add_osm_feature(key = 'place')%>%
-  osmdata_sf()%>%
-  unique_osmdata()
-
-cities <- places$osm_points
-
-## water
-
-sindwater <- opq(bbox = study_ext)%>%
-  add_osm_feature(key = 'natural', value = 'water')%>%
-  osmdata_sf()%>%
-  unique_osmdata()
-
-sind_water <- sindwater$osm_multipolygons
-
-st_crs(sind_water) <- 4326
-
-## city polygons
-
-local <- opq(bbox = study_ext)%>%
-  add_osm_feature(key = 'admin_level', value = '6')%>%
-  osmdata_sf()%>%
-  unique_osmdata()
-
-local_poly <- local$osm_multipolygons
-
-st_crs(local_poly) <- 4326
-
-
-## getting effort raster
-
-dep_int = read.csv("./Data/Fishing intensity_dep.csv")
-
-rastest <- map.extract(dep_int,var = "effort", func = 'sum')
-
-rastest <- projectRaster(rastest,crs = CRS("+init=epsg:4326"))
-
-# plotting map
-library(tmap)
-
-tm_shape(rastest)+
-  tm_raster()+
-tm_shape(mah_poly)+
-  tm_polygons()+
-  tm_text("name", remove.overlap = F)+
-tm_shape(sind_poly, bbox = study_ext+c(-.2,-.2,.2,.2), is.master = T)+
-  tm_polygons()+
-  tm_text("name", remove.overlap = F, size = 0.5)+
-#tm_shape(local_poly)+
- # tm_text("name", remove.overlap = F)+
-  #tm_polygons()+
-tm_shape(cities)+
-  tm_dots()+
-  tm_text("name", remove.overlap = T)
-tm_shape(sind_water)+
-  tm_polygons()+
-tm_graticules(n.x = 5)+
-  tm_scale_bar(position = c("left", "top"), text.size = 0.5) + 
-  tm_compass(position = c('right', 'top'), size = 2)+
-  tm_layout(scale = 1.5, legend.position = c("left", "bottom"))  
+ggsave(boat_plot, filename = "../Figures/figure4.tiff", width = 8, height = 4.5, dpi = 300)
 ```
 
 
