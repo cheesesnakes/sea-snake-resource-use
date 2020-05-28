@@ -5,6 +5,7 @@ int.plot <- function(mdf, gear, name){
   require(ggmap)
   require(ggplot2)
   require(metR)
+  require(viridis)
   
   ggmap(base)+
     metR::geom_contour2(data = depth, aes(x = lon, y = lat, z = depth),
