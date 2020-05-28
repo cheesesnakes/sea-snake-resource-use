@@ -9,44 +9,58 @@ output:
     toc_float: yes
     toc_depth: 2
     number_sections: yes
+    code_folding: hide
 subtitle: Analysis for manuscript
-Author: Shawn Dsouza
+Author: Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker
 ---
 
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+
+# setting global opitions
+
+options(max.print="75")
+
+knitr::opts_chunk$set(echo = T, error = T, warning = F, message = F, tidy = T, 
+                      cache = T,
+                      dpi = 300, fig.align = "center")
+
+# Required libraries
+
+library(tidyverse)
+library(lubridate)
+
+# Data import
+
+snakes = read.csv("./Data/Sea-snakes_fish-dep_2018-19_070220.csv")
+
+# setting ggplot theme
+
+theme_set(theme_bw()+
+            theme(legend.position = "top",
+                  text = element_text(size = 20)
+                  )
+          )
+```
+
+
 # Introduction
+
+This file contains the code for analysis in R for a study about resources use in sea snakes on the west coast of India. 
 
 The core message of this manuscripts are as follows:
 
 - Resource use differs between _H. curtus_ and _H. schistosus_
 - Variation in fishing intensity of trawlers and gillnets affects patterns of resource use
 
+We used a combination of approaches including: 
+
+a. fisheries dependent methods to characterise distribution and habitat use of the two species, and spatial overlap with fishing; 
+
+b. visual gut content analysis to characterise diet and trophic niche of the species, and overlap between fisheries catch and sea snake diet; 
+
+c. stable isotope analysis to characterise overall resource use in terms of isotopic niche, as well as the effect of fishing intensity on the niche width of both species.
+
 This file was last update on `r Sys.Date()`
-
-```{r setup, include=FALSE, message=FALSE, warning=FALSE}
-
-options(max.print="75")
-knitr::opts_chunk$set(echo = FALSE, error = T, warning = F, message = F, tidy = T, 
-                      cache = T,
-                      dpi = 300, fig.align = "center")
-
-#Required libraries
-
-library(plyr)
-library(tidyverse)
-library(broom)
-library(lubridate)
-library(viridis)
-
-#Data import
-
-snakes = read.csv("./Data/Sea-snakes_fish-dep_2018-19_070220.csv")
-
-theme_set(theme_bw()+
-            theme(legend.position = "top",
-                  text = element_text(size = 20)
-                  )
-          )#setting ggplot theme
-```
 
 ```{r child = './Sections/Fishing intensity.rmd'}
 ```
