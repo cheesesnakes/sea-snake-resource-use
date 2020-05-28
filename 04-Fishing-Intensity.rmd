@@ -1,0 +1,154 @@
+
+```{r}
+# importing libraries
+
+library(tidyverse)
+library(lubridate)
+library(viridis)
+```
+
+  
+# Varition in fishing intensity along the sindhudurg coast
+
+```{r}
+#importing effort data
+
+effort = read.csv("../Data/Fishing-Effort_111219.csv")%>%
+  group_by(Date, Gear.Type)%>%
+  distinct(Boat.name, .keep_all = T)%>%# fixing repetitions in effort data
+  mutate(Month = factor(months(dmy(Date)), 
+                        levels = month.name),
+         Year = year(dmy(Date)))%>%
+  filter(Gear.Type == "Trawler" | Gear.Type == "GillNet")# removing beach seines and purse seines
+
+```
+
+## Calculating effort with depth
+
+__Fishing intensity__: Vessel effort (Number of days fishing x No. of hauls x Average time per haul) is calculated for each boat on each day. This is then totaled for the sampling duration at each site.
+
+- Should fishing intensity be analysed seperately by fishing gear.
+- Should calculation of fishing intensity factor in Gears.
+
+
+```{r, eval = FALSE, echo = TRUE}
+
+dep_int = effort%>% 
+  filter(Fishing.Location != "")%>% #removing missing location data
+  dplyr::select(Date, Gear.Type, Fishing.Location, Boat.name,
+                No..of.Hauls, Average.Haul.Time..Hours., No..of.Days.fishing, Depth..wav.)%>%
+  group_by(Gear.Type)%>%
+  mutate(n.days = ifelse(is.na(No..of.Days.fishing), #filling in missing data with means
+                         median(No..of.Days.fishing, na.rm = T), No..of.Days.fishing),
+         n.hauls = ifelse(is.na(No..of.Hauls), 
+                          mean(No..of.Hauls, na.rm = T), No..of.Hauls),
+         haul.time = ifelse(is.na(Average.Haul.Time..Hours.), 
+                            mean(Average.Haul.Time..Hours., na.rm = T), Average.Haul.Time..Hours.))%>%
+  ungroup()%>%
+  mutate(effort = 
+           (n.days)*(n.hauls)*(haul.time),
+         Depth.m = Depth..wav.*1.87)%>%
+  dplyr::select(Date, Boat.name, Gear.Type, Fishing.Location, Depth.m, effort)%>%
+  drop_na()
+
+```
+
+```{r}
+dep_int = read.csv("../Data/Fishing intensity_dep.csv")
+
+knitr::kable(table(dep_int$Gear.Type))#sample size
+
+# effort per boat
+
+dep_int%>%
+  group_by(Gear.Type)%>%
+  skimr::skim(effort)%>%
+  skimr::yank("numeric")
+
+# testing difference in effort by gears
+
+broom::tidy(t.test(effort ~ Gear.Type, data = dep_int))%>%
+  dplyr::select(estimate:p.value)
+
+lsr::cohensD(effort ~ Gear.Type, data = dep_int) # effect size
+```
+
+## Mapping fishing intensity
+
+How do we use location and depth data gathered from fisher surveys to map fishing intensity?
+  
+- Nearest landmarks are geocoded from google maps API 
+- Latitude is extracted from landmark geocode
+- Match landmark latitude and depth from survey to GEBCO data
+- Extract final longitude from GEBCO data
+
+```{r fp}
+library(sp)
+library(rgdal)
+library(raster)
+library(ggmap)
+
+dep_int = read.csv("../Data/Fishing intensity_dep.csv")
+
+ext <- raster("../Data/sampling_extent.tif")
+
+#importing functions
+
+source("../Functions/intensity extract.R")
+source("../Functions/raster to df.R")
+source("../Functions/intensity_plot.R")
+
+#Calculating fishing intensity
+
+fi <- dep_int%>%
+  group_by(Gear.Type)%>%
+  nest()%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "effort", func = 'sum')),
+         mdf = map(m, map.df))%>%
+  dplyr::select(mdf)%>%
+  unnest()%>%
+  spread(Gear.Type, layer)
+
+# Plotting intensity of fishing by gear type
+
+base <- get_googlemap(center = c(mean(dep_int$lon),mean(dep_int$lat)), 
+                      zoom = 10, scale = 2, maptype = "terrain")##Getting basemap
+
+#importing bathymetric data downloaded from GEBCO database
+library(marmap)
+
+depth <- readGEBCO.bathy("../Data/gebco_2019_n16.6_s15.6_w73.1_e73.9.nc")
+
+depth = fortify.bathy(depth)%>%
+  dplyr::rename(lon = x, lat = y, depth = z)%>%
+  filter(depth < 1)
+
+boat_plot <- dep_int%>%
+  group_by(Gear.Type)%>%
+  nest()%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "effort", func = 'sum')),
+         mdf = map(m, map.df),
+         plot = map2(mdf, Gear.Type, ~int.plot(mdf = ., Gear.Type, name = "Fishing intensity")))%>%
+  gridExtra::grid.arrange(grobs = .$plot, ncol = 2)
+
+ggsave(boat_plot, filename = "../Figures and Tables/figure4.tiff", width = 8, height = 4.5, dpi = 300)
+```
+
+
+*Are points accurately depicted?*
+  
+  Survey based map of fishing intensity needs to be verified with onboard observations and/or remote GPS data.
+
+```{r}
+#Spatial extent of gear types
+
+dep_int%>%
+  group_by(Gear.Type)%>%
+  nest()%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "effort", func = 'sum')),
+         mdf = map(m, map.df))%>%
+  dplyr::select(mdf)%>%
+  summarise(ext = map(mdf, ~sum(.$layer>0)))%>%
+  unnest()
+```
+

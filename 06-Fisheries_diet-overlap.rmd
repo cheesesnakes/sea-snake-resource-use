@@ -1,0 +1,175 @@
+# Overlap between fisheries catch and sea snake diet
+
+```{r}
+# importing catch data
+
+catch <- read.csv("../Data/catch.csv")
+
+# importing gut content data
+
+gutcontent <- read.csv("../Data/Sea_snakes_gut_content_2018-19.csv")
+
+# Standarising sea snake gut content data
+gutcontent = gutcontent%>%
+  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
+         Prey.Family != "Unidentified", Prey.Family != "")%>%
+  group_by(Snake.Species)%>%
+  mutate(n = n())%>%
+  group_by(Snake.Species, Prey.Family)%>%
+  summarise(Abundance = n(), n = last(n), Rel.prop = last(Abundance/n))
+```
+
+## Sampling Adequacy
+
+```{r}
+# calculating number trips and fishing effort
+
+catch%>%
+  group_by(Gear.Type, Sample)%>%
+  summarise(Haul.time = last(Haul.time),
+            No.hauls = last(No.hauls))%>%
+  group_by(Gear.Type)%>%
+  summarise(N = length(unique(Sample)),
+            Haul.Hours = sum(No.hauls*Haul.time, na.rm = T)/60)
+```
+
+## Catch weight
+
+```{r}
+
+# importing catch weight data
+
+tonnage <- read.csv("../Data/catch tonnage.csv")
+# transforming total catch weight to log 
+
+shapiro.test(log(tonnage$Total.Catch..kg.))
+
+broom::tidy(t.test(log(Total.Catch..kg.) ~ Gear.Type, data = tonnage))
+
+lsr::cohensD(log(Total.Catch..kg.) ~ Gear.Type, data = tonnage)
+```
+
+
+## Diverisity of prey families found in fisheries catch
+
+```{r}
+#Creating data martix
+
+catch_fam <- catch%>%
+  filter(Family != "")%>%
+  group_by(Gear.Type, Sample)%>%
+  mutate(Sample.Wt = sum(Weight.g, na.rm = T))%>%#Total sampled biomass
+  group_by(Gear.Type, Sample, Family)%>%
+  summarise(Biomass = sum(Weight.g, na.rm = T),#weight of each fish family in catch
+            Prey = last(ifelse(Family%in%gutcontent$Prey.Family, "Yes", "No")),
+            Sample.Wt = last(Sample.Wt))%>%
+  mutate(Rel.biomass = Biomass/Sample.Wt)#%>%#relative propotion of fish family in sample
+  #group_by(Gear.Type, Family)%>%
+  #summarise(Avg.rel.biomass = sum(Rel.biomass)/n(), Prey = last(Prey))
+
+#Richness
+
+catch%>%
+  filter(Family != "")%>%
+  group_by(Gear.Type)%>%
+  summarise(Family.Richness = length(unique(Family)))
+
+```
+
+## No. of Sea snake prey families found in fish catch and overlap
+
+```{r}
+gc.hs <- filter(gutcontent, Snake.Species == "Hydrophis schistosus")
+gc.hc <- filter(gutcontent, Snake.Species == "Hydrophis curtus")
+
+catch_fam = catch_fam%>%
+  mutate(HS = if_else(Family%in%gc.hs$Prey.Family, "Yes", "No"),
+         HC= if_else(Family%in%gc.hc$Prey.Family, "Yes", "No"))
+
+# number of prey families caught by each gear
+catch_fam%>%
+  gather(c("HC", "HS"), key = "snake", value = "Prey")%>%
+  filter(Prey == "Yes")%>%
+  group_by(Gear.Type, snake)%>%
+  summarise(Nfam = length(unique(Family)))
+
+# prey of each species as relative proportion in fisheries catch
+
+catch_fam%>%
+  gather(c("HC", "HS"), key = snake, value = Prey)%>%
+  filter(Prey == "Yes")%>%
+  group_by(Gear.Type, Sample, snake)%>%
+  summarise(N = length(unique(Family)),
+            Biomass = sum(Biomass),
+            Sample.Wt = last(Sample.Wt),
+            rel.prop = Biomass/Sample.Wt)%>%
+  group_by(Gear.Type, snake)%>%
+  summarise(Mean.prop = mean(rel.prop))
+  
+```
+
+```{r}
+# is the proportion of HC prey greater than that of HS in catch
+# do trawlers have a higher overlap with sea snakes than gillnets
+
+catch_fam%>%
+  gather(c("HC", "HS"), key = snake, value = Prey)%>%
+  filter(Prey == "Yes")%>%
+  group_by(Gear.Type, Sample, snake)%>%
+  summarise(Biomass = sum(Biomass),
+            Sample.Wt = last(Sample.Wt),
+            rel.prop = Biomass/Sample.Wt)%>%
+  group_by(Gear.Type)%>%
+  nest()%>%
+  mutate(ttest = map(data, ~t.test(rel.prop ~ snake, data = .)),
+         sumry = map(ttest, broom::tidy),
+         d = map(data, ~lsr::cohensD(rel.prop ~ snake, data = .)))%>%
+  dplyr::select(sumry, d)%>%
+  unnest()%>%
+  dplyr::select(Gear.Type:p.value, d)%>%
+  rename(HC = estimate1,
+         HS = estimate2)
+
+catch_fam%>%
+  gather(c("HC", "HS"), key = snake, value = Prey)%>%
+  filter(Prey == "Yes")%>%
+  group_by(Gear.Type, Sample, snake)%>%
+  summarise(Biomass = sum(Biomass),
+            Sample.Wt = last(Sample.Wt),
+            rel.prop = Biomass/Sample.Wt)%>%
+  group_by(snake)%>%
+  nest()%>%
+  mutate(ttest = map(data, ~t.test(rel.prop ~ Gear.Type, data = .)),
+         sumry = map(ttest, broom::tidy),
+         d = map(data, ~lsr::cohensD(rel.prop ~ Gear.Type, data = .)))%>%
+  dplyr::select(sumry, d)%>%
+  unnest()%>%
+  dplyr::select(snake:p.value, d)%>%
+  rename(GN = estimate1,
+         TR = estimate2)
+
+```
+
+
+## Sea snake prey species in fisheries catch
+
+Species constituting >10% of the catch on average are represented
+
+```{r}
+catch_fam%>%
+  gather(c("HC", "HS"), key = "snake", value = "Prey")%>%
+  filter(Prey == "Yes")%>%
+  group_by(Gear.Type, Family)%>%
+  summarise(N = length(unique(Family)), 
+            p = mean(Rel.biomass, na.rm = T))%>%
+  ggplot(aes(reorder(Family, p), p))+
+  geom_col(width = 0.5)+
+  scale_fill_brewer(palette = "Greys")+
+  labs(x = "Fish Family", y = "Average proportion in catch")+
+  scale_y_sqrt()+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, face = "italic"))+
+  facet_wrap(~Gear.Type, ncol = 1)
+
+ggsave(last_plot(), filename = "../Figures and Tables/fig5.png", height = 8, width = 8)
+```
+

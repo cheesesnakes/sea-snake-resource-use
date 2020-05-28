@@ -1,0 +1,204 @@
+# Difference in distribution and habitat use between _H. curtus_ and _H. shcistosus_
+
+## Mapping sea snake distribution with fisheries survey data
+
+```{r, eval = FALSE, echo = TRUE}
+#Calculating sea snake abundance
+
+snakes_den = snakes%>%
+  filter(Species == "Hydrophis schistosus" | Species == "Hydrophis curtus",
+         Fishing.Location != "", 
+         !is.na(Depth.Caught..m.))%>%
+  dplyr::select(Species, Fishing.Location, Depth.Caught..m., Date, Boat.Name.Owner, 
+         No..of.Hauls, Average.Haul.Duration..Hours., Gear.Type)%>%
+  group_by(Gear.Type)%>%
+  mutate(n.hauls = ifelse(is.na(No..of.Hauls), 
+                         median(No..of.Hauls, na.rm = T), No..of.Hauls),
+         haul.time = ifelse(is.na(Average.Haul.Duration..Hours.), 
+                         median(Average.Haul.Duration..Hours., na.rm = T),
+                         Average.Haul.Duration..Hours.))%>%
+  group_by(Date, Boat.Name.Owner)%>%
+  summarise(HC = sum(Species == "Hydrophis curtus"),
+         HS = sum(Species == "Hydrophis schistosus"),
+         effort = last(n.hauls*haul.time),
+         Fishing.Location = last(Fishing.Location),
+         Depth.Caught..m. = last(Depth.Caught..m.))%>%
+  gather(c("HC", "HS"), value = n, key = "Species")%>%
+  mutate(CPUE = n/effort)%>%
+  drop_na()
+```
+
+```{r}
+# sample size
+
+snakes%>%
+  filter(Species == "Hydrophis schistosus" | Species == "Hydrophis curtus",
+         Fishing.Location != "", 
+         !is.na(Depth.Caught..m.))%>%
+  dplyr::select(Species, Fishing.Location, Depth.Caught..m., Date, Boat.Name.Owner, 
+         No..of.Hauls, Average.Haul.Duration..Hours., Gear.Type)%>%
+  group_by(Gear.Type)%>%
+  mutate(n.hauls = ifelse(is.na(No..of.Hauls), #completing vars with median
+                         median(No..of.Hauls, na.rm = T), No..of.Hauls),
+         haul.time = ifelse(is.na(Average.Haul.Duration..Hours.), 
+                         median(Average.Haul.Duration..Hours., na.rm = T),
+                         Average.Haul.Duration..Hours.))%>%
+  group_by(Gear.Type, Date, Boat.Name.Owner)%>%
+  summarise(HC = sum(Species == "Hydrophis curtus"),
+         HS = sum(Species == "Hydrophis schistosus"),
+         effort = last(n.hauls*haul.time),
+         Fishing.Location = last(Fishing.Location),
+         Depth.Caught..m. = last(Depth.Caught..m.))%>%
+  gather(c("HC", "HS"), value = n, key = "Species")%>%
+  mutate(CPUE = n/effort)%>%
+  drop_na()%>%
+  group_by(Gear.Type)%>%
+  summarise(n = n(),
+            effort = sum(effort))
+```
+
+
+```{r}
+snakes_den <- read.csv("./Data/snakes-density.csv")#saved data set to reduce compute time
+
+# plotting densities
+
+## importing functions
+
+source("./Functions/intensity extract.R")
+source("./Functions/raster to df.R")
+source("./Functions/intensity_plot.R")
+
+## Calculating sea snake CPUE
+
+den <- snakes_den%>%
+  group_by(Species)%>%
+  nest()%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "n", func = 'sum')),
+         mdf = map(m, map.df))%>%
+  dplyr::select(mdf)%>%
+  unnest()%>%
+  spread(Species, layer)
+
+# Mean, sd CPUE
+
+den%>%
+  skimr::skim(HC, HS)
+
+#Spatial extent of species
+
+snakes_den%>%
+  group_by(Species)%>%
+  nest()%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "CPUE", func = 'sum')),
+         mdf = map(m, map.df))%>%
+  dplyr::select(mdf)%>%
+  summarise(ext = map(mdf, ~sum(.$layer>0)))%>%
+  unnest()
+
+#Plotting distribution
+library(marmap)
+library(ggmap)
+
+depth <- readGEBCO.bathy("./Data/gebco_2019_n16.6_s15.6_w73.1_e73.9.nc")
+
+depth = fortify.bathy(depth)%>%
+  dplyr::rename(lon = x, lat = y, depth = z)%>%
+  filter(depth < 1)
+
+snake_plot <- snakes_den%>%
+  mutate(Species = ifelse(Species == "HC", "Hydrophis curtus", "Hydrophis schistosus"))%>%
+  group_by(Species)%>%
+  nest()%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "CPUE", func = 'sum')),
+         mdf = map(m, map.df),
+         plot = map2(mdf, Species, ~int.plot(mdf = ., Species, name = "CPUE")))%>%
+  gridExtra::grid.arrange(grobs = .$plot, ncol = 2)
+
+ggsave(snake_plot, filename = "./Figures and Tables/figure1.tiff", width = 8, height = 4.5, dpi = 300)
+
+```
+
+- Why does the join reduce from 101 -> 92
+- Why is _H. curtus_ only found around and off Malvan?
+
+Do _H. schistosus_ and _H.curtus_ partition the coastal habitat along the depth axis?
+
+## Summarising depth use by species
+
+```{r}
+# Calculating mean depth in cell
+
+dep <- depth%>%
+  nest()%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "depth", func = mean)),
+         mdf = map(m, map.df))%>%
+  dplyr::select(mdf)%>%
+  unnest()%>%
+  rename(mean.depth = layer)
+
+#Calculating relative abaundance of sea snakes in each cell
+
+fi_den<- inner_join(fi, den, by = c("x", "y"))%>%
+  inner_join(dep, by = c("x", "y"))%>%
+  mutate(rel.prop = HC/(HC+HS))
+
+# Relative proportion of H. curtus with depth
+
+fi_den%>%
+  gather(c("HS", "HC"), key = sp, value = CPUE)%>%
+  filter(CPUE>0)%>%
+  group_by(sp)%>%
+  skimr::skim(mean.depth)%>%
+  skimr::yank("numeric")
+
+```
+
+## Spatial segregation by species
+
+```{r}
+fi_den%>%
+  summarise(ttl.ext = sum(HC>0 | HS>0),
+            ovrlp = sum(HC > 0 & HS > 0),
+            rel.ovlp = ovrlp/ttl.ext)
+```
+
+
+## Modelling depth use by species
+
+```{r}
+#t-test for cell depth
+fi_den%>%
+  gather(c("HS", "HC"), key = sp, value = CPUE)%>%
+  filter(CPUE>0)%>%
+  dplyr::select(sp, mean.depth)%>%
+  nest()%>%
+  mutate(mod = map(data, ~t.test(mean.depth ~ sp, data = .)),
+         sumry = map(mod, broom::tidy),
+         d = map(data, ~lsr::cohensD(mean.depth ~ sp, data = .)))%>%
+  dplyr::select(sumry, d)%>%
+  unnest()%>%
+  dplyr::select(estimate:p.value, d)
+
+#testing effect of cell depth on relative abundance
+
+fi_den%>%
+  gather(c("HS", "HC"), key = sp, value = CPUE)%>%
+  mutate(rel.prop = ifelse(sp == "HS", 1 - rel.prop, rel.prop),
+         mean.depth = -mean.depth)%>%
+  dplyr::select(sp, rel.prop, mean.depth)%>%
+  group_by(sp)%>%
+  nest()%>%
+  mutate(prop_dep = map(data, ~lm(rel.prop ~ mean.depth, data = .)),
+         sumry = map(prop_dep, broom::tidy),
+         stat = map(prop_dep, broom::glance))%>%
+  dplyr::select(sumry, stat)%>%
+  unnest()%>%
+  dplyr::select(sp:p.value, adj.r.squared)
+  
+```
+
+After controling for effect of gear type with a mixed effect model. Depth caught still varies significantly with species.
+
+Hence, prefered habitat in terms of depth may vary bewtween _H. curtus_ and _H. schistosus_
+

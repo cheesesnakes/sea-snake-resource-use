@@ -1,0 +1,113 @@
+# Does fishing intensity affect the distribution of *H. curtus* and *H. schistosus*?
+
+```{r}
+dep_int <- read.csv("../data/Fishing intensity_dep.csv")
+
+depth <- read.csv("../data/sindhudurg depth.csv")
+
+snakes_den <- read.csv("../data/snakes-density.csv")
+```
+
+
+```{r}
+library(sp)
+library(raster)
+
+ext <- raster::raster("../Data/sampling_extent.tif")
+
+source("../Functions/intensity extract.R")
+source("../Functions/raster to df.R")
+
+```
+
+```{r}
+#Calculating fishing intensity
+
+fi <- dep_int%>%
+  group_by(Gear.Type)%>%
+  nest()%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "effort", func = 'sum')),
+         mdf = map(m, map.df))%>%
+  dplyr::select(mdf)%>%
+  unnest()%>%
+  spread(Gear.Type, layer)
+#rename(intensity = layer)
+
+# Calculating sea snake CPUE
+
+den <- snakes_den%>%
+  group_by(Species)%>%
+  nest()%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "n", func = 'sum')),
+         mdf = map(m, map.df))%>%
+  dplyr::select(mdf)%>%
+  unnest()%>%
+  spread(Species, layer)
+
+# Calculating mean depth in cell
+
+dep <- depth%>%
+  nest()%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "depth", func = mean)),
+         mdf = map(m, map.df))%>%
+  dplyr::select(mdf)%>%
+  unnest()%>%
+  rename(mean.depth = layer)
+
+#Calculating relative abaundance of sea snakes
+
+fi_den<- inner_join(fi, den, by = c("x", "y"))%>%
+  inner_join(dep, by = c("x", "y"))%>%
+  mutate(rel.prop = HC/(HC+HS))
+
+```
+
+## Spatial overlap between fisheries and sea snakes
+
+```{r}
+sp.ovlp <- fi_den%>%
+  gather(c("HS", "HC"), key = sp, value = CPUE)%>%
+  gather(c("GillNet", "Trawler"), key = gear, value = intensity)%>%
+  group_by(gear, sp)%>%
+  summarise(overlap = sum(CPUE > 0 & intensity > 0),
+            extent.sp = sum(CPUE>0),
+            rel.ovlp = overlap/extent.sp)
+
+knitr::kable(sp.ovlp)
+```
+
+
+```{r}
+sp.ovlp%>%
+  group_by(sp)%>%
+  nest()%>%
+  mutate(ptest = map(data, ~prop.test(.$overlap, .$extent.sp)),
+         sumry = map(ptest, broom::tidy),
+         h = map(sumry, ~pwr::ES.h(.$estimate2, .$estimate1)))%>%
+  select(sumry, h)%>%
+  unnest()%>%
+  dplyr::select(sp:p.value, h)
+```
+
+
+## Variation in relative proportion of HC with fishing intensity
+
+```{r}
+int_dist <- lm(rel.prop ~ GillNet + Trawler + mean.depth, data = fi_den)
+
+tidy(int_dist)
+
+glance(int_dist)%>%
+  dplyr::select(adj.r.squared, AIC)
+
+car::Anova(int_dist)
+
+fi_den%>%
+  gather(c('GillNet', 'Trawler'), key = "Gear.Type", value =  "intensity")%>%
+  ggplot(aes(intensity, rel.prop))+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  scale_y_log10()+
+  labs(x = "Fishing intensity", y = "Relative proportion of H.curtus")+
+  facet_wrap(~Gear.Type, scales = "free_x")
+```
