@@ -1,47 +1,57 @@
 
-# Difference in resouce use betweek *H. curtus* and *H. schistosus*?
+# Difference in resouce use betweek *H. curtus* and *H. schistosus*
 
-Carbon and Nitrogen isotope ratios were compared accorss species. Plasma and scale samples were used to compare short term and long term resource use respectively. Multiples metrics including niche width (SEA), variance (range), overlap (%) were used.
+Carbon and Nitrogen isotope ratios were compared across snake species. Plasma and scale samples were used to compare short term and long term resource use respectively. Multiples metrics including niche width (SEA), variance (range), overlap (%) were used.
+
+<span style = "color: red;">**This section needs to be revised with new data from CEaS**</span>
 
 ```{r sia}
-#Stable isotope data
-sia = read.csv("../Data/Stable Isotope Data_CEAS_241119.csv")
 
-#joining sia data to snake data
+# importing stable isotope data
+
+sia = read.csv("./Data/Stable Isotope Data_CEAS_241119.csv")
+
+# joining SI data to snake data
 
 sia_snakes = sia%>%
-  filter(Tissue.type != "Gut Content")%>%
+  filter(Tissue.type != "Gut Content")%>% # removing prey SI data
   left_join(snakes, 'Field.Code')%>%
   mutate(Lab = "CEAS")%>%
+  # renamving variables for ease of understanding
   dplyr::rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
+  # selecting relevant variables
   dplyr::select(Date, Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
                 Gear.Type, Fishing.Location, Depth.Caught..m.,
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
                 Tissue.type, Month, Year)
 
-#labels
+# creating labels for figures
 
-D.C =expression({delta}^13*C~'\u2030') 
+D.C = expression({delta}^13*C~'\u2030') 
 
-D.N =expression({delta}^15*N~'\u2030')
-
+D.N = expression({delta}^15*N~'\u2030')
 
 ```
 
-## Number of samples analysed 
+## Number of tissue samples analysed 
 
 ```{r}
+
 sia_snakes%>%
   filter(Tissue.type == "Plasma" | Tissue.type == "Scales")%>%
   filter(Species == "Hydrophis curtus" | Species == "Hydrophis schistosus")%>%
   group_by(Species, Tissue.type)%>%
   count()%>%
   spread(Tissue.type, n)
+
 ```
 
 ## Summary statistics on Carbon and Nitrogen stable isotopes
 
+Mean ± standard deviation (parts per mil)
+
 ```{r}
+
 sia_snakes%>%
   filter(Tissue.type == "Plasma" | Tissue.type == "Scales")%>%
   filter(Species == "Hydrophis curtus" | Species == "Hydrophis schistosus")%>%
@@ -52,63 +62,101 @@ sia_snakes%>%
             n = sum(!is.na(value)))%>%
   unite("Mean.sd", Mean:sd, sep = "±")%>%
   dplyr::select(-n)%>%
-  spread(Isotope, Mean.sd)
+  spread(Isotope, Mean.sd)%>%
+  arrange(Tissue.type, Species)
+
 ```
+
+Both $\delta^{15}N$ and $\delta^{13}C$ were enriched in *H. schistosus* compared to _H. curtus_
 
 ## Difference in niche width between sea snakes
 
+We used the SIBER package (Jackson et al. 2011) for to compare isotopic niche width and overlap between _H. curtus_ and _H. schistosus_. 
+
 ```{r, results = FALSE}
+
+# importing required libraries for stable isotope analysis
+
 library(SIBER)
 
-#Creating siber data
-siber_snakes = sia_snakes%>%
-  filter()%>%
-  dplyr::select(Delta.Carbon, Delta.Nitrogen, Tissue.type, Species)%>%
+# Formating SI data for use with SIBER
+
+siber_snakes <- sia_snakes%>%
+  dplyr::select(Delta.Carbon, Delta.Nitrogen, Tissue.type, Species)%>% # selecting required variables
+  # renaming varibale as per requirement for SIBER
   dplyr::rename(iso1 = Delta.Carbon,
          iso2 = Delta.Nitrogen,
          group = Tissue.type,
          community = Species)%>%
+  # removing missing data points
   filter(!is.na(group),
          !is.na(iso1),
          !is.na(iso2),
          community == "Hydrophis schistosus" | community == "Hydrophis curtus")%>%
   droplevels()
 
+# Creating a SIBER object for analysis
+
 siber.snakes = createSiberObject(siber_snakes)
+
 ```
 
 ### Maximum likelihood estimate of SEA
 
 ``` {r}
-SEA.ML_snakes <- groupMetricsML(siber.snakes) #maximum likelihood estimates
 
-data.frame(t(SEA.ML_snakes))
+SEA.ML_snakes <- groupMetricsML(siber.snakes)
+
+# Clean table 
+
+data.frame(t(SEA.ML_snakes))%>%
+  rownames_to_column("Species.Tissue")%>%
+  separate(Species.Tissue, c("Species", "Tissue"), sep = "([\\.\\?\\:])")%>%
+  arrange(Tissue, Species)
 
 ```
 
 As maximum likelihood can only porivde point estimates of SEA, a bayesian model was used to provide more robust comparison of niche width.
 
+<span style = "color: red;"> **Add comparisoon of ML SEA here** </span>
+
 ### Bayesian estimate of SEA
 
-```{r, results = FALSE}
-# options for running jags
-parms <- list()
-parms$n.iter <- 2 * 10^4   # number of iterations to run the model for
-parms$n.burnin <- 1 * 10^3 # discard the first set of values
-parms$n.thin <- 10     # thin the posterior by this many
-parms$n.chains <- 2        # run this many chains
+We estimate the standard ellipse area (SEA) of each species in isotopic space by fitting a multivaria normal model to the isotope data using bayesian inference.
 
-# define the priors
+```{r, results = FALSE}
+
+# Setting options for running jags
+
+parms <- list() # list of parameters fir JAGS
+
+parms$n.iter <- 2*10^4   # number of iterations to run the model for
+
+parms$n.burnin <- 1*10^3 # discard the first set of 1000 values
+
+parms$n.thin <- 10 # thin the posterior by this many
+
+parms$n.chains <- 2 # run this many chains
+
+# Defining vague priors
+
 priors <- list()
+
 priors$R <- 1 * diag(2)
+
 priors$k <- 2
+
 priors$tau.mu <- 1.0E-3
 
-snakes.post <- siberMVN(siber.snakes, parms, priors)#fitting multivariate normal model and getting                                                          posteriors
+# Fitting the model and getting posteriors
 
-SEA.B_snakes <- siberEllipses(snakes.post)#estimating standard ellipse area from posteriors
+snakes.post <- siberMVN(siber.snakes, parms, priors)
 
-means.B_snakes <- extractPosteriorMeans(siber.snakes, snakes.post)#mean isotope values
+# estimating standard ellipse area from posteriors
+
+SEA.B_snakes <- siberEllipses(snakes.post)
+
+# Creating a table of posterior estiamtes of Standard ellipse area
 
 ccc <- names(snakes.post)
 
@@ -118,63 +166,78 @@ SEA.B_snakesdf = data.frame(SEA.B_snakes, check.names = F)%>%
   rowid_to_column(var = "run")%>%
   gather(Species.Tissue, SEA.B, -run)%>%
   separate(Species.Tissue, c("Species","Tissue"), sep = "([\\.\\?\\:])")
-
 ```
 
 ```{r}
-#Summarising SEA estimates
+# Summarising Bayesian estimate of SEA
 
 SEA.B_snakesdf%>%
   group_by(Species, Tissue)%>%
-  summarise(SEA.mean = mean(SEA.B),
-            SEA.sd = sd(SEA.B),
-            SEA.se = sd(SEA.B)/sqrt(n()))
+  summarise(`Mean SEAb` = mean(SEA.B),
+            `Standard deviation` = sd(SEA.B))%>%
+  arrange(Tissue, Species)
 
 ```
+
+<span style = "color: red;"> **Add comparisoon of Bayesian SEA here** </span>
 
 ### Testing difference in species niche area by tissue type
 
 ```{r}
+
 SEA.B_snakesdf%>%
   spread(key = Species, value = SEA.B)%>%
   group_by(Tissue)%>%
-  summarise(p = sum(`Hydrophis schistosus` > `Hydrophis curtus`)/n())
+  summarise(`P(HS > HC)` = sum(`Hydrophis schistosus` > `Hydrophis curtus`)/n())
+
 ```
 
-Hyp: *H. schistosus* SEA is larger than *H. curtus*
+Hypothesis: *H. schistosus* SEA is larger than *H. curtus*
   
-  While niche width is slightly larger in *H. schistosus*, it is not significantly different. The posterior distribution of SEA^~b~ has right skewed long tail (masked by the limits of the graph for visual clarity) possibly due to the low sample size. Niche width doesn't seem to change accross different tissue types either, indicating stability over variying periods of assimilation.
+While niche width is slightly larger in *H. schistosus*, it is not significantly different. The posterior distribution of SEA^~b~ has right skewed long tail (masked by the limits of the graph for visual clarity) possibly due to the low sample size. Niche width doesn't seem to change accross different tissue types either, indicating stability over variying periods of assimilation.
 
+<span style = "color: red;"> **Update inference** </span>
 
 ## Visualising posterior ellipses to compare species isotopic niche
 
-```{r}
+```{r fig.height=6}
 # how many of the posterior draws do you want?
+
 n.posts <- 10
 
 # decide how big an ellipse you want to draw
+
 p.ell <- pchisq(1,2)
 
 set.seed(1)
 
 # a list to store the results
+
 snake_ellipses <- list()
 
 # loop over groups
-for (i in 1:length(snakes.post)#sgenerating list with length groups*communities
-){
+
+## generating list with length groups*communities
+
+for (i in 1:length(snakes.post))
+  {
   
   # a dummy variable to build in the loop
+  
   ell <- NULL
   post.id <- NULL
   
-  for ( j in sample(1:4000, n.posts)){#randomlu extracting parameters for n samples from posterior distribution
+  # randomly extracting parameters for n samples from posterior distribution
+  
+  for ( j in sample(1:4000, n.posts)){
     
     # covariance matrix
-    Sigma  <- matrix(snakes.post[[i]][j,1:4], 2, 2)
+    
+    Sigma <- matrix(snakes.post[[i]][j,1:4], 2, 2)
     
     # mean
-    mu     <- snakes.post[[i]][j,5:6]
+    
+    mu <- snakes.post[[i]][j,5:6]
     
     # ellipse points
     
@@ -182,33 +245,39 @@ for (i in 1:length(snakes.post)#sgenerating list with length groups*communities
     
     
     ell <- rbind(ell, out) #ellipse points from current loop
+    
     post.id <- c(post.id, rep(j, nrow(out))) #adding loop number (rep)
     
   }
+  
   ell <- as.data.frame(ell) # data frame of ellipse points from all draws
-  ell$rep <- post.id #adding draw id
-  snake_ellipses[[i]] <- ell #creading list of draws from each community.group
+  
+  ell$rep <- post.id # adding draw id
+  
+  snake_ellipses[[i]] <- ell # creading list of draws from each community.group
 }
 
-snake.ellipses <- bind_rows(snake_ellipses, .id = "id")#creating a data frame of post ellipse draws
+snake.ellipses <- bind_rows(snake_ellipses, .id = "id") # creating a data frame of post ellipse draws
 
 
 # now we need the group and community names
 
 # extract them from the ellipses.posterior list
-group_comm_names <- names(snakes.post)[as.numeric(snake.ellipses$id)]#extractin communit.group from posteriors
+
+group_comm_names <- names(snakes.post)[as.numeric(snake.ellipses$id)] # extractin community.group from posteriors
 
 # split them and conver to a matrix, NB byrow = T
+
 split_group_comm <- matrix(unlist(strsplit(group_comm_names, "[.]")),
-                           nrow(snake.ellipses), 2, byrow = TRUE)#splitting communit and group
+                           nrow(snake.ellipses), 2, byrow = TRUE) # splitting communit and group
 
 snake.ellipses$community <- split_group_comm[,1]
+
 snake.ellipses$group     <- split_group_comm[,2]
 
-snake.ellipses <- dplyr::rename(snake.ellipses, iso1 = x, iso2 = y, 
-                                Species = community, Tissue = group)
+snake.ellipses <- dplyr::rename(snake.ellipses, iso1 = x, iso2 = y, Species = community, Tissue = group)
 
-#Plotting 10 randomly sampled ellipses
+# Plotting 10 randomly sampled ellipses
 
 siber_snakes%>%
   rename(Species = community,
@@ -220,12 +289,11 @@ siber_snakes%>%
   geom_polygon(data = snake.ellipses,
                mapping = aes(iso1, iso2, group = rep, linetype = Species, col = Species),
                fill = NA)+
-  scale_color_brewer(palette = "Set1", direction = -1)+
-  scale_fill_brewer(palette = "Set1", direction = -1)+
+  scale_color_grey()+
   facet_wrap(~Tissue)+
   theme(legend.text = element_text(face = "italic"))
 
-ggsave(last_plot(), filename = "../Figures and Tables/figure3.tiff", height = 4.5, width = 8)
+ggsave(last_plot(), filename = "./Figures and Tables/figure3.tiff", height = 6, width = 8)
 ```
 
 As seen in the SEA estimation, low sample size for *H. curtus* causes greater uncertainty in the estimation of standar ellipses even with bayesian inference. Both carbon and nitrogen isotpes seem to be enriched in scales when compared to plasma. Degree of overlap appears to be low for both tissues.
@@ -233,28 +301,37 @@ As seen in the SEA estimation, low sample size for *H. curtus* causes greater un
 - Samples sizes for *H. curtus* in both tissues need to be increased despite using bayesian methods
 - **Unusual outlier** in *H. schistosus* scales data needs to be checked
 
+<span style = "color: red;"> **Update inference** </span>
+
 ## Relative overlap in bayesian standard ellipses
 
 ```{r, cache = TRUE}
-#Overlap in ellipse based on plasma samples
+
+# Overlap in ellipse based on plasma samples
+
 snake.p.overlap <- bayesianOverlap(ellipse1 = "Hydrophis schistosus.Plasma" , #Group 1
                                    ellipse2 = "Hydrophis curtus.Plasma", #Group 2
                                    snakes.post, #list with posteriour dists
                                    draws = 100, p.interval = 0.95, n = 100) #params
 
 snake.p.overlap <- snake.p.overlap%>%
-  mutate(Turnover = "Short-term")
+  mutate(Turnover = "Short-term") # plasma represents short - term turnover in isotope ratios
 
-#overlap in ellipse based on scale samples
+# Overlap in ellipse based on scale samples
+
 snake.s.overlap <- bayesianOverlap(ellipse1 = "Hydrophis schistosus.Scales" , #Group 1
                                    ellipse2 = "Hydrophis curtus.Scales", #Group 2
                                    snakes.post, #list with posteriour dists
                                    draws = 100, p.interval = 0.95, n = 100) #params
 
 snake.s.overlap <- snake.s.overlap%>%
-  mutate(Turnover = "Long-term")
+  mutate(Turnover = "Long-term") # scales represent long term turn over in isotope ratios
+
+# Creating a combined data frame 
 
 snake.overlap <- bind_rows(snake.p.overlap, snake.s.overlap)
+
+# Plotting overlap
 
 snake.overlap%>%
   mutate(prop.overlap = overlap/(area1 + area2 - overlap))%>% #relative overlap
@@ -264,14 +341,20 @@ snake.overlap%>%
   labs(x = "Proportion of overlap", y = "Number of samples")+
   scale_color_discrete(name = "Mean")+
   facet_wrap(~Turnover)
+
 ```
 
 ```{r}
+
+# summarising overlap in standard ellipses
+
 snake.overlap%>%
   group_by(Turnover)%>%
-  mutate(prop.overlap = overlap/(area1 + area2 - overlap))%>%
-  summarise(Avg.overlap = mean(prop.overlap),
-            sd = sd(prop.overlap))
+  # calculating relative overlap in bayesian standard ellipses
+  mutate(prop.overlap = overlap/(area1 + area2 - overlap))%>% 
+  summarise(`Average overlap` = mean(prop.overlap),
+            `Standard deviation` = sd(prop.overlap))
+
 ```
 
 Overlap between *H. curtus* and *H. schistosus* seems to be high in when comparing long term resource use, i.e., scales.
@@ -282,3 +365,13 @@ This difference could be caused by:
 
 - low sample size for *H. curtus*
 - differences in processing of scales and plasma, i.e., lipid extraction
+
+<span style = "color: red;"> **Update inference** </span>
+
+## References
+
+- Section 4.3.2 was adapeted from [Andrew Jackson's Github example](https://github.com/AndrewLJackson/SIAR-examples-and-queries/blob/master/learning-resources/siber-comparing-populations.Rmd).
+
+- Section 4.4 was adapted from the [SIBER Vignette](https://cran.r-project.org/web/packages/SIBER/vignettes/Plot-posterior-ellipses.html).
+
+- Section 4.5 was adapted from this [Vignette](https://cran.r-project.org/web/packages/SIBER/vignettes/Ellipse-Overlap.html).

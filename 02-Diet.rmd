@@ -214,7 +214,7 @@ similarity(fam_vegan, q = 2, boot = T)%>%
 
 There was limited overlap in prey between _H. schistosus_ and _H. curtus_
 
-## Testing segregation in prey between _H. curtus_ and _H. schistosus_
+### Testing segregation in prey between _H. curtus_ and _H. schistosus_
 
 ```{r}
 
