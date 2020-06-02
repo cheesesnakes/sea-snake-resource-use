@@ -134,7 +134,7 @@ snakes_den%>%
 
 ## Mapping sea snake distributions
 
-```{r}
+```{r fig.height=6, fig.width=8}
 
 ## importing required libraries
 
@@ -171,7 +171,8 @@ snake_plot <- snakes_den%>%
 
 ## saving high res figure
 
-ggsave(snake_plot, filename = "./Figures and Tables/figure1.tiff", width = 8, height = 4.5, dpi = 300)
+ggsave(snake_plot, filename = "./Figures and Tables/figure1.tiff", width = 8, height = 6, dpi = 300)
+
 
 ```
 

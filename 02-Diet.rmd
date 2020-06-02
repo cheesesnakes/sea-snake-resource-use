@@ -1,26 +1,19 @@
-```{r}
-# libraries
-
-library(tidyverse)
-
-#snakes data
-
-snakes <- read.csv("../data/Sea-snakes_fish-dep_2018-19_070220.csv")
-```
 
 # DIfference in diet between *H. curtus* and *H. schsitosus*
 
 ## No. of samples collected by sea snake species
 
 ```{r}
+
 snakes%>%
   filter(Species == "Hydrophis curtus" | Species == "Hydrophis schistosus")%>%
   group_by(Species)%>%
-  summarise(N = n(),
-            n = sum((Gut.Content) == "Yes"),
-            n_male = sum((Gut.Content) == "Yes" & Sex == "Male"),
-            n_female = sum((Gut.Content) == "Yes" & Sex == "Female"),
-            prop = N/793)
+  summarise(N = n(), # total number of individuals sampled
+            n = sum((Gut.Content) == "Yes"), # number of individuals with gut content
+            n_male = sum((Gut.Content) == "Yes" & Sex == "Male"), # males with gut content
+            n_female = sum((Gut.Content) == "Yes" & Sex == "Female"), # females with content
+            prop.unid = n/N) # propotion of individuals with gut content
+
 ```
 
 A very low proportion of inviduals had gut content present at the time of sampling. Sampling accross species and sexes may be adequate for comparison.
@@ -28,215 +21,39 @@ A very low proportion of inviduals had gut content present at the time of sampli
 ## Proportion of unidentified specimens
 
 ```{r}
-gc = read.csv("../Data/Sea_snakes_gut_content_2018-19.csv")%>%
-  filter(Source == "Gut content")
+
+# importing gut content data
+
+gc = read.csv("./Data/Sea_snakes_gut_content_2018-19.csv")%>%
+  filter(Source == "Gut content") # removing specimens collected from fisheries landings
+
+# calculating richness
 
 gc%>%
   filter(Source == "Gut content")%>%
-  summarise(N_sp = length(unique(Prey.Species)),
-            N_fam = length(unique(Prey.Family)),
-            unid_sp = sum(Prey.Species == "Unidentified" | Prey.Species == "", na.rm = T)/n(),
-            unid_fam = sum(Prey.Family == "Unidentified" | Prey.Family == "", na.rm = T)/n())
+  summarise(N_sp = length(unique(Prey.Species)), # number of prey species
+            N_fam = length(unique(Prey.Family)), # number of prey families
+            # proportion of unidentitified specimens
+            unid_sp = sum(Prey.Species == "Unidentified" | Prey.Species == "", na.rm = T)*100/n(), ## species
+            unid_fam = sum(Prey.Family == "Unidentified" | Prey.Family == "", na.rm = T)*100/n())%>% ## family
+  # creating clean table
+  gather()%>%
+  mutate(Metric = ifelse(substr(key, 1, 1) == "N", "N", "% Unidentified"),
+         Unit = ifelse(grepl(key, pattern = "sp", fixed = T), "Prey Species", "Prey Family"))%>%
+  dplyr::select(Unit, Metric, value)%>%
+  spread(Metric, value)
 ```
 
 A large portion of gut content specimens were unidentifiable. This is an unavoidable consquence of VGCA.
 
-
-## Diverisity of prey families found in gut content
-
-```{r}
-library(vegetarian)
-
-#Creating data martix
-
-fam_vegan = gc%>%
-  filter(Source == "Gut content")%>%
-  filter(Prey.Family != "Unidentified")%>%
-  group_by(Snake.Species, Prey.Family)%>%
-  summarise(n = n())%>%
-  group_by(Snake.Species)%>%
-  mutate(t = sum(n))%>%
-  group_by(Snake.Species, Prey.Family)%>%
-  summarise(p = n/t)%>%
-  spread(Prey.Family, p, fill = 0)%>%
-  column_to_rownames("Snake.Species")
-
-#Richness
-
-gc%>%
-  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
-         Prey.Species != "Unidentified")%>%
-  group_by(Snake.Species)%>%
-  summarise(Prey.Species.Richness = length(unique(Prey.Species)))
-
-#Alpha Diversity
-
-data.frame(
-  hs = d(fam_vegan[-1,], "alpha", boot = T),
-  hc = d(fam_vegan[-2,], "alpha", boot = T)
-)
-
-#Beta diverisity
-gc%>%
-  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
-         Prey.Species != "Unidentified")%>%
-  group_by(Prey.Species)%>%
-  summarise(N_pred = length(unique(Snake.Species)))%>%
-  ungroup()%>%
-  summarise(Overlap = sum(N_pred>1))
-
-gc%>%
-  filter(Prey.Species != "Unidentified")%>%
-  group_by(Snake.Species, Prey.Species)%>%
-  summarise(n = n())%>%
-  group_by(Snake.Species)%>%
-  mutate(N = sum(n))%>%
-  group_by(Snake.Species, Prey.Species)%>%
-  summarise(p = n/N)%>%
-  spread(Snake.Species, p, fill = 0)%>%
-  rename("HC" = 'Hydrophis curtus', "HS" = 'Hydrophis schistosus')%>%
-  mutate(P = abs(HC - HS))%>%
-  summarise(D = 1 - 0.5*sum(P)) 
-
-similarity(fam_vegan, q = 2, boot = T)
-
-#Percentage of tetrodontids
-gc%>%
-  filter(Prey.Species != "", Prey.Species != "Unidentified",
-         Prey.Family != "", Prey.Family != "Unidentified")%>%
-  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus")%>%
-  group_by(Snake.Species)%>%
-  mutate(N = n())%>%
-  group_by(Snake.Species, Prey.Family, Prey.Species)%>%
-  summarise(N = last(N),
-            Perc = n()*100/N)%>%
-  write.csv(file = "../Data/prey list.csv")
-
-```
-## List of sea snake prey species
-
-```{r}
-gc%>%
-  filter(Snake.Species != "")%>%
-  group_by(Snake.Species, Prey.Family, Prey.Species)%>%
-  summarise(Percentage = n())
-```
-
-## Relative abundance of prey families in sea snake gut content
-
-```{r}
-gc%>%
-  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
-         Prey.Family != "", Prey.Family != "Unidentified")%>%
-  ggplot(aes(Prey.Family, fill = Snake.Species))+
-  geom_bar(aes(y = ..prop.., group = Snake.Species), stat = "count",
-           position = position_dodge(preserve = "single"), color = "black")+
-  labs(x =" Prey Family", y = "Relative proportion")+
-  scale_y_continuous(expand = c(0,0), trans = )+
-  scale_fill_brewer(palette = "Greys")+
-  theme_minimal()+
-  theme(legend.position = "top", axis.text.x = element_text(angle = 45, hjust = 1), 
-        text = element_text(size = 20),
-        legend.text = element_text(face = "italic"))
-
-```
-
-## Diverisity of prey families found in gut content
-
-```{r}
-library(vegetarian)
-library(vegan)
-
-#Creating data martix
-
-fam_vegan = gc%>%
-  filter(Prey.Family != "Unidentified")%>%
-  group_by(Snake.Species, Prey.Family)%>%
-  summarise(n = n())%>%
-  spread(Prey.Family, n, fill = 0)%>%
-  column_to_rownames("Snake.Species")
-
-#Richness
-
-gc%>%
-  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
-         Prey.Family != "Unidentified")%>%
-  group_by(Snake.Species)%>%
-  summarise(Prey.Family.Richness = length(unique(Prey.Family)))
-
-#Alpha Diversity
-data.frame(
-  hs = d(fam_vegan[-1,], "alpha", boot = T),
-  hc = d(fam_vegan[-2,], "alpha", boot = T)
-)
-
-renyi(fam_vegan, hill = T, scales = c(0,1,2))
-
-library(hilldiv)
-
-# splitting data by gut samples
-
-fam_hilldiv <- gc%>%
-  filter(Prey.Family != "Unidentified", Prey.Family !="", Field.Code != "")%>%
-  group_by(Field.Code, Prey.Family)%>%
-  summarise(n = n())%>%
-  spread(Field.Code, n, fill = 0)%>%
-  ungroup()%>%
-  column_to_rownames("Prey.Family")
-
-fam_hilldiv <- as.data.frame(fam_hilldiv)  
-
-# sample ids and species
-
-gc_samples <- gc%>%
-  filter(Prey.Family != "Unidentified", Prey.Family !="", Field.Code != "")%>%
-  dplyr::select(Field.Code, Snake.Species)%>%
-  distinct()%>%
-  rename(Sample = Field.Code,
-         Species = Snake.Species)
-
-# testing difference between species
-
-#div_test(countable = tss(fam_hilldiv), hierarchy = gc_samples, qvalue = 1)
-
-```
-
-## Overlap in prey of _H. curtus_ and _H. schsitosus_
-
-```{r}
-#Beta diverisity
-gc%>%
-  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
-         Prey.Family != "Unidentified")%>%
-  group_by(Prey.Family)%>%
-  summarise(N_pred = length(unique(Snake.Species)))%>%
-  ungroup()%>%
-  summarise(Overlap = sum(N_pred>1))
-
-similarity(fam_vegan, q = 2, boot = T)
-
-
-library(vegan)
-
-fam_simboo <- gc%>%
-  filter(Prey.Family != "Unidentified", Prey.Family !="", Field.Code != "")%>%
-  group_by(Snake.Species, Field.Code, Prey.Family)%>%
-  summarise(n = n())%>%
-  spread(Prey.Family, n, fill = 0)%>%
-  ungroup()
-
-set.seed(2)
-
-permanova_sp <- adonis2(fam_simboo[,3:length(fam_simboo)] ~ fam_simboo$Snake.Species,
-                     data = fam_simboo[,1])
-
-broom::tidy(permanova_sp)
-```
-
 ## Prey preference
 
+We modified and used the the Index of relative importance according to Pinkas et al. 1971 to determine the difference in prey preference between _H. curtus_ and _H. schistosus_
+
 ```{r}
-#Percentage of tetrodontids
+
+# calulating index of relative importance (Pinkas et al. 1971)
+
 IRI <- gc%>%
   filter(Prey.Family != "")%>%
   filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus")%>%
@@ -252,35 +69,191 @@ IRI <- gc%>%
             n = n(), # number of individuals of prey family
             N = last(N))%>%
   group_by(Snake.Species, Prey.Family)%>%
+  # caluclating percentages
   summarise(per.F = f*100/Fr,
             per.W = w*100/W,
-            per.N = n*100/N, 
+            per.N = n*100/N,
+            # caluclating IRI
             IRI = (per.N + per.W)*per.F)%>%
-  group_by(Snake.Species)%>%
-  arrange(desc(IRI))%>%
+  arrange(Snake.Species, desc(IRI))%>%
   mutate(rank = 1:n())
 
+# clean table
+
 knitr::kable(IRI)
+
 ```
 
-```{r}
+```{r fig.height=6, fig.width=8}
+
+# plotting prey preference
+
 IRI%>%
   ggplot(aes(Prey.Family, IRI, fill = Snake.Species))+
   geom_col(col = "black", position = position_dodge(preserve = "single"))+
   scale_y_sqrt(name = "IRI (sq.rt.)")+
-  scale_fill_brewer(palette = "Greys")+
+  labs(x = "Prey Family")+
+  scale_fill_brewer(palette = "Greys", name = "Snake Species")+
   theme(axis.text.x = element_text(hjust = 1, angle = 60),
         legend.text = element_text(face = "italic"))
 
+# saving high res plot
+
+ggsave(last_plot(), filename = "./Figures and Tables/figure2.tiff", width = 8, height = 6, dpi = 300)
+
 ```
 
-## Selectivity of prey sizes
+_H. schistosus_ showed preference for the Tetraodontid fish, while _H. curtus_ did not exhibit any prey preference.
+
+## Range of prey found in _H. curtus_ and _H. shistosus_ gut
+
+We compared the dietary breadth between snakes species using the richness and diversity of prey families.
 
 ```{r}
-# summary
+
+# Creating data martix for prey community analysis analysis
+
+fam_vegan = gc%>%
+  filter(Prey.Family != "Unidentified")%>% # removing unidentified specimens
+  group_by(Snake.Species, Prey.Family)%>%
+  summarise(n = n())%>% # total number of specimens per family in each snake species
+  group_by(Snake.Species)%>%
+  mutate(t = sum(n))%>% # total number of specimens for each snake species
+  group_by(Snake.Species, Prey.Family)%>%
+  summarise(p = n/t)%>% # relative proportion
+  spread(Prey.Family, p, fill = 0)%>%
+  column_to_rownames("Snake.Species")
+
+```
+
+### Prey richness
+
+```{r}
+
 gc%>%
   filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
-         Condition < 2)%>%
+         Prey.Species != "Unidentified")%>%
+  group_by(Snake.Species)%>%
+  summarise(Prey.Species = length(unique(Prey.Species)),
+            Prey.Families = length(unique(Prey.Family)))
+
+```
+
+### Prey family diversity
+
+```{r}
+
+# loading libraries
+
+library(vegetarian) ## for community indices
+
+# calculating shanon diversity
+
+data.frame(
+  hs = d(fam_vegan[-1,], "alpha", boot = T), ## for Hydrophis schistosus
+  hc = d(fam_vegan[-2,], "alpha", boot = T) ## for Hydropis schistosus
+  )%>%
+  # creating a clean table
+  gather()%>%
+  mutate(Species = ifelse(substr(key, 1, 2) == "hs",  "Hydrophis schistosus",  "Hydrophis curtus"),
+         Metric = ifelse(substr(key, 4, 4) == "D", "Shanon Diversity", "Standard Error"))%>%
+  dplyr::select(Species, Metric, value)%>%
+  spread(Metric, value)
+
+```
+
+While _H. schistosus_ fed on greater number of prey families, _H. curtus_ showed greater evenness in prey preference.
+
+Statistical comparison is difficult as each individual snake fed on only one type of specimen at time.
+
+## Diet overlap between _H. curtus_ and _H. shistosus_
+
+Number of overlapping prey families:
+
+```{r}
+
+gc%>%
+  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
+         Prey.Family != "Unidentified")%>%
+  group_by(Prey.Family)%>%
+  summarise(N_pred = length(unique(Snake.Species)))%>%
+  ungroup()%>%
+  summarise(Overlap = sum(N_pred>1))%>%
+  as.numeric()
+
+```
+
+Shoener's (1971) resource overlap index (D):
+
+```{r}
+
+gc%>%
+  filter(Prey.Species != "Unidentified")%>%
+  group_by(Snake.Species, Prey.Family)%>%
+  summarise(n = n())%>% # number of speciemens per prey family in each snake species
+  group_by(Snake.Species)%>%
+  mutate(N = sum(n))%>% # total number of specimens collected from each snake species
+  group_by(Snake.Species, Prey.Family)%>%
+  summarise(p = n/N)%>% # relative proportion of each prey family
+  spread(Snake.Species, p, fill = 0)%>%
+  rename("HC" = 'Hydrophis curtus', "HS" = 'Hydrophis schistosus')%>%
+  mutate(P = abs(HC - HS))%>% # difference in relactive proportion prey items 
+  summarise(D = 1 - 0.5*sum(P))%>% # Schoener's resource overlap index
+  as.numeric()
+
+```
+
+Morista - Horn overlap:
+
+```{r}
+
+similarity(fam_vegan, q = 2, boot = T)%>%
+  as.data.frame()
+
+```
+
+There was limited overlap in prey between _H. schistosus_ and _H. curtus_
+
+## Testing segregation in prey between _H. curtus_ and _H. schistosus_
+
+```{r}
+
+# loading libraries
+
+library(vegan)
+
+# formating data for vegan
+
+fam_simboo <- gc%>%
+  filter(Prey.Family != "Unidentified", Prey.Family !="", Field.Code != "")%>%
+  group_by(Snake.Species, Field.Code, Prey.Family)%>%
+  summarise(n = n())%>%
+  spread(Prey.Family, n, fill = 0)%>%
+  ungroup()
+
+# PERMANOVA to compare composition
+
+set.seed(2)
+
+permanova_sp <- adonis2(fam_simboo[,3:length(fam_simboo)] ~ fam_simboo$Snake.Species,
+                     data = fam_simboo[,1])
+
+## clean table
+
+broom::tidy(permanova_sp)
+```
+
+Prey composition was significantly different between the two snake species.
+
+## Difference in size selectivity of prey between _H. curtus_ and _H. schistosus_
+
+```{r}
+
+# summary
+
+gc%>%
+  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
+         Condition < 3)%>% # removing very digested specimens 
   group_by(Snake.Species)%>%
   skimr::skim(Maximum.Body.Girth..cm.)%>%
   skimr::yank("numeric")%>%
@@ -291,15 +264,19 @@ gc%>%
 
 gc%>%
   filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
-         Condition < 3, !is.na(Maximum.Body.Girth..cm.))%>%
+         Condition < 3, # removing digested specimens 
+         !is.na(Maximum.Body.Girth..cm.))%>% # removing unrecorded data
   dplyr::select(Snake.Species, Maximum.Body.Girth..cm.)%>%
   droplevels()%>%
   nest()%>%
-  mutate(test = map(data, ~t.test(Maximum.Body.Girth..cm. ~ Snake.Species, data = .)),
+  mutate(test = map(data, ~t.test(Maximum.Body.Girth..cm. ~ Snake.Species, data = .)), # t test
          sumry = map(test, broom::tidy),
-         d = map(data, ~lsr::cohensD(Maximum.Body.Girth..cm. ~ Snake.Species, data = .)))%>%
+         d = map(data, ~lsr::cohensD(Maximum.Body.Girth..cm. ~ Snake.Species, data = .)))%>% # effect size
   dplyr::select(sumry, d)%>%
   unnest()%>%
-  dplyr::select(estimate:p.value, d)
+  dplyr::select(estimate1:p.value, d)%>%
+  rename(`Hydrophis curtus` = estimate1,
+         `Hydrophis schistosus` = estimate2)
 ```
 
+_H. schistosus_ fed on larger prey than _H. curtus_
