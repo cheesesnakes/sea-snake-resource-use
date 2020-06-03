@@ -1,6 +1,6 @@
 # Does isotopic niche of sea snakes change with local fishing intensity?
 
-As it is infeasible to to find sites with little to no fishing pressure on mainland India. The ultimate objective of this project remains unfulfilled it is nigh impossible to conduct a study with controls and test sites with varying levels of fishing pressure.
+It is infeasible to to find sites with little to no fishing pressure on mainland India. Hence, it is nigh impossible to conduct a study with controls and test sites with varying levels of fishing pressure.
 
 - How do you test the niche shift hypotheses with out spatial replicates?
   
@@ -9,55 +9,86 @@ As it is infeasible to to find sites with little to no fishing pressure on mainl
   + Is there a corellation between fishing intensity and isotopic ratios?
   + Do niche metrics (width, overlap) vary with fishing pressure (high, medium and low preiods during the year)?
   
-  What temporal resolution should be used for the analysis?
+- What temporal resolution should be used for the analysis?
   
   - Day, week, month or season. 
+
 - Which is appropriate and why?
   
   Depending on the tissue being analysed. Scales - month, Plasma - week
 
-- What are the existing data and sampling structures and what can be improved?
+## Determining cluster of fishing intensity off the coast of sindhudurg
 
-```{r}
-# determining clusters for fishing intensity
+We used hierarchical clustering based on fishing intensity of both gears, and the position of the cell in the grid to divided the grid into high and low fishing intensity zones. 
 
-fi_den <- read.csv("../data/cell_fish_snake.csv")
+```{r fig.height=4, fig.width=4}
 
-fi_den = fi_den%>%
+# importing gridded fishing intensity data - see section 5
+
+fi_den <- read.csv("./data/cell_fish_snake.csv")
+
+fi_den <- fi_den%>%
+  # adding cell id
   mutate(id = 1:nrow(fi_den))
+
+# clustering grid cells based on fishing intensity
+
+## selecting relevant variables
 
 fi = fi_den%>%
   dplyr::select(id, x, y, GillNet, Trawler)
 
+## creating distance matrix
+
 dist_fi <- dist(fi)
+
+## Hierarchical clustering
 
 clust_fi <- hclust(dist_fi)
 
-fi_class <- cutree(clust_fi, 3)
+## Assigning fishing intensity classes
+
+fi_class <- cutree(clust_fi, 4) ## cutting the tree 4 times
+
+## Naming clasess
 
 fi <- fi%>%
-  mutate(class = as.factor(ifelse(fi_class == 2, "High", "Low")))
+  mutate(class = as.factor(ifelse(fi_class == 3 | fi_class == 2 , "High", "Low")))
+
+## Plotting grid
 
 ggplot(fi, aes(x, y, fill = class))+
-  geom_tile()
+  geom_tile(col = "black")+
+  scale_fill_brewer(palette = "Set1", name = "Fishing intensity")+
+  labs(x = "Longitude", y = "Latitude")+
+  theme(text = element_text(size = 10))
 ```
 
+<span style = "color: red;"> **Clustering may need to be revised based on sample size** </span>
+
+## Geocoding stable isotope data
+
+<span style = "color: red;"> **Update geocoding code and rerun** </span>
+
 ```{r, eval=FALSE, echo=TRUE}
-#Stable isotope data
 
-sia = read.csv("../Data/Stable Isotope Data_CEAS_241119.csv")
+# importing stable isotope data
 
-#joining sia data to snake data
+sia = read.csv("./Data/Stable Isotope Data_CEAS_241119.csv")
+
+# joining sia data to snake data
 
 sia_snakes = sia%>%
   filter(Tissue.type != "Gut Content")%>%
   left_join(snakes, 'Field.Code')%>%
   mutate(Lab = "CEAS")%>%
-  rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
-  dplyr::select(Date, Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
-                Gear.Type, Fishing.Location, Depth.Caught..m.,
+  #rename(Delta.Carbon = d13C.vpdb. , Delta.Nitrogen = d15N.N2.air.)%>%
+  dplyr::select(Date, Field.Code, Species, Snout.to.Vent.cm., Sex, Gravid, Class,
+                Gear.Type, Fishing.Location, Depth.Caught.m.,
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
                 Tissue.type, Month, Year)
+
+## Assigning grid cells to snakes
 
 sia_li <- sia_fi%>%
   group_by(Field.Code, Species, Tissue.type, Delta.Carbon, Delta.Nitrogen)%>%
@@ -68,6 +99,8 @@ sia_li <- sia_fi%>%
   unnest()%>%
   inner_join(fi, by = c("x", "y"))
 
+## Saving data to save time
+
 write.csv(sia_li, "./Data/SIA_fishing intensity.csv")
 ```
 
@@ -75,35 +108,56 @@ write.csv(sia_li, "./Data/SIA_fishing intensity.csv")
 ## Sample size
 
 ```{r}
-sia_li <- read.csv("../Data/SIA_fishing intensity.csv")
+# importing geocoded stable isotope data
+
+sia_li <- read.csv("./Data/SIA_fishing intensity.csv")
+
+# adding fishing intensity class
 
 sia_li <- sia_li%>%
   inner_join(fi, c("x","y"))
 
-table(sia_li$Species, sia_li$Tissue.type)
+# summarising number of samples
+
+table(sia_li$Species, sia_li$Tissue.type, sia_li$class)%>%
+  as.data.frame()%>%
+  spread(Var3, Freq)%>%
+  rename(Species = Var1,
+         Tissue = Var2)%>%
+  arrange(Species, Tissue)
+
 ```
 
 
-## Variation Carbon isotope ratio with fishing intensity
+## Variation isotope ratio with fishing intensity
+
+Using only plasma values. 
 
 ```{r}
+# plotting
+
 sia_li%>%
   filter(Tissue.type == "Plasma")%>%
   gather(key = Isotope, c(Delta.Carbon, Delta.Nitrogen), value = ratio)%>%
   ggplot(aes(intensity, ratio))+
   geom_point(size = 3)+
   geom_smooth(method = lm)+
-  labs(x = "Fishing intensity")+
+  labs(x = "Fishing intensity", y = "Isotope ratio")+
   theme(legend.text = element_text(face = "italic"))+
   facet_wrap(~Isotope, scale = "free_y")
+
 ```
 
+Both $\delta^{15}N$ and $\delta^{13}C$ show strong negatice relationship with increasing fishing intensity.
+
+<span style = "color: red;"> **Update with new SI data** </span>
 
 ## Modeling isotope ratios with fishing intensity
 
-### Continous model
+Using only plasma values. 
 
 ```{r}
+
 sia_li%>%
   filter(Tissue.type == "Plasma")%>%
   gather(key = Isotope, c(Delta.Carbon, Delta.Nitrogen), value = ratio)%>%
@@ -111,30 +165,37 @@ sia_li%>%
   nest()%>%
   mutate(
     mod1 = map(data, ~lm(ratio ~ intensity, data = .)),
-    summ1 = map(mod1, tidy),
-    anova = map(mod1, car::Anova), 
+    summ1 = map(mod1, broom::tidy),
     r2 = map(mod1, broom::glance)
   )%>%
   dplyr::select(summ1, r2)%>%
   unnest()%>%
   dplyr::select(Species:p.value, adj.r.squared)
+
 ```
 
 Samples sizes for *H. curtus* are low, however, fishing intensity seems to have a significant __depletion effect__ on plasma isotope ratios in _H. schistosus_.
 
 ## Difference in niche width between sea snakes
 
+See section 4 for more details on analysis with SIBER.
+
 ```{r, results = FALSE}
+# Loading required libraries
+
 library(SIBER)
 
 #Creating siber data
+
 siber_fi = sia_li%>%
-  filter(Tissue.type == "Plasma")%>%
+  filter(Tissue.type == "Plasma")%>% # using plasma values for comparison
   dplyr::select(Delta.Carbon, Delta.Nitrogen, Species, class)%>%
+  # renaming baed on SIBER conventions
   rename(iso1 = Delta.Carbon,
          iso2 = Delta.Nitrogen,
-         group = class,
+         group = class, # setting fishing intesnity as group
          community = Species)%>%
+  # removing missing data
   filter(!is.na(group),
          !is.na(iso1),
          !is.na(iso2),
@@ -143,13 +204,15 @@ siber_fi = sia_li%>%
   dplyr::select(iso1, iso2, group, community)%>%
   droplevels()
 
+# Creating SIBER object fo MVN fitting
+
 siber.snakes.fi = createSiberObject(as.data.frame(siber_fi))
 ```
 
 ### Maximum likelihood estimate of SEA
 
 ``` {r}
-SEA.ML_snakes.fi <- groupMetricsML(siber.snakes.fi) #maximum likelihood estimates
+SEA.ML_snakes.fi <- groupMetricsML(siber.snakes.fi)
 
 data.frame(t(SEA.ML_snakes.fi))
 
@@ -160,6 +223,7 @@ As maximum likelihood can only porivde point estimates of SEA, a bayesian model 
 ### Bayesian estimate of SEA
 
 ```{r, results = FALSE}
+
 # options for running jags
 parms <- list()
 parms$n.iter <- 2 * 10^4   # number of iterations to run the model for
@@ -192,6 +256,7 @@ SEA.B_snakes.fi.df = data.frame(SEA.B_snakes.fi, check.names = F)%>%
 ```
 
 ```{r}
+
 #Summarising SEA estimates
 
 SEA.B_snakes.fi.df%>%
@@ -202,16 +267,20 @@ SEA.B_snakes.fi.df%>%
 
 ```
 
-### Testing difference in species niche area by tissue type
+### Testing difference in species niche area by fishing intensity
 
 ```{r}
+
 SEA.B_snakes.fi.df%>%
   spread(key = FI.Class, value = SEA.B)%>%
   group_by(Species)%>%
-  summarise(p = sum(`High` > `Low`)/n())
+  summarise(`P(High > Low)` = sum(`High` > `Low`)/n())
+
 ```
 
-```{r}
+## Visualising difference in niche width across gradiet of fishing intensity
+
+```{r fig.height=6}
 SEA.B_snakes.fi.df%>%
   ggplot(aes(Species, SEA.B, fill = FI.Class))+
   geom_boxplot(alpha = 0.3, width = 0.25)+
@@ -219,6 +288,6 @@ SEA.B_snakes.fi.df%>%
   scale_fill_discrete(name = "Fishing Intensity")+
   theme(axis.text.x = element_text(face = "italic"))
 
-ggsave(last_plot(), filename = "../Figures and Tables/fig6.png", height = 4.5, width = 8, device = "png")
+ggsave(last_plot(), filename = "./Figures and Tables/figure6.png", height = 6, width = 8, device = "png")
 ```
 
