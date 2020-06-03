@@ -103,6 +103,8 @@ ggsave(last_plot(), filename = "./Figures and Tables/figure2.tiff", width = 8, h
 
 ```
 
+**Figure 2**: Index of relative importance (IRI, square root transformed) (Pinkas et al., 1970) of prey families in sea snake diet.
+
 _H. schistosus_ showed preference for the Tetraodontid fish, while _H. curtus_ did not exhibit any prey preference.
 
 ## Range of prey found in _H. curtus_ and _H. shistosus_ gut

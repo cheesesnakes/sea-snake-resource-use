@@ -296,6 +296,8 @@ siber_snakes%>%
 ggsave(last_plot(), filename = "./Figures and Tables/figure3.tiff", height = 6, width = 8)
 ```
 
+**Figure 3**: Bayesian ellipses in isotopic space describing difference in niche width and resource use between H. curtus and H. schistosus.
+
 As seen in the SEA estimation, low sample size for *H. curtus* causes greater uncertainty in the estimation of standar ellipses even with bayesian inference. Both carbon and nitrogen isotpes seem to be enriched in scales when compared to plasma. Degree of overlap appears to be low for both tissues.
 
 - Samples sizes for *H. curtus* in both tissues need to be increased despite using bayesian methods

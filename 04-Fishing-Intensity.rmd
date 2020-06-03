@@ -1,25 +1,16 @@
-
-```{r}
-# importing libraries
-
-library(tidyverse)
-library(lubridate)
-library(viridis)
-```
-
-  
 # Varition in fishing intensity along the sindhudurg coast
 
 ```{r}
-#importing effort data
 
-effort = read.csv("../Data/Fishing-Effort_111219.csv")%>%
+# importing effort data
+
+effort = read.csv("./Data/Fishing-Effort_111219.csv")%>%
   group_by(Date, Gear.Type)%>%
-  distinct(Boat.name, .keep_all = T)%>%# fixing repetitions in effort data
+  distinct(Boat.name, .keep_all = T)%>% # fixing repetitions in effort data
   mutate(Month = factor(months(dmy(Date)), 
                         levels = month.name),
          Year = year(dmy(Date)))%>%
-  filter(Gear.Type == "Trawler" | Gear.Type == "GillNet")# removing beach seines and purse seines
+  filter(Gear.Type == "Trawler" | Gear.Type == "GillNet") # removing beach seines and purse seines
 
 ```
 
@@ -38,67 +29,93 @@ dep_int = effort%>%
   dplyr::select(Date, Gear.Type, Fishing.Location, Boat.name,
                 No..of.Hauls, Average.Haul.Time..Hours., No..of.Days.fishing, Depth..wav.)%>%
   group_by(Gear.Type)%>%
-  mutate(n.days = ifelse(is.na(No..of.Days.fishing), #filling in missing data with means
+  # interpolating missing data with medians
+  mutate(n.days = ifelse(is.na(No..of.Days.fishing),
                          median(No..of.Days.fishing, na.rm = T), No..of.Days.fishing),
          n.hauls = ifelse(is.na(No..of.Hauls), 
-                          mean(No..of.Hauls, na.rm = T), No..of.Hauls),
+                          median(No..of.Hauls, na.rm = T), No..of.Hauls),
          haul.time = ifelse(is.na(Average.Haul.Time..Hours.), 
-                            mean(Average.Haul.Time..Hours., na.rm = T), Average.Haul.Time..Hours.))%>%
+                            median(Average.Haul.Time..Hours., na.rm = T), Average.Haul.Time..Hours.))%>%
   ungroup()%>%
-  mutate(effort = 
-           (n.days)*(n.hauls)*(haul.time),
-         Depth.m = Depth..wav.*1.87)%>%
-  dplyr::select(Date, Boat.name, Gear.Type, Fishing.Location, Depth.m, effort)%>%
-  drop_na()
+  # calculating fihsing effort per trip
+  mutate(effort = (n.days)*(n.hauls)*(haul.time),
+         Depth.m = Depth..wav.*1.87)%>% # converting depth to meters
+  dplyr::select(Date, Boat.name, Gear.Type, Fishing.Location, Depth.m, effort)%>% # selecting relevant variables
+  drop_na() # remving missing values
 
 ```
 
-```{r}
-dep_int = read.csv("../Data/Fishing intensity_dep.csv")
+## Geocoding fishing trips
 
-knitr::kable(table(dep_int$Gear.Type))#sample size
+<span style = "color: red;"> **Add geocoding script** </span>
+
+## No. of trips sampled
+
+```{r}
+
+# saved geocoded fishing intensity data
+
+dep_int = read.csv("./Data/Fishing intensity_dep.csv")
+
+## Sample size
+
+knitr::kable(table(dep_int$Gear.Type))
+
+```
+
+
+## Summarising fishing effort per trip
+
+```{r}
 
 # effort per boat
 
 dep_int%>%
   group_by(Gear.Type)%>%
   skimr::skim(effort)%>%
-  skimr::yank("numeric")
+  skimr::yank("numeric")%>%
+  dplyr::select(-hist)
 
-# testing difference in effort by gears
+```
+
+## Testing difference in effort by gears
+
+```{r}
+
+# T - test
 
 broom::tidy(t.test(effort ~ Gear.Type, data = dep_int))%>%
-  dplyr::select(estimate:p.value)
+  dplyr::select(estimate:p.value)%>%
+  # Effect size
+  mutate(d = lsr::cohensD(effort ~ Gear.Type, data = dep_int))%>%
+  dplyr::select(-estimate)%>%
+  rename(`Gill net` = estimate1,
+         Trawler = estimate2)
 
-lsr::cohensD(effort ~ Gear.Type, data = dep_int) # effect size
 ```
+
+Trawlers had much higher fishing efforts than gillnets off the coast of Sindhudurg from 2018 - 2019.
 
 ## Mapping fishing intensity
 
-How do we use location and depth data gathered from fisher surveys to map fishing intensity?
-  
-- Nearest landmarks are geocoded from google maps API 
-- Latitude is extracted from landmark geocode
-- Match landmark latitude and depth from survey to GEBCO data
-- Extract final longitude from GEBCO data
-
 ```{r fp}
+# required libraries
+
 library(sp)
 library(rgdal)
 library(raster)
 library(ggmap)
 
-dep_int = read.csv("../Data/Fishing intensity_dep.csv")
+# Sampling grid as raster
 
-ext <- raster("../Data/sampling_extent.tif")
+ext <- raster("./Data/sampling_extent.tif")
 
-#importing functions
+# importing functions for standardising effort
 
-source("../Functions/intensity extract.R")
-source("../Functions/raster to df.R")
-source("../Functions/intensity_plot.R")
+source("./Functions/intensity extract.R")
+source("./Functions/raster to df.R")
 
-#Calculating fishing intensity
+# Calculating fishing intensity
 
 fi <- dep_int%>%
   group_by(Gear.Type)%>%
@@ -114,14 +131,23 @@ fi <- dep_int%>%
 base <- get_googlemap(center = c(mean(dep_int$lon),mean(dep_int$lat)), 
                       zoom = 10, scale = 2, maptype = "terrain")##Getting basemap
 
-#importing bathymetric data downloaded from GEBCO database
+## importing bathymetric data downloaded from GEBCO database
+
 library(marmap)
 
-depth <- readGEBCO.bathy("../Data/gebco_2019_n16.6_s15.6_w73.1_e73.9.nc")
+depth <- readGEBCO.bathy("./Data/gebco_2020_n16.6_s15.6_w72.9_e73.9.nc")
+
+## converting depth data to usable data frame
 
 depth = fortify.bathy(depth)%>%
   dplyr::rename(lon = x, lat = y, depth = z)%>%
   filter(depth < 1)
+
+## loading funtion for plotting fishing intensity
+
+source("./Functions/intensity_plot.R")
+
+## creating plot
 
 boat_plot <- dep_int%>%
   group_by(Gear.Type)%>%
@@ -131,24 +157,38 @@ boat_plot <- dep_int%>%
          plot = map2(mdf, Gear.Type, ~int.plot(mdf = ., Gear.Type, name = "Fishing intensity")))%>%
   gridExtra::grid.arrange(grobs = .$plot, ncol = 2)
 
-ggsave(boat_plot, filename = "../Figures and Tables/figure4.tiff", width = 8, height = 4.5, dpi = 300)
+## saving high res figure for publication
+ 
+ggsave(boat_plot, filename = "./Figures and Tables/figure4.tiff", width = 8, height = 4.5, dpi = 300)
 ```
 
 
+**Figure 4**: Distribution of fishing intensity of trawlers in gillnets operating from Malvan, Maharashtra. Black lines indicate 10m depth contours
+
 *Are points accurately depicted?*
   
-  Survey based map of fishing intensity needs to be verified with onboard observations and/or remote GPS data.
+Survey based map of fishing intensity may need to be verified with onboard observations and/or remote GPS data. Our field work for the same was cut short given the Coronavirus pandemic in 2020.
+
+<span style = "color: red;"> **Link to prelimary results for fisheries mapping** </span>
+
+
+## Spatial coverage of trawlers and gillnets along the Sindhudurg coast
 
 ```{r}
-#Spatial extent of gear types
+
 
 dep_int%>%
   group_by(Gear.Type)%>%
   nest()%>%
+  ## Caluclating total effort in each grid cell
   mutate(m = map(data, ~map.extract(df = ., var = "effort", func = 'sum')),
+         ## Converting raster to data frame
          mdf = map(m, map.df))%>%
   dplyr::select(mdf)%>%
-  summarise(ext = map(mdf, ~sum(.$layer>0)))%>%
+  ## Caluclating spatial extent of fisheries as number of raster cells * 10 sq. km.
+  summarise(`Extent (sq. km.)` = map(mdf, ~sum(.$layer>0)*10))%>%
   unnest()
+
 ```
 
+As expexted, trawlers have a larger spatial foot print than gillnets.

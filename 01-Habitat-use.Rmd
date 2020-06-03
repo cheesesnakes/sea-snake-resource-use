@@ -176,7 +176,7 @@ ggsave(snake_plot, filename = "./Figures and Tables/figure1.tiff", width = 8, he
 
 ```
 
-Figure 1: Distribution and depth use of sea snake in the near shore waters of Sindhudurg, Maharashtra based on fisheries dependent data.
+**Figure 1**: Distribution and depth use of sea snake in the near shore waters of Sindhudurg, Maharashtra based on fisheries dependent data.
 
 ## Summarising depth use by species
 
