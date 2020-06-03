@@ -24,7 +24,7 @@
 <meta name="author" content="Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker" />
 
 
-<meta name="date" content="2020-05-28" />
+<meta name="date" content="2020-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,600 @@
 
 
 
+<script>
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+        
+        <script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+        
+        <script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
+  rCodeBlocks.each(function() {
+
+    // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Code');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide');
+    });
+  });
+
+}
+</script>
+        
+        <script>
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.3.7
+ * http://getbootstrap.com/javascript/#dropdowns
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle="dropdown"]'
+  var Dropdown = function (element) {
+    $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.VERSION = '3.3.7'
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+  function clearMenus(e) {
+    if (e && e.which === 3) return
+    $(backdrop).remove()
+    $(toggle).each(function () {
+      var $this         = $(this)
+      var $parent       = getParent($this)
+      var relatedTarget = { relatedTarget: this }
+
+      if (!$parent.hasClass('open')) return
+
+      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this.attr('aria-expanded', 'false')
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+    })
+  }
+
+  Dropdown.prototype.toggle = function (e) {
+    var $this = $(this)
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    clearMenus()
+
+    if (!isActive) {
+      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
+        // if mobile we use a backdrop because click events don't delegate
+        $(document.createElement('div'))
+          .addClass('dropdown-backdrop')
+          .insertAfter($(this))
+          .on('click', clearMenus)
+      }
+
+      var relatedTarget = { relatedTarget: this }
+      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this
+        .trigger('focus')
+        .attr('aria-expanded', 'true')
+
+      $parent
+        .toggleClass('open')
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
+    }
+
+    return false
+  }
+
+  Dropdown.prototype.keydown = function (e) {
+    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
+
+    var $this = $(this)
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    if (!isActive && e.which != 27 || isActive && e.which == 27) {
+      if (e.which == 27) $parent.find(toggle).trigger('focus')
+      return $this.trigger('click')
+    }
+
+    var desc = ' li:not(.disabled):visible a'
+    var $items = $parent.find('.dropdown-menu' + desc)
+
+    if (!$items.length) return
+
+    var index = $items.index(e.target)
+
+    if (e.which == 38 && index > 0)                 index--         // up
+    if (e.which == 40 && index < $items.length - 1) index++         // down
+    if (!~index)                                    index = 0
+
+    $items.eq(index).trigger('focus')
+  }
+
+
+  // DROPDOWN PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.dropdown')
+
+      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown             = Plugin
+  $.fn.dropdown.Constructor = Dropdown
+
+
+  // DROPDOWN NO CONFLICT
+  // ====================
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  // APPLY TO STANDARD DROPDOWN ELEMENTS
+  // ===================================
+
+  $(document)
+    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
+    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
+
+}(jQuery);
+</script>
+        
+        <style type="text/css">
+        
+        .code-folding-btn { margin-bottom: 4px; }
+        .row { display: flex; }
+        .collapse { display: none; }
+        .in { display:block }
+        .pull-right > 
+        .dropdown-menu {
+          right: 0; 
+          left: auto;
+        }
+        .open > 
+        .dropdown-menu {display: block;}
+        .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 160px;
+        padding: 5px 0;
+        margin: 2px 0 0;
+        font-size: 14px;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #ccc; 
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
+        
+        </style>
+        
+        <script>
+        
+        $(document).ready(function () {
+        window.initializeCodeFolding("show" === "hide");
+        });
+        
+        </script>
+
+        
+        <script>
+        
+        document.write('
+        
+        <div class="btn-group pull-right" style="position: absolute; top: 20%; right: 2%; z-index: 200">
+        
+        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast="">
+        
+        <span>
+        
+        Code
+        
+        </span> 
+        
+        <span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;">
+        
+        <li>
+        
+        <a id="rmd-show-all-code" href="#">
+        
+        Show All Code
+        
+        </a>
+        
+        </li>
+        
+        <li>
+        
+        <a id="rmd-hide-all-code" href="#">
+        
+        Hide All Code
+        
+        </a>
+        
+        </li>
+        
+        </ul>
+        
+        </div>')
+        
+        </script>
 
 
 <style type="text/css">
@@ -128,26 +722,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><i class="fa fa-check"></i><b>2</b> DIfference in distribution and habitat use between <em>H. curtus</em> and <em>H. shcistosus</em></a><ul>
-<li class="chapter" data-level="2.1" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mapping-sea-snake-distribution-with-fisheries-survey-data"><i class="fa fa-check"></i><b>2.1</b> Mapping sea snake distribution with fisheries survey data</a></li>
-<li class="chapter" data-level="2.2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#summarising-depth-use-by-species"><i class="fa fa-check"></i><b>2.2</b> Summarising depth use by species</a></li>
-<li class="chapter" data-level="2.3" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#spatial-segregation-by-species"><i class="fa fa-check"></i><b>2.3</b> Spatial segregation by species</a></li>
-<li class="chapter" data-level="2.4" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#modelling-depth-use-by-species"><i class="fa fa-check"></i><b>2.4</b> Modelling depth use by species</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#citation"><i class="fa fa-check"></i><b>1.1</b> Citation</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><i class="fa fa-check"></i><b>2</b> Difference in distribution and habitat use between <em>H. curtus</em> and <em>H. shcistosus</em></a><ul>
+<li class="chapter" data-level="2.1" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#calculating-abundance-of-sea-snakes-per-fishing-trip"><i class="fa fa-check"></i><b>2.1</b> Calculating abundance of sea snakes per fishing trip</a></li>
+<li class="chapter" data-level="2.2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#sample-size"><i class="fa fa-check"></i><b>2.2</b> Sample size</a></li>
+<li class="chapter" data-level="2.3" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#geocoding-fishing-trips"><i class="fa fa-check"></i><b>2.3</b> Geocoding fishing trips</a></li>
+<li class="chapter" data-level="2.4" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mean-cpue-by-species"><i class="fa fa-check"></i><b>2.4</b> Mean CPUE by species</a></li>
+<li class="chapter" data-level="2.5" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#area-used-by-species"><i class="fa fa-check"></i><b>2.5</b> Area used by species</a></li>
+<li class="chapter" data-level="2.6" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mapping-sea-snake-distributions"><i class="fa fa-check"></i><b>2.6</b> Mapping sea snake distributions</a></li>
+<li class="chapter" data-level="2.7" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#summarising-depth-use-by-species"><i class="fa fa-check"></i><b>2.7</b> Summarising depth use by species</a></li>
+<li class="chapter" data-level="2.8" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#spatial-segregation-by-species"><i class="fa fa-check"></i><b>2.8</b> Spatial segregation by species</a></li>
+<li class="chapter" data-level="2.9" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#modelling-depth-use-by-species"><i class="fa fa-check"></i><b>2.9</b> Modelling depth use by species</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><i class="fa fa-check"></i><b>3</b> DIfference in diet between <em>H. curtus</em> and <em>H. schsitosus</em></a><ul>
 <li class="chapter" data-level="3.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#no.-of-samples-collected-by-sea-snake-species"><i class="fa fa-check"></i><b>3.1</b> No. of samples collected by sea snake species</a></li>
 <li class="chapter" data-level="3.2" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#proportion-of-unidentified-specimens"><i class="fa fa-check"></i><b>3.2</b> Proportion of unidentified specimens</a></li>
-<li class="chapter" data-level="3.3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diverisity-of-prey-families-found-in-gut-content"><i class="fa fa-check"></i><b>3.3</b> Diverisity of prey families found in gut content</a></li>
-<li class="chapter" data-level="3.4" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#list-of-sea-snake-prey-species"><i class="fa fa-check"></i><b>3.4</b> List of sea snake prey species</a></li>
-<li class="chapter" data-level="3.5" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#relative-abundance-of-prey-families-in-sea-snake-gut-content"><i class="fa fa-check"></i><b>3.5</b> Relative abundance of prey families in sea snake gut content</a></li>
-<li class="chapter" data-level="3.6" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diverisity-of-prey-families-found-in-gut-content-1"><i class="fa fa-check"></i><b>3.6</b> Diverisity of prey families found in gut content</a></li>
-<li class="chapter" data-level="3.7" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#overlap-in-prey-of-h.-curtus-and-h.-schsitosus"><i class="fa fa-check"></i><b>3.7</b> Overlap in prey of <em>H. curtus</em> and <em>H. schsitosus</em></a></li>
-<li class="chapter" data-level="3.8" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-preference"><i class="fa fa-check"></i><b>3.8</b> Prey preference</a></li>
-<li class="chapter" data-level="3.9" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#selectivity-of-prey-sizes"><i class="fa fa-check"></i><b>3.9</b> Selectivity of prey sizes</a></li>
+<li class="chapter" data-level="3.3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-preference"><i class="fa fa-check"></i><b>3.3</b> Prey preference</a></li>
+<li class="chapter" data-level="3.4" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#range-of-prey-found-in-h.-curtus-and-h.-shistosus-gut"><i class="fa fa-check"></i><b>3.4</b> Range of prey found in <em>H. curtus</em> and <em>H. shistosus</em> gut</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-richness"><i class="fa fa-check"></i><b>3.4.1</b> Prey richness</a></li>
+<li class="chapter" data-level="3.4.2" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-family-diversity"><i class="fa fa-check"></i><b>3.4.2</b> Prey family diversity</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>4</b> Difference in resouce use betweek <em>H. curtus</em> and <em>H. schistosus</em>?</a><ul>
-<li class="chapter" data-level="4.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#number-of-samples-analysed"><i class="fa fa-check"></i><b>4.1</b> Number of samples analysed</a></li>
+<li class="chapter" data-level="3.5" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diet-overlap-between-h.-curtus-and-h.-shistosus"><i class="fa fa-check"></i><b>3.5</b> Diet overlap between <em>H. curtus</em> and <em>H. shistosus</em></a><ul>
+<li class="chapter" data-level="3.5.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#testing-segregation-in-prey-between-h.-curtus-and-h.-schistosus"><i class="fa fa-check"></i><b>3.5.1</b> Testing segregation in prey between <em>H. curtus</em> and <em>H. schistosus</em></a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#difference-in-size-selectivity-of-prey-between-h.-curtus-and-h.-schistosus"><i class="fa fa-check"></i><b>3.6</b> Difference in size selectivity of prey between <em>H. curtus</em> and <em>H. schistosus</em></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>4</b> Difference in resouce use betweek <em>H. curtus</em> and <em>H. schistosus</em></a><ul>
+<li class="chapter" data-level="4.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#number-of-tissue-samples-analysed"><i class="fa fa-check"></i><b>4.1</b> Number of tissue samples analysed</a></li>
 <li class="chapter" data-level="4.2" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#summary-statistics-on-carbon-and-nitrogen-stable-isotopes"><i class="fa fa-check"></i><b>4.2</b> Summary statistics on Carbon and Nitrogen stable isotopes</a></li>
 <li class="chapter" data-level="4.3" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#difference-in-niche-width-between-sea-snakes"><i class="fa fa-check"></i><b>4.3</b> Difference in niche width between sea snakes</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#maximum-likelihood-estimate-of-sea"><i class="fa fa-check"></i><b>4.3.1</b> Maximum likelihood estimate of SEA</a></li>
@@ -156,33 +759,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#visualising-posterior-ellipses-to-compare-species-isotopic-niche"><i class="fa fa-check"></i><b>4.4</b> Visualising posterior ellipses to compare species isotopic niche</a></li>
 <li class="chapter" data-level="4.5" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#relative-overlap-in-bayesian-standard-ellipses"><i class="fa fa-check"></i><b>4.5</b> Relative overlap in bayesian standard ellipses</a></li>
+<li class="chapter" data-level="4.6" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#references"><i class="fa fa-check"></i><b>4.6</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><i class="fa fa-check"></i><b>5</b> Varition in fishing intensity along the sindhudurg coast</a><ul>
 <li class="chapter" data-level="5.1" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#calculating-effort-with-depth"><i class="fa fa-check"></i><b>5.1</b> Calculating effort with depth</a></li>
-<li class="chapter" data-level="5.2" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#mapping-fishing-intensity"><i class="fa fa-check"></i><b>5.2</b> Mapping fishing intensity</a></li>
+<li class="chapter" data-level="5.2" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#geocoding-fishing-trips-1"><i class="fa fa-check"></i><b>5.2</b> Geocoding fishing trips</a></li>
+<li class="chapter" data-level="5.3" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#no.-of-trips-sampled"><i class="fa fa-check"></i><b>5.3</b> No. of trips sampled</a></li>
+<li class="chapter" data-level="5.4" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#summarising-fishing-effort-per-trip"><i class="fa fa-check"></i><b>5.4</b> Summarising fishing effort per trip</a></li>
+<li class="chapter" data-level="5.5" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#testing-difference-in-effort-by-gears"><i class="fa fa-check"></i><b>5.5</b> Testing difference in effort by gears</a></li>
+<li class="chapter" data-level="5.6" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#mapping-fishing-intensity"><i class="fa fa-check"></i><b>5.6</b> Mapping fishing intensity</a></li>
+<li class="chapter" data-level="5.7" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#spatial-coverage-of-trawlers-and-gillnets-along-the-sindhudurg-coast"><i class="fa fa-check"></i><b>5.7</b> Spatial coverage of trawlers and gillnets along the Sindhudurg coast</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>6</b> Does fishing intensity affect the distribution of <em>H. curtus</em> and <em>H. schistosus</em>?</a><ul>
-<li class="chapter" data-level="6.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#spatial-overlap-between-fisheries-and-sea-snakes"><i class="fa fa-check"></i><b>6.1</b> Spatial overlap between fisheries and sea snakes</a></li>
-<li class="chapter" data-level="6.2" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#variation-in-relative-proportion-of-hc-with-fishing-intensity"><i class="fa fa-check"></i><b>6.2</b> Variation in relative proportion of HC with fishing intensity</a></li>
+<li class="chapter" data-level="6.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#spatial-overlap-between-fisheries-and-sea-snakes"><i class="fa fa-check"></i><b>6.1</b> Spatial overlap between fisheries and sea snakes</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#testing-spatial-overlap-between-sea-snakes-and-fisheries"><i class="fa fa-check"></i><b>6.1.1</b> Testing spatial overlap between sea snakes and fisheries</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html"><i class="fa fa-check"></i><b>7</b> Overlap between fisheries catch and sea snake diet</a><ul>
-<li class="chapter" data-level="7.1" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sampling-adequacy"><i class="fa fa-check"></i><b>7.1</b> Sampling Adequacy</a></li>
-<li class="chapter" data-level="7.2" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#catch-weight"><i class="fa fa-check"></i><b>7.2</b> Catch weight</a></li>
-<li class="chapter" data-level="7.3" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#diverisity-of-prey-families-found-in-fisheries-catch"><i class="fa fa-check"></i><b>7.3</b> Diverisity of prey families found in fisheries catch</a></li>
+<li class="chapter" data-level="7.1" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sampling-adequacy-for-fisherie-catch-data"><i class="fa fa-check"></i><b>7.1</b> Sampling Adequacy for fisherie catch data</a></li>
+<li class="chapter" data-level="7.2" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#difference-in-catch-landed-per-trip-by-gear"><i class="fa fa-check"></i><b>7.2</b> Difference in catch landed per trip by gear</a></li>
+<li class="chapter" data-level="7.3" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#richness-of-fish-families-found-in-fisheries-catch"><i class="fa fa-check"></i><b>7.3</b> Richness of fish families found in fisheries catch</a></li>
 <li class="chapter" data-level="7.4" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#no.-of-sea-snake-prey-families-found-in-fish-catch-and-overlap"><i class="fa fa-check"></i><b>7.4</b> No. of Sea snake prey families found in fish catch and overlap</a></li>
-<li class="chapter" data-level="7.5" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sea-snake-prey-species-in-fisheries-catch"><i class="fa fa-check"></i><b>7.5</b> Sea snake prey species in fisheries catch</a></li>
+<li class="chapter" data-level="7.5" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#relative-proportion-of-sea-snake-prey-in-fisheries-catch"><i class="fa fa-check"></i><b>7.5</b> Relative proportion of sea snake prey in fisheries catch</a></li>
+<li class="chapter" data-level="7.6" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#is-the-proportion-of-h.-curtus-prey-greater-than-that-of-h.-schistosus-in-catch"><i class="fa fa-check"></i><b>7.6</b> Is the proportion of <em>H. curtus</em> prey greater than that of <em>H. schistosus</em> in catch?</a></li>
+<li class="chapter" data-level="7.7" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#do-trawlers-have-a-greater-trophic-overlap-with-sea-snakes-than-gillnets"><i class="fa fa-check"></i><b>7.7</b> Do trawlers have a greater trophic overlap with sea snakes than gillnets?</a></li>
+<li class="chapter" data-level="7.8" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sea-snake-prey-species-in-fisheries-catch"><i class="fa fa-check"></i><b>7.8</b> Sea snake prey species in fisheries catch</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><i class="fa fa-check"></i><b>8</b> Does isotopic niche of sea snakes change with local fishing intensity?</a><ul>
-<li class="chapter" data-level="8.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#sample-size"><i class="fa fa-check"></i><b>8.1</b> Sample size</a></li>
-<li class="chapter" data-level="8.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#variation-carbon-isotope-ratio-with-fishing-intensity"><i class="fa fa-check"></i><b>8.2</b> Variation Carbon isotope ratio with fishing intensity</a></li>
-<li class="chapter" data-level="8.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#modeling-isotope-ratios-with-fishing-intensity"><i class="fa fa-check"></i><b>8.3</b> Modeling isotope ratios with fishing intensity</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#continous-model"><i class="fa fa-check"></i><b>8.3.1</b> Continous model</a></li>
+<li class="chapter" data-level="8.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#determining-cluster-of-fishing-intensity-off-the-coast-of-sindhudurg"><i class="fa fa-check"></i><b>8.1</b> Determining cluster of fishing intensity off the coast of sindhudurg</a></li>
+<li class="chapter" data-level="8.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#geocoding-stable-isotope-data"><i class="fa fa-check"></i><b>8.2</b> Geocoding stable isotope data</a></li>
+<li class="chapter" data-level="8.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#sample-size-1"><i class="fa fa-check"></i><b>8.3</b> Sample size</a></li>
+<li class="chapter" data-level="8.4" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#variation-isotope-ratio-with-fishing-intensity"><i class="fa fa-check"></i><b>8.4</b> Variation isotope ratio with fishing intensity</a></li>
+<li class="chapter" data-level="8.5" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#modeling-isotope-ratios-with-fishing-intensity"><i class="fa fa-check"></i><b>8.5</b> Modeling isotope ratios with fishing intensity</a></li>
+<li class="chapter" data-level="8.6" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#difference-in-niche-width-between-sea-snakes-1"><i class="fa fa-check"></i><b>8.6</b> Difference in niche width between sea snakes</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#maximum-likelihood-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.6.1</b> Maximum likelihood estimate of SEA</a></li>
+<li class="chapter" data-level="8.6.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#bayesian-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.6.2</b> Bayesian estimate of SEA</a></li>
+<li class="chapter" data-level="8.6.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#testing-difference-in-species-niche-area-by-fishing-intensity"><i class="fa fa-check"></i><b>8.6.3</b> Testing difference in species niche area by fishing intensity</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#difference-in-niche-width-between-sea-snakes-1"><i class="fa fa-check"></i><b>8.4</b> Difference in niche width between sea snakes</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#maximum-likelihood-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.4.1</b> Maximum likelihood estimate of SEA</a></li>
-<li class="chapter" data-level="8.4.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#bayesian-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.4.2</b> Bayesian estimate of SEA</a></li>
-<li class="chapter" data-level="8.4.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#testing-difference-in-species-niche-area-by-tissue-type-1"><i class="fa fa-check"></i><b>8.4.3</b> Testing difference in species niche area by tissue type</a></li>
-</ul></li>
+<li class="chapter" data-level="8.7" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#visualising-difference-in-niche-width-across-gradiet-of-fishing-intensity"><i class="fa fa-check"></i><b>8.7</b> Visualising difference in niche width across gradiet of fishing intensity</a></li>
 </ul></li>
 </ul>
 
@@ -203,203 +817,404 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity" class="section level1">
 <h1><span class="header-section-number">8</span> Does isotopic niche of sea snakes change with local fishing intensity?</h1>
-<p>As it is infeasible to to find sites with little to no fishing pressure on mainland India. The ultimate objective of this project remains unfulfilled it is nigh impossible to conduct a study with controls and test sites with varying levels of fishing pressure.</p>
+<p>It is infeasible to to find sites with little to no fishing pressure on mainland India. Hence, it is nigh impossible to conduct a study with controls and test sites with varying levels of fishing pressure.</p>
 <ul>
 <li><p>How do you test the niche shift hypotheses with out spatial replicates?</p>
 <p>While the control - test study design failed, fishing effort data was collected from multiple vessels (Gillnet and Trawlers) landing at the Malvan harbour over the period of 1.5 years along side diet, abundance (snakes and prey), and isotopic data. So we ask the following questions:</p>
 <ul>
 <li>Is there a corellation between fishing intensity and isotopic ratios?</li>
 <li>Do niche metrics (width, overlap) vary with fishing pressure (high, medium and low preiods during the year)?</li>
-</ul>
-<p>What temporal resolution should be used for the analysis?</p>
+</ul></li>
+<li><p>What temporal resolution should be used for the analysis?</p>
 <ul>
 <li>Day, week, month or season.</li>
 </ul></li>
 <li><p>Which is appropriate and why?</p>
 <p>Depending on the tissue being analysed. Scales - month, Plasma - week</p></li>
-<li><p>What are the existing data and sampling structures and what can be improved?</p></li>
 </ul>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1"><span class="co"># determining clusters for fishing intensity</span></a>
-<a class="sourceLine" id="cb275-2" title="2"></a>
-<a class="sourceLine" id="cb275-3" title="3">fi_den &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;../data/cell_fish_snake.csv&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in file(file, &quot;rt&quot;): cannot open the connection</code></pre>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" title="1">fi_den =<span class="st"> </span>fi_den<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb277-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(fi_den))</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;fi_den&#39; not found</code></pre>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" title="1">fi =<span class="st"> </span>fi_den<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb279-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(id, x, y, GillNet, Trawler)</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;fi_den&#39; not found</code></pre>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" title="1">dist_fi &lt;-<span class="st"> </span><span class="kw">dist</span>(fi)</a></code></pre></div>
-<pre><code>## Error in as.matrix(x): object &#39;fi&#39; not found</code></pre>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" title="1">clust_fi &lt;-<span class="st"> </span><span class="kw">hclust</span>(dist_fi)</a></code></pre></div>
-<pre><code>## Error in hclust(dist_fi): object &#39;dist_fi&#39; not found</code></pre>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" title="1">fi_class &lt;-<span class="st"> </span><span class="kw">cutree</span>(clust_fi, <span class="dv">3</span>)</a></code></pre></div>
-<pre><code>## Error in nrow(tree$merge): object &#39;clust_fi&#39; not found</code></pre>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" title="1">fi &lt;-<span class="st"> </span>fi<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb287-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">class =</span> <span class="kw">as.factor</span>(<span class="kw">ifelse</span>(fi_class <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;High&quot;</span>, <span class="st">&quot;Low&quot;</span>)))</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;fi&#39; not found</code></pre>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" title="1"><span class="kw">ggplot</span>(fi, <span class="kw">aes</span>(x, y, <span class="dt">fill =</span> class))<span class="op">+</span></a>
-<a class="sourceLine" id="cb289-2" title="2"><span class="st">  </span><span class="kw">geom_tile</span>()</a></code></pre></div>
-<pre><code>## Error in ggplot(fi, aes(x, y, fill = class)): object &#39;fi&#39; not found</code></pre>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" title="1"><span class="co">#Stable isotope data</span></a>
-<a class="sourceLine" id="cb291-2" title="2"></a>
-<a class="sourceLine" id="cb291-3" title="3">sia =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;../Data/Stable Isotope Data_CEAS_241119.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb291-4" title="4"></a>
-<a class="sourceLine" id="cb291-5" title="5"><span class="co">#joining sia data to snake data</span></a>
-<a class="sourceLine" id="cb291-6" title="6"></a>
-<a class="sourceLine" id="cb291-7" title="7">sia_snakes =<span class="st"> </span>sia<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-8" title="8"><span class="st">  </span><span class="kw">filter</span>(Tissue.type <span class="op">!=</span><span class="st"> &quot;Gut Content&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-9" title="9"><span class="st">  </span><span class="kw">left_join</span>(snakes, <span class="st">&#39;Field.Code&#39;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-10" title="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Lab =</span> <span class="st">&quot;CEAS&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-11" title="11"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Delta.Carbon =</span> d13C..vpdb. , <span class="dt">Delta.Nitrogen =</span> d15N..N2.air.)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-12" title="12"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Date, Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,</a>
-<a class="sourceLine" id="cb291-13" title="13">                Gear.Type, Fishing.Location, Depth.Caught..m.,</a>
-<a class="sourceLine" id="cb291-14" title="14">                Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, </a>
-<a class="sourceLine" id="cb291-15" title="15">                Tissue.type, Month, Year)</a>
-<a class="sourceLine" id="cb291-16" title="16"></a>
-<a class="sourceLine" id="cb291-17" title="17">sia_li &lt;-<span class="st"> </span>sia_fi<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-18" title="18"><span class="st">  </span><span class="kw">group_by</span>(Field.Code, Species, Tissue.type, Delta.Carbon, Delta.Nitrogen)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-19" title="19"><span class="st">  </span><span class="kw">nest</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-20" title="20"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cell =</span> <span class="kw">map</span>(data, cell.ext),</a>
-<a class="sourceLine" id="cb291-21" title="21">         <span class="dt">celldf =</span> <span class="kw">map</span>(cell, as.data.frame))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-22" title="22"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(celldf)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-23" title="23"><span class="st">  </span><span class="kw">unnest</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-24" title="24"><span class="st">  </span><span class="kw">inner_join</span>(fi, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>))</a>
-<a class="sourceLine" id="cb291-25" title="25"></a>
-<a class="sourceLine" id="cb291-26" title="26"><span class="kw">write.csv</span>(sia_li, <span class="st">&quot;./Data/SIA_fishing intensity.csv&quot;</span>)</a></code></pre></div>
-<div id="sample-size" class="section level2">
-<h2><span class="header-section-number">8.1</span> Sample size</h2>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" title="1">sia_li &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;../Data/SIA_fishing intensity.csv&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in file(file, &quot;rt&quot;): cannot open the connection</code></pre>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" title="1">sia_li &lt;-<span class="st"> </span>sia_li<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb294-2" title="2"><span class="st">  </span><span class="kw">inner_join</span>(fi, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>))</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;sia_li&#39; not found</code></pre>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" title="1"><span class="kw">table</span>(sia_li<span class="op">$</span>Species, sia_li<span class="op">$</span>Tissue.type)</a></code></pre></div>
-<pre><code>## Error in table(sia_li$Species, sia_li$Tissue.type): object &#39;sia_li&#39; not found</code></pre>
+<div id="determining-cluster-of-fishing-intensity-off-the-coast-of-sindhudurg" class="section level2">
+<h2><span class="header-section-number">8.1</span> Determining cluster of fishing intensity off the coast of sindhudurg</h2>
+<p>We used hierarchical clustering based on fishing intensity of both gears, and the position of the cell in the grid to divided the grid into high and low fishing intensity zones.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="co"># importing gridded fishing intensity data - see section 5</span></a>
+<a class="sourceLine" id="cb62-2" title="2"></a>
+<a class="sourceLine" id="cb62-3" title="3">fi_den &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/cell_fish_snake.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb62-4" title="4"></a>
+<a class="sourceLine" id="cb62-5" title="5">fi_den &lt;-<span class="st"> </span>fi_den<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb62-6" title="6"><span class="st">  </span><span class="co"># adding cell id</span></a>
+<a class="sourceLine" id="cb62-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(fi_den))</a>
+<a class="sourceLine" id="cb62-8" title="8"></a>
+<a class="sourceLine" id="cb62-9" title="9"><span class="co"># clustering grid cells based on fishing intensity</span></a>
+<a class="sourceLine" id="cb62-10" title="10"></a>
+<a class="sourceLine" id="cb62-11" title="11"><span class="co">## selecting relevant variables</span></a>
+<a class="sourceLine" id="cb62-12" title="12"></a>
+<a class="sourceLine" id="cb62-13" title="13">fi =<span class="st"> </span>fi_den<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb62-14" title="14"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(id, x, y, GillNet, Trawler)</a>
+<a class="sourceLine" id="cb62-15" title="15"></a>
+<a class="sourceLine" id="cb62-16" title="16"><span class="co">## creating distance matrix</span></a>
+<a class="sourceLine" id="cb62-17" title="17"></a>
+<a class="sourceLine" id="cb62-18" title="18">dist_fi &lt;-<span class="st"> </span><span class="kw">dist</span>(fi)</a>
+<a class="sourceLine" id="cb62-19" title="19"></a>
+<a class="sourceLine" id="cb62-20" title="20"><span class="co">## Hierarchical clustering</span></a>
+<a class="sourceLine" id="cb62-21" title="21"></a>
+<a class="sourceLine" id="cb62-22" title="22">clust_fi &lt;-<span class="st"> </span><span class="kw">hclust</span>(dist_fi)</a>
+<a class="sourceLine" id="cb62-23" title="23"></a>
+<a class="sourceLine" id="cb62-24" title="24"><span class="co">## Assigning fishing intensity classes</span></a>
+<a class="sourceLine" id="cb62-25" title="25"></a>
+<a class="sourceLine" id="cb62-26" title="26">fi_class &lt;-<span class="st"> </span><span class="kw">cutree</span>(clust_fi, <span class="dv">4</span>) <span class="co">## cutting the tree 4 times</span></a>
+<a class="sourceLine" id="cb62-27" title="27"></a>
+<a class="sourceLine" id="cb62-28" title="28"><span class="co">## Naming clasess</span></a>
+<a class="sourceLine" id="cb62-29" title="29"></a>
+<a class="sourceLine" id="cb62-30" title="30">fi &lt;-<span class="st"> </span>fi<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb62-31" title="31"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">class =</span> <span class="kw">as.factor</span>(<span class="kw">ifelse</span>(fi_class <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="op">|</span><span class="st"> </span>fi_class <span class="op">==</span><span class="st"> </span><span class="dv">2</span> , <span class="st">&quot;High&quot;</span>, <span class="st">&quot;Low&quot;</span>)))</a>
+<a class="sourceLine" id="cb62-32" title="32"></a>
+<a class="sourceLine" id="cb62-33" title="33"><span class="co">## Plotting grid</span></a>
+<a class="sourceLine" id="cb62-34" title="34"></a>
+<a class="sourceLine" id="cb62-35" title="35"><span class="kw">ggplot</span>(fi, <span class="kw">aes</span>(x, y, <span class="dt">fill =</span> class))<span class="op">+</span></a>
+<a class="sourceLine" id="cb62-36" title="36"><span class="st">  </span><span class="kw">geom_tile</span>(<span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb62-37" title="37"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Set1&quot;</span>, <span class="dt">name =</span> <span class="st">&quot;Fishing intensity&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb62-38" title="38"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Latitude&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb62-39" title="39"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>))</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-50-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<p><span style="color: red;"> <strong>Clustering may need to be revised based on sample size</strong> </span></p>
 </div>
-<div id="variation-carbon-isotope-ratio-with-fishing-intensity" class="section level2">
-<h2><span class="header-section-number">8.2</span> Variation Carbon isotope ratio with fishing intensity</h2>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" title="1">sia_li<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb298-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Tissue.type <span class="op">==</span><span class="st"> &quot;Plasma&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb298-3" title="3"><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> Isotope, <span class="kw">c</span>(Delta.Carbon, Delta.Nitrogen), <span class="dt">value =</span> ratio)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb298-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(intensity, ratio))<span class="op">+</span></a>
-<a class="sourceLine" id="cb298-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb298-6" title="6"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm)<span class="op">+</span></a>
-<a class="sourceLine" id="cb298-7" title="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fishing intensity&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb298-8" title="8"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb298-9" title="9"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Isotope, <span class="dt">scale =</span> <span class="st">&quot;free_y&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;sia_li&#39; not found</code></pre>
+<div id="geocoding-stable-isotope-data" class="section level2">
+<h2><span class="header-section-number">8.2</span> Geocoding stable isotope data</h2>
+<p><span style="color: red;"> <strong>Update geocoding code and rerun</strong> </span></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="co"># importing stable isotope data</span></a>
+<a class="sourceLine" id="cb63-2" title="2"></a>
+<a class="sourceLine" id="cb63-3" title="3">sia =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./Data/Stable Isotope Data_CEAS_241119.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb63-4" title="4"></a>
+<a class="sourceLine" id="cb63-5" title="5"><span class="co"># joining sia data to snake data</span></a>
+<a class="sourceLine" id="cb63-6" title="6"></a>
+<a class="sourceLine" id="cb63-7" title="7">sia_snakes =<span class="st"> </span>sia<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-8" title="8"><span class="st">  </span><span class="kw">filter</span>(Tissue.type <span class="op">!=</span><span class="st"> &quot;Gut Content&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-9" title="9"><span class="st">  </span><span class="kw">left_join</span>(snakes, <span class="st">&#39;Field.Code&#39;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-10" title="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Lab =</span> <span class="st">&quot;CEAS&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-11" title="11"><span class="st">  </span><span class="co">#rename(Delta.Carbon = d13C.vpdb. , Delta.Nitrogen = d15N.N2.air.)%&gt;%</span></a>
+<a class="sourceLine" id="cb63-12" title="12"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Date, Field.Code, Species, Snout.to.Vent.cm., Sex, Gravid, Class,</a>
+<a class="sourceLine" id="cb63-13" title="13">                Gear.Type, Fishing.Location, Depth.Caught.m.,</a>
+<a class="sourceLine" id="cb63-14" title="14">                Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, </a>
+<a class="sourceLine" id="cb63-15" title="15">                Tissue.type, Month, Year)</a>
+<a class="sourceLine" id="cb63-16" title="16"></a>
+<a class="sourceLine" id="cb63-17" title="17"><span class="co">## Assigning grid cells to snakes</span></a>
+<a class="sourceLine" id="cb63-18" title="18"></a>
+<a class="sourceLine" id="cb63-19" title="19">sia_li &lt;-<span class="st"> </span>sia_fi<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-20" title="20"><span class="st">  </span><span class="kw">group_by</span>(Field.Code, Species, Tissue.type, Delta.Carbon, Delta.Nitrogen)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-21" title="21"><span class="st">  </span><span class="kw">nest</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-22" title="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cell =</span> <span class="kw">map</span>(data, cell.ext),</a>
+<a class="sourceLine" id="cb63-23" title="23">         <span class="dt">celldf =</span> <span class="kw">map</span>(cell, as.data.frame))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-24" title="24"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(celldf)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-25" title="25"><span class="st">  </span><span class="kw">unnest</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-26" title="26"><span class="st">  </span><span class="kw">inner_join</span>(fi, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>))</a>
+<a class="sourceLine" id="cb63-27" title="27"></a>
+<a class="sourceLine" id="cb63-28" title="28"><span class="co">## Saving data to save time</span></a>
+<a class="sourceLine" id="cb63-29" title="29"></a>
+<a class="sourceLine" id="cb63-30" title="30"><span class="kw">write.csv</span>(sia_li, <span class="st">&quot;./Data/SIA_fishing intensity.csv&quot;</span>)</a></code></pre></div>
+</div>
+<div id="sample-size-1" class="section level2">
+<h2><span class="header-section-number">8.3</span> Sample size</h2>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="co"># importing geocoded stable isotope data</span></a>
+<a class="sourceLine" id="cb64-2" title="2"></a>
+<a class="sourceLine" id="cb64-3" title="3">sia_li &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./Data/SIA_fishing intensity.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb64-4" title="4"></a>
+<a class="sourceLine" id="cb64-5" title="5"><span class="co"># adding fishing intensity class</span></a>
+<a class="sourceLine" id="cb64-6" title="6"></a>
+<a class="sourceLine" id="cb64-7" title="7">sia_li &lt;-<span class="st"> </span>sia_li<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb64-8" title="8"><span class="st">  </span><span class="kw">inner_join</span>(fi, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>))</a>
+<a class="sourceLine" id="cb64-9" title="9"></a>
+<a class="sourceLine" id="cb64-10" title="10"><span class="co"># summarising number of samples</span></a>
+<a class="sourceLine" id="cb64-11" title="11"></a>
+<a class="sourceLine" id="cb64-12" title="12"><span class="kw">table</span>(sia_li<span class="op">$</span>Species, sia_li<span class="op">$</span>Tissue.type, sia_li<span class="op">$</span>class)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb64-13" title="13"><span class="st">  </span><span class="kw">as.data.frame</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb64-14" title="14"><span class="st">  </span><span class="kw">spread</span>(Var3, Freq)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb64-15" title="15"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Species =</span> Var1,</a>
+<a class="sourceLine" id="cb64-16" title="16">         <span class="dt">Tissue =</span> Var2)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb64-17" title="17"><span class="st">  </span><span class="kw">arrange</span>(Species, Tissue)</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Species</th>
+<th align="left">Tissue</th>
+<th align="right">High</th>
+<th align="right">Low</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Plasma</td>
+<td align="right">3</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Scales</td>
+<td align="right">0</td>
+<td align="right">12</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="variation-isotope-ratio-with-fishing-intensity" class="section level2">
+<h2><span class="header-section-number">8.4</span> Variation isotope ratio with fishing intensity</h2>
+<p>Using only plasma values.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="co"># plotting</span></a>
+<a class="sourceLine" id="cb65-2" title="2"></a>
+<a class="sourceLine" id="cb65-3" title="3">sia_li<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb65-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Tissue.type <span class="op">==</span><span class="st"> &quot;Plasma&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb65-5" title="5"><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> Isotope, <span class="kw">c</span>(Delta.Carbon, Delta.Nitrogen), <span class="dt">value =</span> ratio)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb65-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(intensity, ratio))<span class="op">+</span></a>
+<a class="sourceLine" id="cb65-7" title="7"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb65-8" title="8"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm)<span class="op">+</span></a>
+<a class="sourceLine" id="cb65-9" title="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fishing intensity&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Isotope ratio&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb65-10" title="10"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb65-11" title="11"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Isotope, <span class="dt">scale =</span> <span class="st">&quot;free_y&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" width="2400" style="display: block; margin: auto;" /></p>
+<p>Both <span class="math inline">\(\delta^{15}N\)</span> and <span class="math inline">\(\delta^{13}C\)</span> show strong negatice relationship with increasing fishing intensity.</p>
+<p><span style="color: red;"> <strong>Update with new SI data</strong> </span></p>
 </div>
 <div id="modeling-isotope-ratios-with-fishing-intensity" class="section level2">
-<h2><span class="header-section-number">8.3</span> Modeling isotope ratios with fishing intensity</h2>
-<div id="continous-model" class="section level3">
-<h3><span class="header-section-number">8.3.1</span> Continous model</h3>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" title="1">sia_li<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb300-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Tissue.type <span class="op">==</span><span class="st"> &quot;Plasma&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb300-3" title="3"><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> Isotope, <span class="kw">c</span>(Delta.Carbon, Delta.Nitrogen), <span class="dt">value =</span> ratio)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb300-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Species, Isotope)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb300-5" title="5"><span class="st">  </span><span class="kw">nest</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb300-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb300-7" title="7">    <span class="dt">mod1 =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="kw">lm</span>(ratio <span class="op">~</span><span class="st"> </span>intensity, <span class="dt">data =</span> .)),</a>
-<a class="sourceLine" id="cb300-8" title="8">    <span class="dt">summ1 =</span> <span class="kw">map</span>(mod1, tidy),</a>
-<a class="sourceLine" id="cb300-9" title="9">    <span class="dt">anova =</span> <span class="kw">map</span>(mod1, car<span class="op">::</span>Anova), </a>
-<a class="sourceLine" id="cb300-10" title="10">    <span class="dt">r2 =</span> <span class="kw">map</span>(mod1, broom<span class="op">::</span>glance)</a>
-<a class="sourceLine" id="cb300-11" title="11">  )<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb300-12" title="12"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(summ1, r2)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb300-13" title="13"><span class="st">  </span><span class="kw">unnest</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb300-14" title="14"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Species<span class="op">:</span>p.value, adj.r.squared)</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;sia_li&#39; not found</code></pre>
+<h2><span class="header-section-number">8.5</span> Modeling isotope ratios with fishing intensity</h2>
+<p>Using only plasma values.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1">sia_li<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Tissue.type <span class="op">==</span><span class="st"> &quot;Plasma&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-3" title="3"><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> Isotope, <span class="kw">c</span>(Delta.Carbon, Delta.Nitrogen), <span class="dt">value =</span> ratio)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Species, Isotope)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-5" title="5"><span class="st">  </span><span class="kw">nest</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb66-7" title="7">    <span class="dt">mod1 =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="kw">lm</span>(ratio <span class="op">~</span><span class="st"> </span>intensity, <span class="dt">data =</span> .)),</a>
+<a class="sourceLine" id="cb66-8" title="8">    <span class="dt">summ1 =</span> <span class="kw">map</span>(mod1, broom<span class="op">::</span>tidy),</a>
+<a class="sourceLine" id="cb66-9" title="9">    <span class="dt">r2 =</span> <span class="kw">map</span>(mod1, broom<span class="op">::</span>glance)</a>
+<a class="sourceLine" id="cb66-10" title="10">  )<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-11" title="11"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(summ1, r2)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-12" title="12"><span class="st">  </span><span class="kw">unnest</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-13" title="13"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Species<span class="op">:</span>p.value, adj.r.squared)</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Species</th>
+<th align="left">Isotope</th>
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">adj.r.squared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Delta.Carbon</td>
+<td align="left">(Intercept)</td>
+<td align="right">-15.4011808</td>
+<td align="right">0.6232436</td>
+<td align="right">-24.711336</td>
+<td align="right">0.0000000</td>
+<td align="right">0.1925198</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Delta.Carbon</td>
+<td align="left">intensity</td>
+<td align="right">-0.0119892</td>
+<td align="right">0.0065172</td>
+<td align="right">-1.839621</td>
+<td align="right">0.0989712</td>
+<td align="right">0.1925198</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Delta.Nitrogen</td>
+<td align="left">(Intercept)</td>
+<td align="right">15.7569605</td>
+<td align="right">0.3712895</td>
+<td align="right">42.438473</td>
+<td align="right">0.0000000</td>
+<td align="right">0.2023267</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Delta.Nitrogen</td>
+<td align="left">intensity</td>
+<td align="right">-0.0073013</td>
+<td align="right">0.0038825</td>
+<td align="right">-1.880548</td>
+<td align="right">0.0927251</td>
+<td align="right">0.2023267</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>Samples sizes for <em>H. curtus</em> are low, however, fishing intensity seems to have a significant <strong>depletion effect</strong> on plasma isotope ratios in <em>H. schistosus</em>.</p>
 </div>
-</div>
 <div id="difference-in-niche-width-between-sea-snakes-1" class="section level2">
-<h2><span class="header-section-number">8.4</span> Difference in niche width between sea snakes</h2>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" title="1"><span class="kw">library</span>(SIBER)</a>
-<a class="sourceLine" id="cb302-2" title="2"></a>
-<a class="sourceLine" id="cb302-3" title="3"><span class="co">#Creating siber data</span></a>
-<a class="sourceLine" id="cb302-4" title="4">siber_fi =<span class="st"> </span>sia_li<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb302-5" title="5"><span class="st">  </span><span class="kw">filter</span>(Tissue.type <span class="op">==</span><span class="st"> &quot;Plasma&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb302-6" title="6"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Delta.Carbon, Delta.Nitrogen, Species, class)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb302-7" title="7"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">iso1 =</span> Delta.Carbon,</a>
-<a class="sourceLine" id="cb302-8" title="8">         <span class="dt">iso2 =</span> Delta.Nitrogen,</a>
-<a class="sourceLine" id="cb302-9" title="9">         <span class="dt">group =</span> class,</a>
-<a class="sourceLine" id="cb302-10" title="10">         <span class="dt">community =</span> Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb302-11" title="11"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(group),</a>
-<a class="sourceLine" id="cb302-12" title="12">         <span class="op">!</span><span class="kw">is.na</span>(iso1),</a>
-<a class="sourceLine" id="cb302-13" title="13">         <span class="op">!</span><span class="kw">is.na</span>(iso2),</a>
-<a class="sourceLine" id="cb302-14" title="14">         community <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>community <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb302-15" title="15"><span class="st">  </span><span class="kw">ungroup</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb302-16" title="16"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(iso1, iso2, group, community)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb302-17" title="17"><span class="st">  </span><span class="kw">droplevels</span>()</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;sia_li&#39; not found</code></pre>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" title="1">siber.snakes.fi =<span class="st"> </span><span class="kw">createSiberObject</span>(<span class="kw">as.data.frame</span>(siber_fi))</a></code></pre></div>
-<pre><code>## Error in as.data.frame(siber_fi): object &#39;siber_fi&#39; not found</code></pre>
+<h2><span class="header-section-number">8.6</span> Difference in niche width between sea snakes</h2>
+<p>See section 4 for more details on analysis with SIBER.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="co"># Loading required libraries</span></a>
+<a class="sourceLine" id="cb67-2" title="2"></a>
+<a class="sourceLine" id="cb67-3" title="3"><span class="kw">library</span>(SIBER)</a>
+<a class="sourceLine" id="cb67-4" title="4"></a>
+<a class="sourceLine" id="cb67-5" title="5"><span class="co">#Creating siber data</span></a>
+<a class="sourceLine" id="cb67-6" title="6"></a>
+<a class="sourceLine" id="cb67-7" title="7">siber_fi =<span class="st"> </span>sia_li<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb67-8" title="8"><span class="st">  </span><span class="kw">filter</span>(Tissue.type <span class="op">==</span><span class="st"> &quot;Plasma&quot;</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># using plasma values for comparison</span></a>
+<a class="sourceLine" id="cb67-9" title="9"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Delta.Carbon, Delta.Nitrogen, Species, class)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb67-10" title="10"><span class="st">  </span><span class="co"># renaming baed on SIBER conventions</span></a>
+<a class="sourceLine" id="cb67-11" title="11"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">iso1 =</span> Delta.Carbon,</a>
+<a class="sourceLine" id="cb67-12" title="12">         <span class="dt">iso2 =</span> Delta.Nitrogen,</a>
+<a class="sourceLine" id="cb67-13" title="13">         <span class="dt">group =</span> class, <span class="co"># setting fishing intesnity as group</span></a>
+<a class="sourceLine" id="cb67-14" title="14">         <span class="dt">community =</span> Species)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb67-15" title="15"><span class="st">  </span><span class="co"># removing missing data</span></a>
+<a class="sourceLine" id="cb67-16" title="16"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(group),</a>
+<a class="sourceLine" id="cb67-17" title="17">         <span class="op">!</span><span class="kw">is.na</span>(iso1),</a>
+<a class="sourceLine" id="cb67-18" title="18">         <span class="op">!</span><span class="kw">is.na</span>(iso2),</a>
+<a class="sourceLine" id="cb67-19" title="19">         community <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>community <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb67-20" title="20"><span class="st">  </span><span class="kw">ungroup</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb67-21" title="21"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(iso1, iso2, group, community)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb67-22" title="22"><span class="st">  </span><span class="kw">droplevels</span>()</a>
+<a class="sourceLine" id="cb67-23" title="23"></a>
+<a class="sourceLine" id="cb67-24" title="24"><span class="co"># Creating SIBER object fo MVN fitting</span></a>
+<a class="sourceLine" id="cb67-25" title="25"></a>
+<a class="sourceLine" id="cb67-26" title="26">siber.snakes.fi =<span class="st"> </span><span class="kw">createSiberObject</span>(<span class="kw">as.data.frame</span>(siber_fi))</a></code></pre></div>
 <div id="maximum-likelihood-estimate-of-sea-1" class="section level3">
-<h3><span class="header-section-number">8.4.1</span> Maximum likelihood estimate of SEA</h3>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1">SEA.ML_snakes.fi &lt;-<span class="st"> </span><span class="kw">groupMetricsML</span>(siber.snakes.fi) <span class="co">#maximum likelihood estimates</span></a></code></pre></div>
-<pre><code>## Error in groupMetricsML(siber.snakes.fi): object &#39;siber.snakes.fi&#39; not found</code></pre>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" title="1"><span class="kw">data.frame</span>(<span class="kw">t</span>(SEA.ML_snakes.fi))</a></code></pre></div>
-<pre><code>## Error in t(SEA.ML_snakes.fi): object &#39;SEA.ML_snakes.fi&#39; not found</code></pre>
+<h3><span class="header-section-number">8.6.1</span> Maximum likelihood estimate of SEA</h3>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">SEA.ML_snakes.fi &lt;-<span class="st"> </span><span class="kw">groupMetricsML</span>(siber.snakes.fi)</a>
+<a class="sourceLine" id="cb68-2" title="2"></a>
+<a class="sourceLine" id="cb68-3" title="3"><span class="kw">data.frame</span>(<span class="kw">t</span>(SEA.ML_snakes.fi))</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">TA</th>
+<th align="right">SEA</th>
+<th align="right">SEAc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hydrophis schistosus.Low</td>
+<td align="right">2.1424</td>
+<td align="right">1.234995</td>
+<td align="right">1.440828</td>
+</tr>
+<tr class="even">
+<td>Hydrophis schistosus.High</td>
+<td align="right">1.2033</td>
+<td align="right">2.182545</td>
+<td align="right">4.365089</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>As maximum likelihood can only porivde point estimates of SEA, a bayesian model was used to provide more robust comparison of niche width.</p>
 </div>
 <div id="bayesian-estimate-of-sea-1" class="section level3">
-<h3><span class="header-section-number">8.4.2</span> Bayesian estimate of SEA</h3>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" title="1"><span class="co"># options for running jags</span></a>
-<a class="sourceLine" id="cb310-2" title="2">parms &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb310-3" title="3">parms<span class="op">$</span>n.iter &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="dv">4</span>   <span class="co"># number of iterations to run the model for</span></a>
-<a class="sourceLine" id="cb310-4" title="4">parms<span class="op">$</span>n.burnin &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="dv">3</span> <span class="co"># discard the first set of values</span></a>
-<a class="sourceLine" id="cb310-5" title="5">parms<span class="op">$</span>n.thin &lt;-<span class="st"> </span><span class="dv">10</span>     <span class="co"># thin the posterior by this many</span></a>
-<a class="sourceLine" id="cb310-6" title="6">parms<span class="op">$</span>n.chains &lt;-<span class="st"> </span><span class="dv">2</span>        <span class="co"># run this many chains</span></a>
-<a class="sourceLine" id="cb310-7" title="7"></a>
-<a class="sourceLine" id="cb310-8" title="8"><span class="co"># define the priors</span></a>
-<a class="sourceLine" id="cb310-9" title="9">priors &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb310-10" title="10">priors<span class="op">$</span>R &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb310-11" title="11">priors<span class="op">$</span>k &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb310-12" title="12">priors<span class="op">$</span>tau.mu &lt;-<span class="st"> </span><span class="fl">1.0E-3</span></a>
-<a class="sourceLine" id="cb310-13" title="13"></a>
-<a class="sourceLine" id="cb310-14" title="14">snakes.fi.post &lt;-<span class="st"> </span><span class="kw">siberMVN</span>(siber.snakes.fi, </a>
-<a class="sourceLine" id="cb310-15" title="15">                           parms, priors)<span class="co">#fitting multivariate normal model and getting                                                          posteriors</span></a></code></pre></div>
-<pre><code>## Error in siberMVN(siber.snakes.fi, parms, priors): object &#39;siber.snakes.fi&#39; not found</code></pre>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" title="1">SEA.B_snakes.fi &lt;-<span class="st"> </span><span class="kw">siberEllipses</span>(snakes.fi.post)<span class="co">#estimating standard ellipse area from posteriors</span></a></code></pre></div>
-<pre><code>## Error in nrow(corrected.posteriors[[1]]): object &#39;snakes.fi.post&#39; not found</code></pre>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" title="1">means.B_snakes.fi &lt;-<span class="st"> </span><span class="kw">extractPosteriorMeans</span>(siber.snakes.fi, snakes.fi.post)<span class="co">#mean isotope values</span></a></code></pre></div>
-<pre><code>## Error in paste(siber$original.data[, &quot;community&quot;], siber$original.data[, : object &#39;siber.snakes.fi&#39; not found</code></pre>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1">ccc &lt;-<span class="st"> </span><span class="kw">names</span>(snakes.fi.post)</a></code></pre></div>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;snakes.fi.post&#39; not found</code></pre>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">colnames</span>(SEA.B_snakes.fi) &lt;-<span class="st"> </span>ccc</a></code></pre></div>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;ccc&#39; not found</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" title="1">SEA.B_snakes.fi.df =<span class="st"> </span><span class="kw">data.frame</span>(SEA.B_snakes.fi, <span class="dt">check.names =</span> F)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb320-2" title="2"><span class="st">  </span><span class="kw">rowid_to_column</span>(<span class="dt">var =</span> <span class="st">&quot;run&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb320-3" title="3"><span class="st">  </span><span class="kw">gather</span>(Species.class, SEA.B, <span class="op">-</span>run)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb320-4" title="4"><span class="st">  </span><span class="kw">separate</span>(Species.class, <span class="kw">c</span>(<span class="st">&quot;Species&quot;</span>,<span class="st">&quot;FI.Class&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;([</span><span class="ch">\\</span><span class="st">.</span><span class="ch">\\</span><span class="st">?</span><span class="ch">\\</span><span class="st">:])&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in data.frame(SEA.B_snakes.fi, check.names = F): object &#39;SEA.B_snakes.fi&#39; not found</code></pre>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" title="1"><span class="co">#Summarising SEA estimates</span></a>
-<a class="sourceLine" id="cb322-2" title="2"></a>
-<a class="sourceLine" id="cb322-3" title="3">SEA.B_snakes.fi.df<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb322-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Species, FI.Class)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb322-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">SEA.mean =</span> <span class="kw">mean</span>(SEA.B),</a>
-<a class="sourceLine" id="cb322-6" title="6">            <span class="dt">SEA.sd =</span> <span class="kw">sd</span>(SEA.B),</a>
-<a class="sourceLine" id="cb322-7" title="7">            <span class="dt">SEA.se =</span> <span class="kw">sd</span>(SEA.B)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">n</span>()))</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;SEA.B_snakes.fi.df&#39; not found</code></pre>
+<h3><span class="header-section-number">8.6.2</span> Bayesian estimate of SEA</h3>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="co"># options for running jags</span></a>
+<a class="sourceLine" id="cb69-2" title="2">parms &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb69-3" title="3">parms<span class="op">$</span>n.iter &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="dv">4</span>   <span class="co"># number of iterations to run the model for</span></a>
+<a class="sourceLine" id="cb69-4" title="4">parms<span class="op">$</span>n.burnin &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="dv">3</span> <span class="co"># discard the first set of values</span></a>
+<a class="sourceLine" id="cb69-5" title="5">parms<span class="op">$</span>n.thin &lt;-<span class="st"> </span><span class="dv">10</span>     <span class="co"># thin the posterior by this many</span></a>
+<a class="sourceLine" id="cb69-6" title="6">parms<span class="op">$</span>n.chains &lt;-<span class="st"> </span><span class="dv">2</span>        <span class="co"># run this many chains</span></a>
+<a class="sourceLine" id="cb69-7" title="7"></a>
+<a class="sourceLine" id="cb69-8" title="8"><span class="co"># define the priors</span></a>
+<a class="sourceLine" id="cb69-9" title="9">priors &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb69-10" title="10">priors<span class="op">$</span>R &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb69-11" title="11">priors<span class="op">$</span>k &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb69-12" title="12">priors<span class="op">$</span>tau.mu &lt;-<span class="st"> </span><span class="fl">1.0E-3</span></a>
+<a class="sourceLine" id="cb69-13" title="13"></a>
+<a class="sourceLine" id="cb69-14" title="14">snakes.fi.post &lt;-<span class="st"> </span><span class="kw">siberMVN</span>(siber.snakes.fi, </a>
+<a class="sourceLine" id="cb69-15" title="15">                           parms, priors)<span class="co">#fitting multivariate normal model and getting                                                          posteriors</span></a>
+<a class="sourceLine" id="cb69-16" title="16"></a>
+<a class="sourceLine" id="cb69-17" title="17">SEA.B_snakes.fi &lt;-<span class="st"> </span><span class="kw">siberEllipses</span>(snakes.fi.post)<span class="co">#estimating standard ellipse area from posteriors</span></a>
+<a class="sourceLine" id="cb69-18" title="18"></a>
+<a class="sourceLine" id="cb69-19" title="19">means.B_snakes.fi &lt;-<span class="st"> </span><span class="kw">extractPosteriorMeans</span>(siber.snakes.fi, snakes.fi.post)<span class="co">#mean isotope values</span></a>
+<a class="sourceLine" id="cb69-20" title="20"></a>
+<a class="sourceLine" id="cb69-21" title="21">ccc &lt;-<span class="st"> </span><span class="kw">names</span>(snakes.fi.post)</a>
+<a class="sourceLine" id="cb69-22" title="22"></a>
+<a class="sourceLine" id="cb69-23" title="23"><span class="kw">colnames</span>(SEA.B_snakes.fi) &lt;-<span class="st"> </span>ccc</a>
+<a class="sourceLine" id="cb69-24" title="24"></a>
+<a class="sourceLine" id="cb69-25" title="25">SEA.B_snakes.fi.df =<span class="st"> </span><span class="kw">data.frame</span>(SEA.B_snakes.fi, <span class="dt">check.names =</span> F)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb69-26" title="26"><span class="st">  </span><span class="kw">rowid_to_column</span>(<span class="dt">var =</span> <span class="st">&quot;run&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb69-27" title="27"><span class="st">  </span><span class="kw">gather</span>(Species.class, SEA.B, <span class="op">-</span>run)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb69-28" title="28"><span class="st">  </span><span class="kw">separate</span>(Species.class, <span class="kw">c</span>(<span class="st">&quot;Species&quot;</span>,<span class="st">&quot;FI.Class&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;([</span><span class="ch">\\</span><span class="st">.</span><span class="ch">\\</span><span class="st">?</span><span class="ch">\\</span><span class="st">:])&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="co">#Summarising SEA estimates</span></a>
+<a class="sourceLine" id="cb70-2" title="2"></a>
+<a class="sourceLine" id="cb70-3" title="3">SEA.B_snakes.fi.df<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb70-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Species, FI.Class)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb70-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">SEA.mean =</span> <span class="kw">mean</span>(SEA.B),</a>
+<a class="sourceLine" id="cb70-6" title="6">            <span class="dt">SEA.sd =</span> <span class="kw">sd</span>(SEA.B),</a>
+<a class="sourceLine" id="cb70-7" title="7">            <span class="dt">SEA.se =</span> <span class="kw">sd</span>(SEA.B)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">n</span>()))</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Species</th>
+<th align="left">FI.Class</th>
+<th align="right">SEA.mean</th>
+<th align="right">SEA.sd</th>
+<th align="right">SEA.se</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">High</td>
+<td align="right">3.516156</td>
+<td align="right">3.249581</td>
+<td align="right">0.0513804</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Low</td>
+<td align="right">1.523470</td>
+<td align="right">0.609967</td>
+<td align="right">0.0096444</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="testing-difference-in-species-niche-area-by-tissue-type-1" class="section level3">
-<h3><span class="header-section-number">8.4.3</span> Testing difference in species niche area by tissue type</h3>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb324-1" title="1">SEA.B_snakes.fi.df<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb324-2" title="2"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> FI.Class, <span class="dt">value =</span> SEA.B)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb324-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb324-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">p =</span> <span class="kw">sum</span>(<span class="st">`</span><span class="dt">High</span><span class="st">`</span> <span class="op">&gt;</span><span class="st"> `</span><span class="dt">Low</span><span class="st">`</span>)<span class="op">/</span><span class="kw">n</span>())</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;SEA.B_snakes.fi.df&#39; not found</code></pre>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" title="1">SEA.B_snakes.fi.df<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb326-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Species, SEA.B, <span class="dt">fill =</span> FI.Class))<span class="op">+</span></a>
-<a class="sourceLine" id="cb326-3" title="3"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">width =</span> <span class="fl">0.25</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb326-4" title="4"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>), <span class="dt">name =</span> <span class="st">&quot;Standard Ellispes Area&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb326-5" title="5"><span class="st">  </span><span class="kw">scale_fill_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Fishing Intensity&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb326-6" title="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>))</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;SEA.B_snakes.fi.df&#39; not found</code></pre>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" title="1"><span class="kw">ggsave</span>(<span class="kw">last_plot</span>(), <span class="dt">filename =</span> <span class="st">&quot;../Figures and Tables/fig6.png&quot;</span>, <span class="dt">height =</span> <span class="fl">4.5</span>, <span class="dt">width =</span> <span class="dv">8</span>, <span class="dt">device =</span> <span class="st">&quot;png&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in grDevices::png(..., res = dpi, units = &quot;in&quot;): unable to start png() device</code></pre>
+</div>
+<div id="testing-difference-in-species-niche-area-by-fishing-intensity" class="section level3">
+<h3><span class="header-section-number">8.6.3</span> Testing difference in species niche area by fishing intensity</h3>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">SEA.B_snakes.fi.df<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb71-2" title="2"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> FI.Class, <span class="dt">value =</span> SEA.B)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb71-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Species)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb71-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">P(High &gt; Low)</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sum</span>(<span class="st">`</span><span class="dt">High</span><span class="st">`</span> <span class="op">&gt;</span><span class="st"> `</span><span class="dt">Low</span><span class="st">`</span>)<span class="op">/</span><span class="kw">n</span>())</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Species</th>
+<th align="right">P(High &gt; Low)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="right">0.8265</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="visualising-difference-in-niche-width-across-gradiet-of-fishing-intensity" class="section level2">
+<h2><span class="header-section-number">8.7</span> Visualising difference in niche width across gradiet of fishing intensity</h2>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">SEA.B_snakes.fi.df<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb72-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Species, SEA.B, <span class="dt">fill =</span> FI.Class))<span class="op">+</span></a>
+<a class="sourceLine" id="cb72-3" title="3"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">width =</span> <span class="fl">0.25</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb72-4" title="4"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>), <span class="dt">name =</span> <span class="st">&quot;Standard Ellispes Area&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb72-5" title="5"><span class="st">  </span><span class="kw">scale_fill_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Fishing Intensity&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb72-6" title="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>))</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-60-1.png" width="2400" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">ggsave</span>(<span class="kw">last_plot</span>(), <span class="dt">filename =</span> <span class="st">&quot;./Figures and Tables/figure6.png&quot;</span>, <span class="dt">height =</span> <span class="dv">6</span>, <span class="dt">width =</span> <span class="dv">8</span>, <span class="dt">device =</span> <span class="st">&quot;png&quot;</span>)</a></code></pre></div>
 
-</div>
 </div>
 </div>
             </section>
@@ -458,6 +1273,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

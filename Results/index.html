@@ -24,7 +24,7 @@
 <meta name="author" content="Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker" />
 
 
-<meta name="date" content="2020-05-28" />
+<meta name="date" content="2020-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,600 @@
 
 
 
+<script>
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+        
+        <script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+        
+        <script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
+  rCodeBlocks.each(function() {
+
+    // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Code');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide');
+    });
+  });
+
+}
+</script>
+        
+        <script>
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.3.7
+ * http://getbootstrap.com/javascript/#dropdowns
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle="dropdown"]'
+  var Dropdown = function (element) {
+    $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.VERSION = '3.3.7'
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+  function clearMenus(e) {
+    if (e && e.which === 3) return
+    $(backdrop).remove()
+    $(toggle).each(function () {
+      var $this         = $(this)
+      var $parent       = getParent($this)
+      var relatedTarget = { relatedTarget: this }
+
+      if (!$parent.hasClass('open')) return
+
+      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this.attr('aria-expanded', 'false')
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+    })
+  }
+
+  Dropdown.prototype.toggle = function (e) {
+    var $this = $(this)
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    clearMenus()
+
+    if (!isActive) {
+      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
+        // if mobile we use a backdrop because click events don't delegate
+        $(document.createElement('div'))
+          .addClass('dropdown-backdrop')
+          .insertAfter($(this))
+          .on('click', clearMenus)
+      }
+
+      var relatedTarget = { relatedTarget: this }
+      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this
+        .trigger('focus')
+        .attr('aria-expanded', 'true')
+
+      $parent
+        .toggleClass('open')
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
+    }
+
+    return false
+  }
+
+  Dropdown.prototype.keydown = function (e) {
+    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
+
+    var $this = $(this)
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    if (!isActive && e.which != 27 || isActive && e.which == 27) {
+      if (e.which == 27) $parent.find(toggle).trigger('focus')
+      return $this.trigger('click')
+    }
+
+    var desc = ' li:not(.disabled):visible a'
+    var $items = $parent.find('.dropdown-menu' + desc)
+
+    if (!$items.length) return
+
+    var index = $items.index(e.target)
+
+    if (e.which == 38 && index > 0)                 index--         // up
+    if (e.which == 40 && index < $items.length - 1) index++         // down
+    if (!~index)                                    index = 0
+
+    $items.eq(index).trigger('focus')
+  }
+
+
+  // DROPDOWN PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.dropdown')
+
+      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown             = Plugin
+  $.fn.dropdown.Constructor = Dropdown
+
+
+  // DROPDOWN NO CONFLICT
+  // ====================
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  // APPLY TO STANDARD DROPDOWN ELEMENTS
+  // ===================================
+
+  $(document)
+    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
+    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
+
+}(jQuery);
+</script>
+        
+        <style type="text/css">
+        
+        .code-folding-btn { margin-bottom: 4px; }
+        .row { display: flex; }
+        .collapse { display: none; }
+        .in { display:block }
+        .pull-right > 
+        .dropdown-menu {
+          right: 0; 
+          left: auto;
+        }
+        .open > 
+        .dropdown-menu {display: block;}
+        .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 160px;
+        padding: 5px 0;
+        margin: 2px 0 0;
+        font-size: 14px;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #ccc; 
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
+        
+        </style>
+        
+        <script>
+        
+        $(document).ready(function () {
+        window.initializeCodeFolding("show" === "hide");
+        });
+        
+        </script>
+
+        
+        <script>
+        
+        document.write('
+        
+        <div class="btn-group pull-right" style="position: absolute; top: 20%; right: 2%; z-index: 200">
+        
+        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast="">
+        
+        <span>
+        
+        Code
+        
+        </span> 
+        
+        <span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;">
+        
+        <li>
+        
+        <a id="rmd-show-all-code" href="#">
+        
+        Show All Code
+        
+        </a>
+        
+        </li>
+        
+        <li>
+        
+        <a id="rmd-hide-all-code" href="#">
+        
+        Hide All Code
+        
+        </a>
+        
+        </li>
+        
+        </ul>
+        
+        </div>')
+        
+        </script>
 
 
 <style type="text/css">
@@ -128,26 +722,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><i class="fa fa-check"></i><b>2</b> DIfference in distribution and habitat use between <em>H. curtus</em> and <em>H. shcistosus</em></a><ul>
-<li class="chapter" data-level="2.1" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mapping-sea-snake-distribution-with-fisheries-survey-data"><i class="fa fa-check"></i><b>2.1</b> Mapping sea snake distribution with fisheries survey data</a></li>
-<li class="chapter" data-level="2.2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#summarising-depth-use-by-species"><i class="fa fa-check"></i><b>2.2</b> Summarising depth use by species</a></li>
-<li class="chapter" data-level="2.3" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#spatial-segregation-by-species"><i class="fa fa-check"></i><b>2.3</b> Spatial segregation by species</a></li>
-<li class="chapter" data-level="2.4" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#modelling-depth-use-by-species"><i class="fa fa-check"></i><b>2.4</b> Modelling depth use by species</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#citation"><i class="fa fa-check"></i><b>1.1</b> Citation</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><i class="fa fa-check"></i><b>2</b> Difference in distribution and habitat use between <em>H. curtus</em> and <em>H. shcistosus</em></a><ul>
+<li class="chapter" data-level="2.1" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#calculating-abundance-of-sea-snakes-per-fishing-trip"><i class="fa fa-check"></i><b>2.1</b> Calculating abundance of sea snakes per fishing trip</a></li>
+<li class="chapter" data-level="2.2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#sample-size"><i class="fa fa-check"></i><b>2.2</b> Sample size</a></li>
+<li class="chapter" data-level="2.3" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#geocoding-fishing-trips"><i class="fa fa-check"></i><b>2.3</b> Geocoding fishing trips</a></li>
+<li class="chapter" data-level="2.4" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mean-cpue-by-species"><i class="fa fa-check"></i><b>2.4</b> Mean CPUE by species</a></li>
+<li class="chapter" data-level="2.5" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#area-used-by-species"><i class="fa fa-check"></i><b>2.5</b> Area used by species</a></li>
+<li class="chapter" data-level="2.6" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mapping-sea-snake-distributions"><i class="fa fa-check"></i><b>2.6</b> Mapping sea snake distributions</a></li>
+<li class="chapter" data-level="2.7" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#summarising-depth-use-by-species"><i class="fa fa-check"></i><b>2.7</b> Summarising depth use by species</a></li>
+<li class="chapter" data-level="2.8" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#spatial-segregation-by-species"><i class="fa fa-check"></i><b>2.8</b> Spatial segregation by species</a></li>
+<li class="chapter" data-level="2.9" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#modelling-depth-use-by-species"><i class="fa fa-check"></i><b>2.9</b> Modelling depth use by species</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><i class="fa fa-check"></i><b>3</b> DIfference in diet between <em>H. curtus</em> and <em>H. schsitosus</em></a><ul>
 <li class="chapter" data-level="3.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#no.-of-samples-collected-by-sea-snake-species"><i class="fa fa-check"></i><b>3.1</b> No. of samples collected by sea snake species</a></li>
 <li class="chapter" data-level="3.2" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#proportion-of-unidentified-specimens"><i class="fa fa-check"></i><b>3.2</b> Proportion of unidentified specimens</a></li>
-<li class="chapter" data-level="3.3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diverisity-of-prey-families-found-in-gut-content"><i class="fa fa-check"></i><b>3.3</b> Diverisity of prey families found in gut content</a></li>
-<li class="chapter" data-level="3.4" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#list-of-sea-snake-prey-species"><i class="fa fa-check"></i><b>3.4</b> List of sea snake prey species</a></li>
-<li class="chapter" data-level="3.5" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#relative-abundance-of-prey-families-in-sea-snake-gut-content"><i class="fa fa-check"></i><b>3.5</b> Relative abundance of prey families in sea snake gut content</a></li>
-<li class="chapter" data-level="3.6" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diverisity-of-prey-families-found-in-gut-content-1"><i class="fa fa-check"></i><b>3.6</b> Diverisity of prey families found in gut content</a></li>
-<li class="chapter" data-level="3.7" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#overlap-in-prey-of-h.-curtus-and-h.-schsitosus"><i class="fa fa-check"></i><b>3.7</b> Overlap in prey of <em>H. curtus</em> and <em>H. schsitosus</em></a></li>
-<li class="chapter" data-level="3.8" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-preference"><i class="fa fa-check"></i><b>3.8</b> Prey preference</a></li>
-<li class="chapter" data-level="3.9" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#selectivity-of-prey-sizes"><i class="fa fa-check"></i><b>3.9</b> Selectivity of prey sizes</a></li>
+<li class="chapter" data-level="3.3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-preference"><i class="fa fa-check"></i><b>3.3</b> Prey preference</a></li>
+<li class="chapter" data-level="3.4" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#range-of-prey-found-in-h.-curtus-and-h.-shistosus-gut"><i class="fa fa-check"></i><b>3.4</b> Range of prey found in <em>H. curtus</em> and <em>H. shistosus</em> gut</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-richness"><i class="fa fa-check"></i><b>3.4.1</b> Prey richness</a></li>
+<li class="chapter" data-level="3.4.2" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-family-diversity"><i class="fa fa-check"></i><b>3.4.2</b> Prey family diversity</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>4</b> Difference in resouce use betweek <em>H. curtus</em> and <em>H. schistosus</em>?</a><ul>
-<li class="chapter" data-level="4.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#number-of-samples-analysed"><i class="fa fa-check"></i><b>4.1</b> Number of samples analysed</a></li>
+<li class="chapter" data-level="3.5" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diet-overlap-between-h.-curtus-and-h.-shistosus"><i class="fa fa-check"></i><b>3.5</b> Diet overlap between <em>H. curtus</em> and <em>H. shistosus</em></a><ul>
+<li class="chapter" data-level="3.5.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#testing-segregation-in-prey-between-h.-curtus-and-h.-schistosus"><i class="fa fa-check"></i><b>3.5.1</b> Testing segregation in prey between <em>H. curtus</em> and <em>H. schistosus</em></a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#difference-in-size-selectivity-of-prey-between-h.-curtus-and-h.-schistosus"><i class="fa fa-check"></i><b>3.6</b> Difference in size selectivity of prey between <em>H. curtus</em> and <em>H. schistosus</em></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>4</b> Difference in resouce use betweek <em>H. curtus</em> and <em>H. schistosus</em></a><ul>
+<li class="chapter" data-level="4.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#number-of-tissue-samples-analysed"><i class="fa fa-check"></i><b>4.1</b> Number of tissue samples analysed</a></li>
 <li class="chapter" data-level="4.2" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#summary-statistics-on-carbon-and-nitrogen-stable-isotopes"><i class="fa fa-check"></i><b>4.2</b> Summary statistics on Carbon and Nitrogen stable isotopes</a></li>
 <li class="chapter" data-level="4.3" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#difference-in-niche-width-between-sea-snakes"><i class="fa fa-check"></i><b>4.3</b> Difference in niche width between sea snakes</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#maximum-likelihood-estimate-of-sea"><i class="fa fa-check"></i><b>4.3.1</b> Maximum likelihood estimate of SEA</a></li>
@@ -156,33 +759,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#visualising-posterior-ellipses-to-compare-species-isotopic-niche"><i class="fa fa-check"></i><b>4.4</b> Visualising posterior ellipses to compare species isotopic niche</a></li>
 <li class="chapter" data-level="4.5" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#relative-overlap-in-bayesian-standard-ellipses"><i class="fa fa-check"></i><b>4.5</b> Relative overlap in bayesian standard ellipses</a></li>
+<li class="chapter" data-level="4.6" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#references"><i class="fa fa-check"></i><b>4.6</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><i class="fa fa-check"></i><b>5</b> Varition in fishing intensity along the sindhudurg coast</a><ul>
 <li class="chapter" data-level="5.1" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#calculating-effort-with-depth"><i class="fa fa-check"></i><b>5.1</b> Calculating effort with depth</a></li>
-<li class="chapter" data-level="5.2" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#mapping-fishing-intensity"><i class="fa fa-check"></i><b>5.2</b> Mapping fishing intensity</a></li>
+<li class="chapter" data-level="5.2" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#geocoding-fishing-trips-1"><i class="fa fa-check"></i><b>5.2</b> Geocoding fishing trips</a></li>
+<li class="chapter" data-level="5.3" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#no.-of-trips-sampled"><i class="fa fa-check"></i><b>5.3</b> No. of trips sampled</a></li>
+<li class="chapter" data-level="5.4" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#summarising-fishing-effort-per-trip"><i class="fa fa-check"></i><b>5.4</b> Summarising fishing effort per trip</a></li>
+<li class="chapter" data-level="5.5" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#testing-difference-in-effort-by-gears"><i class="fa fa-check"></i><b>5.5</b> Testing difference in effort by gears</a></li>
+<li class="chapter" data-level="5.6" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#mapping-fishing-intensity"><i class="fa fa-check"></i><b>5.6</b> Mapping fishing intensity</a></li>
+<li class="chapter" data-level="5.7" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#spatial-coverage-of-trawlers-and-gillnets-along-the-sindhudurg-coast"><i class="fa fa-check"></i><b>5.7</b> Spatial coverage of trawlers and gillnets along the Sindhudurg coast</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>6</b> Does fishing intensity affect the distribution of <em>H. curtus</em> and <em>H. schistosus</em>?</a><ul>
-<li class="chapter" data-level="6.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#spatial-overlap-between-fisheries-and-sea-snakes"><i class="fa fa-check"></i><b>6.1</b> Spatial overlap between fisheries and sea snakes</a></li>
-<li class="chapter" data-level="6.2" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#variation-in-relative-proportion-of-hc-with-fishing-intensity"><i class="fa fa-check"></i><b>6.2</b> Variation in relative proportion of HC with fishing intensity</a></li>
+<li class="chapter" data-level="6.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#spatial-overlap-between-fisheries-and-sea-snakes"><i class="fa fa-check"></i><b>6.1</b> Spatial overlap between fisheries and sea snakes</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#testing-spatial-overlap-between-sea-snakes-and-fisheries"><i class="fa fa-check"></i><b>6.1.1</b> Testing spatial overlap between sea snakes and fisheries</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html"><i class="fa fa-check"></i><b>7</b> Overlap between fisheries catch and sea snake diet</a><ul>
-<li class="chapter" data-level="7.1" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sampling-adequacy"><i class="fa fa-check"></i><b>7.1</b> Sampling Adequacy</a></li>
-<li class="chapter" data-level="7.2" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#catch-weight"><i class="fa fa-check"></i><b>7.2</b> Catch weight</a></li>
-<li class="chapter" data-level="7.3" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#diverisity-of-prey-families-found-in-fisheries-catch"><i class="fa fa-check"></i><b>7.3</b> Diverisity of prey families found in fisheries catch</a></li>
+<li class="chapter" data-level="7.1" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sampling-adequacy-for-fisherie-catch-data"><i class="fa fa-check"></i><b>7.1</b> Sampling Adequacy for fisherie catch data</a></li>
+<li class="chapter" data-level="7.2" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#difference-in-catch-landed-per-trip-by-gear"><i class="fa fa-check"></i><b>7.2</b> Difference in catch landed per trip by gear</a></li>
+<li class="chapter" data-level="7.3" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#richness-of-fish-families-found-in-fisheries-catch"><i class="fa fa-check"></i><b>7.3</b> Richness of fish families found in fisheries catch</a></li>
 <li class="chapter" data-level="7.4" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#no.-of-sea-snake-prey-families-found-in-fish-catch-and-overlap"><i class="fa fa-check"></i><b>7.4</b> No. of Sea snake prey families found in fish catch and overlap</a></li>
-<li class="chapter" data-level="7.5" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sea-snake-prey-species-in-fisheries-catch"><i class="fa fa-check"></i><b>7.5</b> Sea snake prey species in fisheries catch</a></li>
+<li class="chapter" data-level="7.5" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#relative-proportion-of-sea-snake-prey-in-fisheries-catch"><i class="fa fa-check"></i><b>7.5</b> Relative proportion of sea snake prey in fisheries catch</a></li>
+<li class="chapter" data-level="7.6" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#is-the-proportion-of-h.-curtus-prey-greater-than-that-of-h.-schistosus-in-catch"><i class="fa fa-check"></i><b>7.6</b> Is the proportion of <em>H. curtus</em> prey greater than that of <em>H. schistosus</em> in catch?</a></li>
+<li class="chapter" data-level="7.7" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#do-trawlers-have-a-greater-trophic-overlap-with-sea-snakes-than-gillnets"><i class="fa fa-check"></i><b>7.7</b> Do trawlers have a greater trophic overlap with sea snakes than gillnets?</a></li>
+<li class="chapter" data-level="7.8" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sea-snake-prey-species-in-fisheries-catch"><i class="fa fa-check"></i><b>7.8</b> Sea snake prey species in fisheries catch</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><i class="fa fa-check"></i><b>8</b> Does isotopic niche of sea snakes change with local fishing intensity?</a><ul>
-<li class="chapter" data-level="8.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#sample-size"><i class="fa fa-check"></i><b>8.1</b> Sample size</a></li>
-<li class="chapter" data-level="8.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#variation-carbon-isotope-ratio-with-fishing-intensity"><i class="fa fa-check"></i><b>8.2</b> Variation Carbon isotope ratio with fishing intensity</a></li>
-<li class="chapter" data-level="8.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#modeling-isotope-ratios-with-fishing-intensity"><i class="fa fa-check"></i><b>8.3</b> Modeling isotope ratios with fishing intensity</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#continous-model"><i class="fa fa-check"></i><b>8.3.1</b> Continous model</a></li>
+<li class="chapter" data-level="8.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#determining-cluster-of-fishing-intensity-off-the-coast-of-sindhudurg"><i class="fa fa-check"></i><b>8.1</b> Determining cluster of fishing intensity off the coast of sindhudurg</a></li>
+<li class="chapter" data-level="8.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#geocoding-stable-isotope-data"><i class="fa fa-check"></i><b>8.2</b> Geocoding stable isotope data</a></li>
+<li class="chapter" data-level="8.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#sample-size-1"><i class="fa fa-check"></i><b>8.3</b> Sample size</a></li>
+<li class="chapter" data-level="8.4" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#variation-isotope-ratio-with-fishing-intensity"><i class="fa fa-check"></i><b>8.4</b> Variation isotope ratio with fishing intensity</a></li>
+<li class="chapter" data-level="8.5" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#modeling-isotope-ratios-with-fishing-intensity"><i class="fa fa-check"></i><b>8.5</b> Modeling isotope ratios with fishing intensity</a></li>
+<li class="chapter" data-level="8.6" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#difference-in-niche-width-between-sea-snakes-1"><i class="fa fa-check"></i><b>8.6</b> Difference in niche width between sea snakes</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#maximum-likelihood-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.6.1</b> Maximum likelihood estimate of SEA</a></li>
+<li class="chapter" data-level="8.6.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#bayesian-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.6.2</b> Bayesian estimate of SEA</a></li>
+<li class="chapter" data-level="8.6.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#testing-difference-in-species-niche-area-by-fishing-intensity"><i class="fa fa-check"></i><b>8.6.3</b> Testing difference in species niche area by fishing intensity</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#difference-in-niche-width-between-sea-snakes-1"><i class="fa fa-check"></i><b>8.4</b> Difference in niche width between sea snakes</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#maximum-likelihood-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.4.1</b> Maximum likelihood estimate of SEA</a></li>
-<li class="chapter" data-level="8.4.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#bayesian-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.4.2</b> Bayesian estimate of SEA</a></li>
-<li class="chapter" data-level="8.4.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#testing-difference-in-species-niche-area-by-tissue-type-1"><i class="fa fa-check"></i><b>8.4.3</b> Testing difference in species niche area by tissue type</a></li>
-</ul></li>
+<li class="chapter" data-level="8.7" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#visualising-difference-in-niche-width-across-gradiet-of-fishing-intensity"><i class="fa fa-check"></i><b>8.7</b> Visualising difference in niche width across gradiet of fishing intensity</a></li>
 </ul></li>
 </ul>
 
@@ -204,7 +818,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape</h1>
 <p class="author"><em>Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker</em></p>
-<p class="date"><em>2020-05-28</em></p>
+<p class="date"><em>2020-06-03</em></p>
 </div>
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
@@ -220,7 +834,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>visual gut content analysis to characterise diet and trophic niche of the species, and overlap between fisheries catch and sea snake diet;</p></li>
 <li><p>stable isotope analysis to characterise overall resource use in terms of isotopic niche, as well as the effect of fishing intensity on the niche width of both species.</p></li>
 </ol>
+<div id="citation" class="section level2">
+<h2><span class="header-section-number">1.1</span> Citation</h2>
+<p><span style="color: red;"> <strong>Add link/citation</strong> </span></p>
 
+</div>
 </div>
             </section>
 
@@ -278,6 +896,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

@@ -24,7 +24,7 @@
 <meta name="author" content="Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker" />
 
 
-<meta name="date" content="2020-05-28" />
+<meta name="date" content="2020-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,600 @@
 
 
 
+<script>
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+        
+        <script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+        
+        <script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
+  rCodeBlocks.each(function() {
+
+    // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Code');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide');
+    });
+  });
+
+}
+</script>
+        
+        <script>
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.3.7
+ * http://getbootstrap.com/javascript/#dropdowns
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle="dropdown"]'
+  var Dropdown = function (element) {
+    $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.VERSION = '3.3.7'
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+  function clearMenus(e) {
+    if (e && e.which === 3) return
+    $(backdrop).remove()
+    $(toggle).each(function () {
+      var $this         = $(this)
+      var $parent       = getParent($this)
+      var relatedTarget = { relatedTarget: this }
+
+      if (!$parent.hasClass('open')) return
+
+      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this.attr('aria-expanded', 'false')
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+    })
+  }
+
+  Dropdown.prototype.toggle = function (e) {
+    var $this = $(this)
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    clearMenus()
+
+    if (!isActive) {
+      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
+        // if mobile we use a backdrop because click events don't delegate
+        $(document.createElement('div'))
+          .addClass('dropdown-backdrop')
+          .insertAfter($(this))
+          .on('click', clearMenus)
+      }
+
+      var relatedTarget = { relatedTarget: this }
+      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this
+        .trigger('focus')
+        .attr('aria-expanded', 'true')
+
+      $parent
+        .toggleClass('open')
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
+    }
+
+    return false
+  }
+
+  Dropdown.prototype.keydown = function (e) {
+    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
+
+    var $this = $(this)
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    if (!isActive && e.which != 27 || isActive && e.which == 27) {
+      if (e.which == 27) $parent.find(toggle).trigger('focus')
+      return $this.trigger('click')
+    }
+
+    var desc = ' li:not(.disabled):visible a'
+    var $items = $parent.find('.dropdown-menu' + desc)
+
+    if (!$items.length) return
+
+    var index = $items.index(e.target)
+
+    if (e.which == 38 && index > 0)                 index--         // up
+    if (e.which == 40 && index < $items.length - 1) index++         // down
+    if (!~index)                                    index = 0
+
+    $items.eq(index).trigger('focus')
+  }
+
+
+  // DROPDOWN PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.dropdown')
+
+      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown             = Plugin
+  $.fn.dropdown.Constructor = Dropdown
+
+
+  // DROPDOWN NO CONFLICT
+  // ====================
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  // APPLY TO STANDARD DROPDOWN ELEMENTS
+  // ===================================
+
+  $(document)
+    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
+    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
+
+}(jQuery);
+</script>
+        
+        <style type="text/css">
+        
+        .code-folding-btn { margin-bottom: 4px; }
+        .row { display: flex; }
+        .collapse { display: none; }
+        .in { display:block }
+        .pull-right > 
+        .dropdown-menu {
+          right: 0; 
+          left: auto;
+        }
+        .open > 
+        .dropdown-menu {display: block;}
+        .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 160px;
+        padding: 5px 0;
+        margin: 2px 0 0;
+        font-size: 14px;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #ccc; 
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
+        
+        </style>
+        
+        <script>
+        
+        $(document).ready(function () {
+        window.initializeCodeFolding("show" === "hide");
+        });
+        
+        </script>
+
+        
+        <script>
+        
+        document.write('
+        
+        <div class="btn-group pull-right" style="position: absolute; top: 20%; right: 2%; z-index: 200">
+        
+        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast="">
+        
+        <span>
+        
+        Code
+        
+        </span> 
+        
+        <span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;">
+        
+        <li>
+        
+        <a id="rmd-show-all-code" href="#">
+        
+        Show All Code
+        
+        </a>
+        
+        </li>
+        
+        <li>
+        
+        <a id="rmd-hide-all-code" href="#">
+        
+        Hide All Code
+        
+        </a>
+        
+        </li>
+        
+        </ul>
+        
+        </div>')
+        
+        </script>
 
 
 <style type="text/css">
@@ -128,26 +722,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><i class="fa fa-check"></i><b>2</b> DIfference in distribution and habitat use between <em>H. curtus</em> and <em>H. shcistosus</em></a><ul>
-<li class="chapter" data-level="2.1" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mapping-sea-snake-distribution-with-fisheries-survey-data"><i class="fa fa-check"></i><b>2.1</b> Mapping sea snake distribution with fisheries survey data</a></li>
-<li class="chapter" data-level="2.2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#summarising-depth-use-by-species"><i class="fa fa-check"></i><b>2.2</b> Summarising depth use by species</a></li>
-<li class="chapter" data-level="2.3" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#spatial-segregation-by-species"><i class="fa fa-check"></i><b>2.3</b> Spatial segregation by species</a></li>
-<li class="chapter" data-level="2.4" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#modelling-depth-use-by-species"><i class="fa fa-check"></i><b>2.4</b> Modelling depth use by species</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#citation"><i class="fa fa-check"></i><b>1.1</b> Citation</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><i class="fa fa-check"></i><b>2</b> Difference in distribution and habitat use between <em>H. curtus</em> and <em>H. shcistosus</em></a><ul>
+<li class="chapter" data-level="2.1" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#calculating-abundance-of-sea-snakes-per-fishing-trip"><i class="fa fa-check"></i><b>2.1</b> Calculating abundance of sea snakes per fishing trip</a></li>
+<li class="chapter" data-level="2.2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#sample-size"><i class="fa fa-check"></i><b>2.2</b> Sample size</a></li>
+<li class="chapter" data-level="2.3" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#geocoding-fishing-trips"><i class="fa fa-check"></i><b>2.3</b> Geocoding fishing trips</a></li>
+<li class="chapter" data-level="2.4" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mean-cpue-by-species"><i class="fa fa-check"></i><b>2.4</b> Mean CPUE by species</a></li>
+<li class="chapter" data-level="2.5" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#area-used-by-species"><i class="fa fa-check"></i><b>2.5</b> Area used by species</a></li>
+<li class="chapter" data-level="2.6" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mapping-sea-snake-distributions"><i class="fa fa-check"></i><b>2.6</b> Mapping sea snake distributions</a></li>
+<li class="chapter" data-level="2.7" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#summarising-depth-use-by-species"><i class="fa fa-check"></i><b>2.7</b> Summarising depth use by species</a></li>
+<li class="chapter" data-level="2.8" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#spatial-segregation-by-species"><i class="fa fa-check"></i><b>2.8</b> Spatial segregation by species</a></li>
+<li class="chapter" data-level="2.9" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#modelling-depth-use-by-species"><i class="fa fa-check"></i><b>2.9</b> Modelling depth use by species</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><i class="fa fa-check"></i><b>3</b> DIfference in diet between <em>H. curtus</em> and <em>H. schsitosus</em></a><ul>
 <li class="chapter" data-level="3.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#no.-of-samples-collected-by-sea-snake-species"><i class="fa fa-check"></i><b>3.1</b> No. of samples collected by sea snake species</a></li>
 <li class="chapter" data-level="3.2" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#proportion-of-unidentified-specimens"><i class="fa fa-check"></i><b>3.2</b> Proportion of unidentified specimens</a></li>
-<li class="chapter" data-level="3.3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diverisity-of-prey-families-found-in-gut-content"><i class="fa fa-check"></i><b>3.3</b> Diverisity of prey families found in gut content</a></li>
-<li class="chapter" data-level="3.4" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#list-of-sea-snake-prey-species"><i class="fa fa-check"></i><b>3.4</b> List of sea snake prey species</a></li>
-<li class="chapter" data-level="3.5" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#relative-abundance-of-prey-families-in-sea-snake-gut-content"><i class="fa fa-check"></i><b>3.5</b> Relative abundance of prey families in sea snake gut content</a></li>
-<li class="chapter" data-level="3.6" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diverisity-of-prey-families-found-in-gut-content-1"><i class="fa fa-check"></i><b>3.6</b> Diverisity of prey families found in gut content</a></li>
-<li class="chapter" data-level="3.7" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#overlap-in-prey-of-h.-curtus-and-h.-schsitosus"><i class="fa fa-check"></i><b>3.7</b> Overlap in prey of <em>H. curtus</em> and <em>H. schsitosus</em></a></li>
-<li class="chapter" data-level="3.8" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-preference"><i class="fa fa-check"></i><b>3.8</b> Prey preference</a></li>
-<li class="chapter" data-level="3.9" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#selectivity-of-prey-sizes"><i class="fa fa-check"></i><b>3.9</b> Selectivity of prey sizes</a></li>
+<li class="chapter" data-level="3.3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-preference"><i class="fa fa-check"></i><b>3.3</b> Prey preference</a></li>
+<li class="chapter" data-level="3.4" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#range-of-prey-found-in-h.-curtus-and-h.-shistosus-gut"><i class="fa fa-check"></i><b>3.4</b> Range of prey found in <em>H. curtus</em> and <em>H. shistosus</em> gut</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-richness"><i class="fa fa-check"></i><b>3.4.1</b> Prey richness</a></li>
+<li class="chapter" data-level="3.4.2" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-family-diversity"><i class="fa fa-check"></i><b>3.4.2</b> Prey family diversity</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>4</b> Difference in resouce use betweek <em>H. curtus</em> and <em>H. schistosus</em>?</a><ul>
-<li class="chapter" data-level="4.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#number-of-samples-analysed"><i class="fa fa-check"></i><b>4.1</b> Number of samples analysed</a></li>
+<li class="chapter" data-level="3.5" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diet-overlap-between-h.-curtus-and-h.-shistosus"><i class="fa fa-check"></i><b>3.5</b> Diet overlap between <em>H. curtus</em> and <em>H. shistosus</em></a><ul>
+<li class="chapter" data-level="3.5.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#testing-segregation-in-prey-between-h.-curtus-and-h.-schistosus"><i class="fa fa-check"></i><b>3.5.1</b> Testing segregation in prey between <em>H. curtus</em> and <em>H. schistosus</em></a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#difference-in-size-selectivity-of-prey-between-h.-curtus-and-h.-schistosus"><i class="fa fa-check"></i><b>3.6</b> Difference in size selectivity of prey between <em>H. curtus</em> and <em>H. schistosus</em></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>4</b> Difference in resouce use betweek <em>H. curtus</em> and <em>H. schistosus</em></a><ul>
+<li class="chapter" data-level="4.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#number-of-tissue-samples-analysed"><i class="fa fa-check"></i><b>4.1</b> Number of tissue samples analysed</a></li>
 <li class="chapter" data-level="4.2" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#summary-statistics-on-carbon-and-nitrogen-stable-isotopes"><i class="fa fa-check"></i><b>4.2</b> Summary statistics on Carbon and Nitrogen stable isotopes</a></li>
 <li class="chapter" data-level="4.3" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#difference-in-niche-width-between-sea-snakes"><i class="fa fa-check"></i><b>4.3</b> Difference in niche width between sea snakes</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#maximum-likelihood-estimate-of-sea"><i class="fa fa-check"></i><b>4.3.1</b> Maximum likelihood estimate of SEA</a></li>
@@ -156,33 +759,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#visualising-posterior-ellipses-to-compare-species-isotopic-niche"><i class="fa fa-check"></i><b>4.4</b> Visualising posterior ellipses to compare species isotopic niche</a></li>
 <li class="chapter" data-level="4.5" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#relative-overlap-in-bayesian-standard-ellipses"><i class="fa fa-check"></i><b>4.5</b> Relative overlap in bayesian standard ellipses</a></li>
+<li class="chapter" data-level="4.6" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#references"><i class="fa fa-check"></i><b>4.6</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><i class="fa fa-check"></i><b>5</b> Varition in fishing intensity along the sindhudurg coast</a><ul>
 <li class="chapter" data-level="5.1" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#calculating-effort-with-depth"><i class="fa fa-check"></i><b>5.1</b> Calculating effort with depth</a></li>
-<li class="chapter" data-level="5.2" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#mapping-fishing-intensity"><i class="fa fa-check"></i><b>5.2</b> Mapping fishing intensity</a></li>
+<li class="chapter" data-level="5.2" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#geocoding-fishing-trips-1"><i class="fa fa-check"></i><b>5.2</b> Geocoding fishing trips</a></li>
+<li class="chapter" data-level="5.3" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#no.-of-trips-sampled"><i class="fa fa-check"></i><b>5.3</b> No. of trips sampled</a></li>
+<li class="chapter" data-level="5.4" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#summarising-fishing-effort-per-trip"><i class="fa fa-check"></i><b>5.4</b> Summarising fishing effort per trip</a></li>
+<li class="chapter" data-level="5.5" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#testing-difference-in-effort-by-gears"><i class="fa fa-check"></i><b>5.5</b> Testing difference in effort by gears</a></li>
+<li class="chapter" data-level="5.6" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#mapping-fishing-intensity"><i class="fa fa-check"></i><b>5.6</b> Mapping fishing intensity</a></li>
+<li class="chapter" data-level="5.7" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#spatial-coverage-of-trawlers-and-gillnets-along-the-sindhudurg-coast"><i class="fa fa-check"></i><b>5.7</b> Spatial coverage of trawlers and gillnets along the Sindhudurg coast</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>6</b> Does fishing intensity affect the distribution of <em>H. curtus</em> and <em>H. schistosus</em>?</a><ul>
-<li class="chapter" data-level="6.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#spatial-overlap-between-fisheries-and-sea-snakes"><i class="fa fa-check"></i><b>6.1</b> Spatial overlap between fisheries and sea snakes</a></li>
-<li class="chapter" data-level="6.2" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#variation-in-relative-proportion-of-hc-with-fishing-intensity"><i class="fa fa-check"></i><b>6.2</b> Variation in relative proportion of HC with fishing intensity</a></li>
+<li class="chapter" data-level="6.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#spatial-overlap-between-fisheries-and-sea-snakes"><i class="fa fa-check"></i><b>6.1</b> Spatial overlap between fisheries and sea snakes</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#testing-spatial-overlap-between-sea-snakes-and-fisheries"><i class="fa fa-check"></i><b>6.1.1</b> Testing spatial overlap between sea snakes and fisheries</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html"><i class="fa fa-check"></i><b>7</b> Overlap between fisheries catch and sea snake diet</a><ul>
-<li class="chapter" data-level="7.1" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sampling-adequacy"><i class="fa fa-check"></i><b>7.1</b> Sampling Adequacy</a></li>
-<li class="chapter" data-level="7.2" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#catch-weight"><i class="fa fa-check"></i><b>7.2</b> Catch weight</a></li>
-<li class="chapter" data-level="7.3" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#diverisity-of-prey-families-found-in-fisheries-catch"><i class="fa fa-check"></i><b>7.3</b> Diverisity of prey families found in fisheries catch</a></li>
+<li class="chapter" data-level="7.1" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sampling-adequacy-for-fisherie-catch-data"><i class="fa fa-check"></i><b>7.1</b> Sampling Adequacy for fisherie catch data</a></li>
+<li class="chapter" data-level="7.2" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#difference-in-catch-landed-per-trip-by-gear"><i class="fa fa-check"></i><b>7.2</b> Difference in catch landed per trip by gear</a></li>
+<li class="chapter" data-level="7.3" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#richness-of-fish-families-found-in-fisheries-catch"><i class="fa fa-check"></i><b>7.3</b> Richness of fish families found in fisheries catch</a></li>
 <li class="chapter" data-level="7.4" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#no.-of-sea-snake-prey-families-found-in-fish-catch-and-overlap"><i class="fa fa-check"></i><b>7.4</b> No. of Sea snake prey families found in fish catch and overlap</a></li>
-<li class="chapter" data-level="7.5" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sea-snake-prey-species-in-fisheries-catch"><i class="fa fa-check"></i><b>7.5</b> Sea snake prey species in fisheries catch</a></li>
+<li class="chapter" data-level="7.5" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#relative-proportion-of-sea-snake-prey-in-fisheries-catch"><i class="fa fa-check"></i><b>7.5</b> Relative proportion of sea snake prey in fisheries catch</a></li>
+<li class="chapter" data-level="7.6" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#is-the-proportion-of-h.-curtus-prey-greater-than-that-of-h.-schistosus-in-catch"><i class="fa fa-check"></i><b>7.6</b> Is the proportion of <em>H. curtus</em> prey greater than that of <em>H. schistosus</em> in catch?</a></li>
+<li class="chapter" data-level="7.7" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#do-trawlers-have-a-greater-trophic-overlap-with-sea-snakes-than-gillnets"><i class="fa fa-check"></i><b>7.7</b> Do trawlers have a greater trophic overlap with sea snakes than gillnets?</a></li>
+<li class="chapter" data-level="7.8" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sea-snake-prey-species-in-fisheries-catch"><i class="fa fa-check"></i><b>7.8</b> Sea snake prey species in fisheries catch</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><i class="fa fa-check"></i><b>8</b> Does isotopic niche of sea snakes change with local fishing intensity?</a><ul>
-<li class="chapter" data-level="8.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#sample-size"><i class="fa fa-check"></i><b>8.1</b> Sample size</a></li>
-<li class="chapter" data-level="8.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#variation-carbon-isotope-ratio-with-fishing-intensity"><i class="fa fa-check"></i><b>8.2</b> Variation Carbon isotope ratio with fishing intensity</a></li>
-<li class="chapter" data-level="8.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#modeling-isotope-ratios-with-fishing-intensity"><i class="fa fa-check"></i><b>8.3</b> Modeling isotope ratios with fishing intensity</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#continous-model"><i class="fa fa-check"></i><b>8.3.1</b> Continous model</a></li>
+<li class="chapter" data-level="8.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#determining-cluster-of-fishing-intensity-off-the-coast-of-sindhudurg"><i class="fa fa-check"></i><b>8.1</b> Determining cluster of fishing intensity off the coast of sindhudurg</a></li>
+<li class="chapter" data-level="8.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#geocoding-stable-isotope-data"><i class="fa fa-check"></i><b>8.2</b> Geocoding stable isotope data</a></li>
+<li class="chapter" data-level="8.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#sample-size-1"><i class="fa fa-check"></i><b>8.3</b> Sample size</a></li>
+<li class="chapter" data-level="8.4" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#variation-isotope-ratio-with-fishing-intensity"><i class="fa fa-check"></i><b>8.4</b> Variation isotope ratio with fishing intensity</a></li>
+<li class="chapter" data-level="8.5" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#modeling-isotope-ratios-with-fishing-intensity"><i class="fa fa-check"></i><b>8.5</b> Modeling isotope ratios with fishing intensity</a></li>
+<li class="chapter" data-level="8.6" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#difference-in-niche-width-between-sea-snakes-1"><i class="fa fa-check"></i><b>8.6</b> Difference in niche width between sea snakes</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#maximum-likelihood-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.6.1</b> Maximum likelihood estimate of SEA</a></li>
+<li class="chapter" data-level="8.6.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#bayesian-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.6.2</b> Bayesian estimate of SEA</a></li>
+<li class="chapter" data-level="8.6.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#testing-difference-in-species-niche-area-by-fishing-intensity"><i class="fa fa-check"></i><b>8.6.3</b> Testing difference in species niche area by fishing intensity</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#difference-in-niche-width-between-sea-snakes-1"><i class="fa fa-check"></i><b>8.4</b> Difference in niche width between sea snakes</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#maximum-likelihood-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.4.1</b> Maximum likelihood estimate of SEA</a></li>
-<li class="chapter" data-level="8.4.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#bayesian-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.4.2</b> Bayesian estimate of SEA</a></li>
-<li class="chapter" data-level="8.4.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#testing-difference-in-species-niche-area-by-tissue-type-1"><i class="fa fa-check"></i><b>8.4.3</b> Testing difference in species niche area by tissue type</a></li>
-</ul></li>
+<li class="chapter" data-level="8.7" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#visualising-difference-in-niche-width-across-gradiet-of-fishing-intensity"><i class="fa fa-check"></i><b>8.7</b> Visualising difference in niche width across gradiet of fishing intensity</a></li>
 </ul></li>
 </ul>
 
@@ -203,165 +817,403 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="overlap-between-fisheries-catch-and-sea-snake-diet" class="section level1">
 <h1><span class="header-section-number">7</span> Overlap between fisheries catch and sea snake diet</h1>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" title="1"><span class="co"># importing catch data</span></a>
-<a class="sourceLine" id="cb237-2" title="2"></a>
-<a class="sourceLine" id="cb237-3" title="3">catch &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;../Data/catch.csv&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in file(file, &quot;rt&quot;): cannot open the connection</code></pre>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" title="1"><span class="co"># importing gut content data</span></a>
-<a class="sourceLine" id="cb239-2" title="2"></a>
-<a class="sourceLine" id="cb239-3" title="3">gutcontent &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;../Data/Sea_snakes_gut_content_2018-19.csv&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in file(file, &quot;rt&quot;): cannot open the connection</code></pre>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1"><span class="co"># Standarising sea snake gut content data</span></a>
-<a class="sourceLine" id="cb241-2" title="2">gutcontent =<span class="st"> </span>gutcontent<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb241-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
-<a class="sourceLine" id="cb241-4" title="4">         Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>, Prey.Family <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb241-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb241-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb241-7" title="7"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb241-8" title="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Abundance =</span> <span class="kw">n</span>(), <span class="dt">n =</span> <span class="kw">last</span>(n), <span class="dt">Rel.prop =</span> <span class="kw">last</span>(Abundance<span class="op">/</span>n))</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;gutcontent&#39; not found</code></pre>
-<div id="sampling-adequacy" class="section level2">
-<h2><span class="header-section-number">7.1</span> Sampling Adequacy</h2>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1"><span class="co"># calculating number trips and fishing effort</span></a>
-<a class="sourceLine" id="cb243-2" title="2"></a>
-<a class="sourceLine" id="cb243-3" title="3">catch<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Haul.time =</span> <span class="kw">last</span>(Haul.time),</a>
-<a class="sourceLine" id="cb243-6" title="6">            <span class="dt">No.hauls =</span> <span class="kw">last</span>(No.hauls))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-7" title="7"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-8" title="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Sample)),</a>
-<a class="sourceLine" id="cb243-9" title="9">            <span class="dt">Haul.Hours =</span> <span class="kw">sum</span>(No.hauls<span class="op">*</span>Haul.time, <span class="dt">na.rm =</span> T)<span class="op">/</span><span class="dv">60</span>)</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;catch&#39; not found</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co"># importing catch data</span></a>
+<a class="sourceLine" id="cb51-2" title="2"></a>
+<a class="sourceLine" id="cb51-3" title="3">catch &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./Data/catch.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb51-4" title="4"></a>
+<a class="sourceLine" id="cb51-5" title="5"><span class="co"># importing gut content data</span></a>
+<a class="sourceLine" id="cb51-6" title="6"></a>
+<a class="sourceLine" id="cb51-7" title="7">gutcontent &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./Data/Sea_snakes_gut_content_2018-19.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb51-8" title="8"></a>
+<a class="sourceLine" id="cb51-9" title="9"><span class="co"># Standarising sea snake gut content data</span></a>
+<a class="sourceLine" id="cb51-10" title="10"></a>
+<a class="sourceLine" id="cb51-11" title="11">gutcontent =<span class="st"> </span>gutcontent<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb51-12" title="12"><span class="st">  </span><span class="co"># removing specimens collected from fish landing centers</span></a>
+<a class="sourceLine" id="cb51-13" title="13"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
+<a class="sourceLine" id="cb51-14" title="14">         <span class="co"># removing unidentified specimens</span></a>
+<a class="sourceLine" id="cb51-15" title="15">         Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>, Prey.Family <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb51-16" title="16"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb51-17" title="17"><span class="st">  </span><span class="co"># caluclating abundance</span></a>
+<a class="sourceLine" id="cb51-18" title="18"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb51-19" title="19"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb51-20" title="20"><span class="st">  </span><span class="co"># calculating relative abunance from each snakes species</span></a>
+<a class="sourceLine" id="cb51-21" title="21"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Abundance =</span> <span class="kw">n</span>(), <span class="dt">n =</span> <span class="kw">last</span>(n), <span class="dt">Rel.prop =</span> <span class="kw">last</span>(Abundance<span class="op">/</span>n))</a></code></pre></div>
+<p><strong>Note</strong>: Catch data was combined from multiple sources (Sharma et al. unpublished data and Gupta et al. unpublished data). The same was standardised for this analysis. Kindly refer to <code>Functions/clean catch data.R</code> for further details.</p>
+<div id="sampling-adequacy-for-fisherie-catch-data" class="section level2">
+<h2><span class="header-section-number">7.1</span> Sampling Adequacy for fisherie catch data</h2>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co"># calculating number trips and fishing effort</span></a>
+<a class="sourceLine" id="cb52-2" title="2"></a>
+<a class="sourceLine" id="cb52-3" title="3">catch<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb52-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb52-5" title="5"><span class="st">  </span><span class="co"># Number hauls and haul duration for each trip</span></a>
+<a class="sourceLine" id="cb52-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Haul.time =</span> <span class="kw">last</span>(Haul.time),</a>
+<a class="sourceLine" id="cb52-7" title="7">            <span class="dt">No.hauls =</span> <span class="kw">last</span>(No.hauls))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb52-8" title="8"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb52-9" title="9"><span class="st">  </span><span class="co"># Number trips and effort sampled by gear type</span></a>
+<a class="sourceLine" id="cb52-10" title="10"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Sample)),</a>
+<a class="sourceLine" id="cb52-11" title="11">            <span class="dt">Haul.Hours =</span> <span class="kw">sum</span>(No.hauls<span class="op">*</span>Haul.time, <span class="dt">na.rm =</span> T)<span class="op">/</span><span class="dv">60</span>)</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Gear.Type</th>
+<th align="right">N</th>
+<th align="right">Haul.Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gill Net</td>
+<td align="right">38</td>
+<td align="right">35.41667</td>
+</tr>
+<tr class="even">
+<td align="left">Trawler</td>
+<td align="right">140</td>
+<td align="right">434.65000</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="catch-weight" class="section level2">
-<h2><span class="header-section-number">7.2</span> Catch weight</h2>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" title="1"><span class="co"># importing catch weight data</span></a>
-<a class="sourceLine" id="cb245-2" title="2"></a>
-<a class="sourceLine" id="cb245-3" title="3">tonnage &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;../Data/catch tonnage.csv&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in file(file, &quot;rt&quot;): cannot open the connection</code></pre>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" title="1"><span class="co"># transforming total catch weight to log </span></a>
-<a class="sourceLine" id="cb247-2" title="2"></a>
-<a class="sourceLine" id="cb247-3" title="3"><span class="kw">shapiro.test</span>(<span class="kw">log</span>(tonnage<span class="op">$</span>Total.Catch..kg.))</a></code></pre></div>
-<pre><code>## Error in stopifnot(is.numeric(x)): object &#39;tonnage&#39; not found</code></pre>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" title="1">broom<span class="op">::</span><span class="kw">tidy</span>(<span class="kw">t.test</span>(<span class="kw">log</span>(Total.Catch..kg.) <span class="op">~</span><span class="st"> </span>Gear.Type, <span class="dt">data =</span> tonnage))</a></code></pre></div>
-<pre><code>## Error in eval(m$data, parent.frame()): object &#39;tonnage&#39; not found</code></pre>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" title="1">lsr<span class="op">::</span><span class="kw">cohensD</span>(<span class="kw">log</span>(Total.Catch..kg.) <span class="op">~</span><span class="st"> </span>Gear.Type, <span class="dt">data =</span> tonnage)</a></code></pre></div>
-<pre><code>## Error in is(data, &quot;data.frame&quot;): object &#39;tonnage&#39; not found</code></pre>
 </div>
-<div id="diverisity-of-prey-families-found-in-fisheries-catch" class="section level2">
-<h2><span class="header-section-number">7.3</span> Diverisity of prey families found in fisheries catch</h2>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" title="1"><span class="co">#Creating data martix</span></a>
-<a class="sourceLine" id="cb253-2" title="2"></a>
-<a class="sourceLine" id="cb253-3" title="3">catch_fam &lt;-<span class="st"> </span>catch<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb253-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Family <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb253-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb253-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Sample.Wt =</span> <span class="kw">sum</span>(Weight.g, <span class="dt">na.rm =</span> T))<span class="op">%&gt;%</span><span class="co">#Total sampled biomass</span></a>
-<a class="sourceLine" id="cb253-7" title="7"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample, Family)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb253-8" title="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Biomass =</span> <span class="kw">sum</span>(Weight.g, <span class="dt">na.rm =</span> T),<span class="co">#weight of each fish family in catch</span></a>
-<a class="sourceLine" id="cb253-9" title="9">            <span class="dt">Prey =</span> <span class="kw">last</span>(<span class="kw">ifelse</span>(Family<span class="op">%in%</span>gutcontent<span class="op">$</span>Prey.Family, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>)),</a>
-<a class="sourceLine" id="cb253-10" title="10">            <span class="dt">Sample.Wt =</span> <span class="kw">last</span>(Sample.Wt))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb253-11" title="11"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Rel.biomass =</span> Biomass<span class="op">/</span>Sample.Wt)<span class="co">#%&gt;%#relative propotion of fish family in sample</span></a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;catch&#39; not found</code></pre>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" title="1">  <span class="co">#group_by(Gear.Type, Family)%&gt;%</span></a>
-<a class="sourceLine" id="cb255-2" title="2">  <span class="co">#summarise(Avg.rel.biomass = sum(Rel.biomass)/n(), Prey = last(Prey))</span></a>
-<a class="sourceLine" id="cb255-3" title="3"></a>
-<a class="sourceLine" id="cb255-4" title="4"><span class="co">#Richness</span></a>
-<a class="sourceLine" id="cb255-5" title="5"></a>
-<a class="sourceLine" id="cb255-6" title="6">catch<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb255-7" title="7"><span class="st">  </span><span class="kw">filter</span>(Family <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb255-8" title="8"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb255-9" title="9"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Family.Richness =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Family)))</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;catch&#39; not found</code></pre>
+<div id="difference-in-catch-landed-per-trip-by-gear" class="section level2">
+<h2><span class="header-section-number">7.2</span> Difference in catch landed per trip by gear</h2>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="co"># importing catch weight data</span></a>
+<a class="sourceLine" id="cb53-2" title="2"></a>
+<a class="sourceLine" id="cb53-3" title="3">tonnage &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./Data/catch tonnage.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb53-4" title="4"></a>
+<a class="sourceLine" id="cb53-5" title="5"><span class="co"># Testing assumption of normality</span></a>
+<a class="sourceLine" id="cb53-6" title="6"></a>
+<a class="sourceLine" id="cb53-7" title="7">broom<span class="op">::</span><span class="kw">tidy</span>(<span class="kw">shapiro.test</span>(<span class="kw">log</span>(tonnage<span class="op">$</span>Total.Catch..kg.)))</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.966559</td>
+<td align="right">0.0203415</td>
+<td align="left">Shapiro-Wilk normality test</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="co"># Test</span></a>
+<a class="sourceLine" id="cb54-2" title="2"></a>
+<a class="sourceLine" id="cb54-3" title="3">broom<span class="op">::</span><span class="kw">tidy</span>(<span class="kw">t.test</span>(<span class="kw">log</span>(Total.Catch..kg.) <span class="op">~</span><span class="st"> </span>Gear.Type, <span class="dt">data =</span> tonnage))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb54-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">d =</span> lsr<span class="op">::</span><span class="kw">cohensD</span>(<span class="kw">log</span>(Total.Catch..kg.) <span class="op">~</span><span class="st"> </span>Gear.Type, <span class="dt">data =</span> tonnage))<span class="op">%&gt;%</span><span class="co"># effect size</span></a>
+<a class="sourceLine" id="cb54-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(estimate1<span class="op">:</span>p.value, d)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb54-6" title="6"><span class="st">  </span><span class="co"># inverse log</span></a>
+<a class="sourceLine" id="cb54-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">estimate1 =</span> <span class="kw">exp</span>(estimate1),</a>
+<a class="sourceLine" id="cb54-8" title="8">         <span class="dt">estimate2 =</span> <span class="kw">exp</span>(estimate2))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb54-9" title="9"><span class="st">  </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">Gill net</span><span class="st">`</span> =<span class="st"> </span>estimate1,</a>
+<a class="sourceLine" id="cb54-10" title="10">         <span class="dt">Trawler =</span> estimate2)</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="right">Gill net</th>
+<th align="right">Trawler</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">d</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">98.09173</td>
+<td align="right">226.0161</td>
+<td align="right">-3.896286</td>
+<td align="right">0.0002104</td>
+<td align="right">0.8447173</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Trawlers landed significantly higher catches per trip than gill nets.</p>
+<p><strong>Note:</strong> Total catch landed per trip in kgs was log transformed for normality.</p>
+</div>
+<div id="richness-of-fish-families-found-in-fisheries-catch" class="section level2">
+<h2><span class="header-section-number">7.3</span> Richness of fish families found in fisheries catch</h2>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="co">#Richness</span></a>
+<a class="sourceLine" id="cb55-2" title="2"></a>
+<a class="sourceLine" id="cb55-3" title="3">catch<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb55-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Family <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb55-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb55-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Family.Richness =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Family)))</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Gear.Type</th>
+<th align="right">Family.Richness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gill Net</td>
+<td align="right">15</td>
+</tr>
+<tr class="even">
+<td align="left">Trawler</td>
+<td align="right">48</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="no.-of-sea-snake-prey-families-found-in-fish-catch-and-overlap" class="section level2">
 <h2><span class="header-section-number">7.4</span> No. of Sea snake prey families found in fish catch and overlap</h2>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" title="1">gc.hs &lt;-<span class="st"> </span><span class="kw">filter</span>(gutcontent, Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in filter(gutcontent, Snake.Species == &quot;Hydrophis schistosus&quot;): object &#39;gutcontent&#39; not found</code></pre>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" title="1">gc.hc &lt;-<span class="st"> </span><span class="kw">filter</span>(gutcontent, Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in filter(gutcontent, Snake.Species == &quot;Hydrophis curtus&quot;): object &#39;gutcontent&#39; not found</code></pre>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" title="1">catch_fam =<span class="st"> </span>catch_fam<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb261-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">HS =</span> <span class="kw">if_else</span>(Family<span class="op">%in%</span>gc.hs<span class="op">$</span>Prey.Family, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>),</a>
-<a class="sourceLine" id="cb261-3" title="3">         <span class="dt">HC=</span> <span class="kw">if_else</span>(Family<span class="op">%in%</span>gc.hc<span class="op">$</span>Prey.Family, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;catch_fam&#39; not found</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" title="1"><span class="co"># number of prey families caught by each gear</span></a>
-<a class="sourceLine" id="cb263-2" title="2">catch_fam<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb263-3" title="3"><span class="st">  </span><span class="kw">gather</span>(<span class="kw">c</span>(<span class="st">&quot;HC&quot;</span>, <span class="st">&quot;HS&quot;</span>), <span class="dt">key =</span> <span class="st">&quot;snake&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;Prey&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb263-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Prey <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb263-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, snake)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb263-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Nfam =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Family)))</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;catch_fam&#39; not found</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" title="1"><span class="co"># prey of each species as relative proportion in fisheries catch</span></a>
-<a class="sourceLine" id="cb265-2" title="2"></a>
-<a class="sourceLine" id="cb265-3" title="3">catch_fam<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb265-4" title="4"><span class="st">  </span><span class="kw">gather</span>(<span class="kw">c</span>(<span class="st">&quot;HC&quot;</span>, <span class="st">&quot;HS&quot;</span>), <span class="dt">key =</span> snake, <span class="dt">value =</span> Prey)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb265-5" title="5"><span class="st">  </span><span class="kw">filter</span>(Prey <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb265-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample, snake)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb265-7" title="7"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Family)),</a>
-<a class="sourceLine" id="cb265-8" title="8">            <span class="dt">Biomass =</span> <span class="kw">sum</span>(Biomass),</a>
-<a class="sourceLine" id="cb265-9" title="9">            <span class="dt">Sample.Wt =</span> <span class="kw">last</span>(Sample.Wt),</a>
-<a class="sourceLine" id="cb265-10" title="10">            <span class="dt">rel.prop =</span> Biomass<span class="op">/</span>Sample.Wt)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb265-11" title="11"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, snake)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb265-12" title="12"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Mean.prop =</span> <span class="kw">mean</span>(rel.prop))</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;catch_fam&#39; not found</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1"><span class="co"># is the proportion of HC prey greater than that of HS in catch</span></a>
-<a class="sourceLine" id="cb267-2" title="2"><span class="co"># do trawlers have a higher overlap with sea snakes than gillnets</span></a>
-<a class="sourceLine" id="cb267-3" title="3"></a>
-<a class="sourceLine" id="cb267-4" title="4">catch_fam<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb267-5" title="5"><span class="st">  </span><span class="kw">gather</span>(<span class="kw">c</span>(<span class="st">&quot;HC&quot;</span>, <span class="st">&quot;HS&quot;</span>), <span class="dt">key =</span> snake, <span class="dt">value =</span> Prey)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb267-6" title="6"><span class="st">  </span><span class="kw">filter</span>(Prey <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb267-7" title="7"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample, snake)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb267-8" title="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Biomass =</span> <span class="kw">sum</span>(Biomass),</a>
-<a class="sourceLine" id="cb267-9" title="9">            <span class="dt">Sample.Wt =</span> <span class="kw">last</span>(Sample.Wt),</a>
-<a class="sourceLine" id="cb267-10" title="10">            <span class="dt">rel.prop =</span> Biomass<span class="op">/</span>Sample.Wt)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb267-11" title="11"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb267-12" title="12"><span class="st">  </span><span class="kw">nest</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb267-13" title="13"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ttest =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="kw">t.test</span>(rel.prop <span class="op">~</span><span class="st"> </span>snake, <span class="dt">data =</span> .)),</a>
-<a class="sourceLine" id="cb267-14" title="14">         <span class="dt">sumry =</span> <span class="kw">map</span>(ttest, broom<span class="op">::</span>tidy),</a>
-<a class="sourceLine" id="cb267-15" title="15">         <span class="dt">d =</span> <span class="kw">map</span>(data, <span class="op">~</span>lsr<span class="op">::</span><span class="kw">cohensD</span>(rel.prop <span class="op">~</span><span class="st"> </span>snake, <span class="dt">data =</span> .)))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb267-16" title="16"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(sumry, d)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb267-17" title="17"><span class="st">  </span><span class="kw">unnest</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb267-18" title="18"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Gear.Type<span class="op">:</span>p.value, d)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb267-19" title="19"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">HC =</span> estimate1,</a>
-<a class="sourceLine" id="cb267-20" title="20">         <span class="dt">HS =</span> estimate2)</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;catch_fam&#39; not found</code></pre>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" title="1">catch_fam<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb269-2" title="2"><span class="st">  </span><span class="kw">gather</span>(<span class="kw">c</span>(<span class="st">&quot;HC&quot;</span>, <span class="st">&quot;HS&quot;</span>), <span class="dt">key =</span> snake, <span class="dt">value =</span> Prey)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb269-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Prey <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb269-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample, snake)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb269-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Biomass =</span> <span class="kw">sum</span>(Biomass),</a>
-<a class="sourceLine" id="cb269-6" title="6">            <span class="dt">Sample.Wt =</span> <span class="kw">last</span>(Sample.Wt),</a>
-<a class="sourceLine" id="cb269-7" title="7">            <span class="dt">rel.prop =</span> Biomass<span class="op">/</span>Sample.Wt)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb269-8" title="8"><span class="st">  </span><span class="kw">group_by</span>(snake)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb269-9" title="9"><span class="st">  </span><span class="kw">nest</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb269-10" title="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ttest =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="kw">t.test</span>(rel.prop <span class="op">~</span><span class="st"> </span>Gear.Type, <span class="dt">data =</span> .)),</a>
-<a class="sourceLine" id="cb269-11" title="11">         <span class="dt">sumry =</span> <span class="kw">map</span>(ttest, broom<span class="op">::</span>tidy),</a>
-<a class="sourceLine" id="cb269-12" title="12">         <span class="dt">d =</span> <span class="kw">map</span>(data, <span class="op">~</span>lsr<span class="op">::</span><span class="kw">cohensD</span>(rel.prop <span class="op">~</span><span class="st"> </span>Gear.Type, <span class="dt">data =</span> .)))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb269-13" title="13"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(sumry, d)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb269-14" title="14"><span class="st">  </span><span class="kw">unnest</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb269-15" title="15"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(snake<span class="op">:</span>p.value, d)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb269-16" title="16"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">GN =</span> estimate1,</a>
-<a class="sourceLine" id="cb269-17" title="17">         <span class="dt">TR =</span> estimate2)</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;catch_fam&#39; not found</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="co"># Creating separate prey data frame for each species</span></a>
+<a class="sourceLine" id="cb56-2" title="2"></a>
+<a class="sourceLine" id="cb56-3" title="3">gc.hs &lt;-<span class="st"> </span><span class="kw">filter</span>(gutcontent, Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span>)</a>
+<a class="sourceLine" id="cb56-4" title="4"></a>
+<a class="sourceLine" id="cb56-5" title="5">gc.hc &lt;-<span class="st"> </span><span class="kw">filter</span>(gutcontent, Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>)</a>
+<a class="sourceLine" id="cb56-6" title="6"></a>
+<a class="sourceLine" id="cb56-7" title="7"><span class="co"># Creating data martix for fisheries catch</span></a>
+<a class="sourceLine" id="cb56-8" title="8"></a>
+<a class="sourceLine" id="cb56-9" title="9">catch_fam &lt;-<span class="st"> </span>catch<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-10" title="10"><span class="st">  </span><span class="co"># removing unidentified speciemens</span></a>
+<a class="sourceLine" id="cb56-11" title="11"><span class="st">  </span><span class="kw">filter</span>(Family <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-12" title="12"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-13" title="13"><span class="st">  </span><span class="co"># Calculating total weight per sample</span></a>
+<a class="sourceLine" id="cb56-14" title="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Sample.Wt =</span> <span class="kw">sum</span>(Weight.g, <span class="dt">na.rm =</span> T))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-15" title="15"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample, Family)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-16" title="16"><span class="st">  </span><span class="co"># Weight of each fish family in catch</span></a>
+<a class="sourceLine" id="cb56-17" title="17"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Biomass =</span> <span class="kw">sum</span>(Weight.g, <span class="dt">na.rm =</span> T),</a>
+<a class="sourceLine" id="cb56-18" title="18">            <span class="co"># Marking sea snake prey families</span></a>
+<a class="sourceLine" id="cb56-19" title="19">            <span class="dt">Prey =</span> <span class="kw">last</span>(<span class="kw">ifelse</span>(Family<span class="op">%in%</span>gutcontent<span class="op">$</span>Prey.Family, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>)),</a>
+<a class="sourceLine" id="cb56-20" title="20">            <span class="dt">Sample.Wt =</span> <span class="kw">last</span>(Sample.Wt))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-21" title="21"><span class="st">  </span><span class="co"># Caluclating relative proportion in catch</span></a>
+<a class="sourceLine" id="cb56-22" title="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Rel.biomass =</span> Biomass<span class="op">/</span>Sample.Wt)<span class="co">#%&gt;%</span></a>
+<a class="sourceLine" id="cb56-23" title="23"></a>
+<a class="sourceLine" id="cb56-24" title="24"><span class="co">## Adding sea snake species</span></a>
+<a class="sourceLine" id="cb56-25" title="25"></a>
+<a class="sourceLine" id="cb56-26" title="26">catch_fam =<span class="st"> </span>catch_fam<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-27" title="27"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">HS =</span> <span class="kw">if_else</span>(Family<span class="op">%in%</span>gc.hs<span class="op">$</span>Prey.Family, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>),</a>
+<a class="sourceLine" id="cb56-28" title="28">         <span class="dt">HC=</span> <span class="kw">if_else</span>(Family<span class="op">%in%</span>gc.hc<span class="op">$</span>Prey.Family, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</a>
+<a class="sourceLine" id="cb56-29" title="29"></a>
+<a class="sourceLine" id="cb56-30" title="30"><span class="co"># number of prey families caught by each gear</span></a>
+<a class="sourceLine" id="cb56-31" title="31"></a>
+<a class="sourceLine" id="cb56-32" title="32">catch_fam<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-33" title="33"><span class="st">  </span><span class="kw">gather</span>(<span class="kw">c</span>(<span class="st">&quot;HC&quot;</span>, <span class="st">&quot;HS&quot;</span>), <span class="dt">key =</span> <span class="st">&quot;Snake species&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;Prey&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-34" title="34"><span class="st">  </span><span class="kw">filter</span>(Prey <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-35" title="35"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, <span class="st">`</span><span class="dt">Snake species</span><span class="st">`</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-36" title="36"><span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">Prey Family Overlap</span><span class="st">`</span> =<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(Family)))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-37" title="37"><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">Snake species</span><span class="st">`</span> =<span class="st"> </span><span class="kw">ifelse</span>(<span class="st">`</span><span class="dt">Snake species</span><span class="st">`</span> <span class="op">==</span><span class="st"> &quot;HC&quot;</span>, <span class="st">&quot;Hydrophis curtus&quot;</span>, <span class="st">&quot;Hydrophis schistosus&quot;</span>))</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Gear.Type</th>
+<th align="left">Snake species</th>
+<th align="right">Prey Family Overlap</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gill Net</td>
+<td align="left">Hydrophis curtus</td>
+<td align="right">7</td>
+</tr>
+<tr class="even">
+<td align="left">Gill Net</td>
+<td align="left">Hydrophis schistosus</td>
+<td align="right">7</td>
+</tr>
+<tr class="odd">
+<td align="left">Trawler</td>
+<td align="left">Hydrophis curtus</td>
+<td align="right">9</td>
+</tr>
+<tr class="even">
+<td align="left">Trawler</td>
+<td align="left">Hydrophis schistosus</td>
+<td align="right">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Trawlers caught more sea snake prey families than gillnets.</p>
+</div>
+<div id="relative-proportion-of-sea-snake-prey-in-fisheries-catch" class="section level2">
+<h2><span class="header-section-number">7.5</span> Relative proportion of sea snake prey in fisheries catch</h2>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co"># prey of each species as relative proportion in fisheries catch</span></a>
+<a class="sourceLine" id="cb57-2" title="2"></a>
+<a class="sourceLine" id="cb57-3" title="3">catch_fam<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb57-4" title="4"><span class="st">  </span><span class="kw">gather</span>(<span class="kw">c</span>(<span class="st">&quot;HC&quot;</span>, <span class="st">&quot;HS&quot;</span>), <span class="dt">key =</span> snake, <span class="dt">value =</span> Prey)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb57-5" title="5"><span class="st">  </span><span class="kw">filter</span>(Prey <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb57-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample, snake)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb57-7" title="7"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Family)),</a>
+<a class="sourceLine" id="cb57-8" title="8">            <span class="dt">Biomass =</span> <span class="kw">sum</span>(Biomass),</a>
+<a class="sourceLine" id="cb57-9" title="9">            <span class="dt">Sample.Wt =</span> <span class="kw">last</span>(Sample.Wt),</a>
+<a class="sourceLine" id="cb57-10" title="10">            <span class="dt">rel.prop =</span> Biomass<span class="op">/</span>Sample.Wt)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb57-11" title="11"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, snake)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb57-12" title="12"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Mean.prop =</span> <span class="kw">mean</span>(rel.prop))</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Gear.Type</th>
+<th align="left">snake</th>
+<th align="right">Mean.prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gill Net</td>
+<td align="left">HC</td>
+<td align="right">0.8204191</td>
+</tr>
+<tr class="even">
+<td align="left">Gill Net</td>
+<td align="left">HS</td>
+<td align="right">0.8188879</td>
+</tr>
+<tr class="odd">
+<td align="left">Trawler</td>
+<td align="left">HC</td>
+<td align="right">0.7356892</td>
+</tr>
+<tr class="even">
+<td align="left">Trawler</td>
+<td align="left">HS</td>
+<td align="right">0.4842906</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Sea snake prey consisted of a greater proportion of gillnet catch than trawler catch on average.</p>
+</div>
+<div id="is-the-proportion-of-h.-curtus-prey-greater-than-that-of-h.-schistosus-in-catch" class="section level2">
+<h2><span class="header-section-number">7.6</span> Is the proportion of <em>H. curtus</em> prey greater than that of <em>H. schistosus</em> in catch?</h2>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">catch_fam<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="st">  </span><span class="kw">gather</span>(<span class="kw">c</span>(<span class="st">&quot;HC&quot;</span>, <span class="st">&quot;HS&quot;</span>), <span class="dt">key =</span> snake, <span class="dt">value =</span> Prey)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Prey <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample, snake)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Biomass =</span> <span class="kw">sum</span>(Biomass),</a>
+<a class="sourceLine" id="cb58-6" title="6">            <span class="dt">Sample.Wt =</span> <span class="kw">last</span>(Sample.Wt),</a>
+<a class="sourceLine" id="cb58-7" title="7">            <span class="dt">rel.prop =</span> Biomass<span class="op">/</span>Sample.Wt)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-8" title="8"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-9" title="9"><span class="st">  </span><span class="kw">nest</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-10" title="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ttest =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="kw">t.test</span>(rel.prop <span class="op">~</span><span class="st"> </span>snake, <span class="dt">data =</span> .)),</a>
+<a class="sourceLine" id="cb58-11" title="11">         <span class="dt">sumry =</span> <span class="kw">map</span>(ttest, broom<span class="op">::</span>tidy),</a>
+<a class="sourceLine" id="cb58-12" title="12">         <span class="dt">d =</span> <span class="kw">map</span>(data, <span class="op">~</span>lsr<span class="op">::</span><span class="kw">cohensD</span>(rel.prop <span class="op">~</span><span class="st"> </span>snake, <span class="dt">data =</span> .)))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-13" title="13"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(sumry, d)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-14" title="14"><span class="st">  </span><span class="kw">unnest</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-15" title="15"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Gear.Type<span class="op">:</span>p.value, d, <span class="op">-</span>estimate)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb58-16" title="16"><span class="st">  </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">H. curtus</span><span class="st">`</span> =<span class="st"> </span>estimate1,</a>
+<a class="sourceLine" id="cb58-17" title="17">         <span class="st">`</span><span class="dt">H. schistosus</span><span class="st">`</span> =<span class="st"> </span>estimate2)</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Gear.Type</th>
+<th align="right">H. curtus</th>
+<th align="right">H. schistosus</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">d</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gill Net</td>
+<td align="right">0.8204191</td>
+<td align="right">0.8188879</td>
+<td align="right">0.0412568</td>
+<td align="right">0.9672023</td>
+<td align="right">0.0094650</td>
+</tr>
+<tr class="even">
+<td align="left">Trawler</td>
+<td align="right">0.7356892</td>
+<td align="right">0.4842906</td>
+<td align="right">7.0245510</td>
+<td align="right">0.0000000</td>
+<td align="right">0.8885814</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Yes, for trawlers.</p>
+</div>
+<div id="do-trawlers-have-a-greater-trophic-overlap-with-sea-snakes-than-gillnets" class="section level2">
+<h2><span class="header-section-number">7.7</span> Do trawlers have a greater trophic overlap with sea snakes than gillnets?</h2>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">catch_fam<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-2" title="2"><span class="st">  </span><span class="kw">gather</span>(<span class="kw">c</span>(<span class="st">&quot;HC&quot;</span>, <span class="st">&quot;HS&quot;</span>), <span class="dt">key =</span> snake, <span class="dt">value =</span> Prey)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Prey <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Sample, snake)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Biomass =</span> <span class="kw">sum</span>(Biomass),</a>
+<a class="sourceLine" id="cb59-6" title="6">            <span class="dt">Sample.Wt =</span> <span class="kw">last</span>(Sample.Wt),</a>
+<a class="sourceLine" id="cb59-7" title="7">            <span class="dt">rel.prop =</span> Biomass<span class="op">/</span>Sample.Wt)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-8" title="8"><span class="st">  </span><span class="kw">group_by</span>(snake)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-9" title="9"><span class="st">  </span><span class="kw">nest</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-10" title="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ttest =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="kw">t.test</span>(rel.prop <span class="op">~</span><span class="st"> </span>Gear.Type, <span class="dt">data =</span> .)),</a>
+<a class="sourceLine" id="cb59-11" title="11">         <span class="dt">sumry =</span> <span class="kw">map</span>(ttest, broom<span class="op">::</span>tidy),</a>
+<a class="sourceLine" id="cb59-12" title="12">         <span class="dt">d =</span> <span class="kw">map</span>(data, <span class="op">~</span>lsr<span class="op">::</span><span class="kw">cohensD</span>(rel.prop <span class="op">~</span><span class="st"> </span>Gear.Type, <span class="dt">data =</span> .)))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-13" title="13"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(sumry, d)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-14" title="14"><span class="st">  </span><span class="kw">unnest</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-15" title="15"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(snake<span class="op">:</span>p.value, d, <span class="op">-</span>estimate)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-16" title="16"><span class="st">  </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">Gill net</span><span class="st">`</span> =<span class="st"> </span>estimate1,</a>
+<a class="sourceLine" id="cb59-17" title="17">         <span class="dt">Trawler =</span> estimate2)</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">snake</th>
+<th align="right">Gill net</th>
+<th align="right">Trawler</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">d</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">HC</td>
+<td align="right">0.8204191</td>
+<td align="right">0.7356892</td>
+<td align="right">2.469163</td>
+<td align="right">0.0153629</td>
+<td align="right">0.3588295</td>
+</tr>
+<tr class="even">
+<td align="left">HS</td>
+<td align="right">0.8188879</td>
+<td align="right">0.4842906</td>
+<td align="right">8.695296</td>
+<td align="right">0.0000000</td>
+<td align="right">1.1771718</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Yes.</p>
 </div>
 <div id="sea-snake-prey-species-in-fisheries-catch" class="section level2">
-<h2><span class="header-section-number">7.5</span> Sea snake prey species in fisheries catch</h2>
-<p>Species constituting &gt;10% of the catch on average are represented</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" title="1">catch_fam<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb271-2" title="2"><span class="st">  </span><span class="kw">gather</span>(<span class="kw">c</span>(<span class="st">&quot;HC&quot;</span>, <span class="st">&quot;HS&quot;</span>), <span class="dt">key =</span> <span class="st">&quot;snake&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;Prey&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb271-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Prey <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb271-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Family)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb271-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Family)), </a>
-<a class="sourceLine" id="cb271-6" title="6">            <span class="dt">p =</span> <span class="kw">mean</span>(Rel.biomass, <span class="dt">na.rm =</span> T))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb271-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">reorder</span>(Family, p), p))<span class="op">+</span></a>
-<a class="sourceLine" id="cb271-8" title="8"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">width =</span> <span class="fl">0.5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb271-9" title="9"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Greys&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb271-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fish Family&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Average proportion in catch&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb271-11" title="11"><span class="st">  </span><span class="kw">scale_y_sqrt</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb271-12" title="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb271-13" title="13"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Gear.Type, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;catch_fam&#39; not found</code></pre>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" title="1"><span class="kw">ggsave</span>(<span class="kw">last_plot</span>(), <span class="dt">filename =</span> <span class="st">&quot;../Figures and Tables/fig5.png&quot;</span>, <span class="dt">height =</span> <span class="dv">8</span>, <span class="dt">width =</span> <span class="dv">8</span>)</a></code></pre></div>
-<pre><code>## Error in grDevices::png(..., res = dpi, units = &quot;in&quot;): unable to start png() device</code></pre>
+<h2><span class="header-section-number">7.8</span> Sea snake prey species in fisheries catch</h2>
+<p>Species constituting &gt;10% of the catch on average are represented.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">catch_fam<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-2" title="2"><span class="st">  </span><span class="kw">gather</span>(<span class="kw">c</span>(<span class="st">&quot;HC&quot;</span>, <span class="st">&quot;HS&quot;</span>), <span class="dt">key =</span> <span class="st">&quot;snake&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;Prey&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Prey <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Gear.Type, Family)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Family)), </a>
+<a class="sourceLine" id="cb60-6" title="6">            <span class="dt">p =</span> <span class="kw">mean</span>(Rel.biomass, <span class="dt">na.rm =</span> T))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">reorder</span>(Family, p), p))<span class="op">+</span></a>
+<a class="sourceLine" id="cb60-8" title="8"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">width =</span> <span class="fl">0.5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb60-9" title="9"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Greys&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb60-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fish Family&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Average proportion in catch&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb60-11" title="11"><span class="st">  </span><span class="kw">scale_y_sqrt</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb60-12" title="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb60-13" title="13"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Gear.Type, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-49-1.png" width="2400" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="kw">ggsave</span>(<span class="kw">last_plot</span>(), <span class="dt">filename =</span> <span class="st">&quot;./Figures and Tables/figure5.png&quot;</span>, <span class="dt">height =</span> <span class="dv">8</span>, <span class="dt">width =</span> <span class="dv">8</span>)</a></code></pre></div>
 
 </div>
 </div>
@@ -421,6 +1273,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

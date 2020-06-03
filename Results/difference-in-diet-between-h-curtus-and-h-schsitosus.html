@@ -24,7 +24,7 @@
 <meta name="author" content="Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker" />
 
 
-<meta name="date" content="2020-05-28" />
+<meta name="date" content="2020-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,600 @@
 
 
 
+<script>
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+        
+        <script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+        
+        <script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
+  rCodeBlocks.each(function() {
+
+    // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Code');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide');
+    });
+  });
+
+}
+</script>
+        
+        <script>
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.3.7
+ * http://getbootstrap.com/javascript/#dropdowns
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle="dropdown"]'
+  var Dropdown = function (element) {
+    $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.VERSION = '3.3.7'
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+  function clearMenus(e) {
+    if (e && e.which === 3) return
+    $(backdrop).remove()
+    $(toggle).each(function () {
+      var $this         = $(this)
+      var $parent       = getParent($this)
+      var relatedTarget = { relatedTarget: this }
+
+      if (!$parent.hasClass('open')) return
+
+      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this.attr('aria-expanded', 'false')
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+    })
+  }
+
+  Dropdown.prototype.toggle = function (e) {
+    var $this = $(this)
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    clearMenus()
+
+    if (!isActive) {
+      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
+        // if mobile we use a backdrop because click events don't delegate
+        $(document.createElement('div'))
+          .addClass('dropdown-backdrop')
+          .insertAfter($(this))
+          .on('click', clearMenus)
+      }
+
+      var relatedTarget = { relatedTarget: this }
+      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this
+        .trigger('focus')
+        .attr('aria-expanded', 'true')
+
+      $parent
+        .toggleClass('open')
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
+    }
+
+    return false
+  }
+
+  Dropdown.prototype.keydown = function (e) {
+    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
+
+    var $this = $(this)
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    if (!isActive && e.which != 27 || isActive && e.which == 27) {
+      if (e.which == 27) $parent.find(toggle).trigger('focus')
+      return $this.trigger('click')
+    }
+
+    var desc = ' li:not(.disabled):visible a'
+    var $items = $parent.find('.dropdown-menu' + desc)
+
+    if (!$items.length) return
+
+    var index = $items.index(e.target)
+
+    if (e.which == 38 && index > 0)                 index--         // up
+    if (e.which == 40 && index < $items.length - 1) index++         // down
+    if (!~index)                                    index = 0
+
+    $items.eq(index).trigger('focus')
+  }
+
+
+  // DROPDOWN PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.dropdown')
+
+      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown             = Plugin
+  $.fn.dropdown.Constructor = Dropdown
+
+
+  // DROPDOWN NO CONFLICT
+  // ====================
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  // APPLY TO STANDARD DROPDOWN ELEMENTS
+  // ===================================
+
+  $(document)
+    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
+    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
+
+}(jQuery);
+</script>
+        
+        <style type="text/css">
+        
+        .code-folding-btn { margin-bottom: 4px; }
+        .row { display: flex; }
+        .collapse { display: none; }
+        .in { display:block }
+        .pull-right > 
+        .dropdown-menu {
+          right: 0; 
+          left: auto;
+        }
+        .open > 
+        .dropdown-menu {display: block;}
+        .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 160px;
+        padding: 5px 0;
+        margin: 2px 0 0;
+        font-size: 14px;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #ccc; 
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
+        
+        </style>
+        
+        <script>
+        
+        $(document).ready(function () {
+        window.initializeCodeFolding("show" === "hide");
+        });
+        
+        </script>
+
+        
+        <script>
+        
+        document.write('
+        
+        <div class="btn-group pull-right" style="position: absolute; top: 20%; right: 2%; z-index: 200">
+        
+        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast="">
+        
+        <span>
+        
+        Code
+        
+        </span> 
+        
+        <span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;">
+        
+        <li>
+        
+        <a id="rmd-show-all-code" href="#">
+        
+        Show All Code
+        
+        </a>
+        
+        </li>
+        
+        <li>
+        
+        <a id="rmd-hide-all-code" href="#">
+        
+        Hide All Code
+        
+        </a>
+        
+        </li>
+        
+        </ul>
+        
+        </div>')
+        
+        </script>
 
 
 <style type="text/css">
@@ -128,26 +722,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><i class="fa fa-check"></i><b>2</b> DIfference in distribution and habitat use between <em>H. curtus</em> and <em>H. shcistosus</em></a><ul>
-<li class="chapter" data-level="2.1" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mapping-sea-snake-distribution-with-fisheries-survey-data"><i class="fa fa-check"></i><b>2.1</b> Mapping sea snake distribution with fisheries survey data</a></li>
-<li class="chapter" data-level="2.2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#summarising-depth-use-by-species"><i class="fa fa-check"></i><b>2.2</b> Summarising depth use by species</a></li>
-<li class="chapter" data-level="2.3" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#spatial-segregation-by-species"><i class="fa fa-check"></i><b>2.3</b> Spatial segregation by species</a></li>
-<li class="chapter" data-level="2.4" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#modelling-depth-use-by-species"><i class="fa fa-check"></i><b>2.4</b> Modelling depth use by species</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#citation"><i class="fa fa-check"></i><b>1.1</b> Citation</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><i class="fa fa-check"></i><b>2</b> Difference in distribution and habitat use between <em>H. curtus</em> and <em>H. shcistosus</em></a><ul>
+<li class="chapter" data-level="2.1" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#calculating-abundance-of-sea-snakes-per-fishing-trip"><i class="fa fa-check"></i><b>2.1</b> Calculating abundance of sea snakes per fishing trip</a></li>
+<li class="chapter" data-level="2.2" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#sample-size"><i class="fa fa-check"></i><b>2.2</b> Sample size</a></li>
+<li class="chapter" data-level="2.3" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#geocoding-fishing-trips"><i class="fa fa-check"></i><b>2.3</b> Geocoding fishing trips</a></li>
+<li class="chapter" data-level="2.4" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mean-cpue-by-species"><i class="fa fa-check"></i><b>2.4</b> Mean CPUE by species</a></li>
+<li class="chapter" data-level="2.5" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#area-used-by-species"><i class="fa fa-check"></i><b>2.5</b> Area used by species</a></li>
+<li class="chapter" data-level="2.6" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#mapping-sea-snake-distributions"><i class="fa fa-check"></i><b>2.6</b> Mapping sea snake distributions</a></li>
+<li class="chapter" data-level="2.7" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#summarising-depth-use-by-species"><i class="fa fa-check"></i><b>2.7</b> Summarising depth use by species</a></li>
+<li class="chapter" data-level="2.8" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#spatial-segregation-by-species"><i class="fa fa-check"></i><b>2.8</b> Spatial segregation by species</a></li>
+<li class="chapter" data-level="2.9" data-path="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"><a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html#modelling-depth-use-by-species"><i class="fa fa-check"></i><b>2.9</b> Modelling depth use by species</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><i class="fa fa-check"></i><b>3</b> DIfference in diet between <em>H. curtus</em> and <em>H. schsitosus</em></a><ul>
 <li class="chapter" data-level="3.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#no.-of-samples-collected-by-sea-snake-species"><i class="fa fa-check"></i><b>3.1</b> No. of samples collected by sea snake species</a></li>
 <li class="chapter" data-level="3.2" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#proportion-of-unidentified-specimens"><i class="fa fa-check"></i><b>3.2</b> Proportion of unidentified specimens</a></li>
-<li class="chapter" data-level="3.3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diverisity-of-prey-families-found-in-gut-content"><i class="fa fa-check"></i><b>3.3</b> Diverisity of prey families found in gut content</a></li>
-<li class="chapter" data-level="3.4" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#list-of-sea-snake-prey-species"><i class="fa fa-check"></i><b>3.4</b> List of sea snake prey species</a></li>
-<li class="chapter" data-level="3.5" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#relative-abundance-of-prey-families-in-sea-snake-gut-content"><i class="fa fa-check"></i><b>3.5</b> Relative abundance of prey families in sea snake gut content</a></li>
-<li class="chapter" data-level="3.6" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diverisity-of-prey-families-found-in-gut-content-1"><i class="fa fa-check"></i><b>3.6</b> Diverisity of prey families found in gut content</a></li>
-<li class="chapter" data-level="3.7" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#overlap-in-prey-of-h.-curtus-and-h.-schsitosus"><i class="fa fa-check"></i><b>3.7</b> Overlap in prey of <em>H. curtus</em> and <em>H. schsitosus</em></a></li>
-<li class="chapter" data-level="3.8" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-preference"><i class="fa fa-check"></i><b>3.8</b> Prey preference</a></li>
-<li class="chapter" data-level="3.9" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#selectivity-of-prey-sizes"><i class="fa fa-check"></i><b>3.9</b> Selectivity of prey sizes</a></li>
+<li class="chapter" data-level="3.3" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-preference"><i class="fa fa-check"></i><b>3.3</b> Prey preference</a></li>
+<li class="chapter" data-level="3.4" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#range-of-prey-found-in-h.-curtus-and-h.-shistosus-gut"><i class="fa fa-check"></i><b>3.4</b> Range of prey found in <em>H. curtus</em> and <em>H. shistosus</em> gut</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-richness"><i class="fa fa-check"></i><b>3.4.1</b> Prey richness</a></li>
+<li class="chapter" data-level="3.4.2" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#prey-family-diversity"><i class="fa fa-check"></i><b>3.4.2</b> Prey family diversity</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>4</b> Difference in resouce use betweek <em>H. curtus</em> and <em>H. schistosus</em>?</a><ul>
-<li class="chapter" data-level="4.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#number-of-samples-analysed"><i class="fa fa-check"></i><b>4.1</b> Number of samples analysed</a></li>
+<li class="chapter" data-level="3.5" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#diet-overlap-between-h.-curtus-and-h.-shistosus"><i class="fa fa-check"></i><b>3.5</b> Diet overlap between <em>H. curtus</em> and <em>H. shistosus</em></a><ul>
+<li class="chapter" data-level="3.5.1" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#testing-segregation-in-prey-between-h.-curtus-and-h.-schistosus"><i class="fa fa-check"></i><b>3.5.1</b> Testing segregation in prey between <em>H. curtus</em> and <em>H. schistosus</em></a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="difference-in-diet-between-h-curtus-and-h-schsitosus.html"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#difference-in-size-selectivity-of-prey-between-h.-curtus-and-h.-schistosus"><i class="fa fa-check"></i><b>3.6</b> Difference in size selectivity of prey between <em>H. curtus</em> and <em>H. schistosus</em></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>4</b> Difference in resouce use betweek <em>H. curtus</em> and <em>H. schistosus</em></a><ul>
+<li class="chapter" data-level="4.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#number-of-tissue-samples-analysed"><i class="fa fa-check"></i><b>4.1</b> Number of tissue samples analysed</a></li>
 <li class="chapter" data-level="4.2" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#summary-statistics-on-carbon-and-nitrogen-stable-isotopes"><i class="fa fa-check"></i><b>4.2</b> Summary statistics on Carbon and Nitrogen stable isotopes</a></li>
 <li class="chapter" data-level="4.3" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#difference-in-niche-width-between-sea-snakes"><i class="fa fa-check"></i><b>4.3</b> Difference in niche width between sea snakes</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#maximum-likelihood-estimate-of-sea"><i class="fa fa-check"></i><b>4.3.1</b> Maximum likelihood estimate of SEA</a></li>
@@ -156,33 +759,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#visualising-posterior-ellipses-to-compare-species-isotopic-niche"><i class="fa fa-check"></i><b>4.4</b> Visualising posterior ellipses to compare species isotopic niche</a></li>
 <li class="chapter" data-level="4.5" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#relative-overlap-in-bayesian-standard-ellipses"><i class="fa fa-check"></i><b>4.5</b> Relative overlap in bayesian standard ellipses</a></li>
+<li class="chapter" data-level="4.6" data-path="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#references"><i class="fa fa-check"></i><b>4.6</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><i class="fa fa-check"></i><b>5</b> Varition in fishing intensity along the sindhudurg coast</a><ul>
 <li class="chapter" data-level="5.1" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#calculating-effort-with-depth"><i class="fa fa-check"></i><b>5.1</b> Calculating effort with depth</a></li>
-<li class="chapter" data-level="5.2" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#mapping-fishing-intensity"><i class="fa fa-check"></i><b>5.2</b> Mapping fishing intensity</a></li>
+<li class="chapter" data-level="5.2" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#geocoding-fishing-trips-1"><i class="fa fa-check"></i><b>5.2</b> Geocoding fishing trips</a></li>
+<li class="chapter" data-level="5.3" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#no.-of-trips-sampled"><i class="fa fa-check"></i><b>5.3</b> No. of trips sampled</a></li>
+<li class="chapter" data-level="5.4" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#summarising-fishing-effort-per-trip"><i class="fa fa-check"></i><b>5.4</b> Summarising fishing effort per trip</a></li>
+<li class="chapter" data-level="5.5" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#testing-difference-in-effort-by-gears"><i class="fa fa-check"></i><b>5.5</b> Testing difference in effort by gears</a></li>
+<li class="chapter" data-level="5.6" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#mapping-fishing-intensity"><i class="fa fa-check"></i><b>5.6</b> Mapping fishing intensity</a></li>
+<li class="chapter" data-level="5.7" data-path="varition-in-fishing-intensity-along-the-sindhudurg-coast.html"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#spatial-coverage-of-trawlers-and-gillnets-along-the-sindhudurg-coast"><i class="fa fa-check"></i><b>5.7</b> Spatial coverage of trawlers and gillnets along the Sindhudurg coast</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><i class="fa fa-check"></i><b>6</b> Does fishing intensity affect the distribution of <em>H. curtus</em> and <em>H. schistosus</em>?</a><ul>
-<li class="chapter" data-level="6.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#spatial-overlap-between-fisheries-and-sea-snakes"><i class="fa fa-check"></i><b>6.1</b> Spatial overlap between fisheries and sea snakes</a></li>
-<li class="chapter" data-level="6.2" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#variation-in-relative-proportion-of-hc-with-fishing-intensity"><i class="fa fa-check"></i><b>6.2</b> Variation in relative proportion of HC with fishing intensity</a></li>
+<li class="chapter" data-level="6.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#spatial-overlap-between-fisheries-and-sea-snakes"><i class="fa fa-check"></i><b>6.1</b> Spatial overlap between fisheries and sea snakes</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#testing-spatial-overlap-between-sea-snakes-and-fisheries"><i class="fa fa-check"></i><b>6.1.1</b> Testing spatial overlap between sea snakes and fisheries</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html"><i class="fa fa-check"></i><b>7</b> Overlap between fisheries catch and sea snake diet</a><ul>
-<li class="chapter" data-level="7.1" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sampling-adequacy"><i class="fa fa-check"></i><b>7.1</b> Sampling Adequacy</a></li>
-<li class="chapter" data-level="7.2" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#catch-weight"><i class="fa fa-check"></i><b>7.2</b> Catch weight</a></li>
-<li class="chapter" data-level="7.3" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#diverisity-of-prey-families-found-in-fisheries-catch"><i class="fa fa-check"></i><b>7.3</b> Diverisity of prey families found in fisheries catch</a></li>
+<li class="chapter" data-level="7.1" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sampling-adequacy-for-fisherie-catch-data"><i class="fa fa-check"></i><b>7.1</b> Sampling Adequacy for fisherie catch data</a></li>
+<li class="chapter" data-level="7.2" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#difference-in-catch-landed-per-trip-by-gear"><i class="fa fa-check"></i><b>7.2</b> Difference in catch landed per trip by gear</a></li>
+<li class="chapter" data-level="7.3" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#richness-of-fish-families-found-in-fisheries-catch"><i class="fa fa-check"></i><b>7.3</b> Richness of fish families found in fisheries catch</a></li>
 <li class="chapter" data-level="7.4" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#no.-of-sea-snake-prey-families-found-in-fish-catch-and-overlap"><i class="fa fa-check"></i><b>7.4</b> No. of Sea snake prey families found in fish catch and overlap</a></li>
-<li class="chapter" data-level="7.5" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sea-snake-prey-species-in-fisheries-catch"><i class="fa fa-check"></i><b>7.5</b> Sea snake prey species in fisheries catch</a></li>
+<li class="chapter" data-level="7.5" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#relative-proportion-of-sea-snake-prey-in-fisheries-catch"><i class="fa fa-check"></i><b>7.5</b> Relative proportion of sea snake prey in fisheries catch</a></li>
+<li class="chapter" data-level="7.6" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#is-the-proportion-of-h.-curtus-prey-greater-than-that-of-h.-schistosus-in-catch"><i class="fa fa-check"></i><b>7.6</b> Is the proportion of <em>H. curtus</em> prey greater than that of <em>H. schistosus</em> in catch?</a></li>
+<li class="chapter" data-level="7.7" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#do-trawlers-have-a-greater-trophic-overlap-with-sea-snakes-than-gillnets"><i class="fa fa-check"></i><b>7.7</b> Do trawlers have a greater trophic overlap with sea snakes than gillnets?</a></li>
+<li class="chapter" data-level="7.8" data-path="overlap-between-fisheries-catch-and-sea-snake-diet.html"><a href="overlap-between-fisheries-catch-and-sea-snake-diet.html#sea-snake-prey-species-in-fisheries-catch"><i class="fa fa-check"></i><b>7.8</b> Sea snake prey species in fisheries catch</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><i class="fa fa-check"></i><b>8</b> Does isotopic niche of sea snakes change with local fishing intensity?</a><ul>
-<li class="chapter" data-level="8.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#sample-size"><i class="fa fa-check"></i><b>8.1</b> Sample size</a></li>
-<li class="chapter" data-level="8.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#variation-carbon-isotope-ratio-with-fishing-intensity"><i class="fa fa-check"></i><b>8.2</b> Variation Carbon isotope ratio with fishing intensity</a></li>
-<li class="chapter" data-level="8.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#modeling-isotope-ratios-with-fishing-intensity"><i class="fa fa-check"></i><b>8.3</b> Modeling isotope ratios with fishing intensity</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#continous-model"><i class="fa fa-check"></i><b>8.3.1</b> Continous model</a></li>
+<li class="chapter" data-level="8.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#determining-cluster-of-fishing-intensity-off-the-coast-of-sindhudurg"><i class="fa fa-check"></i><b>8.1</b> Determining cluster of fishing intensity off the coast of sindhudurg</a></li>
+<li class="chapter" data-level="8.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#geocoding-stable-isotope-data"><i class="fa fa-check"></i><b>8.2</b> Geocoding stable isotope data</a></li>
+<li class="chapter" data-level="8.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#sample-size-1"><i class="fa fa-check"></i><b>8.3</b> Sample size</a></li>
+<li class="chapter" data-level="8.4" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#variation-isotope-ratio-with-fishing-intensity"><i class="fa fa-check"></i><b>8.4</b> Variation isotope ratio with fishing intensity</a></li>
+<li class="chapter" data-level="8.5" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#modeling-isotope-ratios-with-fishing-intensity"><i class="fa fa-check"></i><b>8.5</b> Modeling isotope ratios with fishing intensity</a></li>
+<li class="chapter" data-level="8.6" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#difference-in-niche-width-between-sea-snakes-1"><i class="fa fa-check"></i><b>8.6</b> Difference in niche width between sea snakes</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#maximum-likelihood-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.6.1</b> Maximum likelihood estimate of SEA</a></li>
+<li class="chapter" data-level="8.6.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#bayesian-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.6.2</b> Bayesian estimate of SEA</a></li>
+<li class="chapter" data-level="8.6.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#testing-difference-in-species-niche-area-by-fishing-intensity"><i class="fa fa-check"></i><b>8.6.3</b> Testing difference in species niche area by fishing intensity</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#difference-in-niche-width-between-sea-snakes-1"><i class="fa fa-check"></i><b>8.4</b> Difference in niche width between sea snakes</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#maximum-likelihood-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.4.1</b> Maximum likelihood estimate of SEA</a></li>
-<li class="chapter" data-level="8.4.2" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#bayesian-estimate-of-sea-1"><i class="fa fa-check"></i><b>8.4.2</b> Bayesian estimate of SEA</a></li>
-<li class="chapter" data-level="8.4.3" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#testing-difference-in-species-niche-area-by-tissue-type-1"><i class="fa fa-check"></i><b>8.4.3</b> Testing difference in species niche area by tissue type</a></li>
-</ul></li>
+<li class="chapter" data-level="8.7" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#visualising-difference-in-niche-width-across-gradiet-of-fishing-intensity"><i class="fa fa-check"></i><b>8.7</b> Visualising difference in niche width across gradiet of fishing intensity</a></li>
 </ul></li>
 </ul>
 
@@ -205,14 +819,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">3</span> DIfference in diet between <em>H. curtus</em> and <em>H. schsitosus</em></h1>
 <div id="no.-of-samples-collected-by-sea-snake-species" class="section level2">
 <h2><span class="header-section-number">3.1</span> No. of samples collected by sea snake species</h2>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">snakes<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span> <span class="op">|</span><span class="st"> </span>Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb40-5" title="5">            <span class="dt">n =</span> <span class="kw">sum</span>((Gut.Content) <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>),</a>
-<a class="sourceLine" id="cb40-6" title="6">            <span class="dt">n_male =</span> <span class="kw">sum</span>((Gut.Content) <span class="op">==</span><span class="st"> &quot;Yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Sex <span class="op">==</span><span class="st"> &quot;Male&quot;</span>),</a>
-<a class="sourceLine" id="cb40-7" title="7">            <span class="dt">n_female =</span> <span class="kw">sum</span>((Gut.Content) <span class="op">==</span><span class="st"> &quot;Yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Sex <span class="op">==</span><span class="st"> &quot;Female&quot;</span>),</a>
-<a class="sourceLine" id="cb40-8" title="8">            <span class="dt">prop =</span> N<span class="op">/</span><span class="dv">793</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">snakes<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span> <span class="op">|</span><span class="st"> </span>Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Species)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">n</span>(), <span class="co"># total number of individuals sampled</span></a>
+<a class="sourceLine" id="cb12-5" title="5">            <span class="dt">n =</span> <span class="kw">sum</span>((Gut.Content) <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>), <span class="co"># number of individuals with gut content</span></a>
+<a class="sourceLine" id="cb12-6" title="6">            <span class="dt">n_male =</span> <span class="kw">sum</span>((Gut.Content) <span class="op">==</span><span class="st"> &quot;Yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Sex <span class="op">==</span><span class="st"> &quot;Male&quot;</span>), <span class="co"># males with gut content</span></a>
+<a class="sourceLine" id="cb12-7" title="7">            <span class="dt">n_female =</span> <span class="kw">sum</span>((Gut.Content) <span class="op">==</span><span class="st"> &quot;Yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Sex <span class="op">==</span><span class="st"> &quot;Female&quot;</span>), <span class="co"># females with content</span></a>
+<a class="sourceLine" id="cb12-8" title="8">            <span class="dt">prop.unid =</span> n<span class="op">/</span>N) <span class="co"># propotion of individuals with gut content</span></a></code></pre></div>
+<div class="kable-table">
 <table>
 <thead>
 <tr class="header">
@@ -221,7 +836,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <th align="right">n</th>
 <th align="right">n_male</th>
 <th align="right">n_female</th>
-<th align="right">prop</th>
+<th align="right">prop.unid</th>
 </tr>
 </thead>
 <tbody>
@@ -231,7 +846,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">36</td>
 <td align="right">18</td>
 <td align="right">18</td>
-<td align="right">0.2257251</td>
+<td align="right">0.2011173</td>
 </tr>
 <tr class="even">
 <td align="left">Hydrophis schistosus</td>
@@ -239,271 +854,641 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">93</td>
 <td align="right">55</td>
 <td align="right">36</td>
-<td align="right">0.7629256</td>
+<td align="right">0.1537190</td>
 </tr>
 </tbody>
 </table>
+</div>
 <p>A very low proportion of inviduals had gut content present at the time of sampling. Sampling accross species and sexes may be adequate for comparison.</p>
 </div>
 <div id="proportion-of-unidentified-specimens" class="section level2">
 <h2><span class="header-section-number">3.2</span> Proportion of unidentified specimens</h2>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">gc =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;../Data/Sea_snakes_gut_content_2018-19.csv&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb41-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Source <span class="op">==</span><span class="st"> &quot;Gut content&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in file(file, &quot;rt&quot;): cannot open the connection</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Source <span class="op">==</span><span class="st"> &quot;Gut content&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb43-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N_sp =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Prey.Species)),</a>
-<a class="sourceLine" id="cb43-4" title="4">            <span class="dt">N_fam =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Prey.Family)),</a>
-<a class="sourceLine" id="cb43-5" title="5">            <span class="dt">unid_sp =</span> <span class="kw">sum</span>(Prey.Species <span class="op">==</span><span class="st"> &quot;Unidentified&quot;</span> <span class="op">|</span><span class="st"> </span>Prey.Species <span class="op">==</span><span class="st"> &quot;&quot;</span>, <span class="dt">na.rm =</span> T)<span class="op">/</span><span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb43-6" title="6">            <span class="dt">unid_fam =</span> <span class="kw">sum</span>(Prey.Family <span class="op">==</span><span class="st"> &quot;Unidentified&quot;</span> <span class="op">|</span><span class="st"> </span>Prey.Family <span class="op">==</span><span class="st"> &quot;&quot;</span>, <span class="dt">na.rm =</span> T)<span class="op">/</span><span class="kw">n</span>())</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># importing gut content data</span></a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3">gc =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./Data/Sea_snakes_gut_content_2018-19.csv&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Source <span class="op">==</span><span class="st"> &quot;Gut content&quot;</span>) <span class="co"># removing specimens collected from fisheries landings</span></a>
+<a class="sourceLine" id="cb13-5" title="5"></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="co"># calculating richness</span></a>
+<a class="sourceLine" id="cb13-7" title="7"></a>
+<a class="sourceLine" id="cb13-8" title="8">gc<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-9" title="9"><span class="st">  </span><span class="kw">filter</span>(Source <span class="op">==</span><span class="st"> &quot;Gut content&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-10" title="10"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N_sp =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Prey.Species)), <span class="co"># number of prey species</span></a>
+<a class="sourceLine" id="cb13-11" title="11">            <span class="dt">N_fam =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Prey.Family)), <span class="co"># number of prey families</span></a>
+<a class="sourceLine" id="cb13-12" title="12">            <span class="co"># proportion of unidentitified specimens</span></a>
+<a class="sourceLine" id="cb13-13" title="13">            <span class="dt">unid_sp =</span> <span class="kw">sum</span>(Prey.Species <span class="op">==</span><span class="st"> &quot;Unidentified&quot;</span> <span class="op">|</span><span class="st"> </span>Prey.Species <span class="op">==</span><span class="st"> &quot;&quot;</span>, <span class="dt">na.rm =</span> T)<span class="op">*</span><span class="dv">100</span><span class="op">/</span><span class="kw">n</span>(), <span class="co">## species</span></a>
+<a class="sourceLine" id="cb13-14" title="14">            <span class="dt">unid_fam =</span> <span class="kw">sum</span>(Prey.Family <span class="op">==</span><span class="st"> &quot;Unidentified&quot;</span> <span class="op">|</span><span class="st"> </span>Prey.Family <span class="op">==</span><span class="st"> &quot;&quot;</span>, <span class="dt">na.rm =</span> T)<span class="op">*</span><span class="dv">100</span><span class="op">/</span><span class="kw">n</span>())<span class="op">%&gt;%</span><span class="st"> </span><span class="co">## family</span></a>
+<a class="sourceLine" id="cb13-15" title="15"><span class="st">  </span><span class="co"># creating clean table</span></a>
+<a class="sourceLine" id="cb13-16" title="16"><span class="st">  </span><span class="kw">gather</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-17" title="17"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Metric =</span> <span class="kw">ifelse</span>(<span class="kw">substr</span>(key, <span class="dv">1</span>, <span class="dv">1</span>) <span class="op">==</span><span class="st"> &quot;N&quot;</span>, <span class="st">&quot;N&quot;</span>, <span class="st">&quot;% Unidentified&quot;</span>),</a>
+<a class="sourceLine" id="cb13-18" title="18">         <span class="dt">Unit =</span> <span class="kw">ifelse</span>(<span class="kw">grepl</span>(key, <span class="dt">pattern =</span> <span class="st">&quot;sp&quot;</span>, <span class="dt">fixed =</span> T), <span class="st">&quot;Prey Species&quot;</span>, <span class="st">&quot;Prey Family&quot;</span>))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-19" title="19"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Unit, Metric, value)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-20" title="20"><span class="st">  </span><span class="kw">spread</span>(Metric, value)</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Unit</th>
+<th align="right">% Unidentified</th>
+<th align="right">N</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Prey Family</td>
+<td align="right">29.45736</td>
+<td align="right">18</td>
+</tr>
+<tr class="even">
+<td align="left">Prey Species</td>
+<td align="right">40.31008</td>
+<td align="right">26</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>A large portion of gut content specimens were unidentifiable. This is an unavoidable consquence of VGCA.</p>
 </div>
-<div id="diverisity-of-prey-families-found-in-gut-content" class="section level2">
-<h2><span class="header-section-number">3.3</span> Diverisity of prey families found in gut content</h2>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">library</span>(vegetarian)</a>
-<a class="sourceLine" id="cb45-2" title="2"></a>
-<a class="sourceLine" id="cb45-3" title="3"><span class="co">#Creating data martix</span></a>
-<a class="sourceLine" id="cb45-4" title="4"></a>
-<a class="sourceLine" id="cb45-5" title="5">fam_vegan =<span class="st"> </span>gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb45-6" title="6"><span class="st">  </span><span class="kw">filter</span>(Source <span class="op">==</span><span class="st"> &quot;Gut content&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb45-7" title="7"><span class="st">  </span><span class="kw">filter</span>(Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb45-8" title="8"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb45-9" title="9"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb45-10" title="10"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb45-11" title="11"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t =</span> <span class="kw">sum</span>(n))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb45-12" title="12"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb45-13" title="13"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">p =</span> n<span class="op">/</span>t)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb45-14" title="14"><span class="st">  </span><span class="kw">spread</span>(Prey.Family, p, <span class="dt">fill =</span> <span class="dv">0</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb45-15" title="15"><span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="st">&quot;Snake.Species&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="co">#Richness</span></a>
-<a class="sourceLine" id="cb47-2" title="2"></a>
-<a class="sourceLine" id="cb47-3" title="3">gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb47-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
-<a class="sourceLine" id="cb47-5" title="5">         Prey.Species <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb47-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb47-7" title="7"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Prey.Species.Richness =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Prey.Species)))</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="co">#Alpha Diversity</span></a>
-<a class="sourceLine" id="cb49-2" title="2"></a>
-<a class="sourceLine" id="cb49-3" title="3"><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb49-4" title="4">  <span class="dt">hs =</span> <span class="kw">d</span>(fam_vegan[<span class="op">-</span><span class="dv">1</span>,], <span class="st">&quot;alpha&quot;</span>, <span class="dt">boot =</span> T),</a>
-<a class="sourceLine" id="cb49-5" title="5">  <span class="dt">hc =</span> <span class="kw">d</span>(fam_vegan[<span class="op">-</span><span class="dv">2</span>,], <span class="st">&quot;alpha&quot;</span>, <span class="dt">boot =</span> T)</a>
-<a class="sourceLine" id="cb49-6" title="6">)</a></code></pre></div>
-<pre><code>## Error in is.data.frame(abundances): object &#39;fam_vegan&#39; not found</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co">#Beta diverisity</span></a>
-<a class="sourceLine" id="cb51-2" title="2">gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb51-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
-<a class="sourceLine" id="cb51-4" title="4">         Prey.Species <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb51-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Prey.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb51-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N_pred =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Snake.Species)))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb51-7" title="7"><span class="st">  </span><span class="kw">ungroup</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb51-8" title="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Overlap =</span> <span class="kw">sum</span>(N_pred<span class="op">&gt;</span><span class="dv">1</span>))</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Prey.Species <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">N =</span> <span class="kw">sum</span>(n))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-7" title="7"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-8" title="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">p =</span> n<span class="op">/</span>N)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-9" title="9"><span class="st">  </span><span class="kw">spread</span>(Snake.Species, p, <span class="dt">fill =</span> <span class="dv">0</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-10" title="10"><span class="st">  </span><span class="kw">rename</span>(<span class="st">&quot;HC&quot;</span> =<span class="st"> &#39;Hydrophis curtus&#39;</span>, <span class="st">&quot;HS&quot;</span> =<span class="st"> &#39;Hydrophis schistosus&#39;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-11" title="11"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">P =</span> <span class="kw">abs</span>(HC <span class="op">-</span><span class="st"> </span>HS))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-12" title="12"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">D =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span><span class="op">*</span><span class="kw">sum</span>(P)) </a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">similarity</span>(fam_vegan, <span class="dt">q =</span> <span class="dv">2</span>, <span class="dt">boot =</span> T)</a></code></pre></div>
-<pre><code>## Error in similarity(fam_vegan, q = 2, boot = T): object &#39;fam_vegan&#39; not found</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co">#Percentage of tetrodontids</span></a>
-<a class="sourceLine" id="cb57-2" title="2">gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb57-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Prey.Species <span class="op">!=</span><span class="st"> &quot;&quot;</span>, Prey.Species <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>,</a>
-<a class="sourceLine" id="cb57-4" title="4">         Prey.Family <span class="op">!=</span><span class="st"> &quot;&quot;</span>, Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb57-5" title="5"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb57-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb57-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">N =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb57-8" title="8"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family, Prey.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb57-9" title="9"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">last</span>(N),</a>
-<a class="sourceLine" id="cb57-10" title="10">            <span class="dt">Perc =</span> <span class="kw">n</span>()<span class="op">*</span><span class="dv">100</span><span class="op">/</span>N)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb57-11" title="11"><span class="st">  </span><span class="kw">write.csv</span>(<span class="dt">file =</span> <span class="st">&quot;../Data/prey list.csv&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-</div>
-<div id="list-of-sea-snake-prey-species" class="section level2">
-<h2><span class="header-section-number">3.4</span> List of sea snake prey species</h2>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb59-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb59-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family, Prey.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb59-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Percentage =</span> <span class="kw">n</span>())</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-</div>
-<div id="relative-abundance-of-prey-families-in-sea-snake-gut-content" class="section level2">
-<h2><span class="header-section-number">3.5</span> Relative abundance of prey families in sea snake gut content</h2>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb61-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
-<a class="sourceLine" id="cb61-3" title="3">         Prey.Family <span class="op">!=</span><span class="st"> &quot;&quot;</span>, Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb61-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Prey.Family, <span class="dt">fill =</span> Snake.Species))<span class="op">+</span></a>
-<a class="sourceLine" id="cb61-5" title="5"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y =</span> ..prop.., <span class="dt">group =</span> Snake.Species), <span class="dt">stat =</span> <span class="st">&quot;count&quot;</span>,</a>
-<a class="sourceLine" id="cb61-6" title="6">           <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">preserve =</span> <span class="st">&quot;single&quot;</span>), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb61-7" title="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span><span class="st">&quot; Prey Family&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Relative proportion&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb61-8" title="8"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">trans =</span> )<span class="op">+</span></a>
-<a class="sourceLine" id="cb61-9" title="9"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Greys&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb61-10" title="10"><span class="st">  </span><span class="kw">theme_minimal</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb61-11" title="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>, <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb61-12" title="12">        <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">20</span>),</a>
-<a class="sourceLine" id="cb61-13" title="13">        <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>))</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-</div>
-<div id="diverisity-of-prey-families-found-in-gut-content-1" class="section level2">
-<h2><span class="header-section-number">3.6</span> Diverisity of prey families found in gut content</h2>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="kw">library</span>(vegetarian)</a>
-<a class="sourceLine" id="cb63-2" title="2"><span class="kw">library</span>(vegan)</a>
-<a class="sourceLine" id="cb63-3" title="3"></a>
-<a class="sourceLine" id="cb63-4" title="4"><span class="co">#Creating data martix</span></a>
-<a class="sourceLine" id="cb63-5" title="5"></a>
-<a class="sourceLine" id="cb63-6" title="6">fam_vegan =<span class="st"> </span>gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb63-7" title="7"><span class="st">  </span><span class="kw">filter</span>(Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb63-8" title="8"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb63-9" title="9"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb63-10" title="10"><span class="st">  </span><span class="kw">spread</span>(Prey.Family, n, <span class="dt">fill =</span> <span class="dv">0</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb63-11" title="11"><span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="st">&quot;Snake.Species&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="co">#Richness</span></a>
-<a class="sourceLine" id="cb65-2" title="2"></a>
-<a class="sourceLine" id="cb65-3" title="3">gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb65-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
-<a class="sourceLine" id="cb65-5" title="5">         Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb65-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb65-7" title="7"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Prey.Family.Richness =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Prey.Family)))</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="co">#Alpha Diversity</span></a>
-<a class="sourceLine" id="cb67-2" title="2"><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb67-3" title="3">  <span class="dt">hs =</span> <span class="kw">d</span>(fam_vegan[<span class="op">-</span><span class="dv">1</span>,], <span class="st">&quot;alpha&quot;</span>, <span class="dt">boot =</span> T),</a>
-<a class="sourceLine" id="cb67-4" title="4">  <span class="dt">hc =</span> <span class="kw">d</span>(fam_vegan[<span class="op">-</span><span class="dv">2</span>,], <span class="st">&quot;alpha&quot;</span>, <span class="dt">boot =</span> T)</a>
-<a class="sourceLine" id="cb67-5" title="5">)</a></code></pre></div>
-<pre><code>## Error in is.data.frame(abundances): object &#39;fam_vegan&#39; not found</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="kw">renyi</span>(fam_vegan, <span class="dt">hill =</span> T, <span class="dt">scales =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>))</a></code></pre></div>
-<pre><code>## Error in as.matrix(x): object &#39;fam_vegan&#39; not found</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="kw">library</span>(hilldiv)</a>
-<a class="sourceLine" id="cb71-2" title="2"></a>
-<a class="sourceLine" id="cb71-3" title="3"><span class="co"># splitting data by gut samples</span></a>
-<a class="sourceLine" id="cb71-4" title="4"></a>
-<a class="sourceLine" id="cb71-5" title="5">fam_hilldiv &lt;-<span class="st"> </span>gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb71-6" title="6"><span class="st">  </span><span class="kw">filter</span>(Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>, Prey.Family <span class="op">!=</span><span class="st">&quot;&quot;</span>, Field.Code <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb71-7" title="7"><span class="st">  </span><span class="kw">group_by</span>(Field.Code, Prey.Family)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb71-8" title="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb71-9" title="9"><span class="st">  </span><span class="kw">spread</span>(Field.Code, n, <span class="dt">fill =</span> <span class="dv">0</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb71-10" title="10"><span class="st">  </span><span class="kw">ungroup</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb71-11" title="11"><span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="st">&quot;Prey.Family&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1">fam_hilldiv &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fam_hilldiv)  </a></code></pre></div>
-<pre><code>## Error in as.data.frame(fam_hilldiv): object &#39;fam_hilldiv&#39; not found</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="co"># sample ids and species</span></a>
-<a class="sourceLine" id="cb75-2" title="2"></a>
-<a class="sourceLine" id="cb75-3" title="3">gc_samples &lt;-<span class="st"> </span>gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb75-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>, Prey.Family <span class="op">!=</span><span class="st">&quot;&quot;</span>, Field.Code <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb75-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Field.Code, Snake.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb75-6" title="6"><span class="st">  </span><span class="kw">distinct</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb75-7" title="7"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Sample =</span> Field.Code,</a>
-<a class="sourceLine" id="cb75-8" title="8">         <span class="dt">Species =</span> Snake.Species)</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="co"># testing difference between species</span></a>
-<a class="sourceLine" id="cb77-2" title="2"></a>
-<a class="sourceLine" id="cb77-3" title="3"><span class="co">#div_test(countable = tss(fam_hilldiv), hierarchy = gc_samples, qvalue = 1)</span></a></code></pre></div>
-</div>
-<div id="overlap-in-prey-of-h.-curtus-and-h.-schsitosus" class="section level2">
-<h2><span class="header-section-number">3.7</span> Overlap in prey of <em>H. curtus</em> and <em>H. schsitosus</em></h2>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="co">#Beta diverisity</span></a>
-<a class="sourceLine" id="cb78-2" title="2">gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb78-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
-<a class="sourceLine" id="cb78-4" title="4">         Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb78-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Prey.Family)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb78-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N_pred =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Snake.Species)))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb78-7" title="7"><span class="st">  </span><span class="kw">ungroup</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb78-8" title="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Overlap =</span> <span class="kw">sum</span>(N_pred<span class="op">&gt;</span><span class="dv">1</span>))</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">similarity</span>(fam_vegan, <span class="dt">q =</span> <span class="dv">2</span>, <span class="dt">boot =</span> T)</a></code></pre></div>
-<pre><code>## Error in similarity(fam_vegan, q = 2, boot = T): object &#39;fam_vegan&#39; not found</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">library</span>(vegan)</a>
-<a class="sourceLine" id="cb82-2" title="2"></a>
-<a class="sourceLine" id="cb82-3" title="3">fam_simboo &lt;-<span class="st"> </span>gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb82-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>, Prey.Family <span class="op">!=</span><span class="st">&quot;&quot;</span>, Field.Code <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb82-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Field.Code, Prey.Family)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb82-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb82-7" title="7"><span class="st">  </span><span class="kw">spread</span>(Prey.Family, n, <span class="dt">fill =</span> <span class="dv">0</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb82-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>()</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb84-2" title="2"></a>
-<a class="sourceLine" id="cb84-3" title="3">permanova_sp &lt;-<span class="st"> </span><span class="kw">adonis2</span>(fam_simboo[,<span class="dv">3</span><span class="op">:</span><span class="kw">length</span>(fam_simboo)] <span class="op">~</span><span class="st"> </span>fam_simboo<span class="op">$</span>Snake.Species,</a>
-<a class="sourceLine" id="cb84-4" title="4">                     <span class="dt">data =</span> fam_simboo[,<span class="dv">1</span>])</a></code></pre></div>
-<pre><code>## Error in eval(YVAR, environment(formula), globalenv()): object &#39;fam_simboo&#39; not found</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1">broom<span class="op">::</span><span class="kw">tidy</span>(permanova_sp)</a></code></pre></div>
-<pre><code>## Error in broom::tidy(permanova_sp): object &#39;permanova_sp&#39; not found</code></pre>
-</div>
 <div id="prey-preference" class="section level2">
-<h2><span class="header-section-number">3.8</span> Prey preference</h2>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1"><span class="co">#Percentage of tetrodontids</span></a>
-<a class="sourceLine" id="cb88-2" title="2">IRI &lt;-<span class="st"> </span>gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb88-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Prey.Family <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb88-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb88-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb88-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Fr =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Field.Code)), <span class="co"># total number of snakes sampled</span></a>
-<a class="sourceLine" id="cb88-7" title="7">         <span class="dt">W =</span> <span class="kw">sum</span>(Weight..g., <span class="dt">na.rm =</span> T), <span class="co"># total weight of prey sampled</span></a>
-<a class="sourceLine" id="cb88-8" title="8">         <span class="dt">N =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># total number of prey sampled</span></a>
-<a class="sourceLine" id="cb88-9" title="9"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb88-10" title="10"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">f =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Field.Code)), <span class="co"># number snakes in which prey family occured</span></a>
-<a class="sourceLine" id="cb88-11" title="11">            <span class="dt">Fr =</span> <span class="kw">last</span>(Fr),</a>
-<a class="sourceLine" id="cb88-12" title="12">            <span class="dt">w =</span> <span class="kw">sum</span>(Weight..g., <span class="dt">na.rm =</span> T), <span class="co"># weight of prey family</span></a>
-<a class="sourceLine" id="cb88-13" title="13">            <span class="dt">W =</span> <span class="kw">last</span>(W),</a>
-<a class="sourceLine" id="cb88-14" title="14">            <span class="dt">n =</span> <span class="kw">n</span>(), <span class="co"># number of individuals of prey family</span></a>
-<a class="sourceLine" id="cb88-15" title="15">            <span class="dt">N =</span> <span class="kw">last</span>(N))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb88-16" title="16"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb88-17" title="17"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">per.F =</span> f<span class="op">*</span><span class="dv">100</span><span class="op">/</span>Fr,</a>
-<a class="sourceLine" id="cb88-18" title="18">            <span class="dt">per.W =</span> w<span class="op">*</span><span class="dv">100</span><span class="op">/</span>W,</a>
-<a class="sourceLine" id="cb88-19" title="19">            <span class="dt">per.N =</span> n<span class="op">*</span><span class="dv">100</span><span class="op">/</span>N, </a>
-<a class="sourceLine" id="cb88-20" title="20">            <span class="dt">IRI =</span> (per.N <span class="op">+</span><span class="st"> </span>per.W)<span class="op">*</span>per.F)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb88-21" title="21"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb88-22" title="22"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(IRI))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb88-23" title="23"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>())</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1">knitr<span class="op">::</span><span class="kw">kable</span>(IRI)</a></code></pre></div>
-<pre><code>## Error in knitr::kable(IRI): object &#39;IRI&#39; not found</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1">IRI<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb92-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Prey.Family, IRI, <span class="dt">fill =</span> Snake.Species))<span class="op">+</span></a>
-<a class="sourceLine" id="cb92-3" title="3"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">preserve =</span> <span class="st">&quot;single&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb92-4" title="4"><span class="st">  </span><span class="kw">scale_y_sqrt</span>(<span class="dt">name =</span> <span class="st">&quot;IRI (sq.rt.)&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb92-5" title="5"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Greys&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb92-6" title="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">angle =</span> <span class="dv">60</span>),</a>
-<a class="sourceLine" id="cb92-7" title="7">        <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>))</a></code></pre></div>
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;IRI&#39; not found</code></pre>
+<h2><span class="header-section-number">3.3</span> Prey preference</h2>
+<p>We modified and used the the Index of relative importance according to Pinkas et al. 1971 to determine the difference in prey preference between <em>H. curtus</em> and <em>H. schistosus</em></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># calulating index of relative importance (Pinkas et al. 1971)</span></a>
+<a class="sourceLine" id="cb14-2" title="2"></a>
+<a class="sourceLine" id="cb14-3" title="3">IRI &lt;-<span class="st"> </span>gc<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Prey.Family <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Fr =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Field.Code)), <span class="co"># total number of snakes sampled</span></a>
+<a class="sourceLine" id="cb14-8" title="8">         <span class="dt">W =</span> <span class="kw">sum</span>(Weight..g., <span class="dt">na.rm =</span> T), <span class="co"># total weight of prey sampled</span></a>
+<a class="sourceLine" id="cb14-9" title="9">         <span class="dt">N =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># total number of prey sampled</span></a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">f =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Field.Code)), <span class="co"># number snakes in which prey family occured</span></a>
+<a class="sourceLine" id="cb14-12" title="12">            <span class="dt">Fr =</span> <span class="kw">last</span>(Fr),</a>
+<a class="sourceLine" id="cb14-13" title="13">            <span class="dt">w =</span> <span class="kw">sum</span>(Weight..g., <span class="dt">na.rm =</span> T), <span class="co"># weight of prey family</span></a>
+<a class="sourceLine" id="cb14-14" title="14">            <span class="dt">W =</span> <span class="kw">last</span>(W),</a>
+<a class="sourceLine" id="cb14-15" title="15">            <span class="dt">n =</span> <span class="kw">n</span>(), <span class="co"># number of individuals of prey family</span></a>
+<a class="sourceLine" id="cb14-16" title="16">            <span class="dt">N =</span> <span class="kw">last</span>(N))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-17" title="17"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-18" title="18"><span class="st">  </span><span class="co"># caluclating percentages</span></a>
+<a class="sourceLine" id="cb14-19" title="19"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">per.F =</span> f<span class="op">*</span><span class="dv">100</span><span class="op">/</span>Fr,</a>
+<a class="sourceLine" id="cb14-20" title="20">            <span class="dt">per.W =</span> w<span class="op">*</span><span class="dv">100</span><span class="op">/</span>W,</a>
+<a class="sourceLine" id="cb14-21" title="21">            <span class="dt">per.N =</span> n<span class="op">*</span><span class="dv">100</span><span class="op">/</span>N,</a>
+<a class="sourceLine" id="cb14-22" title="22">            <span class="co"># caluclating IRI</span></a>
+<a class="sourceLine" id="cb14-23" title="23">            <span class="dt">IRI =</span> (per.N <span class="op">+</span><span class="st"> </span>per.W)<span class="op">*</span>per.F)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-24" title="24"><span class="st">  </span><span class="kw">arrange</span>(Snake.Species, <span class="kw">desc</span>(IRI))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-25" title="25"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>())</a>
+<a class="sourceLine" id="cb14-26" title="26"></a>
+<a class="sourceLine" id="cb14-27" title="27"><span class="co"># clean table</span></a>
+<a class="sourceLine" id="cb14-28" title="28"></a>
+<a class="sourceLine" id="cb14-29" title="29">knitr<span class="op">::</span><span class="kw">kable</span>(IRI)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Snake.Species</th>
+<th align="left">Prey.Family</th>
+<th align="right">per.F</th>
+<th align="right">per.W</th>
+<th align="right">per.N</th>
+<th align="right">IRI</th>
+<th align="right">rank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Unidentified</td>
+<td align="right">44.827586</td>
+<td align="right">15.2823920</td>
+<td align="right">40.625000</td>
+<td align="right">2506.193436</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Clupeidae</td>
+<td align="right">6.896552</td>
+<td align="right">29.9003322</td>
+<td align="right">9.375000</td>
+<td align="right">270.864360</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Engraulidae</td>
+<td align="right">10.344828</td>
+<td align="right">11.9601329</td>
+<td align="right">9.375000</td>
+<td align="right">220.708271</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Carangidae</td>
+<td align="right">13.793103</td>
+<td align="right">3.3222591</td>
+<td align="right">12.500000</td>
+<td align="right">218.238057</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Scombridae</td>
+<td align="right">6.896552</td>
+<td align="right">6.6445183</td>
+<td align="right">6.250000</td>
+<td align="right">88.927712</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Cynoglossidae</td>
+<td align="right">6.896552</td>
+<td align="right">3.9867110</td>
+<td align="right">6.250000</td>
+<td align="right">70.598007</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Serranidae</td>
+<td align="right">3.448276</td>
+<td align="right">16.6112957</td>
+<td align="right">3.125000</td>
+<td align="right">68.056192</td>
+<td align="right">7</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Leiognathidae</td>
+<td align="right">6.896552</td>
+<td align="right">2.9900332</td>
+<td align="right">6.250000</td>
+<td align="right">63.724367</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Tetraodontidae</td>
+<td align="right">3.448276</td>
+<td align="right">7.6411960</td>
+<td align="right">3.125000</td>
+<td align="right">37.124814</td>
+<td align="right">9</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Nemipteridae</td>
+<td align="right">3.448276</td>
+<td align="right">1.6611296</td>
+<td align="right">3.125000</td>
+<td align="right">16.503895</td>
+<td align="right">10</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Tetraodontidae</td>
+<td align="right">34.246575</td>
+<td align="right">38.7307267</td>
+<td align="right">35.869565</td>
+<td align="right">2554.804519</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Unidentified</td>
+<td align="right">23.287671</td>
+<td align="right">12.9453244</td>
+<td align="right">21.739130</td>
+<td align="right">807.720182</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Ariidae</td>
+<td align="right">9.589041</td>
+<td align="right">8.8407094</td>
+<td align="right">8.695652</td>
+<td align="right">168.156891</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Clupeidae</td>
+<td align="right">6.849315</td>
+<td align="right">10.9456402</td>
+<td align="right">6.521739</td>
+<td align="right">119.639584</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Plotosidae</td>
+<td align="right">8.219178</td>
+<td align="right">7.7882440</td>
+<td align="right">6.521739</td>
+<td align="right">117.616299</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Teraponidae</td>
+<td align="right">6.849315</td>
+<td align="right">6.5673841</td>
+<td align="right">5.434783</td>
+<td align="right">82.206621</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Serranidae</td>
+<td align="right">5.479452</td>
+<td align="right">7.6303742</td>
+<td align="right">5.434783</td>
+<td align="right">71.589900</td>
+<td align="right">7</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Leiognathidae</td>
+<td align="right">4.109589</td>
+<td align="right">1.0524654</td>
+<td align="right">3.260870</td>
+<td align="right">17.726034</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Sillaginidae</td>
+<td align="right">1.369863</td>
+<td align="right">2.4206704</td>
+<td align="right">1.086957</td>
+<td align="right">4.804968</td>
+<td align="right">9</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Scombridae</td>
+<td align="right">1.369863</td>
+<td align="right">1.2103352</td>
+<td align="right">1.086957</td>
+<td align="right">3.146975</td>
+<td align="right">10</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Synodontidae?</td>
+<td align="right">1.369863</td>
+<td align="right">1.1840236</td>
+<td align="right">1.086957</td>
+<td align="right">3.110932</td>
+<td align="right">11</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Pleuronectidae</td>
+<td align="right">1.369863</td>
+<td align="right">0.3683629</td>
+<td align="right">1.086957</td>
+<td align="right">1.993588</td>
+<td align="right">12</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Carangidae</td>
+<td align="right">1.369863</td>
+<td align="right">0.3157396</td>
+<td align="right">1.086957</td>
+<td align="right">1.921502</td>
+<td align="right">13</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Synodontidae</td>
+<td align="right">1.369863</td>
+<td align="right">0.0000000</td>
+<td align="right">1.086957</td>
+<td align="right">1.488981</td>
+<td align="right">14</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># plotting prey preference</span></a>
+<a class="sourceLine" id="cb15-2" title="2"></a>
+<a class="sourceLine" id="cb15-3" title="3">IRI<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Prey.Family, IRI, <span class="dt">fill =</span> Snake.Species))<span class="op">+</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">preserve =</span> <span class="st">&quot;single&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="st">  </span><span class="kw">scale_y_sqrt</span>(<span class="dt">name =</span> <span class="st">&quot;IRI (sq.rt.)&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb15-7" title="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Prey Family&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Greys&quot;</span>, <span class="dt">name =</span> <span class="st">&quot;Snake Species&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb15-9" title="9"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">angle =</span> <span class="dv">60</span>),</a>
+<a class="sourceLine" id="cb15-10" title="10">        <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>))</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="2400" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># saving high res plot</span></a>
+<a class="sourceLine" id="cb16-2" title="2"></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw">ggsave</span>(<span class="kw">last_plot</span>(), <span class="dt">filename =</span> <span class="st">&quot;./Figures and Tables/figure2.tiff&quot;</span>, <span class="dt">width =</span> <span class="dv">8</span>, <span class="dt">height =</span> <span class="dv">6</span>, <span class="dt">dpi =</span> <span class="dv">300</span>)</a></code></pre></div>
+<p><strong>Figure 2</strong>: Index of relative importance (IRI, square root transformed) (Pinkas et al., 1970) of prey families in sea snake diet.</p>
+<p><em>H. schistosus</em> showed preference for the Tetraodontid fish, while <em>H. curtus</em> did not exhibit any prey preference.</p>
 </div>
-<div id="selectivity-of-prey-sizes" class="section level2">
-<h2><span class="header-section-number">3.9</span> Selectivity of prey sizes</h2>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="co"># summary</span></a>
-<a class="sourceLine" id="cb94-2" title="2">gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
-<a class="sourceLine" id="cb94-4" title="4">         Condition <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-6" title="6"><span class="st">  </span>skimr<span class="op">::</span><span class="kw">skim</span>(Maximum.Body.Girth..cm.)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-7" title="7"><span class="st">  </span>skimr<span class="op">::</span><span class="kw">yank</span>(<span class="st">&quot;numeric&quot;</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-8" title="8"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Snake.Species<span class="op">:</span>p100)</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1"><span class="co"># testing diff max prey width by species</span></a>
-<a class="sourceLine" id="cb96-2" title="2"></a>
-<a class="sourceLine" id="cb96-3" title="3">gc<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
-<a class="sourceLine" id="cb96-5" title="5">         Condition <span class="op">&lt;</span><span class="st"> </span><span class="dv">3</span>, <span class="op">!</span><span class="kw">is.na</span>(Maximum.Body.Girth..cm.))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-6" title="6"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Snake.Species, Maximum.Body.Girth..cm.)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-7" title="7"><span class="st">  </span><span class="kw">droplevels</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-8" title="8"><span class="st">  </span><span class="kw">nest</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="kw">t.test</span>(Maximum.Body.Girth..cm. <span class="op">~</span><span class="st"> </span>Snake.Species, <span class="dt">data =</span> .)),</a>
-<a class="sourceLine" id="cb96-10" title="10">         <span class="dt">sumry =</span> <span class="kw">map</span>(test, broom<span class="op">::</span>tidy),</a>
-<a class="sourceLine" id="cb96-11" title="11">         <span class="dt">d =</span> <span class="kw">map</span>(data, <span class="op">~</span>lsr<span class="op">::</span><span class="kw">cohensD</span>(Maximum.Body.Girth..cm. <span class="op">~</span><span class="st"> </span>Snake.Species, <span class="dt">data =</span> .)))<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-12" title="12"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(sumry, d)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-13" title="13"><span class="st">  </span><span class="kw">unnest</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-14" title="14"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(estimate<span class="op">:</span>p.value, d)</a></code></pre></div>
-<pre><code>## Error in UseMethod(&quot;filter_&quot;): no applicable method for &#39;filter_&#39; applied to an object of class &quot;function&quot;</code></pre>
+<div id="range-of-prey-found-in-h.-curtus-and-h.-shistosus-gut" class="section level2">
+<h2><span class="header-section-number">3.4</span> Range of prey found in <em>H. curtus</em> and <em>H. shistosus</em> gut</h2>
+<p>We compared the dietary breadth between snakes species using the richness and diversity of prey families.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># Creating data martix for prey community analysis analysis</span></a>
+<a class="sourceLine" id="cb17-2" title="2"></a>
+<a class="sourceLine" id="cb17-3" title="3">fam_vegan =<span class="st"> </span>gc<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># removing unidentified specimens</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># total number of specimens per family in each snake species</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t =</span> <span class="kw">sum</span>(n))<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># total number of specimens for each snake species</span></a>
+<a class="sourceLine" id="cb17-9" title="9"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-10" title="10"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">p =</span> n<span class="op">/</span>t)<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># relative proportion</span></a>
+<a class="sourceLine" id="cb17-11" title="11"><span class="st">  </span><span class="kw">spread</span>(Prey.Family, p, <span class="dt">fill =</span> <span class="dv">0</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-12" title="12"><span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="st">&quot;Snake.Species&quot;</span>)</a></code></pre></div>
+<div id="prey-richness" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Prey richness</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">gc<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
+<a class="sourceLine" id="cb18-3" title="3">         Prey.Species <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Prey.Species =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Prey.Species)),</a>
+<a class="sourceLine" id="cb18-6" title="6">            <span class="dt">Prey.Families =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Prey.Family)))</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Snake.Species</th>
+<th align="right">Prey.Species</th>
+<th align="right">Prey.Families</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="right">11</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="right">20</td>
+<td align="right">11</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="prey-family-diversity" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Prey family diversity</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># loading libraries</span></a>
+<a class="sourceLine" id="cb19-2" title="2"></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="kw">library</span>(vegetarian) <span class="co">## for community indices</span></a>
+<a class="sourceLine" id="cb19-4" title="4"></a>
+<a class="sourceLine" id="cb19-5" title="5"><span class="co"># calculating shanon diversity</span></a>
+<a class="sourceLine" id="cb19-6" title="6"></a>
+<a class="sourceLine" id="cb19-7" title="7"><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb19-8" title="8">  <span class="dt">hs =</span> <span class="kw">d</span>(fam_vegan[<span class="op">-</span><span class="dv">1</span>,], <span class="st">&quot;alpha&quot;</span>, <span class="dt">boot =</span> T), <span class="co">## for Hydrophis schistosus</span></a>
+<a class="sourceLine" id="cb19-9" title="9">  <span class="dt">hc =</span> <span class="kw">d</span>(fam_vegan[<span class="op">-</span><span class="dv">2</span>,], <span class="st">&quot;alpha&quot;</span>, <span class="dt">boot =</span> T) <span class="co">## for Hydropis schistosus</span></a>
+<a class="sourceLine" id="cb19-10" title="10">  )<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-11" title="11"><span class="st">  </span><span class="co"># creating a clean table</span></a>
+<a class="sourceLine" id="cb19-12" title="12"><span class="st">  </span><span class="kw">gather</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-13" title="13"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Species =</span> <span class="kw">ifelse</span>(<span class="kw">substr</span>(key, <span class="dv">1</span>, <span class="dv">2</span>) <span class="op">==</span><span class="st"> &quot;hs&quot;</span>,  <span class="st">&quot;Hydrophis schistosus&quot;</span>,  <span class="st">&quot;Hydrophis curtus&quot;</span>),</a>
+<a class="sourceLine" id="cb19-14" title="14">         <span class="dt">Metric =</span> <span class="kw">ifelse</span>(<span class="kw">substr</span>(key, <span class="dv">4</span>, <span class="dv">4</span>) <span class="op">==</span><span class="st"> &quot;D&quot;</span>, <span class="st">&quot;Shanon Diversity&quot;</span>, <span class="st">&quot;Standard Error&quot;</span>))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-15" title="15"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Species, Metric, value)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-16" title="16"><span class="st">  </span><span class="kw">spread</span>(Metric, value)</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Species</th>
+<th align="right">Shanon Diversity</th>
+<th align="right">Standard Error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="right">9.029676</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="right">7.019472</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>While <em>H. schistosus</em> fed on greater number of prey families, <em>H. curtus</em> showed greater evenness in prey preference.</p>
+<p>Statistical comparison is difficult as each individual snake fed on only one type of specimen at time.</p>
+</div>
+</div>
+<div id="diet-overlap-between-h.-curtus-and-h.-shistosus" class="section level2">
+<h2><span class="header-section-number">3.5</span> Diet overlap between <em>H. curtus</em> and <em>H. shistosus</em></h2>
+<p>Number of overlapping prey families:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">gc<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
+<a class="sourceLine" id="cb20-3" title="3">         Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Prey.Family)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N_pred =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Snake.Species)))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-6" title="6"><span class="st">  </span><span class="kw">ungroup</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-7" title="7"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Overlap =</span> <span class="kw">sum</span>(N_pred<span class="op">&gt;</span><span class="dv">1</span>))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-8" title="8"><span class="st">  </span><span class="kw">as.numeric</span>()</a></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<p>Shoener’s (1971) resource overlap index (D):</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">gc<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Prey.Species <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># number of speciemens per prey family in each snake species</span></a>
+<a class="sourceLine" id="cb22-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">N =</span> <span class="kw">sum</span>(n))<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># total number of specimens collected from each snake species</span></a>
+<a class="sourceLine" id="cb22-7" title="7"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Prey.Family)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-8" title="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">p =</span> n<span class="op">/</span>N)<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># relative proportion of each prey family</span></a>
+<a class="sourceLine" id="cb22-9" title="9"><span class="st">  </span><span class="kw">spread</span>(Snake.Species, p, <span class="dt">fill =</span> <span class="dv">0</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-10" title="10"><span class="st">  </span><span class="kw">rename</span>(<span class="st">&quot;HC&quot;</span> =<span class="st"> &#39;Hydrophis curtus&#39;</span>, <span class="st">&quot;HS&quot;</span> =<span class="st"> &#39;Hydrophis schistosus&#39;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-11" title="11"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">P =</span> <span class="kw">abs</span>(HC <span class="op">-</span><span class="st"> </span>HS))<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># difference in relactive proportion prey items </span></a>
+<a class="sourceLine" id="cb22-12" title="12"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">D =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span><span class="op">*</span><span class="kw">sum</span>(P))<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Schoener&#39;s resource overlap index</span></a>
+<a class="sourceLine" id="cb22-13" title="13"><span class="st">  </span><span class="kw">as.numeric</span>()</a></code></pre></div>
+<pre><code>## [1] 0.2380952</code></pre>
+<p>Morista - Horn overlap:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">similarity</span>(fam_vegan, <span class="dt">q =</span> <span class="dv">2</span>, <span class="dt">boot =</span> T)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="st">  </span><span class="kw">as.data.frame</span>()</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="right">Simlarity</th>
+<th align="right">StdErr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.2552632</td>
+<td align="right">0.14</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>There was limited overlap in prey between <em>H. schistosus</em> and <em>H. curtus</em></p>
+<div id="testing-segregation-in-prey-between-h.-curtus-and-h.-schistosus" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Testing segregation in prey between <em>H. curtus</em> and <em>H. schistosus</em></h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># loading libraries</span></a>
+<a class="sourceLine" id="cb25-2" title="2"></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="kw">library</span>(vegan)</a>
+<a class="sourceLine" id="cb25-4" title="4"></a>
+<a class="sourceLine" id="cb25-5" title="5"><span class="co"># formating data for vegan</span></a>
+<a class="sourceLine" id="cb25-6" title="6"></a>
+<a class="sourceLine" id="cb25-7" title="7">fam_simboo &lt;-<span class="st"> </span>gc<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-8" title="8"><span class="st">  </span><span class="kw">filter</span>(Prey.Family <span class="op">!=</span><span class="st"> &quot;Unidentified&quot;</span>, Prey.Family <span class="op">!=</span><span class="st">&quot;&quot;</span>, Field.Code <span class="op">!=</span><span class="st"> &quot;&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-9" title="9"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species, Field.Code, Prey.Family)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-10" title="10"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-11" title="11"><span class="st">  </span><span class="kw">spread</span>(Prey.Family, n, <span class="dt">fill =</span> <span class="dv">0</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-12" title="12"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb25-13" title="13"></a>
+<a class="sourceLine" id="cb25-14" title="14"><span class="co"># PERMANOVA to compare composition</span></a>
+<a class="sourceLine" id="cb25-15" title="15"></a>
+<a class="sourceLine" id="cb25-16" title="16"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb25-17" title="17"></a>
+<a class="sourceLine" id="cb25-18" title="18">permanova_sp &lt;-<span class="st"> </span><span class="kw">adonis2</span>(fam_simboo[,<span class="dv">3</span><span class="op">:</span><span class="kw">length</span>(fam_simboo)] <span class="op">~</span><span class="st"> </span>fam_simboo<span class="op">$</span>Snake.Species,</a>
+<a class="sourceLine" id="cb25-19" title="19">                     <span class="dt">data =</span> fam_simboo[,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb25-20" title="20"></a>
+<a class="sourceLine" id="cb25-21" title="21"><span class="co">## clean table</span></a>
+<a class="sourceLine" id="cb25-22" title="22"></a>
+<a class="sourceLine" id="cb25-23" title="23">broom<span class="op">::</span><span class="kw">tidy</span>(permanova_sp)</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">df</th>
+<th align="right">SumOfSqs</th>
+<th align="right">R2</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">fam_simboo$Snake.Species</td>
+<td align="right">1</td>
+<td align="right">1.552381</td>
+<td align="right">0.0509692</td>
+<td align="right">3.759463</td>
+<td align="right">0.002</td>
+</tr>
+<tr class="even">
+<td align="left">Residual</td>
+<td align="right">70</td>
+<td align="right">28.904841</td>
+<td align="right">0.9490308</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left">Total</td>
+<td align="right">71</td>
+<td align="right">30.457222</td>
+<td align="right">1.0000000</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Prey composition was significantly different between the two snake species.</p>
+</div>
+</div>
+<div id="difference-in-size-selectivity-of-prey-between-h.-curtus-and-h.-schistosus" class="section level2">
+<h2><span class="header-section-number">3.6</span> Difference in size selectivity of prey between <em>H. curtus</em> and <em>H. schistosus</em></h2>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># summary</span></a>
+<a class="sourceLine" id="cb26-2" title="2"></a>
+<a class="sourceLine" id="cb26-3" title="3">gc<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
+<a class="sourceLine" id="cb26-5" title="5">         Condition <span class="op">&lt;</span><span class="st"> </span><span class="dv">3</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># removing very digested specimens </span></a>
+<a class="sourceLine" id="cb26-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(Snake.Species)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-7" title="7"><span class="st">  </span>skimr<span class="op">::</span><span class="kw">skim</span>(Maximum.Body.Girth..cm.)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-8" title="8"><span class="st">  </span>skimr<span class="op">::</span><span class="kw">yank</span>(<span class="st">&quot;numeric&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-9" title="9"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Snake.Species<span class="op">:</span>p100)</a></code></pre></div>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Snake.Species</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="right">2</td>
+<td align="right">0.86</td>
+<td align="right">2.77</td>
+<td align="right">0.76</td>
+<td align="right">2.0</td>
+<td align="right">2.08</td>
+<td align="right">2.65</td>
+<td align="right">3.2</td>
+<td align="right">4.5</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">3.46</td>
+<td align="right">1.17</td>
+<td align="right">0.6</td>
+<td align="right">3.00</td>
+<td align="right">3.60</td>
+<td align="right">4.3</td>
+<td align="right">5.5</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># testing diff max prey width by species</span></a>
+<a class="sourceLine" id="cb27-2" title="2"></a>
+<a class="sourceLine" id="cb27-3" title="3">gc<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis schistosus&quot;</span> <span class="op">|</span><span class="st"> </span>Snake.Species <span class="op">==</span><span class="st"> &quot;Hydrophis curtus&quot;</span>,</a>
+<a class="sourceLine" id="cb27-5" title="5">         Condition <span class="op">&lt;</span><span class="st"> </span><span class="dv">3</span>, <span class="co"># removing digested specimens </span></a>
+<a class="sourceLine" id="cb27-6" title="6">         <span class="op">!</span><span class="kw">is.na</span>(Maximum.Body.Girth..cm.))<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># removing unrecorded data</span></a>
+<a class="sourceLine" id="cb27-7" title="7"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Snake.Species, Maximum.Body.Girth..cm.)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-8" title="8"><span class="st">  </span><span class="kw">droplevels</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-9" title="9"><span class="st">  </span><span class="kw">nest</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-10" title="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="kw">t.test</span>(Maximum.Body.Girth..cm. <span class="op">~</span><span class="st"> </span>Snake.Species, <span class="dt">data =</span> .)), <span class="co"># t test</span></a>
+<a class="sourceLine" id="cb27-11" title="11">         <span class="dt">sumry =</span> <span class="kw">map</span>(test, broom<span class="op">::</span>tidy),</a>
+<a class="sourceLine" id="cb27-12" title="12">         <span class="dt">d =</span> <span class="kw">map</span>(data, <span class="op">~</span>lsr<span class="op">::</span><span class="kw">cohensD</span>(Maximum.Body.Girth..cm. <span class="op">~</span><span class="st"> </span>Snake.Species, <span class="dt">data =</span> .)))<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># effect size</span></a>
+<a class="sourceLine" id="cb27-13" title="13"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(sumry, d)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-14" title="14"><span class="st">  </span><span class="kw">unnest</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-15" title="15"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(estimate1<span class="op">:</span>p.value, d)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-16" title="16"><span class="st">  </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">Hydrophis curtus</span><span class="st">`</span> =<span class="st"> </span>estimate1,</a>
+<a class="sourceLine" id="cb27-17" title="17">         <span class="st">`</span><span class="dt">Hydrophis schistosus</span><span class="st">`</span> =<span class="st"> </span>estimate2)</a></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="right">Hydrophis curtus</th>
+<th align="right">Hydrophis schistosus</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">d</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2.76775</td>
+<td align="right">3.463946</td>
+<td align="right">-2.386272</td>
+<td align="right">0.0237889</td>
+<td align="right">0.6420566</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>H. schistosus</em> fed on larger prey than <em>H. curtus</em></p>
 
 </div>
 </div>
@@ -563,6 +1548,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
