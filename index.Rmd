@@ -58,3 +58,8 @@ a. fisheries dependent methods to characterise distribution and habitat use of t
 b. visual gut content analysis to characterise diet and trophic niche of the species, and overlap between fisheries catch and sea snake diet; 
 
 c. stable isotope analysis to characterise overall resource use in terms of isotopic niche, as well as the effect of fishing intensity on the niche width of both species.
+
+## Citation
+
+<span style = "color: red;"> **Add link/citation** </span>
+

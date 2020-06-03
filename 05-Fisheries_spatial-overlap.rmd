@@ -1,27 +1,27 @@
 # Does fishing intensity affect the distribution of *H. curtus* and *H. schistosus*?
 
 ```{r}
-dep_int <- read.csv("../data/Fishing intensity_dep.csv")
+# loading required libraries
 
-depth <- read.csv("../data/sindhudurg depth.csv")
-
-snakes_den <- read.csv("../data/snakes-density.csv")
-```
-
-
-```{r}
 library(sp)
 library(raster)
 
-ext <- raster::raster("../Data/sampling_extent.tif")
+# importing data
 
-source("../Functions/intensity extract.R")
-source("../Functions/raster to df.R")
+dep_int <- read.csv("./data/Fishing intensity_dep.csv") # geocoded fishing effort
 
-```
+depth <- read.csv("./data/sindhudurg depth.csv") # depth data
 
-```{r}
-#Calculating fishing intensity
+snakes_den <- read.csv("./data/snakes-density.csv") # sea snake occurence in bycatch
+
+ext <- raster::raster("./Data/sampling_extent.tif") # sampling grid
+
+# importing required scripts
+
+source("./Functions/intensity extract.R")
+source("./Functions/raster to df.R")
+
+# Calculating fishing intensity
 
 fi <- dep_int%>%
   group_by(Gear.Type)%>%
@@ -31,7 +31,6 @@ fi <- dep_int%>%
   dplyr::select(mdf)%>%
   unnest()%>%
   spread(Gear.Type, layer)
-#rename(intensity = layer)
 
 # Calculating sea snake CPUE
 
@@ -54,10 +53,11 @@ dep <- depth%>%
   unnest()%>%
   rename(mean.depth = layer)
 
-#Calculating relative abaundance of sea snakes
+# Joining creating combined data frame 
 
 fi_den<- inner_join(fi, den, by = c("x", "y"))%>%
   inner_join(dep, by = c("x", "y"))%>%
+  # calculating relative abaundance of sea snakes in each grid cell
   mutate(rel.prop = HC/(HC+HS))
 
 ```
@@ -65,49 +65,47 @@ fi_den<- inner_join(fi, den, by = c("x", "y"))%>%
 ## Spatial overlap between fisheries and sea snakes
 
 ```{r}
+
+# Calculating spatial overlap between sea snakes and fisheries
+
 sp.ovlp <- fi_den%>%
-  gather(c("HS", "HC"), key = sp, value = CPUE)%>%
-  gather(c("GillNet", "Trawler"), key = gear, value = intensity)%>%
-  group_by(gear, sp)%>%
+  gather(c("HS", "HC"), key = Species, value = CPUE)%>%
+  gather(c("GillNet", "Trawler"), key = Gear, value = intensity)%>%
+  group_by(Gear, Species)%>%
   summarise(overlap = sum(CPUE > 0 & intensity > 0),
             extent.sp = sum(CPUE>0),
             rel.ovlp = overlap/extent.sp)
 
-knitr::kable(sp.ovlp)
-```
+# Creating pretty table
 
-
-```{r}
 sp.ovlp%>%
-  group_by(sp)%>%
-  nest()%>%
-  mutate(ptest = map(data, ~prop.test(.$overlap, .$extent.sp)),
-         sumry = map(ptest, broom::tidy),
-         h = map(sumry, ~pwr::ES.h(.$estimate2, .$estimate1)))%>%
-  select(sumry, h)%>%
-  unnest()%>%
-  dplyr::select(sp:p.value, h)
+    dplyr::select(-extent.sp)%>%
+    mutate(rel.ovlp = 100*rel.ovlp,
+           Species = ifelse(Species == "HC", "Hydrophis curtus", "Hydrophis schistosus"))%>%
+    rename(`Relative Overlap %` = rel.ovlp,
+           `Spatial Overlap` = overlap)
+
 ```
 
+### Testing spatial overlap between sea snakes and fisheries
 
-## Variation in relative proportion of HC with fishing intensity
+We tested the spatial overlap between sea snakes and fisheries along the Sindhudurg coast as the difference in relative proportion of overlap among species and gear.
 
 ```{r}
-int_dist <- lm(rel.prop ~ GillNet + Trawler + mean.depth, data = fi_den)
 
-tidy(int_dist)
+sp.ovlp%>%
+  mutate(Species = ifelse(Species == "HC", "Hydrophis curtus", "Hydrophis schistosus"))%>%
+  group_by(Species)%>%
+  nest()%>%
+  mutate(ptest = map(data, ~prop.test(.$overlap, .$extent.sp)), # Z - test of proportion
+         sumry = map(ptest, broom::tidy),
+         h = map(sumry, ~pwr::ES.h(.$estimate2, .$estimate1)))%>% # effect size
+  dplyr::select(sumry, h)%>%
+  unnest()%>%
+  dplyr::select(Species:p.value, h)%>%
+  rename(`Gill Net` = estimate1,
+         Trawler = estimate2)
 
-glance(int_dist)%>%
-  dplyr::select(adj.r.squared, AIC)
-
-car::Anova(int_dist)
-
-fi_den%>%
-  gather(c('GillNet', 'Trawler'), key = "Gear.Type", value =  "intensity")%>%
-  ggplot(aes(intensity, rel.prop))+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  scale_y_log10()+
-  labs(x = "Fishing intensity", y = "Relative proportion of H.curtus")+
-  facet_wrap(~Gear.Type, scales = "free_x")
 ```
+
+Trawlers had significantly higher spatial overlap with both species. _H. curtus_ overlaped more with trawlers than _H. schistosus_ and vice - a - versa for _H. shcistosus_ in gill nets.
