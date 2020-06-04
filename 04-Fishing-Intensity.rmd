@@ -22,7 +22,7 @@ __Fishing intensity__: Vessel effort (Number of days fishing x No. of hauls x Av
 - Should calculation of fishing intensity factor in Gears.
 
 
-```{r, eval = FALSE, echo = TRUE}
+```{r echo = TRUE}
 
 dep_int = effort%>% 
   filter(Fishing.Location != "")%>% #removing missing location data
@@ -47,16 +47,39 @@ dep_int = effort%>%
 
 ## Geocoding fishing trips
 
-<span style = "color: red;"> **Add geocoding script** </span>
+Using data gathered from fisher surveys, we mapped the location of each fishing trip.
+
+The protocol for geocoding fishing trips is as follows:
+
+- Nearest landmarks are geocoded from google maps API 
+- Latitude is extracted from landmark geocode
+- Match landmark latitude and depth from survey to GEBCO data
+- Extract final longitude from GEBCO data
+
+The protocol is encoded in `Function/geocode.R`
+
+```{r}
+
+source("./Functions/geocode.R")
+
+dep_int <- geocode.trips(dep_int, fl = 'Fishing.Location', dep = 'Depth.m')
+
+# removing duplicates introduced by fuzzy joining
+
+dep_int <- distinct(dep_int, Date, Boat.name, Fishing.Location, Gear.Type, Depth.m, .keep_all = T)
+
+# savinf output
+
+write.csv(dep_int, "./Data/Fishing intensity_dep.csv")
+
+```
+
+**Note:** `fuzzyjoin::fuzzy_inner_join()` introduces many duplicates, I have not as yet been able to fix the issue dirrectly. Currently, removing duplicates from output using `dplyr::distinct()`.
+
 
 ## No. of trips sampled
 
 ```{r}
-
-# saved geocoded fishing intensity data
-
-dep_int = read.csv("./Data/Fishing intensity_dep.csv")
-
 ## Sample size
 
 knitr::kable(table(dep_int$Gear.Type))

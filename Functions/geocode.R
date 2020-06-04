@@ -41,7 +41,7 @@ geocode.trips <- function(df, fl, dep, trip = NULL) {
   
   df <-  mutate_(df, fl = as.character(fl))
   
-  loc <- select(df, fl)%>%distinct() # isolating location for faster computation
+  loc <- dplyr::select(df, fl)%>%distinct() # isolating location for faster computation
     
   loc  <- mutate_geocode(loc, location = fl)
   
@@ -66,3 +66,4 @@ geocode.trips <- function(df, fl, dep, trip = NULL) {
   
   return(df)
 }
+

@@ -4,7 +4,7 @@ We investigated the study species used ssimilar areas for foraging and other act
 
 ## Calculating abundance of sea snakes per fishing trip
 
-```{r, eval = FALSE, echo = TRUE}
+```{r echo = TRUE}
 
 snakes_den = snakes%>%
   filter(Species == "Hydrophis schistosus" | Species == "Hydrophis curtus",
@@ -57,7 +57,8 @@ snakes%>%
   drop_na()
 
 ```
-## Geocoding fishing trips
+
+## Geocoding sea snake encounters
 
 In order to map sea snake distribution and study depth use we used location and depth data gathered from fisher surveys to map each fishing trip.
 
@@ -68,9 +69,25 @@ The protocol for geocoding fishing trips is as follows:
 - Match landmark latitude and depth from survey to GEBCO data
 - Extract final longitude from GEBCO data
 
+The protocol is encoded in `Function/geocode.R`
+
 ```{r}
-# add geocoding code here
+
+source("./Functions/geocode.R")
+
+snakes_den <- geocode.trips(snakes_den, fl = 'Fishing.Location', dep = 'Depth.Caught..m.')
+
+# removing duplicates introduced by fuzzy joining
+
+snakes_den <- distinct(snakes_den, Date, Boat.Name.Owner, Species, Fishing.Location, Depth.Caught..m., .keep_all = T)
+
+# saving output
+
+write.csv(snakes_den, "./Data/snakes-density.csv")
+
 ```
+
+**Note:** `fuzzyjoin::fuzzy_inner_join()` introduces many duplicates, I have not as yet been able to fix the issue dirrectly. Currently, removing duplicates from output using `dplyr::distinct()`.
 
 ## Mean CPUE by species
 
@@ -80,10 +97,6 @@ The average catch per unit effort of each species in each grid cell over the stu
 # loading libraries
 
 library(raster)
-
-# importing saved data set to reduce compute time
-
-snakes_den <- read.csv("./Data/snakes-density.csv")
 
 # raster with study site extent
 

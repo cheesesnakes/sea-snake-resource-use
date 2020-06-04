@@ -66,11 +66,20 @@ ggplot(fi, aes(x, y, fill = class))+
 
 <span style = "color: red;"> **Clustering may need to be revised based on sample size** </span>
 
-## Geocoding stable isotope data
+## Determining capture grid cell for individual snakes
 
-<span style = "color: red;"> **Update geocoding code and rerun** </span>
+Using data gathered from fisher surveys, we mapped the location of each fishing trip.
 
-```{r, eval=FALSE, echo=TRUE}
+The protocol for geocoding fishing trips is as follows:
+
+- Nearest landmarks are geocoded from google maps API 
+- Latitude is extracted from landmark geocode
+- Match landmark latitude and depth from survey to GEBCO data
+- Extract final longitude from GEBCO data
+
+The protocol is encoded in `Function/geocode.R`
+
+```{r echo=TRUE}
 
 # importing stable isotope data
 
@@ -82,15 +91,38 @@ sia_snakes = sia%>%
   filter(Tissue.type != "Gut Content")%>%
   left_join(snakes, 'Field.Code')%>%
   mutate(Lab = "CEAS")%>%
-  #rename(Delta.Carbon = d13C.vpdb. , Delta.Nitrogen = d15N.N2.air.)%>%
-  dplyr::select(Date, Field.Code, Species, Snout.to.Vent.cm., Sex, Gravid, Class,
-                Gear.Type, Fishing.Location, Depth.Caught.m.,
+  rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
+  dplyr::select(Date, Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
+                Gear.Type, Fishing.Location, Depth.Caught..m.,
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
                 Tissue.type, Month, Year)
 
+## Geocoding si data
+
+source("./Functions/geocode.R")
+
+#selecting relavant variables
+
+sia_li = sia_snakes%>%
+  dplyr::select(Field.Code, Species, Fishing.Location, Depth.Caught..m.,Tissue.type,
+                Delta.Carbon, Delta.Nitrogen)%>%
+  filter(Fishing.Location != "")%>%
+  drop_na()%>%
+  droplevels()
+
+sia_li <- geocode.trips(sia_li, fl = 'Fishing.Location', dep = 'Depth.Caught..m.')
+
+## removing duplicates introduced by fuzzy joining
+
+sia_li <- distinct(sia_li, Field.Code, Tissue.type, .keep_all = T)
+
+
 ## Assigning grid cells to snakes
 
-sia_li <- sia_fi%>%
+source("./Functions/find cell.R") # importing cell.ext function
+
+#sia_fi <- 
+sia_li%>%
   group_by(Field.Code, Species, Tissue.type, Delta.Carbon, Delta.Nitrogen)%>%
   nest()%>%
   mutate(cell = map(data, cell.ext),
@@ -104,13 +136,11 @@ sia_li <- sia_fi%>%
 write.csv(sia_li, "./Data/SIA_fishing intensity.csv")
 ```
 
+**Note:** `fuzzyjoin::fuzzy_inner_join()` introduces many duplicates, I have not as yet been able to fix the issue dirrectly. Currently, removing duplicates from output using `dplyr::distinct()`.
 
 ## Sample size
 
 ```{r}
-# importing geocoded stable isotope data
-
-sia_li <- read.csv("./Data/SIA_fishing intensity.csv")
 
 # adding fishing intensity class
 

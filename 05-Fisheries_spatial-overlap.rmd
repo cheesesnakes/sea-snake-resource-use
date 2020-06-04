@@ -60,6 +60,9 @@ fi_den<- inner_join(fi, den, by = c("x", "y"))%>%
   # calculating relative abaundance of sea snakes in each grid cell
   mutate(rel.prop = HC/(HC+HS))
 
+# saving fi_den for analysis
+
+write.csv(fi_den, "./Data/cell_fish_snake.csv")
 ```
 
 ## Spatial overlap between fisheries and sea snakes
