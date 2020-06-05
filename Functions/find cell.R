@@ -11,10 +11,17 @@ cell.ext <- function(df){
   
   coordinates(xy) <- ~lon + lat
   
-  proj4string(xy) <- CRS("+init=epsg:4326")#setting projection to WGS 84 (lon/lat)
+  proj4string(xy) <- CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")#setting projection to WGS 84 (lon/lat)
   
   #xy <- spTransform(xy, CRSobj = CRS("+init=epsg:3857"))#using spherical mercator
   
-  c <- xyFromCell(r, cellFromXY(r, xy))
+  cell <- cellFromXY(r, xy)
   
+  coord <- xyFromCell(r, cellFromXY(r, xy)) 
+  
+  return(coord)
+
 }
+
+
+#cell.ext(sia_li)

@@ -10,8 +10,6 @@ library(raster)
 
 dep_int <- read.csv("./data/Fishing intensity_dep.csv") # geocoded fishing effort
 
-depth <- read.csv("./data/sindhudurg depth.csv") # depth data
-
 snakes_den <- read.csv("./data/snakes-density.csv") # sea snake occurence in bycatch
 
 ext <- raster::raster("./Data/sampling_extent.tif") # sampling grid
@@ -45,6 +43,15 @@ den <- snakes_den%>%
 
 # Calculating mean depth in cell
 
+library(marmap)
+
+depth <- readGEBCO.bathy("./Data/gebco_2020_n16.6_s15.6_w72.9_e73.9.nc")
+
+depth = fortify.bathy(depth)%>% # converting to usable data frame
+  dplyr::rename(lon = x, lat = y, depth = z)%>%
+  filter(depth < 1)
+
+
 dep <- depth%>%
   nest()%>%
   mutate(m = map(data, ~map.extract(df = ., var = "depth", func = mean)),
@@ -62,7 +69,7 @@ fi_den<- inner_join(fi, den, by = c("x", "y"))%>%
 
 # saving fi_den for analysis
 
-write.csv(fi_den, "./Data/cell_fish_snake.csv")
+write.csv(fi, "./Data/Fishing intensity_grid.csv", row.names = F)
 ```
 
 ## Spatial overlap between fisheries and sea snakes

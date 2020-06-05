@@ -23,20 +23,34 @@ We used hierarchical clustering based on fishing intensity of both gears, and th
 
 ```{r fig.height=4, fig.width=4}
 
-# importing gridded fishing intensity data - see section 5
+# loading required libraries
 
-fi_den <- read.csv("./data/cell_fish_snake.csv")
+library(sp)
+library(raster)
 
-fi_den <- fi_den%>%
-  # adding cell id
-  mutate(id = 1:nrow(fi_den))
+# importing data
 
-# clustering grid cells based on fishing intensity
+dep_int <- read.csv("./data/Fishing intensity_dep.csv") # geocoded fishing effort
 
-## selecting relevant variables
+snakes_den <- read.csv("./data/snakes-density.csv") # sea snake occurence in bycatch
 
-fi = fi_den%>%
-  dplyr::select(id, x, y, GillNet, Trawler)
+ext <- raster::raster("./Data/sampling_extent.tif") # sampling grid
+
+# importing required scripts
+
+source("./Functions/intensity extract.R")
+source("./Functions/raster to df.R")
+
+# Calculating fishing intensity
+
+fi <- dep_int%>%
+  group_by(Gear.Type)%>%
+  nest()%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "effort", func = 'sum')),
+         mdf = map(m, map.df))%>%
+  dplyr::select(mdf)%>%
+  unnest()%>%
+  spread(Gear.Type, layer)
 
 ## creating distance matrix
 
@@ -46,14 +60,22 @@ dist_fi <- dist(fi)
 
 clust_fi <- hclust(dist_fi)
 
+plot(clust_fi)
+
 ## Assigning fishing intensity classes
 
-fi_class <- cutree(clust_fi, 4) ## cutting the tree 4 times
+fi_class <- cutree(clust_fi, 6) ## cutting the tree 4 times
 
 ## Naming clasess
 
 fi <- fi%>%
-  mutate(class = as.factor(ifelse(fi_class == 3 | fi_class == 2 , "High", "Low")))
+  mutate(class = as.factor(ifelse(fi_class %in% seq(4, 6, 1) , "High", 
+                                  ifelse(fi_class == 2 | fi_class == 3, 
+                                         "Medium",
+                                         "Low")
+                                  )
+                           )
+         )
 
 ## Plotting grid
 
@@ -97,10 +119,6 @@ sia_snakes = sia%>%
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
                 Tissue.type, Month, Year)
 
-## Geocoding si data
-
-source("./Functions/geocode.R")
-
 #selecting relavant variables
 
 sia_li = sia_snakes%>%
@@ -109,6 +127,10 @@ sia_li = sia_snakes%>%
   filter(Fishing.Location != "")%>%
   drop_na()%>%
   droplevels()
+
+## Geocoding si data
+
+source("./Functions/geocode.R")
 
 sia_li <- geocode.trips(sia_li, fl = 'Fishing.Location', dep = 'Depth.Caught..m.')
 
@@ -121,15 +143,16 @@ sia_li <- distinct(sia_li, Field.Code, Tissue.type, .keep_all = T)
 
 source("./Functions/find cell.R") # importing cell.ext function
 
-#sia_fi <- 
-sia_li%>%
+ext <- raster::raster("./Data/sampling_extent.tif") # sampling grid
+
+sia_fi <- sia_li%>%
   group_by(Field.Code, Species, Tissue.type, Delta.Carbon, Delta.Nitrogen)%>%
   nest()%>%
   mutate(cell = map(data, cell.ext),
          celldf = map(cell, as.data.frame))%>%
   dplyr::select(celldf)%>%
   unnest()%>%
-  inner_join(fi, by = c("x", "y"))
+  ungroup()
 
 ## Saving data to save time
 
@@ -144,8 +167,9 @@ write.csv(sia_li, "./Data/SIA_fishing intensity.csv")
 
 # adding fishing intensity class
 
-sia_li <- sia_li%>%
-  inner_join(fi, c("x","y"))
+sia_li <- sia_fi%>%
+  left_join(fi, c("x","y"))%>%
+  mutate(intensity = GillNet + Trawler)
 
 # summarising number of samples
 
@@ -314,10 +338,11 @@ SEA.B_snakes.fi.df%>%
 SEA.B_snakes.fi.df%>%
   ggplot(aes(Species, SEA.B, fill = FI.Class))+
   geom_boxplot(alpha = 0.3, width = 0.25)+
-  scale_y_continuous(limits = c(0,20), name = "Standard Ellispes Area")+
+  scale_y_continuous(limits = c(0,5), name = "Standard Ellispes Area")+
   scale_fill_discrete(name = "Fishing Intensity")+
   theme(axis.text.x = element_text(face = "italic"))
 
 ggsave(last_plot(), filename = "./Figures and Tables/figure6.png", height = 6, width = 8, device = "png")
 ```
 
+Currently many outliers from 5 - 15 on y - axis
