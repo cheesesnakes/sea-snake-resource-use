@@ -17,6 +17,8 @@ It is infeasible to to find sites with little to no fishing pressure on mainland
   
   Depending on the tissue being analysed. Scales - month, Plasma - week
 
+<span style = "color: red;"> **We used only plasma SI samples for this analysis as they reflect the isotopic assimilation in the short - term where effects of fisheries are expected.** </span>
+
 ## Determining cluster of fishing intensity off the coast of sindhudurg
 
 We used hierarchical clustering based on fishing intensity of both gears, and the position of the cell in the grid to divided the grid into high and low fishing intensity zones. 
@@ -60,8 +62,6 @@ dist_fi <- dist(fi)
 
 clust_fi <- hclust(dist_fi)
 
-plot(clust_fi)
-
 ## Assigning fishing intensity classes
 
 fi_class <- cutree(clust_fi, 6) ## cutting the tree 4 times
@@ -69,13 +69,16 @@ fi_class <- cutree(clust_fi, 6) ## cutting the tree 4 times
 ## Naming clasess
 
 fi <- fi%>%
+  # extracting classes from clustering
   mutate(class = as.factor(ifelse(fi_class %in% seq(4, 6, 1) , "High", 
                                   ifelse(fi_class == 2 | fi_class == 3, 
                                          "Medium",
                                          "Low")
                                   )
                            )
-         )
+         )%>%
+  # reordering classes
+  mutate(class = fct_relevel(class, c("High", "Medium", "Low")))
 
 ## Plotting grid
 
@@ -165,6 +168,7 @@ write.csv(sia_li, "./Data/SIA_fishing intensity.csv")
 
 ```{r}
 
+
 # adding fishing intensity class
 
 sia_li <- sia_fi%>%
@@ -185,9 +189,8 @@ table(sia_li$Species, sia_li$Tissue.type, sia_li$class)%>%
 
 ## Variation isotope ratio with fishing intensity
 
-Using only plasma values. 
-
 ```{r}
+
 # plotting
 
 sia_li%>%
@@ -208,8 +211,6 @@ Both $\delta^{15}N$ and $\delta^{13}C$ show strong negatice relationship with in
 
 ## Modeling isotope ratios with fishing intensity
 
-Using only plasma values. 
-
 ```{r}
 
 sia_li%>%
@@ -226,6 +227,7 @@ sia_li%>%
   unnest()%>%
   dplyr::select(Species:p.value, adj.r.squared)
 
+
 ```
 
 Samples sizes for *H. curtus* are low, however, fishing intensity seems to have a significant __depletion effect__ on plasma isotope ratios in _H. schistosus_.
@@ -235,6 +237,7 @@ Samples sizes for *H. curtus* are low, however, fishing intensity seems to have 
 See section 4 for more details on analysis with SIBER.
 
 ```{r, results = FALSE}
+
 # Loading required libraries
 
 library(SIBER)
@@ -261,14 +264,17 @@ siber_fi = sia_li%>%
 # Creating SIBER object fo MVN fitting
 
 siber.snakes.fi = createSiberObject(as.data.frame(siber_fi))
+
 ```
 
 ### Maximum likelihood estimate of SEA
 
 ``` {r}
+
 SEA.ML_snakes.fi <- groupMetricsML(siber.snakes.fi)
 
 data.frame(t(SEA.ML_snakes.fi))
+
 
 ```
 
@@ -328,14 +334,19 @@ SEA.B_snakes.fi.df%>%
 SEA.B_snakes.fi.df%>%
   spread(key = FI.Class, value = SEA.B)%>%
   group_by(Species)%>%
-  summarise(`P(High > Low)` = sum(`High` > `Low`)/n())
+  summarise(`P(High > Low)` = sum(`High` > `Low`)/n(),
+            `P(Medium > Low)` = sum(`Medium` > `Low`)/n(),
+            `P(High > Medium)` = sum(`High` > `Medium`)/n())
 
 ```
 
-## Visualising difference in niche width across gradiet of fishing intensity
+### Visualising difference in niche width across gradiet of fishing intensity
 
 ```{r fig.height=6}
+
 SEA.B_snakes.fi.df%>%
+  # reordering classes
+  mutate(FI.Class = fct_relevel(FI.Class, c("High", "Medium", "Low")))%>%
   ggplot(aes(Species, SEA.B, fill = FI.Class))+
   geom_boxplot(alpha = 0.3, width = 0.25)+
   scale_y_continuous(limits = c(0,5), name = "Standard Ellispes Area")+
@@ -343,6 +354,7 @@ SEA.B_snakes.fi.df%>%
   theme(axis.text.x = element_text(face = "italic"))
 
 ggsave(last_plot(), filename = "./Figures and Tables/figure6.png", height = 6, width = 8, device = "png")
+
 ```
 
 Currently many outliers from 5 - 15 on y - axis
