@@ -165,7 +165,7 @@ depth = fortify.bathy(depth)%>% # converting to usable data frame
 ## Getting base map
 
 base <- get_googlemap(center = c(mean(snakes_den$lon),mean(snakes_den$lat)), 
-                      zoom = 10, scale = 2, maptype = "terrain")
+                      zoom = 9, scale = 4, maptype = "terrain")##Getting basemap
 
 ## importing plotting function
 

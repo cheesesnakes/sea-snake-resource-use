@@ -152,13 +152,13 @@ fi <- dep_int%>%
 # Plotting intensity of fishing by gear type
 
 base <- get_googlemap(center = c(mean(dep_int$lon),mean(dep_int$lat)), 
-                      zoom = 10, scale = 2, maptype = "terrain")##Getting basemap
+                      zoom = 9, scale = 4, maptype = "terrain")##Getting basemap
 
 ## importing bathymetric data downloaded from GEBCO database
 
 library(marmap)
 
-depth <- readGEBCO.bathy("./Data/gebco_2020_n16.6_s15.6_w72.9_e73.9.nc")
+depth <- readGEBCO.bathy("./Data/gebco_2020_n16.7_s15.5_w72.0_e73.0.nc")
 
 ## converting depth data to usable data frame
 
