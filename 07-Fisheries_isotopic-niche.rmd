@@ -32,9 +32,9 @@ library(raster)
 
 # importing data
 
-dep_int <- read.csv("./data/Fishing intensity_dep.csv") # geocoded fishing effort
+dep_int <- read.csv("./Data/Fishing intensity_dep.csv") # geocoded fishing effort
 
-snakes_den <- read.csv("./data/snakes-density.csv") # sea snake occurence in bycatch
+snakes_den <- read.csv("./Data/snakes-density.csv") # sea snake occurence in bycatch
 
 ext <- raster::raster("./Data/sampling_extent.tif") # sampling grid
 
@@ -116,7 +116,7 @@ sia_snakes = sia%>%
   filter(Tissue.type != "Gut Content")%>%
   left_join(snakes, 'Field.Code')%>%
   mutate(Lab = "CEAS")%>%
-  rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
+  rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air., Date = Date.x)%>%
   dplyr::select(Date, Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
                 Gear.Type, Fishing.Location, Depth.Caught..m.,
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
@@ -334,9 +334,10 @@ SEA.B_snakes.fi.df%>%
 SEA.B_snakes.fi.df%>%
   spread(key = FI.Class, value = SEA.B)%>%
   group_by(Species)%>%
-  summarise(`P(High > Low)` = sum(`High` > `Low`)/n(),
-            `P(Medium > Low)` = sum(`Medium` > `Low`)/n(),
-            `P(High > Medium)` = sum(`High` > `Medium`)/n())
+  summarise(`P(High > Low)` = sum(`High` > `Low`)/n())
+            #Currently no medium cells
+            #`P(Medium > Low)` = sum(`Medium` > `Low`)/n(), 
+            #`P(High > Medium)` = sum(`High` > `Medium`)/n())
 
 ```
 

@@ -158,7 +158,7 @@ base <- get_googlemap(center = c(mean(dep_int$lon),mean(dep_int$lat)),
 
 library(marmap)
 
-depth <- readGEBCO.bathy("./Data/gebco_2020_n16.7_s15.5_w72.0_e73.0.nc")
+depth <- readGEBCO.bathy("./Data/gebco_2020_n16.7_s15.5_w72.0_e73.9.nc")
 
 ## converting depth data to usable data frame
 

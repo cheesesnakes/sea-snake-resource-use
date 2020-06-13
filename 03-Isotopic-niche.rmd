@@ -18,7 +18,7 @@ sia_snakes = sia%>%
   left_join(snakes, 'Field.Code')%>%
   mutate(Lab = "CEAS")%>%
   # renamving variables for ease of understanding
-  dplyr::rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
+  dplyr::rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air., Date = Date.x)%>%
   # selecting relevant variables
   dplyr::select(Date, Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
                 Gear.Type, Fishing.Location, Depth.Caught..m.,

@@ -8,9 +8,9 @@ library(raster)
 
 # importing data
 
-dep_int <- read.csv("./data/Fishing intensity_dep.csv") # geocoded fishing effort
+dep_int <- read.csv("./Data/Fishing intensity_dep.csv") # geocoded fishing effort
 
-snakes_den <- read.csv("./data/snakes-density.csv") # sea snake occurence in bycatch
+snakes_den <- read.csv("./Data/snakes-density.csv") # sea snake occurence in bycatch
 
 ext <- raster::raster("./Data/sampling_extent.tif") # sampling grid
 
@@ -45,7 +45,7 @@ den <- snakes_den%>%
 
 library(marmap)
 
-depth <- readGEBCO.bathy("./Data/gebco_2020_n16.6_s15.6_w72.9_e73.9.nc")
+depth <- readGEBCO.bathy("./Data/gebco_2020_n16.7_s15.5_w72.0_e73.9.nc")
 
 depth = fortify.bathy(depth)%>% # converting to usable data frame
   dplyr::rename(lon = x, lat = y, depth = z)%>%
@@ -82,7 +82,7 @@ sp.ovlp <- fi_den%>%
   gather(c("HS", "HC"), key = Species, value = CPUE)%>%
   gather(c("GillNet", "Trawler"), key = Gear, value = intensity)%>%
   group_by(Gear, Species)%>%
-  summarise(overlap = sum(CPUE > 0 & intensity > 0),
+  summarise(overlap = sum(CPUE > 0 & intensity > 0, na.rm = T),
             extent.sp = sum(CPUE>0),
             rel.ovlp = overlap/extent.sp)
 
@@ -115,6 +115,7 @@ sp.ovlp%>%
   dplyr::select(Species:p.value, h)%>%
   rename(`Gill Net` = estimate1,
          Trawler = estimate2)
+
 
 ```
 

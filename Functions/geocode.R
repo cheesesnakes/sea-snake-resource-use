@@ -7,7 +7,7 @@ library(tidyverse)
 
 ### raw depth data
 
-depth <- readGEBCO.bathy("./Data/gebco_2020_n16.6_s15.6_w72.9_e73.9.nc")
+depth <- readGEBCO.bathy("./Data/gebco_2020_n16.7_s15.5_w72.0_e73.9.nc")
 
 ### converting to data frame
 
