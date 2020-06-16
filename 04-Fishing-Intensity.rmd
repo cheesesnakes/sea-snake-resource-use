@@ -121,8 +121,6 @@ Trawlers had much higher fishing efforts than gillnets off the coast of Sindhudu
 
 ## Mapping fishing intensity
 
-Each fishing trip is assigned to a cell in the sampling grid. Total fishing effort in each grid cell is then calculated to quatify local fishing intensity.
-
 ```{r fp}
 # required libraries
 
@@ -189,6 +187,8 @@ ggsave(boat_plot, filename = "./Figures and Tables/figure4.tiff", width = 8, hei
 
 
 **Figure 4**: Distribution of fishing intensity of trawlers in gillnets operating from Malvan, Maharashtra. Black lines indicate 10m depth contours
+
+Each fishing trip is assigned to a cell in the sampling grid of **`r ncell(ext)` cells** with **`r nrow(ext)` rows** and **`r ncol(ext)` columns**. Total fishing effort in each grid cell is then calculated to quatify local fishing intensity.
 
 *Are points accurately depicted?*
   
