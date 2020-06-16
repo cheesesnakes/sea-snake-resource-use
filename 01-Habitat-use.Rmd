@@ -58,6 +58,14 @@ snakes%>%
 
 ```
 
+```{r}
+snakes%>%
+  filter(Species == "Hydrophis schistosus" | Species == "Hydrophis curtus")%>%
+  summarise(HS = sum(Species == "Hydrophis schistosus"),
+            HC = sum(Species == "Hydrophis curtus"))
+  
+```
+
 ## Geocoding sea snake encounters
 
 In order to map sea snake distribution and study depth use we used location and depth data gathered from fisher surveys to map each fishing trip.
