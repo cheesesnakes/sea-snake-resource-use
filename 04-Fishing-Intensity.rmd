@@ -121,6 +121,8 @@ Trawlers had much higher fishing efforts than gillnets off the coast of Sindhudu
 
 ## Mapping fishing intensity
 
+Each fishing trip is assigned to a cell in the sampling grid. Total fishing effort in each grid cell is then calculated to quatify local fishing intensity.
+
 ```{r fp}
 # required libraries
 
@@ -138,7 +140,7 @@ ext <- raster("./Data/sampling_extent.tif")
 source("./Functions/intensity extract.R")
 source("./Functions/raster to df.R")
 
-# Calculating fishing intensity
+# Calculating fishing intensity in each grid cell
 
 fi <- dep_int%>%
   group_by(Gear.Type)%>%

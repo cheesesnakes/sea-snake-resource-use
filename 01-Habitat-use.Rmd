@@ -91,7 +91,7 @@ write.csv(snakes_den, "./Data/snakes-density.csv")
 
 ## Mean CPUE by species
 
-The average catch per unit effort of each species in each grid cell over the study period.
+Each fishing trip is assigned to a cell in the sampling grid. Total CPUE of each species in each grid cell is then calculated.
 
 ```{r}
 # loading libraries
