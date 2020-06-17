@@ -51,6 +51,13 @@ catch%>%
 
 tonnage <- read.csv("./Data/catch tonnage.csv")
 
+## Summary
+
+tonnage%>%
+  group_by(Gear.Type)%>%
+  skimr::skim(Total.Catch..kg.)%>%
+  skimr::yank("numeric")
+
 # Testing assumption of normality
 
 broom::tidy(shapiro.test(log(tonnage$Total.Catch..kg.)))
