@@ -4,7 +4,7 @@
 
 # importing effort data
 
-effort = read.csv("./Data/Fishing-Effort_111219.csv")%>%
+effort = read.csv("./Data/Fishing-Effort_250720.csv")%>%
   group_by(Date, Gear.Type)%>%
   distinct(Boat.name, .keep_all = T)%>% # fixing repetitions in effort data
   mutate(Month = factor(months(dmy(Date)), 
@@ -188,7 +188,7 @@ ggsave(boat_plot, filename = "./Figures and Tables/figure4.tiff", width = 8, hei
 
 **Figure 4**: Distribution of fishing intensity of trawlers in gillnets operating from Malvan, Maharashtra. Black lines indicate 10m depth contours
 
-Each fishing trip is assigned to a cell in the sampling grid of **`r ncell(ext)` cells** with **`r nrow(ext)` rows** and **`r ncol(ext)` columns**. Total fishing effort in each grid cell is then calculated to quatify local fishing intensity.
+Each fishing trip is assigned to a cell in the sampling grid of **`r raster::ncell(ext)` cells** with **`r raster::nrow(ext)` rows** and **`r raster::ncol(ext)` columns**. Total fishing effort in each grid cell is then calculated to quatify local fishing intensity.
 
 *Are points accurately depicted?*
   
