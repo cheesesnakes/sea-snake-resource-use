@@ -24,7 +24,7 @@
 <meta name="author" content="Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker" />
 
 
-<meta name="date" content="2020-06-16" />
+<meta name="date" content="2020-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -830,7 +830,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb29-9" title="9"><span class="st">  </span><span class="kw">left_join</span>(snakes, <span class="st">&#39;Field.Code&#39;</span>)<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb29-10" title="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Lab =</span> <span class="st">&quot;CEAS&quot;</span>)<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb29-11" title="11"><span class="st">  </span><span class="co"># renamving variables for ease of understanding</span></a>
-<a class="sourceLine" id="cb29-12" title="12"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">rename</span>(<span class="dt">Delta.Carbon =</span> d13C..vpdb. , <span class="dt">Delta.Nitrogen =</span> d15N..N2.air., <span class="dt">Date =</span> Date.x)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-12" title="12"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">rename</span>(<span class="dt">Delta.Carbon =</span> d13C..vpdb. , <span class="dt">Delta.Nitrogen =</span> d15N..N2.air.)<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb29-13" title="13"><span class="st">  </span><span class="co"># selecting relevant variables</span></a>
 <a class="sourceLine" id="cb29-14" title="14"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Date, Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,</a>
 <a class="sourceLine" id="cb29-15" title="15">                Gear.Type, Fishing.Location, Depth.Caught..m.,</a>
@@ -1075,26 +1075,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tr class="odd">
 <td align="left">Hydrophis curtus</td>
 <td align="left">Plasma</td>
-<td align="right">1.086297</td>
-<td align="right">0.6113671</td>
+<td align="right">1.112015</td>
+<td align="right">0.6319474</td>
 </tr>
 <tr class="even">
 <td align="left">Hydrophis schistosus</td>
 <td align="left">Plasma</td>
-<td align="right">2.717488</td>
-<td align="right">0.9764177</td>
+<td align="right">2.707978</td>
+<td align="right">0.9681427</td>
 </tr>
 <tr class="odd">
 <td align="left">Hydrophis curtus</td>
 <td align="left">Scales</td>
-<td align="right">4.710867</td>
-<td align="right">1.0523314</td>
+<td align="right">4.720363</td>
+<td align="right">1.0563752</td>
 </tr>
 <tr class="even">
 <td align="left">Hydrophis schistosus</td>
 <td align="left">Scales</td>
-<td align="right">3.303134</td>
-<td align="right">0.7669954</td>
+<td align="right">3.302240</td>
+<td align="right">0.7538158</td>
 </tr>
 </tbody>
 </table>
@@ -1118,11 +1118,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td align="left">Plasma</td>
-<td align="right">0.95450</td>
+<td align="right">0.9450</td>
 </tr>
 <tr class="even">
 <td align="left">Scales</td>
-<td align="right">0.12525</td>
+<td align="right">0.1265</td>
 </tr>
 </tbody>
 </table>
@@ -1292,13 +1292,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td align="left">Long-term</td>
-<td align="right">0.4095344</td>
-<td align="right">0.0789993</td>
+<td align="right">0.4306671</td>
+<td align="right">0.0725277</td>
 </tr>
 <tr class="even">
 <td align="left">Short-term</td>
-<td align="right">0.0975700</td>
-<td align="right">0.0803418</td>
+<td align="right">0.0962143</td>
+<td align="right">0.0706418</td>
 </tr>
 </tbody>
 </table>

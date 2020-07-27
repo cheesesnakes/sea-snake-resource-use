@@ -24,7 +24,7 @@
 <meta name="author" content="Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker" />
 
 
-<meta name="date" content="2020-06-16" />
+<meta name="date" content="2020-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -819,7 +819,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">5</span> Varition in fishing intensity along the sindhudurg coast</h1>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># importing effort data</span></a>
 <a class="sourceLine" id="cb41-2" title="2"></a>
-<a class="sourceLine" id="cb41-3" title="3">effort =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./Data/Fishing-Effort_111219.csv&quot;</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb41-3" title="3">effort =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./Data/Fishing-Effort_250720.csv&quot;</span>)<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb41-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Date, Gear.Type)<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb41-5" title="5"><span class="st">  </span><span class="kw">distinct</span>(Boat.name, <span class="dt">.keep_all =</span> T)<span class="op">%&gt;%</span><span class="st"> </span><span class="co"># fixing repetitions in effort data</span></a>
 <a class="sourceLine" id="cb41-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Month =</span> <span class="kw">factor</span>(<span class="kw">months</span>(<span class="kw">dmy</span>(Date)), </a>
@@ -891,11 +891,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td align="left">GillNet</td>
-<td align="right">151</td>
+<td align="right">176</td>
 </tr>
 <tr class="even">
 <td align="left">Trawler</td>
-<td align="right">90</td>
+<td align="right">104</td>
 </tr>
 </tbody>
 </table>
@@ -932,26 +932,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">GillNet</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">1.16</td>
-<td align="right">0.70</td>
-<td align="right">0.25</td>
-<td align="right">0.75</td>
+<td align="right">1.10</td>
+<td align="right">0.66</td>
+<td align="right">0.17</td>
+<td align="right">0.69</td>
 <td align="right">1</td>
 <td align="right">1</td>
-<td align="right">4</td>
+<td align="right">3.5</td>
 </tr>
 <tr class="even">
 <td align="left">effort</td>
 <td align="left">Trawler</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">17.70</td>
-<td align="right">8.06</td>
-<td align="right">6.00</td>
+<td align="right">17.66</td>
+<td align="right">8.09</td>
+<td align="right">4.00</td>
 <td align="right">12.00</td>
 <td align="right">18</td>
 <td align="right">18</td>
-<td align="right">48</td>
+<td align="right">48.0</td>
 </tr>
 </tbody>
 </table>
@@ -980,11 +980,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">1.162671</td>
-<td align="right">17.69722</td>
-<td align="right">-19.42709</td>
+<td align="right">1.104034</td>
+<td align="right">17.65625</td>
+<td align="right">-20.82884</td>
 <td align="right">0</td>
-<td align="right">3.341964</td>
+<td align="right">3.343206</td>
 </tr>
 </tbody>
 </table>
@@ -1084,11 +1084,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td align="left">GillNet</td>
-<td align="right">460</td>
+<td align="right">550</td>
 </tr>
 <tr class="even">
 <td align="left">Trawler</td>
-<td align="right">1030</td>
+<td align="right">1180</td>
 </tr>
 </tbody>
 </table>
