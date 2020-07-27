@@ -123,7 +123,7 @@ sia_snakes = sia%>%
                 Tissue.type, Month, Year)%>%
   # using location encountered where fishing location is unavailable
   mutate(Fishing.Location = ifelse(Fishing.Location == "", Location.encountered, Fishing.Location))%>%
-  mutate(Fishing.Location = ifelse(Fishing.Location == "Dandi", "Dandi Beach", Fishing.Location))
+  mutate(Fishing.Location = ifelse(Fishing.Location == "Dandi" | Fishing.Location == "Dandi Beach", "Wayari", Fishing.Location))
 
 #selecting relavant variables
 
@@ -197,14 +197,14 @@ table(sia_li$Species, sia_li$Tissue.type, sia_li$class)%>%
 # plotting
 
 sia_li%>%
-  filter(Tissue.type == "Plasma")%>%
   gather(key = Isotope, c(Delta.Carbon, Delta.Nitrogen), value = ratio)%>%
-  ggplot(aes(intensity, ratio))+
+  ggplot(aes(intensity, ratio, col = Species))+
   geom_point(size = 3)+
   geom_smooth(method = lm)+
+  scale_color_brewer(palette = "Set1")+
   labs(x = "Fishing intensity", y = "Isotope ratio")+
   theme(legend.text = element_text(face = "italic"))+
-  facet_wrap(~Isotope, scale = "free_y")
+  facet_grid(Isotope ~ Tissue.type, scale = "free_y")
 
 ```
 
@@ -217,9 +217,8 @@ Both $\delta^{15}N$ and $\delta^{13}C$ show strong negatice relationship with in
 ```{r}
 
 sia_li%>%
-  filter(Tissue.type == "Plasma")%>%
   gather(key = Isotope, c(Delta.Carbon, Delta.Nitrogen), value = ratio)%>%
-  group_by(Species, Isotope)%>%
+  group_by(Species, Isotope, Tissue.type)%>%
   nest()%>%
   mutate(
     mod1 = map(data, ~lm(ratio ~ intensity, data = .)),
@@ -228,7 +227,8 @@ sia_li%>%
   )%>%
   dplyr::select(summ1, r2)%>%
   unnest()%>%
-  dplyr::select(Species:p.value, adj.r.squared)
+  dplyr::select(Species:p.value, adj.r.squared)%>%
+  arrange(adj.r.squared)
 
 
 ```
@@ -247,7 +247,9 @@ library(SIBER)
 
 #Creating siber data
 
-siber_fi = sia_li%>%
+## Plasma samples
+
+siber_pl_fi = sia_li%>%
   filter(Tissue.type == "Plasma")%>% # using plasma values for comparison
   dplyr::select(Delta.Carbon, Delta.Nitrogen, Species, class)%>%
   # renaming baed on SIBER conventions
@@ -266,7 +268,30 @@ siber_fi = sia_li%>%
 
 # Creating SIBER object fo MVN fitting
 
-siber.snakes.fi = createSiberObject(as.data.frame(siber_fi))
+siber.plasma.fi = createSiberObject(as.data.frame(siber_pl_fi))
+
+## Scale samples
+
+siber_sc_fi = sia_li%>%
+  filter(Tissue.type == "Scales")%>% # using plasma values for comparison
+  dplyr::select(Delta.Carbon, Delta.Nitrogen, Species, class)%>%
+  # renaming baed on SIBER conventions
+  rename(iso1 = Delta.Carbon,
+         iso2 = Delta.Nitrogen,
+         group = class, # setting fishing intesnity as group
+         community = Species)%>%
+  # removing missing data
+  filter(!is.na(group),
+         !is.na(iso1),
+         !is.na(iso2),
+         community == "Hydrophis schistosus" | community == "Hydrophis curtus")%>%
+  ungroup()%>%
+  dplyr::select(iso1, iso2, group, community)%>%
+  droplevels()
+
+# Creating SIBER object fo MVN fitting
+
+siber.scales.fi = createSiberObject(as.data.frame(siber_sc_fi))
 
 ```
 
@@ -274,9 +299,21 @@ siber.snakes.fi = createSiberObject(as.data.frame(siber_fi))
 
 ``` {r}
 
-SEA.ML_snakes.fi <- groupMetricsML(siber.snakes.fi)
+SEA.ML_plasma.fi <- groupMetricsML(siber.plasma.fi)# for plamsa samples
 
-data.frame(t(SEA.ML_snakes.fi))
+SEA.ML_scales.fi <- groupMetricsML(siber.scales.fi)# for scale samples
+
+data.frame(t(SEA.ML_plasma.fi))%>%
+  rownames_to_column("Species.FI")%>%
+  mutate(Tissue = "Plasma")%>%
+  full_join(
+    (data.frame(t(SEA.ML_scales.fi))%>%
+  rownames_to_column("Species.FI")%>%
+  mutate(Tissue = "Scales")
+  )
+  )%>%
+  group_by(Tissue)%>%
+  arrange(Species.FI)
 
 
 ```
@@ -300,21 +337,47 @@ priors$R <- 1 * diag(2)
 priors$k <- 2
 priors$tau.mu <- 1.0E-3
 
-snakes.fi.post <- siberMVN(siber.snakes.fi, 
+# scale samples
+
+scales.fi.post <- siberMVN(siber.scales.fi, 
                            parms, priors)#fitting multivariate normal model and getting                                                          posteriors
 
-SEA.B_snakes.fi <- siberEllipses(snakes.fi.post)#estimating standard ellipse area from posteriors
+SEA.B_scales.fi <- siberEllipses(scales.fi.post)#estimating standard ellipse area from posteriors
 
-means.B_snakes.fi <- extractPosteriorMeans(siber.snakes.fi, snakes.fi.post)#mean isotope values
+means.B_scales.fi <- extractPosteriorMeans(siber.scales.fi, scales.fi.post)#mean isotope values
 
-ccc <- names(snakes.fi.post)
+ccc <- names(scales.fi.post)
 
-colnames(SEA.B_snakes.fi) <- ccc
+colnames(SEA.B_scales.fi) <- ccc
 
-SEA.B_snakes.fi.df = data.frame(SEA.B_snakes.fi, check.names = F)%>%
+# plasma samples
+
+plasma.fi.post <- siberMVN(siber.plasma.fi, 
+                           parms, priors)#fitting multivariate normal model and getting                                                          posteriors
+
+SEA.B_plasma.fi <- siberEllipses(plasma.fi.post)#estimating standard ellipse area from posteriors
+
+means.B_plasma.fi <- extractPosteriorMeans(siber.plasma.fi, plasma.fi.post)#mean isotope values
+
+ccc <- names(plasma.fi.post)
+
+colnames(SEA.B_plasma.fi) <- ccc
+
+# creating data frame
+
+SEA.B_snakes.fi.df = data.frame(SEA.B_plasma.fi, check.names = F)%>%
   rowid_to_column(var = "run")%>%
   gather(Species.class, SEA.B, -run)%>%
-  separate(Species.class, c("Species","FI.Class"), sep = "([\\.\\?\\:])")
+  separate(Species.class, c("Species","FI.Class"), sep = "([\\.\\?\\:])")%>%
+  mutate(Tissue = "Plasma")%>%
+  # appending scale runs
+  full_join(
+    data.frame(SEA.B_scales.fi, check.names = F)%>%
+      rowid_to_column(var = "run")%>%
+      gather(Species.class, SEA.B, -run)%>%
+      separate(Species.class, c("Species","FI.Class"), sep = "([\\.\\?\\:])")%>%
+      mutate(Tissue = "Scale")
+  )
 
 ```
 
@@ -323,7 +386,7 @@ SEA.B_snakes.fi.df = data.frame(SEA.B_snakes.fi, check.names = F)%>%
 #Summarising SEA estimates
 
 SEA.B_snakes.fi.df%>%
-  group_by(Species, FI.Class)%>%
+  group_by(Species, Tissue, FI.Class)%>%
   summarise(SEA.mean = mean(SEA.B),
             SEA.sd = sd(SEA.B),
             SEA.se = sd(SEA.B)/sqrt(n()))
@@ -336,7 +399,7 @@ SEA.B_snakes.fi.df%>%
 
 SEA.B_snakes.fi.df%>%
   spread(key = FI.Class, value = SEA.B)%>%
-  group_by(Species)%>%
+  group_by(Species, Tissue)%>%
   summarise(`P(High > Low)` = sum(`High` > `Low`)/n())
             #Currently no medium cells
             #`P(Medium > Low)` = sum(`Medium` > `Low`)/n(), 
@@ -346,18 +409,19 @@ SEA.B_snakes.fi.df%>%
 
 ### Visualising difference in niche width across gradiet of fishing intensity
 
-```{r fig.height=6}
+```{r fig.height=6, fig.width=10}
 
 SEA.B_snakes.fi.df%>%
   # reordering classes
   mutate(FI.Class = fct_relevel(FI.Class, c("High", "Medium", "Low")))%>%
   ggplot(aes(Species, SEA.B, fill = FI.Class))+
-  geom_boxplot(alpha = 0.3, width = 0.25)+
-  scale_y_continuous(limits = c(0,5), name = "Standard Ellispes Area")+
+  geom_boxplot(alpha = 0.3, width = 0.25, position = position_dodge(preserve = "single"))+
+  scale_y_continuous(limits = c(0,5), name = "Standard Ellispes Area", guide = guide_axis(n.dodge = 1))+
   scale_fill_discrete(name = "Fishing Intensity")+
-  theme(axis.text.x = element_text(face = "italic"))
+  theme(axis.text.x = element_text(face = "italic"))+
+  facet_grid(~Tissue)
 
-ggsave(last_plot(), filename = "./Figures and Tables/figure6.png", height = 6, width = 8, device = "png")
+ggsave(last_plot(), filename = "./Figures and Tables/figure6.png", height = 6, width = 10, device = "png")
 
 ```
 
