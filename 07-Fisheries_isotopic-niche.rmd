@@ -116,11 +116,14 @@ sia_snakes = sia%>%
   filter(Tissue.type != "Gut Content")%>%
   left_join(snakes, 'Field.Code')%>%
   mutate(Lab = "CEAS")%>%
-  rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air., Date = Date.x)%>%
+  rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
   dplyr::select(Date, Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
-                Gear.Type, Fishing.Location, Depth.Caught..m.,
+                Gear.Type, Fishing.Location, Location.encountered, Depth.Caught..m.,
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
-                Tissue.type, Month, Year)
+                Tissue.type, Month, Year)%>%
+  # using location encountered where fishing location is unavailable
+  mutate(Fishing.Location = ifelse(Fishing.Location == "", Location.encountered, Fishing.Location))%>%
+  mutate(Fishing.Location = ifelse(Fishing.Location == "Dandi", "Dandi Beach", Fishing.Location))
 
 #selecting relavant variables
 
