@@ -23,8 +23,7 @@ It is infeasible to to find sites with little to no fishing pressure on mainland
 
 We used hierarchical clustering based on fishing intensity of both gears, and the position of the cell in the grid to divided the grid into high and low fishing intensity zones. 
 
-```{r fig.height=4, fig.width=4}
-
+```{r fig.height=8, fig.width=8}
 # loading required libraries
 
 library(sp)
@@ -62,6 +61,8 @@ dist_fi <- dist(fi)
 
 clust_fi <- hclust(dist_fi)
 
+plot(clust_fi, hang = -1, labels = F)
+
 ## Assigning fishing intensity classes
 
 fi_class <- cutree(clust_fi, 6) ## cutting the tree 4 times
@@ -70,16 +71,16 @@ fi_class <- cutree(clust_fi, 6) ## cutting the tree 4 times
 
 fi <- fi%>%
   # extracting classes from clustering
-  mutate(class = as.factor(ifelse(fi_class %in% seq(4, 6, 1) , "High", 
-                                  ifelse(fi_class == 2 | fi_class == 3, 
-                                         "Medium",
-                                         "Low")
+  mutate(class = as.factor(ifelse(fi_class %in% seq(2, 6, 1) , "High", "Low"
                                   )
                            )
          )%>%
   # reordering classes
   mutate(class = fct_relevel(class, c("High", "Medium", "Low")))
+```
 
+
+```{r fig.height=4, fig.width=4}
 ## Plotting grid
 
 ggplot(fi, aes(x, y, fill = class))+
