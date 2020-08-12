@@ -17,7 +17,7 @@ documentclass: book
 # setting global opitions
 
 options(max.print="75",
-        knitr.kable.NA = "", knitr.kable.align = 'c')
+        knitr.kable.NA = "", knitr.kable.align = 'c', knir.kable.digits = '3')
 
 knitr::opts_chunk$set(echo = T, error = T, warning = F, message = F, tidy = T, 
                       cache = T,

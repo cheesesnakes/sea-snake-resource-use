@@ -65,15 +65,14 @@ plot(clust_fi, hang = -1, labels = F)
 
 ## Assigning fishing intensity classes
 
-fi_class <- cutree(clust_fi, 6) ## cutting the tree 4 times
+fi_class <- cutree(clust_fi, k = 6) ## cutting the tree 4 times
 
 ## Naming clasess
 
 fi <- fi%>%
   # extracting classes from clustering
-  mutate(class = as.factor(ifelse(fi_class %in% seq(2, 6, 1) , "High", "Low"
-                                  )
-                           )
+  mutate(class = as.factor(ifelse(fi_class == 1 , "Low", "High")),
+         fic = fi_class
          )%>%
   # reordering classes
   mutate(class = fct_relevel(class, c("High", "Medium", "Low")))
@@ -193,7 +192,7 @@ table(sia_li$Species, sia_li$Tissue.type, sia_li$class)%>%
 
 ## Variation isotope ratio with fishing intensity
 
-```{r}
+```{r fig.height=8}
 
 # plotting
 
@@ -229,7 +228,7 @@ sia_li%>%
   dplyr::select(summ1, r2)%>%
   unnest()%>%
   dplyr::select(Species:p.value, adj.r.squared)%>%
-  arrange(adj.r.squared)
+  arrange(Species, Tissue.type, adj.r.squared)
 
 
 ```
@@ -411,16 +410,22 @@ SEA.B_snakes.fi.df%>%
 ### Visualising difference in niche width across gradiet of fishing intensity
 
 ```{r fig.height=6, fig.width=10}
+library(gridExtra)
+
+ss = data.frame(Tissue = c("Scale", "Plasma"),
+                High = c(12, 14),
+                Low = c(9, 5))
 
 SEA.B_snakes.fi.df%>%
   # reordering classes
   mutate(FI.Class = fct_relevel(FI.Class, c("High", "Medium", "Low")))%>%
-  ggplot(aes(Species, SEA.B, fill = FI.Class))+
-  geom_boxplot(alpha = 0.3, width = 0.25, position = position_dodge(preserve = "single"))+
-  scale_y_continuous(limits = c(0,5), name = "Standard Ellispes Area", guide = guide_axis(n.dodge = 1))+
-  scale_fill_discrete(name = "Fishing Intensity")+
-  theme(axis.text.x = element_text(face = "italic"))+
-  facet_grid(~Tissue)
+  filter(Species == "Hydrophis schistosus")%>%
+  ggplot(aes(Tissue, SEA.B, fill = FI.Class))+
+  geom_violin(alpha = 0.3, position = position_dodge(0.4), width = 0.5)+
+  geom_boxplot(alpha = 0.3, width = 0.05, outlier.alpha = 0, position = position_dodge(0.4))+
+  annotation_custom(tableGrob(ss, rows = NULL), xmin = 0.4, xmax = 1, ymin = 45, ymax = 50)+
+  scale_y_continuous(name = "Standard Ellispes Area", guide = guide_axis(n.dodge = 1))+
+  scale_fill_discrete(name = "Fishing Intensity")
 
 ggsave(last_plot(), filename = "./Figures and Tables/figure6.png", height = 6, width = 10, device = "png")
 
