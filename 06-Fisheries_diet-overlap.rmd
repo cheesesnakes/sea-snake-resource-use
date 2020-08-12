@@ -54,7 +54,6 @@ tonnage <- read.csv("./Data/catch tonnage.csv")
 ## Summary
 
 tonnage%>%
-  group_by(Gear.Type)%>%
   skimr::skim(Total.Catch..kg.)%>%
   skimr::yank("numeric")
 
@@ -87,7 +86,6 @@ Trawlers landed significantly higher catches per trip than gill nets.
 
 catch%>%
   filter(Family != "")%>%
-  group_by(Gear.Type)%>%
   summarise(Family.Richness = length(unique(Family)))
 
 ```
@@ -107,10 +105,10 @@ gc.hc <- filter(gutcontent, Snake.Species == "Hydrophis curtus")
 catch_fam <- catch%>%
   # removing unidentified speciemens
   filter(Family != "")%>%
-  group_by(Gear.Type, Sample)%>%
+  group_by(Sample)%>%
   # Calculating total weight per sample
   mutate(Sample.Wt = sum(Weight.g, na.rm = T))%>%
-  group_by(Gear.Type, Sample, Family)%>%
+  group_by(Sample, Family)%>%
   # Weight of each fish family in catch
   summarise(Biomass = sum(Weight.g, na.rm = T),
             # Marking sea snake prey families
@@ -130,7 +128,7 @@ catch_fam = catch_fam%>%
 catch_fam%>%
   gather(c("HC", "HS"), key = "Snake species", value = "Prey")%>%
   filter(Prey == "Yes")%>%
-  group_by(Gear.Type, `Snake species`)%>%
+  group_by(`Snake species`)%>%
   summarise(`Prey Family Overlap` = length(unique(Family)))%>%
   mutate(`Snake species` = ifelse(`Snake species` == "HC", "Hydrophis curtus", "Hydrophis schistosus"))
 
@@ -146,12 +144,12 @@ Trawlers caught more sea snake prey families than gillnets.
 catch_fam%>%
   gather(c("HC", "HS"), key = snake, value = Prey)%>%
   filter(Prey == "Yes")%>%
-  group_by(Gear.Type, Sample, snake)%>%
+  group_by(Sample, snake)%>%
   summarise(N = length(unique(Family)),
             Biomass = sum(Biomass),
             Sample.Wt = last(Sample.Wt),
             rel.prop = Biomass/Sample.Wt)%>%
-  group_by(Gear.Type, snake)%>%
+  group_by(snake)%>%
   summarise(Mean.prop = mean(rel.prop))
   
 ```
@@ -165,18 +163,18 @@ Sea snake prey consisted of a greater proportion of gillnet catch than trawler c
 catch_fam%>%
   gather(c("HC", "HS"), key = snake, value = Prey)%>%
   filter(Prey == "Yes")%>%
-  group_by(Gear.Type, Sample, snake)%>%
+  group_by(Sample, snake)%>%
   summarise(Biomass = sum(Biomass),
             Sample.Wt = last(Sample.Wt),
             rel.prop = Biomass/Sample.Wt)%>%
-  group_by(Gear.Type)%>%
+  ungroup()%>%
   nest()%>%
   mutate(ttest = map(data, ~t.test(rel.prop ~ snake, data = .)),
          sumry = map(ttest, broom::tidy),
          d = map(data, ~lsr::cohensD(rel.prop ~ snake, data = .)))%>%
   dplyr::select(sumry, d)%>%
   unnest()%>%
-  dplyr::select(Gear.Type:p.value, d, -estimate)%>%
+  dplyr::select(estimate1:p.value, d, -estimate)%>%
   rename(`H. curtus` = estimate1,
          `H. schistosus` = estimate2)
 
@@ -184,32 +182,6 @@ catch_fam%>%
 
 Yes, for trawlers.
 
-## Do trawlers have a greater trophic overlap with sea snakes than gillnets?
-
-```{r}
-
-catch_fam%>%
-  gather(c("HC", "HS"), key = snake, value = Prey)%>%
-  filter(Prey == "Yes")%>%
-  group_by(Gear.Type, Sample, snake)%>%
-  summarise(Biomass = sum(Biomass),
-            Sample.Wt = last(Sample.Wt),
-            rel.prop = Biomass/Sample.Wt)%>%
-  group_by(snake)%>%
-  nest()%>%
-  mutate(ttest = map(data, ~t.test(rel.prop ~ Gear.Type, data = .)),
-         sumry = map(ttest, broom::tidy),
-         d = map(data, ~lsr::cohensD(rel.prop ~ Gear.Type, data = .)))%>%
-  dplyr::select(sumry, d)%>%
-  unnest()%>%
-  dplyr::select(snake:p.value, d, -estimate)%>%
-  rename(`Gill net` = estimate1,
-         Trawler = estimate2)
-
-
-```
-
-Yes.
 
 ## Sea snake prey species in fisheries catch
 
@@ -220,7 +192,7 @@ Species constituting >10% of the catch on average are represented.
 catch_fam%>%
   gather(c("HC", "HS"), key = "snake", value = "Prey")%>%
   filter(Prey == "Yes")%>%
-  group_by(Gear.Type, Family)%>%
+  group_by(Family)%>%
   summarise(N = length(unique(Family)), 
             p = mean(Rel.biomass, na.rm = T))%>%
   ggplot(aes(reorder(Family, p), p))+
@@ -228,8 +200,7 @@ catch_fam%>%
   scale_fill_brewer(palette = "Greys")+
   labs(x = "Fish Family", y = "Average proportion in catch")+
   scale_y_sqrt()+
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, face = "italic"))+
-  facet_wrap(~Gear.Type, ncol = 1)
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, face = "italic"))
 
 ggsave(last_plot(), filename = "./Figures and Tables/figure5.png", height = 8, width = 8)
 ```
