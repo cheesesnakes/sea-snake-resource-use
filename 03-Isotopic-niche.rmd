@@ -289,7 +289,7 @@ siber_snakes%>%
   geom_polygon(data = snake.ellipses,
                mapping = aes(iso1, iso2, group = rep, linetype = Species, col = Species),
                fill = NA)+
-  scale_color_grey()+
+  scale_color_brewer(palette = "Set1")+
   facet_wrap(~Tissue)+
   theme(legend.text = element_text(face = "italic"))
 

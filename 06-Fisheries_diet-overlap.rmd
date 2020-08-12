@@ -187,7 +187,7 @@ Yes, for trawlers.
 
 Species constituting >10% of the catch on average are represented.
 
-```{r fig.height=8}
+```{r fig.height=6}
 
 catch_fam%>%
   gather(c("HC", "HS"), key = "snake", value = "Prey")%>%
@@ -202,6 +202,6 @@ catch_fam%>%
   scale_y_sqrt()+
   theme(axis.text.x = element_text(angle = 60, hjust = 1, face = "italic"))
 
-ggsave(last_plot(), filename = "./Figures and Tables/figure5.png", height = 8, width = 8)
+ggsave(last_plot(), filename = "./Figures and Tables/figure5.png", height = 6, width = 8)
 ```
 
