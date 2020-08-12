@@ -94,7 +94,6 @@ knitr::kable(table(dep_int$Gear.Type))
 # effort per boat
 
 dep_int%>%
-  group_by(Gear.Type)%>%
   skimr::skim(effort)%>%
   skimr::yank("numeric")%>%
   dplyr::select(-hist)
@@ -141,13 +140,12 @@ source("./Functions/raster to df.R")
 # Calculating fishing intensity in each grid cell
 
 fi <- dep_int%>%
-  group_by(Gear.Type)%>%
   nest()%>%
   mutate(m = map(data, ~map.extract(df = ., var = "effort", func = 'sum')),
          mdf = map(m, map.df))%>%
   dplyr::select(mdf)%>%
   unnest()%>%
-  spread(Gear.Type, layer)
+  rename(intensity = layer)
 
 # Plotting intensity of fishing by gear type
 
@@ -166,23 +164,28 @@ depth = fortify.bathy(depth)%>%
   dplyr::rename(lon = x, lat = y, depth = z)%>%
   filter(depth < 1)
 
-## loading funtion for plotting fishing intensity
-
-source("./Functions/intensity_plot.R")
-
 ## creating plot
+require(grid)
+require(metR)
+require(viridis)
 
-boat_plot <- dep_int%>%
-  group_by(Gear.Type)%>%
-  nest()%>%
-  mutate(m = map(data, ~map.extract(df = ., var = "effort", func = 'sum')),
-         mdf = map(m, map.df),
-         plot = map2(mdf, Gear.Type, ~int.plot(mdf = ., Gear.Type, name = "Fishing intensity")))%>%
-  gridExtra::grid.arrange(grobs = .$plot, ncol = 2)
+ggmap(base)+
+    metR::geom_contour2(data = depth, aes(x = lon, y = lat, z = depth),
+                        breaks=seq(-10, -1000, -10), colour="black", size = 0.1, linetype = "dashed")+
+    metR::geom_text_contour(data = depth, aes(x = lon, y = lat, z = depth), skip = 1,
+                            parse = T, check_overlap = T, size = 1)+
+    geom_tile(data = fi, aes(x = x, y = y, fill = intensity, alpha = intensity), color = "grey50")+
+    coord_quickmap()+
+    scale_x_continuous(limits = c(72.75, 73.75))+
+    scale_y_continuous(limits = c(15.6, 16.6))+
+    scale_fill_viridis(name = "Fishing intensity", option = "B")+
+    scale_alpha_continuous(range = c(0.7, 0.8), guide = F)+
+    labs(x = "Longitude", y = "Latitude")+
+    theme(legend.position = "right")
 
 ## saving high res figure for publication
  
-ggsave(boat_plot, filename = "./Figures and Tables/figure4.tiff", width = 8, height = 4.5, dpi = 300)
+ggsave(last_plot(), filename = "./Figures and Tables/figure4.tiff", width = 8, height = 6, dpi = 300)
 ```
 
 
@@ -203,7 +206,6 @@ Survey based map of fishing intensity may need to be verified with onboard obser
 
 
 dep_int%>%
-  group_by(Gear.Type)%>%
   nest()%>%
   ## Caluclating total effort in each grid cell
   mutate(m = map(data, ~map.extract(df = ., var = "effort", func = 'sum')),
