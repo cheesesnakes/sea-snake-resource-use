@@ -120,7 +120,7 @@ Trawlers had much higher fishing efforts than gillnets off the coast of Sindhudu
 
 ## Mapping fishing intensity
 
-```{r fp}
+```{r fp, fig.height=8}
 # required libraries
 
 library(sp)
@@ -178,14 +178,16 @@ ggmap(base)+
     coord_quickmap()+
     scale_x_continuous(limits = c(72.75, 73.75))+
     scale_y_continuous(limits = c(15.6, 16.6))+
-    scale_fill_viridis(name = "Fishing intensity", option = "B")+
+    scale_fill_viridis(name = "Fishing intensity", option = "B", 
+                       guide = guide_colorbar(direction = "horizontal",barwidth = 10, 
+                                              title.position = "top", title.hjust = 0.5))+
     scale_alpha_continuous(range = c(0.7, 0.8), guide = F)+
     labs(x = "Longitude", y = "Latitude")+
-    theme(legend.position = "right")
+    theme(legend.position = c(0.2, 0.9))
 
 ## saving high res figure for publication
  
-ggsave(last_plot(), filename = "./Figures and Tables/figure4.tiff", width = 8, height = 6, dpi = 300)
+ggsave(last_plot(), filename = "./Figures and Tables/figure4.tiff", width = 8, height = 8, dpi = 300)
 ```
 
 
