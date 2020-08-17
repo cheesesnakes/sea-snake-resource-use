@@ -192,16 +192,18 @@ Species constituting >10% of the catch on average are represented.
 catch_fam%>%
   gather(c("HC", "HS"), key = "snake", value = "Prey")%>%
   filter(Prey == "Yes")%>%
-  group_by(Family)%>%
+  mutate(snake = ifelse(snake == "HC", "Hydrophis curtus",  "Hydrophis schistosus"))%>%
+  group_by(snake, Family)%>%
   summarise(N = length(unique(Family)), 
             p = mean(Rel.biomass, na.rm = T))%>%
   ggplot(aes(reorder(Family, p), p))+
   geom_col(width = 0.5)+
   scale_fill_brewer(palette = "Greys")+
-  labs(x = "Fish Family", y = "Average proportion in catch")+
-  scale_y_sqrt()+
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, face = "italic"))
+  labs(x = "Fish Family", y = "Average proportion \n in catch")+
+  facet_wrap(~snake, scales = "free_x")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, face = "italic"),
+        strip.text = element_text(face = "italic"))
 
-ggsave(last_plot(), filename = "./Figures and Tables/figure5.png", height = 6, width = 8)
+ggsave(last_plot(), filename = "./Figures and Tables/figure5.png", height = 4.5, width = 8)
 ```
 
