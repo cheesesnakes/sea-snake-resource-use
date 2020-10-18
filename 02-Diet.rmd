@@ -276,7 +276,7 @@ gc%>%
          d = map(data, ~lsr::cohensD(Maximum.Body.Girth..cm. ~ Snake.Species, data = .)))%>% # effect size
   dplyr::select(sumry, d)%>%
   unnest()%>%
-  dplyr::select(estimate1:p.value, d)%>%
+  dplyr::select(estimate1:parameter, d)%>%
   rename(`Hydrophis curtus` = estimate1,
          `Hydrophis schistosus` = estimate2)
 ```

@@ -174,7 +174,7 @@ catch_fam%>%
          d = map(data, ~lsr::cohensD(rel.prop ~ snake, data = .)))%>%
   dplyr::select(sumry, d)%>%
   unnest()%>%
-  dplyr::select(estimate1:p.value, d, -estimate)%>%
+  dplyr::select(estimate1:parameter, d, -estimate)%>%
   rename(`H. curtus` = estimate1,
          `H. schistosus` = estimate2)
 

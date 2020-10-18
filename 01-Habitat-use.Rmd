@@ -260,7 +260,7 @@ den%>%
          d = map(data, ~lsr::cohensD(mean.depth ~ sp, data = .)))%>%
   dplyr::select(sumry, d)%>%
   unnest()%>%
-  dplyr::select(estimate:p.value, d)
+  dplyr::select(estimate:parameter, d)
 
 # testing effect of cell depth on relative abundance
 
