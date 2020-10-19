@@ -31,4 +31,11 @@ sia_old <- read.csv("./Data/Stable Isotope Data_CEAS_241119.csv")
 sia_final <- sia_old%>%
   full_join(sia_new)
 
+## checking duplicates
+
+sia_final2 <- sia_final%>%
+  distinct()
+
 write.csv(sia_final, "./Data/Stable Isotope Data_CEAS_final_191020.csv")
+
+
