@@ -821,7 +821,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="difference-in-resouce-use-betweek-h.-curtus-and-h.-schistosus" class="section level1">
 <h1><span class="header-section-number">4</span> Difference in resouce use betweek <em>H. curtus</em> and <em>H. schistosus</em></h1>
 <p>Carbon and Nitrogen isotope ratios were compared across snake species. Plasma and scale samples were used to compare short term and long term resource use respectively. Multiples metrics including niche width (SEA), variance (range), overlap (%) were used.</p>
-<p><span style="color: red;"><strong>This section needs to be revised with new data from CEaS</strong></span></p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb29-1"></a><span class="co"># importing stable isotope data</span></span>
 <span id="cb29-2"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb29-2"></a></span>
 <span id="cb29-3"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb29-3"></a>sia =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./Data/Stable Isotope Data_CEAS_final_191020.csv&quot;</span>)</span>
@@ -1013,11 +1012,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <p>As maximum likelihood can only porivde point estimates of SEA, a bayesian model was used to provide more robust comparison of niche width.</p>
-<p><span style="color: red;"> <strong>Add comparisoon of ML SEA here</strong> </span></p>
 </div>
 <div id="bayesian-estimate-of-sea" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> Bayesian estimate of SEA</h3>
-<p>We estimate the standard ellipse area (SEA) of each species in isotopic space by fitting a multivaria normal model to the isotope data using bayesian inference.</p>
+<p>We estimate the standard ellipse area (SEA) of each species in isotopic space by fitting a multivariate normal model to the isotope data using bayesian inference.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb34-1"></a><span class="co"># Setting options for running jags</span></span>
 <span id="cb34-2"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb34-2"></a></span>
 <span id="cb34-3"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb34-3"></a>parms &lt;-<span class="st"> </span><span class="kw">list</span>() <span class="co"># list of parameters fir JAGS</span></span>
@@ -1103,7 +1101,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<p><span style="color: red;"> <strong>Add comparisoon of Bayesian SEA here</strong> </span></p>
 </div>
 <div id="testing-difference-in-species-niche-area-by-tissue-type" class="section level3">
 <h3><span class="header-section-number">4.3.3</span> Testing difference in species niche area by tissue type</h3>
@@ -1132,8 +1129,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <p>Hypothesis: <em>H. schistosus</em> SEA is larger than <em>H. curtus</em></p>
-<p>While niche width is slightly larger in <em>H. schistosus</em>, it is not significantly different. The posterior distribution of SEA^<sub>b</sub> has right skewed long tail (masked by the limits of the graph for visual clarity) possibly due to the low sample size. Niche width doesn’t seem to change accross different tissue types either, indicating stability over variying periods of assimilation.</p>
-<p><span style="color: red;"> <strong>Update inference</strong> </span></p>
 </div>
 </div>
 <div id="visualising-posterior-ellipses-to-compare-species-isotopic-niche" class="section level2">
@@ -1232,12 +1227,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="_main_files/figure-html/unnamed-chunk-30-1.png" width="2400" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb38-1"></a><span class="kw">ggsave</span>(<span class="kw">last_plot</span>(), <span class="dt">filename =</span> <span class="st">&quot;./Figures and Tables/figure3.tiff&quot;</span>, <span class="dt">height =</span> <span class="dv">6</span>, <span class="dt">width =</span> <span class="dv">8</span>)</span></code></pre></div>
 <p><strong>Figure 3</strong>: Bayesian ellipses in isotopic space describing difference in niche width and resource use between H. curtus and H. schistosus.</p>
-<p>As seen in the SEA estimation, low sample size for <em>H. curtus</em> causes greater uncertainty in the estimation of standar ellipses even with bayesian inference. Both carbon and nitrogen isotpes seem to be enriched in scales when compared to plasma. Degree of overlap appears to be low for both tissues.</p>
-<ul>
-<li>Samples sizes for <em>H. curtus</em> in both tissues need to be increased despite using bayesian methods</li>
-<li><strong>Unusual outlier</strong> in <em>H. schistosus</em> scales data needs to be checked</li>
-</ul>
-<p><span style="color: red;"> <strong>Update inference</strong> </span></p>
 </div>
 <div id="relative-overlap-in-bayesian-standard-ellipses" class="section level2">
 <h2><span class="header-section-number">4.5</span> Relative overlap in bayesian standard ellipses</h2>
@@ -1307,14 +1296,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<p>Overlap between <em>H. curtus</em> and <em>H. schistosus</em> seems to be high in when comparing long term resource use, i.e., scales.</p>
-<p>However, overlap between <em>H. curtus</em> and <em>H. schistosus</em> seems to be very low when comparing short term resource use, i.e., plasma.</p>
-<p>This difference could be caused by:</p>
-<ul>
-<li>low sample size for <em>H. curtus</em></li>
-<li>differences in processing of scales and plasma, i.e., lipid extraction</li>
-</ul>
-<p><span style="color: red;"> <strong>Update inference</strong> </span></p>
 </div>
 <div id="references" class="section level2">
 <h2><span class="header-section-number">4.6</span> References</h2>
