@@ -14,3 +14,12 @@ sia_new <- sia_c%>%
 
 #write.csv(sia_new, "./Data/SIA_CEAS_171020.csv")
 
+## Verifying with snake data
+
+sia_new <- read.csv("./Data/SIA_CEAS_171020.csv")
+
+snakes = read.csv("./Data/Sea-snakes_fish-dep_2018-19_250720.csv")
+
+sia_samps <- sia_new%>%
+  left_join(snakes)%>%
+  select(Field.Code:Species, Gear.Type, Gut.Content, Blood, Scale)
