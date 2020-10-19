@@ -1,52 +1,116 @@
 "","Field.Code","Species","Fishing.Location","Depth.Caught..m.","Tissue.type","Delta.Carbon","Delta.Nitrogen","lat","lon"
-"1","HCDB11","Hydrophis curtus","Wayari",24.31,"Plasma",-18.05,12.5,16.0465772,73.3854166666667
-"2","HCDB25","Hydrophis curtus","Wayari",22.44,"Plasma",-16.82,13.65,16.0465772,73.39375
-"3","HCDB35","Hydrophis curtus","Wayari",9.35,"Plasma",-17.89,13.01,16.0465772,73.4520833333333
-"4","HSDB116","Hydrophis schistosus","Wayari",15.895,"Plasma",-17.33,15.3,16.0465772,73.4354166666667
-"5","HSDB117","Hydrophis schistosus","Wayari",22.44,"Plasma",-15.86,13.92,16.0465772,73.39375
-"6","HSDB121","Hydrophis schistosus","Wayari",20.57,"Plasma",-17.58,14.04,16.0465772,73.4020833333333
-"7","HSDB124","Hydrophis schistosus","Tarkarli",11.22,"Plasma",-14.8,16.14,16.0370463,73.4479166666667
-"8","HSDB130","Hydrophis schistosus","Wayari",20.57,"Plasma",-18.99,14.03,16.0465772,73.4020833333333
-"9","HSDB167","Hydrophis schistosus","Wayari",13.09,"Plasma",-16.24,15.94,16.0465772,73.44375
-"10","HSDB169","Hydrophis schistosus","Wayari",28.05,"Plasma",-16.84,15.06,16.0465772,73.35625
-"11","HSDB176","Hydrophis schistosus","Wayari",14.96,"Plasma",-16.54,14.04,16.0465772,73.4354166666667
-"12","HSDB182","Hydrophis schistosus","Malvan",3.74,"Plasma",-16.23,14,16.0630693,73.45625
-"13","HSDB192","Hydrophis schistosus","Wayari",5.61,"Plasma",-15.95,15.83,16.0465772,73.4604166666667
-"14","HSDB193","Hydrophis schistosus","Wayari",5.61,"Plasma",-16.95,14.53,16.0465772,73.4604166666667
-"15","HSDB63","Hydrophis schistosus","Wayari",13.09,"Plasma",-17.89,13.87,16.0465772,73.44375
-"16","HSDB73","Hydrophis schistosus","Wayari",9.35,"Plasma",-15.31,12.82,16.0465772,73.4520833333333
-"17","HSDB80","Hydrophis schistosus","Wayari",8.415,"Plasma",-16.39,14.43,16.0465772,73.45625
-"18","HSMT109","Hydrophis schistosus","Malvan",37.4,"Plasma",-16.57,14.07,16.0630693,73.28125
-"19","HSMT142","Hydrophis schistosus","Aachara",16.83,"Plasma",-14.86,15.46,16.190837,73.39375
-"20","HSMT20","Hydrophis schistosus","Malvan",46.75,"Plasma",-17.34,12.16,16.0630693,73.2145833333333
-"21","HSMT84","Hydrophis schistosus","Tondavali",11.22,"Plasma",-15.45,15.25,16.1646075,73.4104166666667
-"22","HSMT85","Hydrophis schistosus","Tondavali",11.22,"Plasma",-17.51,14.87,16.1646075,73.4104166666667
-"23","HSMT87","Hydrophis schistosus","Tondavali",14.96,"Scales",-14.56,15.83,16.1646075,73.3979166666667
-"24","HSMT88","Hydrophis schistosus","Tondavali",14.96,"Scales",-16.28,15.46,16.1646075,73.3979166666667
-"25","HSMT90","Hydrophis schistosus","Tondavali",14.96,"Scales",-15.21,15.29,16.1646075,73.3979166666667
-"26","HCDB06","Hydrophis curtus","Wayari",22.44,"Scales",-16.47,14.02,16.0465772,73.39375
-"27","HCDB08","Hydrophis curtus","Wayari",26.18,"Scales",-15.85,14.79,16.0465772,73.3729166666667
-"28","HCDB16","Hydrophis curtus","Wayari",26.18,"Scales",-16.2,13.57,16.0465772,73.3729166666667
-"29","HCDB18","Hydrophis curtus","Wayari",26.18,"Scales",-14.82,15.04,16.0465772,73.3729166666667
-"30","HCDB28","Hydrophis curtus","Wayari",25.245,"Scales",-14.79,14.81,16.0465772,73.3770833333333
-"31","HCDB29","Hydrophis curtus","Wayari",25.245,"Scales",-15.6,14.33,16.0465772,73.3770833333333
-"32","HCDB34","Hydrophis curtus","Wayari",24.31,"Scales",-14.7,14.66,16.0465772,73.3854166666667
-"33","HCMT22","Hydrophis curtus","Malvan",29.92,"Scales",-15.27,12.9,16.0630693,73.3395833333333
-"34","HSDB177","Hydrophis schistosus","Wayari",8.415,"Scales",-14.01,15.08,16.0465772,73.45625
-"35","HSDB178","Hydrophis schistosus","Wayari",5.61,"Scales",-13.26,16.03,16.0465772,73.4604166666667
-"36","HSDB190","Hydrophis schistosus","Devbag",9.35,"Scales",-12.87,15.9,16.0212481,73.4354166666667
-"37","HSDB194","Hydrophis schistosus","Wayari",18.7,"Scales",-14.8,15.28,16.0465772,73.41875
-"38","HSDB63","Hydrophis schistosus","Wayari",13.09,"Scales",-15.85,14.44,16.0465772,73.44375
-"39","HSDB90","Hydrophis schistosus","Wayari",12.155,"Scales",-14.24,15.31,16.0465772,73.4479166666667
-"40","HSMT21","Hydrophis schistosus","Malvan",16.83,"Scales",-15.26,11.56,16.0630693,73.43125
-"41","HSMT37","Hydrophis schistosus","Malvan",11.22,"Scales",-16.09,14.8,16.0630693,73.44375
-"42","HSMT39","Hydrophis schistosus","Malvan",11.22,"Scales",-19.19,14.25,16.0630693,73.44375
-"43","HSMT40","Hydrophis schistosus","Malvan",11.22,"Scales",-14.49,13.62,16.0630693,73.44375
-"44","HSMT42","Hydrophis schistosus","Malvan",11.22,"Scales",-14.89,15.23,16.0630693,73.44375
-"45","HSMT48","Hydrophis schistosus","Malvan",7.48,"Scales",-15.07,15.65,16.0630693,73.4520833333333
-"46","HSMT55","Hydrophis schistosus","Malvan",7.48,"Scales",-15.13,18.06,16.0630693,73.4520833333333
-"47","HSMT79","Hydrophis schistosus","Tondavali",11.22,"Scales",-14.57,15.44,16.1646075,73.4104166666667
-"48","HSMT80","Hydrophis schistosus","Tondavali",11.22,"Scales",-15.44,15.06,16.1646075,73.4104166666667
-"49","HSMT81","Hydrophis schistosus","Tondavali",11.22,"Scales",-14.93,15.24,16.1646075,73.4104166666667
-"50","HSMT84","Hydrophis schistosus","Tondavali",11.22,"Scales",-13.38,15.67,16.1646075,73.4104166666667
-"51","HSMT93","Hydrophis schistosus","Tondavali",14.96,"Scales",-14.37,14.89,16.1646075,73.3979166666667
+"1","HCDB06","Hydrophis curtus","Wayari",22.44,"Scales",-16.47,14.02,16.0465772,73.39375
+"2","HCDB08","Hydrophis curtus","Wayari",26.18,"Scales",-15.85,14.79,16.0465772,73.3729166666667
+"3","HCDB11","Hydrophis curtus","Wayari",24.31,"Plasma",-18.05,12.5,16.0465772,73.3854166666667
+"4","HCDB16","Hydrophis curtus","Wayari",26.18,"Scales",-16.2,13.57,16.0465772,73.3729166666667
+"5","HCDB18","Hydrophis curtus","Wayari",26.18,"Scales",-14.82,15.04,16.0465772,73.3729166666667
+"6","HCDB25","Hydrophis curtus","Wayari",22.44,"Plasma",-16.82,13.65,16.0465772,73.39375
+"7","HCDB28","Hydrophis curtus","Wayari",25.245,"Scales",-14.79,14.81,16.0465772,73.3770833333333
+"8","HCDB29","Hydrophis curtus","Wayari",25.245,"Scales",-15.6,14.33,16.0465772,73.3770833333333
+"9","HCDB34","Hydrophis curtus","Wayari",24.31,"Scales",-14.7,14.66,16.0465772,73.3854166666667
+"10","HCDB35","Hydrophis curtus","Wayari",9.35,"Plasma",-17.89,13.01,16.0465772,73.4520833333333
+"11","HCGN4001","Hydrophis curtus","Wayari",18.7,"Scales",-14.66,15.4,16.0465772,73.41875
+"12","HCGN4002","Hydrophis curtus","Kavada Rock",15.895,"Scales",-15.49,14.1,16.1012464,73.41875
+"13","HCGN4009","Hydrophis curtus","Wayari",22.44,"Plasma",-16.72,13.6,16.0465772,73.39375
+"14","HCGN4010","Hydrophis curtus","Wayari",22.44,"Plasma",-17.33,14.2,16.0465772,73.39375
+"15","HCGN4012","Hydrophis curtus","Devbag",23.375,"Plasma",-15.33,14.3,16.0212481,73.3895833333333
+"16","HCGN4013","Hydrophis curtus","Juva Pankhol",29.92,"Scales",-14.09,13.2,16.1120596,73.29375
+"17","HCGN4014","Hydrophis curtus","Wayari",31.79,"Scales",-14.7,15,16.0465772,73.30625
+"18","HCGN4020","Hydrophis curtus","Wayari",33.66,"Scales",-14.19,13.6,16.0465772,73.3020833333333
+"19","HCGN4021","Hydrophis curtus","Wayari",33.66,"Scales",-15.48,13.4,16.0465772,73.3020833333333
+"20","HCGN4029","Hydrophis curtus","Wayari",26.18,"Plasma",-17.81,13.8,16.0465772,73.3729166666667
+"21","HCGN4062","Hydrophis curtus","Wayari",28.05,"Scales",-14.03,14.9,16.0465772,73.35625
+"22","HCGN4063","Hydrophis curtus","Tarkarli",14.96,"Plasma",-18.06,14.3,16.0370463,73.43125
+"23","HCGN4066","Hydrophis curtus","Wayari",18.7,"Scales",-13.59,14.2,16.0465772,73.41875
+"24","HCGN4067","Hydrophis curtus","Wayari",18.7,"Plasma",-17.16,13.5,16.0465772,73.41875
+"25","HCGN4068","Hydrophis curtus","Kavada Rock",33.66,"Plasma",-16.79,14.4,16.1012464,73.2895833333333
+"26","HCMT13","Hydrophis curtus","Malvan",18.7,"Scales",-14.02,15.2,16.0630693,73.4104166666667
+"27","HCMT22","Hydrophis curtus","Malvan",29.92,"Scales",-15.27,12.9,16.0630693,73.3395833333333
+"28","HCTR4005","Hydrophis curtus","Malvan",22.44,"Scales",-12.92,16.6,16.0630693,73.3895833333333
+"29","HCTR4006","Hydrophis curtus","Malvan",22.44,"Scales",-12.95,14.5,16.0630693,73.3895833333333
+"30","HCTR4023","Hydrophis curtus","Aachara",22.44,"Plasma",-16.79,14.1,16.190837,73.3729166666667
+"31","HCTR4023","Hydrophis curtus","Aachara",22.44,"Scales",-15.47,14.4,16.190837,73.3729166666667
+"32","HCTR4025","Hydrophis curtus","Malvan",41.14,"Plasma",-17.9,13.6,16.0630693,73.2479166666667
+"33","HCTR4026","Hydrophis curtus","Malvan",41.14,"Plasma",-15.2,13.4,16.0630693,73.2479166666667
+"34","HCTR4026","Hydrophis curtus","Malvan",41.14,"Scales",-13.75,13.9,16.0630693,73.2479166666667
+"35","HCTR4027","Hydrophis curtus","Juva Pankhol",41.14,"Scales",-15.47,13.7,16.1120596,73.2520833333333
+"36","HCTR4030","Hydrophis curtus","Juva Pankhol",46.75,"Plasma",-14.79,14,16.1120596,73.1979166666667
+"37","HCTR4034","Hydrophis curtus","Nivati lighthouse",41.14,"Scales",-15.11,13.3,15.9445743,73.2520833333333
+"38","HCTR4035","Hydrophis curtus","Nivati lighthouse",41.14,"Plasma",-15.7,13.2,15.9445743,73.2520833333333
+"39","HCTR4036","Hydrophis curtus","Kavada Rock",35.53,"Plasma",-15.15,13.7,16.1012464,73.28125
+"40","HSDB116","Hydrophis schistosus","Wayari",15.895,"Plasma",-17.33,15.3,16.0465772,73.4354166666667
+"41","HSDB117","Hydrophis schistosus","Wayari",22.44,"Plasma",-15.86,13.92,16.0465772,73.39375
+"42","HSDB121","Hydrophis schistosus","Wayari",20.57,"Plasma",-17.58,14.04,16.0465772,73.4020833333333
+"43","HSDB124","Hydrophis schistosus","Tarkarli",11.22,"Plasma",-14.8,16.14,16.0370463,73.4479166666667
+"44","HSDB130","Hydrophis schistosus","Wayari",20.57,"Plasma",-18.99,14.03,16.0465772,73.4020833333333
+"45","HSDB161","Hydrophis schistosus","Malvan",3.74,"Scales",-15.83,15.9,16.0630693,73.45625
+"46","HSDB167","Hydrophis schistosus","Wayari",13.09,"Plasma",-16.24,15.94,16.0465772,73.44375
+"47","HSDB169","Hydrophis schistosus","Wayari",28.05,"Plasma",-16.84,15.06,16.0465772,73.35625
+"48","HSDB176","Hydrophis schistosus","Wayari",14.96,"Plasma",-16.54,14.04,16.0465772,73.4354166666667
+"49","HSDB177","Hydrophis schistosus","Wayari",8.415,"Scales",-14.01,15.08,16.0465772,73.45625
+"50","HSDB178","Hydrophis schistosus","Wayari",5.61,"Scales",-13.26,16.03,16.0465772,73.4604166666667
+"51","HSDB182","Hydrophis schistosus","Malvan",3.74,"Plasma",-16.23,14,16.0630693,73.45625
+"52","HSDB190","Hydrophis schistosus","Devbag",9.35,"Scales",-12.87,15.9,16.0212481,73.4354166666667
+"53","HSDB192","Hydrophis schistosus","Wayari",5.61,"Plasma",-15.95,15.83,16.0465772,73.4604166666667
+"54","HSDB193","Hydrophis schistosus","Wayari",5.61,"Plasma",-16.95,14.53,16.0465772,73.4604166666667
+"55","HSDB194","Hydrophis schistosus","Wayari",18.7,"Scales",-14.8,15.28,16.0465772,73.41875
+"56","HSDB63","Hydrophis schistosus","Wayari",13.09,"Plasma",-17.89,13.87,16.0465772,73.44375
+"57","HSDB63","Hydrophis schistosus","Wayari",13.09,"Scales",-15.85,14.44,16.0465772,73.44375
+"58","HSDB73","Hydrophis schistosus","Wayari",9.35,"Plasma",-15.31,12.82,16.0465772,73.4520833333333
+"59","HSDB80","Hydrophis schistosus","Wayari",8.415,"Plasma",-16.39,14.43,16.0465772,73.45625
+"60","HSDB90","Hydrophis schistosus","Wayari",12.155,"Scales",-14.24,15.31,16.0465772,73.4479166666667
+"61","HSGN4005","Hydrophis schistosus","Wayari",11.22,"Scales",-14.35,12.9,16.0465772,73.4479166666667
+"62","HSGN4011","Hydrophis schistosus","Kavada Rock",14.96,"Plasma",-16.55,14.4,16.1012464,73.4229166666667
+"63","HSGN4012","Hydrophis schistosus","Wayari",15.895,"Plasma",-17.26,13.9,16.0465772,73.4354166666667
+"64","HSGN4018","Hydrophis schistosus","Wayari",13.09,"Plasma",-15.83,15.9,16.0465772,73.44375
+"65","HSGN4020","Hydrophis schistosus","Vayangani",4.675,"Scales",-14.58,14.7,15.8741823,73.5979166666667
+"66","HSGN4025","Hydrophis schistosus","Wayari",11.22,"Plasma",-16.58,16.1,16.0465772,73.4479166666667
+"67","HSGN4029","Hydrophis schistosus","Wayari",22.44,"Plasma",-17.31,14.1,16.0465772,73.39375
+"68","HSGN4032","Hydrophis schistosus","Wayari",11.22,"Plasma",-15.68,14.4,16.0465772,73.4479166666667
+"69","HSGN4035","Hydrophis schistosus","Vayangani",13.09,"Plasma",-16.86,14.9,15.8741823,73.5604166666667
+"70","HSGN4036","Hydrophis schistosus","Vayangani",5.61,"Plasma",-15.67,14.7,15.8741823,73.5729166666667
+"71","HSGN4041","Hydrophis schistosus","Aachara",16.83,"Plasma",-16.97,15.4,16.190837,73.39375
+"72","HSGN4045","Hydrophis schistosus","Kavada Rock",7.48,"Plasma",-17.39,14.4,16.1012464,73.4395833333333
+"73","HSGN4047","Hydrophis schistosus","Kavada Rock",7.48,"Plasma",-16.96,14.6,16.1012464,73.4395833333333
+"74","HSGN4048","Hydrophis schistosus","Kavada Rock",7.48,"Plasma",-17.94,14,16.1012464,73.4395833333333
+"75","HSGN4049","Hydrophis schistosus","Kavada Rock",7.48,"Plasma",-16.08,14.9,16.1012464,73.4395833333333
+"76","HSGN4064","Hydrophis schistosus","Wayari",16.83,"Plasma",-16.97,14.7,16.0465772,73.43125
+"77","HSGN4080","Hydrophis schistosus","Tarkarli",18.7,"Plasma",-16.09,15,16.0370463,73.41875
+"78","HSGN4081","Hydrophis schistosus","Tondavali",18.7,"Scales",-14.33,13.9,16.1646075,73.3895833333333
+"79","HSGN4089","Hydrophis schistosus","Wayari",14.96,"Plasma",-17.95,14.4,16.0465772,73.4354166666667
+"80","HSGN4106","Hydrophis schistosus","Wayari",18.7,"Plasma",-16.44,16.5,16.0465772,73.41875
+"81","HSGN4107","Hydrophis schistosus","Aachara",14.96,"Scales",-11.9,13.4,16.190837,73.4020833333333
+"82","HSGN4108","Hydrophis schistosus","Devbag",5.61,"Plasma",-16.42,16,16.0212481,73.4604166666667
+"83","HSGN4110","Hydrophis schistosus","Wayari",9.35,"Plasma",-17.53,15.7,16.0465772,73.4520833333333
+"84","HSGN4117","Hydrophis schistosus","Juva Pankhol",14.96,"Scales",-13.47,13.5,16.1120596,73.4229166666667
+"85","HSGN4120","Hydrophis schistosus","Devbag",14.96,"Scales",-14.58,12.5,16.0212481,73.4229166666667
+"86","HSMT10","Hydrophis schistosus","Malvan",44.88,"Scales",-12.52,15.4,16.0630693,73.2229166666667
+"87","HSMT109","Hydrophis schistosus","Malvan",37.4,"Plasma",-16.57,14.07,16.0630693,73.28125
+"88","HSMT12","Hydrophis schistosus","Malvan",44.88,"Scales",-14.35,15.5,16.0630693,73.2229166666667
+"89","HSMT142","Hydrophis schistosus","Aachara",16.83,"Plasma",-14.86,15.46,16.190837,73.39375
+"90","HSMT20","Hydrophis schistosus","Malvan",46.75,"Plasma",-17.34,12.16,16.0630693,73.2145833333333
+"91","HSMT21","Hydrophis schistosus","Malvan",16.83,"Scales",-15.26,11.56,16.0630693,73.43125
+"92","HSMT37","Hydrophis schistosus","Malvan",11.22,"Scales",-16.09,14.8,16.0630693,73.44375
+"93","HSMT39","Hydrophis schistosus","Malvan",11.22,"Scales",-19.19,14.25,16.0630693,73.44375
+"94","HSMT40","Hydrophis schistosus","Malvan",11.22,"Scales",-14.49,13.62,16.0630693,73.44375
+"95","HSMT42","Hydrophis schistosus","Malvan",11.22,"Scales",-14.89,15.23,16.0630693,73.44375
+"96","HSMT48","Hydrophis schistosus","Malvan",7.48,"Scales",-15.07,15.65,16.0630693,73.4520833333333
+"97","HSMT55","Hydrophis schistosus","Malvan",7.48,"Scales",-15.13,18.06,16.0630693,73.4520833333333
+"98","HSMT79","Hydrophis schistosus","Tondavali",11.22,"Scales",-14.57,15.44,16.1646075,73.4104166666667
+"99","HSMT80","Hydrophis schistosus","Tondavali",11.22,"Scales",-15.44,15.06,16.1646075,73.4104166666667
+"100","HSMT81","Hydrophis schistosus","Tondavali",11.22,"Scales",-14.93,15.24,16.1646075,73.4104166666667
+"101","HSMT84","Hydrophis schistosus","Tondavali",11.22,"Plasma",-15.45,15.25,16.1646075,73.4104166666667
+"102","HSMT84","Hydrophis schistosus","Tondavali",11.22,"Scales",-13.38,15.67,16.1646075,73.4104166666667
+"103","HSMT85","Hydrophis schistosus","Tondavali",11.22,"Plasma",-17.51,14.87,16.1646075,73.4104166666667
+"104","HSMT87","Hydrophis schistosus","Tondavali",14.96,"Scales",-14.56,15.83,16.1646075,73.3979166666667
+"105","HSMT88","Hydrophis schistosus","Tondavali",14.96,"Scales",-16.28,15.46,16.1646075,73.3979166666667
+"106","HSMT90","Hydrophis schistosus","Tondavali",14.96,"Scales",-15.21,15.29,16.1646075,73.3979166666667
+"107","HSMT93","Hydrophis schistosus","Tondavali",14.96,"Scales",-14.37,14.89,16.1646075,73.3979166666667
+"108","HSRP4001","Hydrophis schistosus","Malvan",4.675,"Plasma",-15.89,14.6,16.0630693,73.4520833333333
+"109","HSRP4004","Hydrophis schistosus","Malvan",7.48,"Plasma",-16.59,14.7,16.0630693,73.4520833333333
+"110","HSRP4018","Hydrophis schistosus","Malvan",7.48,"Scales",-14.41,13.1,16.0630693,73.4520833333333
+"111","HSRP4026","Hydrophis schistosus","Malvan",13.09,"Scales",-14.47,14.5,16.0630693,73.4395833333333
+"112","HSTR4005","Hydrophis schistosus","Malvan",22.44,"Scales",-14.18,16.9,16.0630693,73.3895833333333
+"113","HSTR4007","Hydrophis schistosus","Malvan",22.44,"Scales",-14.11,15.2,16.0630693,73.3895833333333
+"114","HSTR4028","Hydrophis schistosus","Akere-Nivati",22.44,"Scales",-12.62,14,15.9446644,73.4229166666667
+"115","HSTR4037","Hydrophis schistosus","Juva Pankhol",28.05,"Scales",-12.16,14.8,16.1120596,73.3520833333333

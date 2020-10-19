@@ -108,16 +108,16 @@ The protocol is encoded in `Function/geocode.R`
 
 # importing stable isotope data
 
-sia = read.csv("./Data/Stable Isotope Data_CEAS_241119.csv")
+sia = read.csv("./Data/Stable Isotope Data_CEAS_final_191020.csv")
 
 # joining sia data to snake data
 
 sia_snakes = sia%>%
-  filter(Tissue.type != "Gut Content")%>%
+  filter(Tissue.type == "Plasma" | Tissue.type == "Scales")%>%
   left_join(snakes, 'Field.Code')%>%
   mutate(Lab = "CEAS")%>%
   rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
-  dplyr::select(Date, Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
+  dplyr::select(Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
                 Gear.Type, Fishing.Location, Location.encountered, Depth.Caught..m.,
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
                 Tissue.type, Month, Year)%>%
@@ -228,9 +228,27 @@ sia_li%>%
   dplyr::select(summ1, r2)%>%
   unnest()%>%
   dplyr::select(Species:p.value, adj.r.squared)%>%
-  arrange(Species, Tissue.type, adj.r.squared)
+  arrange(Species, Tissue.type, adj.r.squared) -> sia_fi_lm
 
+library(knitr)
+library(kableExtra)
 
+sia_fi_lm <- sia_fi_lm%>%
+  rename(`Tissue type` = Tissue.type,
+         Parameter = term,
+         Coefficient = estimate,
+         `Standard Error` = std.error,
+         `T` = statistic,
+         p = p.value,
+         `r_adj^2` = adj.r.squared
+         )%>%
+  mutate(Parameter = ifelse(Parameter == "(Intercept)", "Intercept", "Fishing intensity"),
+         `T` = ifelse(Parameter == "Intercept", NA, `T`),
+         p = ifelse(Parameter == "Intercept", NA, p))
+
+kbl(sia_fi_lm, booktabs = T, digits = 3)%>%
+  column_spec(1, italic = T)%>%
+  collapse_rows(columns = 1:3, row_group_label_position ='stack')
 ```
 
 Samples sizes for *H. curtus* are low, however, fishing intensity seems to have a significant __depletion effect__ on plasma isotope ratios in _H. schistosus_.
@@ -412,20 +430,16 @@ SEA.B_snakes.fi.df%>%
 ```{r fig.height=6, fig.width=10}
 library(gridExtra)
 
-ss = data.frame(Tissue = c("Scale", "Plasma"),
-                High = c(12, 14),
-                Low = c(9, 5))
-
 SEA.B_snakes.fi.df%>%
   # reordering classes
   mutate(FI.Class = fct_relevel(FI.Class, c("High", "Medium", "Low")))%>%
-  filter(Species == "Hydrophis schistosus")%>%
-  ggplot(aes(Tissue, SEA.B, fill = FI.Class))+
+  ggplot(aes(Species, SEA.B, fill = FI.Class))+
   geom_violin(alpha = 0.3, position = position_dodge(0.4), width = 0.5)+
   geom_boxplot(alpha = 0.3, width = 0.05, outlier.alpha = 0, position = position_dodge(0.4))+
-  annotation_custom(tableGrob(ss, rows = NULL), xmin = 0.4, xmax = 1, ymin = 45, ymax = 50)+
   scale_y_continuous(name = "Standard Ellispes Area", guide = guide_axis(n.dodge = 1))+
-  scale_fill_discrete(name = "Fishing Intensity")
+  scale_fill_discrete(name = "Fishing Intensity")+
+  facet_wrap(~Tissue)+
+  theme(axis.text.x = element_text(face = "italic"))
 
 ggsave(last_plot(), filename = "./Figures and Tables/figure6.png", height = 6, width = 10, device = "png")
 

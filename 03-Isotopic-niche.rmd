@@ -3,13 +3,12 @@
 
 Carbon and Nitrogen isotope ratios were compared across snake species. Plasma and scale samples were used to compare short term and long term resource use respectively. Multiples metrics including niche width (SEA), variance (range), overlap (%) were used.
 
-<span style = "color: red;">**This section needs to be revised with new data from CEaS**</span>
 
 ```{r sia}
 
 # importing stable isotope data
 
-sia = read.csv("./Data/Stable Isotope Data_CEAS_241119.csv")
+sia = read.csv("./Data/Stable Isotope Data_CEAS_final_191020.csv")
 
 # joining SI data to snake data
 
@@ -20,7 +19,7 @@ sia_snakes = sia%>%
   # renamving variables for ease of understanding
   dplyr::rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
   # selecting relevant variables
-  dplyr::select(Date, Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
+  dplyr::select(Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
                 Gear.Type, Fishing.Location, Depth.Caught..m.,
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
                 Tissue.type, Month, Year)
@@ -82,6 +81,7 @@ library(SIBER)
 # Formating SI data for use with SIBER
 
 siber_snakes <- sia_snakes%>%
+  filter(Tissue.type == "Plasma" | Tissue.type == "Scales")%>%
   dplyr::select(Delta.Carbon, Delta.Nitrogen, Tissue.type, Species)%>% # selecting required variables
   # renaming varibale as per requirement for SIBER
   dplyr::rename(iso1 = Delta.Carbon,
@@ -118,11 +118,9 @@ data.frame(t(SEA.ML_snakes))%>%
 
 As maximum likelihood can only porivde point estimates of SEA, a bayesian model was used to provide more robust comparison of niche width.
 
-<span style = "color: red;"> **Add comparisoon of ML SEA here** </span>
-
 ### Bayesian estimate of SEA
 
-We estimate the standard ellipse area (SEA) of each species in isotopic space by fitting a multivaria normal model to the isotope data using bayesian inference.
+We estimate the standard ellipse area (SEA) of each species in isotopic space by fitting a multivariate normal model to the isotope data using bayesian inference.
 
 ```{r, results = FALSE}
 
@@ -179,7 +177,6 @@ SEA.B_snakesdf%>%
 
 ```
 
-<span style = "color: red;"> **Add comparisoon of Bayesian SEA here** </span>
 
 ### Testing difference in species niche area by tissue type
 
@@ -193,10 +190,6 @@ SEA.B_snakesdf%>%
 ```
 
 Hypothesis: *H. schistosus* SEA is larger than *H. curtus*
-  
-While niche width is slightly larger in *H. schistosus*, it is not significantly different. The posterior distribution of SEA^~b~ has right skewed long tail (masked by the limits of the graph for visual clarity) possibly due to the low sample size. Niche width doesn't seem to change accross different tissue types either, indicating stability over variying periods of assimilation.
-
-<span style = "color: red;"> **Update inference** </span>
 
 ## Visualising posterior ellipses to compare species isotopic niche
 
@@ -298,12 +291,6 @@ ggsave(last_plot(), filename = "./Figures and Tables/figure3.tiff", height = 6, 
 
 **Figure 3**: Bayesian ellipses in isotopic space describing difference in niche width and resource use between H. curtus and H. schistosus.
 
-As seen in the SEA estimation, low sample size for *H. curtus* causes greater uncertainty in the estimation of standar ellipses even with bayesian inference. Both carbon and nitrogen isotpes seem to be enriched in scales when compared to plasma. Degree of overlap appears to be low for both tissues.
-
-- Samples sizes for *H. curtus* in both tissues need to be increased despite using bayesian methods
-- **Unusual outlier** in *H. schistosus* scales data needs to be checked
-
-<span style = "color: red;"> **Update inference** </span>
 
 ## Relative overlap in bayesian standard ellipses
 
@@ -358,17 +345,6 @@ snake.overlap%>%
             `Standard deviation` = sd(prop.overlap))
 
 ```
-
-Overlap between *H. curtus* and *H. schistosus* seems to be high in when comparing long term resource use, i.e., scales.
-
-However, overlap between *H. curtus* and *H. schistosus* seems to be very low when comparing short term resource use, i.e., plasma.
-
-This difference could be caused by:
-
-- low sample size for *H. curtus*
-- differences in processing of scales and plasma, i.e., lipid extraction
-
-<span style = "color: red;"> **Update inference** </span>
 
 ## References
 
