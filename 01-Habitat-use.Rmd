@@ -1,10 +1,12 @@
 # Difference in distribution and habitat use between _H. curtus_ and _H. shcistosus_
 
-We investigated the study species used ssimilar areas for foraging and other activities using survey data gathered from fishermen. We tested differences in depth use and overlap in space.
+We investigated the study species used similar areas for foraging and other activities using survey data gathered from fishermen. We tested differences in depth use and overlap in space.
 
 ## Calculating abundance of sea snakes per fishing trip
 
 ```{r echo = TRUE}
+
+source(file = "Functions/setup.R")
 
 snakes_den = snakes%>%
   filter(Species == "Hydrophis schistosus" | Species == "Hydrophis curtus",
@@ -95,7 +97,7 @@ write.csv(snakes_den, "./Data/snakes-density.csv")
 
 ```
 
-**Note:** `fuzzyjoin::fuzzy_inner_join()` introduces many duplicates, I have not as yet been able to fix the issue dirrectly. Currently, removing duplicates from output using `dplyr::distinct()`.
+**Note:** `fuzzyjoin::fuzzy_inner_join()` introduces many duplicates, I have not as yet been able to fix the issue directly. Currently, removing duplicates from output using `dplyr::distinct()`.
 
 ## Mean CPUE by species
 
@@ -172,8 +174,9 @@ depth = fortify.bathy(depth)%>% # converting to usable data frame
 
 
 ## Getting base map
+map_center = c(lon = mean(snakes_den$lon), lat = mean(snakes_den$lat))
 
-base <- get_googlemap(center = c(mean(snakes_den$lon),mean(snakes_den$lat)), 
+base <- get_googlemap(center = c(lon = mean(snakes_den$lon), lat = mean(snakes_den$lat)), 
                       zoom = 9, scale = 4, maptype = "terrain")##Getting basemap
 
 ## importing plotting function
@@ -186,9 +189,10 @@ snake_plot <- snakes_den%>%
   mutate(Species = ifelse(Species == "HC", "Hydrophis curtus", "Hydrophis schistosus"))%>%
   group_by(Species)%>%
   nest()%>%
-  mutate(m = map(data, ~map.extract(df = ., var = "CPUE", func = 'sum')),
-         mdf = map(m, map.df),
-         plot = map2(mdf, Species, ~int.plot(mdf = ., Species, name = "CPUE", title.face = "italic")))%>%
+  mutate(m = map(data, ~map.extract(df = ., var = "CPUE", func = 'sum')), # rasterising CPUE
+         mdf = map(m, map.df), # Converting raster to df for plotting
+         plot = map2(mdf, Species, ~int.plot(mdf = ., Species, name = "CPUE", title.face = "italic")) #plotting raster on base map
+         )%>%
   gridExtra::grid.arrange(grobs = .$plot, ncol = 2)
 
 ## saving high res figure

@@ -172,8 +172,6 @@ require(viridis)
 ggmap(base)+
     metR::geom_contour2(data = depth, aes(x = lon, y = lat, z = depth),
                         breaks=seq(-10, -1000, -10), colour="black", size = 0.1, linetype = "dashed")+
-    metR::geom_text_contour(data = depth, aes(x = lon, y = lat, z = depth), skip = 1,
-                            parse = T, check_overlap = T, size = 1)+
     geom_tile(data = fi, aes(x = x, y = y, fill = intensity, alpha = intensity), color = "grey50")+
     coord_quickmap()+
     scale_x_continuous(limits = c(72.75, 73.75))+
