@@ -157,7 +157,7 @@ snakes_den%>%
 
 ## Mapping sea snake distributions
 
-```{r fig.height=6, fig.width=8}
+```{r fig.height=8, fig.width=4}
 
 ## importing required libraries
 
@@ -193,11 +193,11 @@ snake_plot <- snakes_den%>%
          mdf = map(m, map.df), # Converting raster to df for plotting
          plot = map2(mdf, Species, ~int.plot(mdf = ., Species, name = "CPUE", title.face = "italic")) #plotting raster on base map
          )%>%
-  gridExtra::grid.arrange(grobs = .$plot, ncol = 2)
+  gridExtra::grid.arrange(grobs = .$plot, ncol = 1)
 
 ## saving high res figure
 
-ggsave(snake_plot, filename = "./Figures and Tables/figure1.tiff", width = 8, height = 6, dpi = 300)
+ggsave(snake_plot, filename = "./Figures and Tables/figure1.tiff", width = 8, height = 16, dpi = 300)
 
 
 ```
