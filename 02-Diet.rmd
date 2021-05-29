@@ -160,7 +160,7 @@ HS = as.data.frame(Diversity(fam_spade[,2])$Shannon_diversity)%>%
 
 HC%>%
   full_join(HS)%>%
-  select(Species, everything())
+  dplyr::select(Species, everything())
 ```
 
 While _H. schistosus_ fed on greater number of prey families, _H. curtus_ showed greater evenness in prey preference.
