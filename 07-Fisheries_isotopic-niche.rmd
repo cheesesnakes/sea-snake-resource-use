@@ -26,6 +26,7 @@ We used hierarchical clustering based on fishing intensity of both gears, and th
 ```{r fig.height=8, fig.width=8}
 # loading required libraries
 
+require(tidyverse)
 library(sp)
 library(raster)
 

@@ -6,6 +6,8 @@ Carbon and Nitrogen isotope ratios were compared across snake species. Plasma an
 
 ```{r sia}
 
+source("Functions/setup.R")
+
 # importing stable isotope data
 
 sia = read.csv("./Data/Stable Isotope Data_CEAS_final_191020.csv")

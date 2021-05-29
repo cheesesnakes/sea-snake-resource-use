@@ -1,6 +1,7 @@
 # Varition in fishing intensity along the sindhudurg coast
 
 ```{r}
+source("Functions/setup.R")
 
 # importing effort data
 

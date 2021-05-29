@@ -1,6 +1,8 @@
 # Overlap between fisheries catch and sea snake diet
 
 ```{r}
+require(tidyverse)
+
 # importing catch data
 
 catch <- read.csv("./Data/catch.csv")
