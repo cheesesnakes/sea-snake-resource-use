@@ -17,7 +17,7 @@ int.plot <- function(mdf, gear, name, title.face = NULL){
     coord_quickmap()+
     scale_x_continuous(limits = c(72.75, 73.75))+
     scale_y_continuous(limits = c(15.6, 16.6))+
-    scale_fill_viridis(name = name, option = "B")+
+    scale_fill_viridis(name = name, option = "B", guide = guide_colorbar(barwidth = 10))+
     scale_alpha_continuous(range = c(0.7, 0.8), guide = F)+
     labs(title = gear, x = "Longitude", y = "Latitude")+
     theme(plot.title = element_text(hjust = 0.5, face = title.face),
