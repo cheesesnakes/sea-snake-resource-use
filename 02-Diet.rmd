@@ -5,6 +5,8 @@
 
 ```{r}
 
+source("./Functions/setup.R")
+
 snakes%>%
   filter(Species == "Hydrophis curtus" | Species == "Hydrophis schistosus")%>%
   group_by(Species)%>%
@@ -16,7 +18,7 @@ snakes%>%
 
 ```
 
-A very low proportion of inviduals had gut content present at the time of sampling. Sampling accross species and sexes may be adequate for comparison.
+A very low proportion of individuals had gut content present at the time of sampling. Sampling across species and sexes may be adequate for comparison.
 
 ## Proportion of unidentified specimens
 
@@ -113,18 +115,15 @@ We compared the dietary breadth between snakes species using the richness and di
 
 ```{r}
 
-# Creating data martix for prey community analysis analysis
+# Creating data matrix for prey community analysis analysis
 
-fam_vegan = gc%>%
+fam_spade = gc%>%
   filter(Prey.Family != "Unidentified")%>% # removing unidentified specimens
   group_by(Snake.Species, Prey.Family)%>%
   summarise(n = n())%>% # total number of specimens per family in each snake species
-  group_by(Snake.Species)%>%
-  mutate(t = sum(n))%>% # total number of specimens for each snake species
-  group_by(Snake.Species, Prey.Family)%>%
-  summarise(p = n/t)%>% # relative proportion
-  spread(Prey.Family, p, fill = 0)%>%
-  column_to_rownames("Snake.Species")
+  spread(Snake.Species, n, fill = 0)%>%
+  column_to_rownames("Prey.Family")
+
 
 ```
 
@@ -134,9 +133,9 @@ fam_vegan = gc%>%
 
 gc%>%
   filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
-         Prey.Species != "Unidentified")%>%
+         Prey.Family != "Unidentified")%>%
   group_by(Snake.Species)%>%
-  summarise(Prey.Species = length(unique(Prey.Species)),
+  summarise(Prey.Species = length(unique(Prey.Species)), # removing unidentified
             Prey.Families = length(unique(Prey.Family)))
 
 ```
@@ -147,21 +146,21 @@ gc%>%
 
 # loading libraries
 
-library(vegetarian) ## for community indices
+library(SpadeR) ## for community indices
 
 # calculating shanon diversity
 
-data.frame(
-  hs = d(fam_vegan[-1,], "alpha", boot = T), ## for Hydrophis schistosus
-  hc = d(fam_vegan[-2,], "alpha", boot = T) ## for Hydropis schistosus
-  )%>%
-  # creating a clean table
-  gather()%>%
-  mutate(Species = ifelse(substr(key, 1, 2) == "hs",  "Hydrophis schistosus",  "Hydrophis curtus"),
-         Metric = ifelse(substr(key, 4, 4) == "D", "Shanon Diversity", "Standard Error"))%>%
-  dplyr::select(Species, Metric, value)%>%
-  spread(Metric, value)
+HC = as.data.frame(Diversity(fam_spade[,1])$Shannon_diversity)%>%
+  rownames_to_column("Estimator")%>%
+  mutate(Species = "Hydrophis curtus")
 
+HS = as.data.frame(Diversity(fam_spade[,2])$Shannon_diversity)%>%
+  rownames_to_column("Estimator")%>%
+  mutate(Species = "Hydrophis schistosus")
+
+HC%>%
+  full_join(HS)%>%
+  select(Species, everything())
 ```
 
 While _H. schistosus_ fed on greater number of prey families, _H. curtus_ showed greater evenness in prey preference.
@@ -208,10 +207,9 @@ gc%>%
 Morista - Horn overlap:
 
 ```{r}
+prey_sim <- SimilarityPair(X = fam_spade, datatype = "abundance")
 
-similarity(fam_vegan, q = 2, boot = T)%>%
-  as.data.frame()
-
+prey_sim$estimated_relative
 ```
 
 There was limited overlap in prey between _H. schistosus_ and _H. curtus_
