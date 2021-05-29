@@ -1,0 +1,28 @@
+```{r}
+source("Functions/setup.R")
+```
+
+# Sampled SVL distribution 
+
+```{r}
+snakes%>%
+  filter(Species %in% c("Hydrophis schistosus", "Hydrophis curtus"))%>%
+  ggplot(aes(Snout.to.Vent..cm.))+
+  geom_histogram(binwidth = 10, col = "black")+
+  labs(x = "Snout to vent length (cm)", y = "Count")+
+  facet_wrap(~Species)+
+  theme(strip.text = element_text(face = "italic"))
+```
+# Sampled sex ratio
+
+```{r}
+snakes%>%
+  filter(Species %in% c("Hydrophis schistosus", "Hydrophis curtus"),
+         Sex != "")%>%
+  ggplot(aes(x = Species, fill = Sex))+
+  geom_bar(width = 0.25, position = position_dodge(), col = "black")+
+  labs(y = "Count")+
+  theme(axis.text.x = element_text(face = "italic"))
+```
+
+
