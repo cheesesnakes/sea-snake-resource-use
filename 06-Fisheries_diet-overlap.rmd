@@ -192,7 +192,7 @@ Yes, for trawlers.
 
 Species constituting >10% of the catch on average are represented.
 
-```{r fig.height=4.5}
+```{r fig.height=6}
 
 catch_fam%>%
   gather(c("HC", "HS"), key = "snake", value = "Prey")%>%
@@ -203,13 +203,13 @@ catch_fam%>%
             p = mean(Rel.biomass, na.rm = T),
             sd = sd(Rel.biomass, na.rm = T)/sqrt(n()))%>%
   ggplot(aes(snake, p, fill = Gear.Type))+
-  geom_col(width = 0.25, position = position_dodge(), col = "black")+
-  geom_errorbar(aes(ymin = p-sd, ymax = p+sd), position = position_dodge(width = .25), width = 0.125)+
+  geom_col(width = 0.5, position = position_dodge(), col = "black")+
+  geom_errorbar(aes(ymin = p-sd, ymax = p+sd), position = position_dodge(width = .5), width = 0.25)+
   scale_fill_brewer(palette = "Greys", name = "Gear Type")+
   scale_y_continuous(expand = c(0,0), limits = c(0,0.3))+
   labs(x = "Snake Species", y = "Average proportion \n in catch")+
   theme(axis.text.x = element_text(face = "italic"))
 
-ggsave(last_plot(), filename = "./Figures and Tables/figure5.png", height = 4.5, width = 8)
+ggsave(last_plot(), filename = "./Figures and Tables/figure5.png", height = 8, width = 8)
 ```
 

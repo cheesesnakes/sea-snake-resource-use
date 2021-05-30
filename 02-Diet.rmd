@@ -47,6 +47,15 @@ gc%>%
 
 A large portion of gut content specimens were unidentifiable. This is an unavoidable consquence of VGCA.
 
+## No. of snakes with mode than one prey specimen
+
+```{r}
+gc%>%
+  filter(Field.Code != "")%>%
+  count(Field.Code,name = "Prey")%>%
+  count(Prey > 1)
+```
+
 ## Prey preference
 
 We modified and used the the Index of relative importance according to Pinkas et al. 1971 to determine the difference in prey preference between _H. curtus_ and _H. schistosus_

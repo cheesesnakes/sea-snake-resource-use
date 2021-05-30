@@ -21,7 +21,7 @@ sia_snakes = sia%>%
   # renamving variables for ease of understanding
   dplyr::rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
   # selecting relevant variables
-  dplyr::select(Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
+  dplyr::select(Field.Code, Species, Snout.to.Vent..cm., Sex, Class,
                 Gear.Type, Fishing.Location, Depth.Caught..m.,
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
                 Tissue.type, Month, Year)

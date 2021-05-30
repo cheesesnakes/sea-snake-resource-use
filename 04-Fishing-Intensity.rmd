@@ -198,8 +198,6 @@ Each fishing trip is assigned to a cell in the sampling grid of **`r raster::nce
   
 Survey based map of fishing intensity may need to be verified with onboard observations and/or remote GPS data. Our field work for the same was cut short given the Coronavirus pandemic in 2020.
 
-<span style = "color: red;"> **Link to prelimary results for fisheries mapping** </span>
-
 
 ## Spatial coverage of trawlers and gillnets along the Sindhudurg coast
 

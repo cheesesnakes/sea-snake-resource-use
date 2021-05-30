@@ -17,7 +17,6 @@ It is infeasible to to find sites with little to no fishing pressure on mainland
   
   Depending on the tissue being analysed. Scales - month, Plasma - week
 
-<span style = "color: red;"> **We used only plasma SI samples for this analysis as they reflect the isotopic assimilation in the short - term where effects of fisheries are expected.** </span>
 
 ## Determining cluster of fishing intensity off the coast of sindhudurg
 
@@ -91,8 +90,6 @@ ggplot(fi, aes(x, y, fill = class))+
   labs(x = "Longitude", y = "Latitude")+
   theme(text = element_text(size = 10))
 ```
-
-<span style = "color: red;"> **Clustering may need to be revised based on sample size** </span>
 
 ## Determining capture grid cell for individual snakes
 
@@ -212,8 +209,6 @@ sia_li%>%
 ```
 
 Both $\delta^{15}N$ and $\delta^{13}C$ show strong negatice relationship with increasing fishing intensity.
-
-<span style = "color: red;"> **Update with new SI data** </span>
 
 ## Modeling isotope ratios with fishing intensity
 
