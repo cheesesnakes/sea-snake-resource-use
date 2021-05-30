@@ -69,7 +69,7 @@ dep_int <- geocode.trips(dep_int, fl = 'Fishing.Location', dep = 'Depth.m')
 
 dep_int <- distinct(dep_int, Date, Boat.name, Fishing.Location, Gear.Type, Depth.m, .keep_all = T)
 
-# savinf output
+# saving output
 
 write.csv(dep_int, "./Data/Fishing intensity_dep.csv")
 
@@ -83,7 +83,7 @@ write.csv(dep_int, "./Data/Fishing intensity_dep.csv")
 ```{r}
 ## Sample size
 
-knitr::kable(table(dep_int$Gear.Type))
+enframe(table(dep_int$Gear.Type))
 
 ```
 
@@ -172,8 +172,8 @@ require(viridis)
 
 ggmap(base)+
     metR::geom_contour2(data = depth, aes(x = lon, y = lat, z = depth),
-                        breaks=seq(-10, -1000, -10), colour="black", size = 0.1, linetype = "dashed")+
-    geom_tile(data = fi, aes(x = x, y = y, fill = intensity, alpha = intensity), color = "grey50")+
+                        breaks=seq(-10, -1000, -10), colour="black", size = 0.25, linetype = "dashed")+
+    geom_tile(data = fi, aes(x = x, y = y, fill = intensity), color = "grey50", alpha = 0.8)+
     coord_quickmap()+
     scale_x_continuous(limits = c(72.75, 73.75))+
     scale_y_continuous(limits = c(15.6, 16.6))+
