@@ -1,8 +1,10 @@
+# Demogrpahic information of sampled individuals
+
 ```{r}
 source("Functions/setup.R")
 ```
 
-# Sampled SVL distribution 
+## Sampled SVL distribution 
 
 ```{r}
 snakes%>%
@@ -14,7 +16,7 @@ snakes%>%
   theme(strip.text = element_text(face = "italic"))
 ```
 
-# Sampled sex ratio
+## Sampled sex ratio
 
 ```{r}
 snakes%>%

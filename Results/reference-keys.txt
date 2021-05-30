@@ -60,6 +60,7 @@ maximum-likelihood-estimate-of-sea-1
 bayesian-estimate-of-sea-1
 testing-difference-in-species-niche-area-by-fishing-intensity
 visualising-difference-in-niche-width-across-gradiet-of-fishing-intensity
+demogrpahic-information-of-sampled-individuals
 sampled-svl-distribution
 sampled-sex-ratio
 difference-in-diet-by-sex-within-h.-curtus-and-h.-schsistosus
