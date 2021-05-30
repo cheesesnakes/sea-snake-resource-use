@@ -13,6 +13,7 @@ snakes%>%
   facet_wrap(~Species)+
   theme(strip.text = element_text(face = "italic"))
 ```
+
 # Sampled sex ratio
 
 ```{r}

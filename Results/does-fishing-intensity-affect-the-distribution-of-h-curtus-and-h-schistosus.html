@@ -24,7 +24,7 @@
 <meta name="author" content="Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker" />
 
 
-<meta name="date" content="2021-05-29" />
+<meta name="date" content="2021-05-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -818,6 +818,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.6.4" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#visualising-difference-in-niche-width-across-gradiet-of-fishing-intensity"><i class="fa fa-check"></i><b>8.6.4</b> Visualising difference in niche width across gradiet of fishing intensity</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="sampled-svl-distribution.html"><a href="sampled-svl-distribution.html"><i class="fa fa-check"></i><b>9</b> Sampled SVL distribution</a></li>
+<li class="chapter" data-level="10" data-path="sampled-sex-ratio.html"><a href="sampled-sex-ratio.html"><i class="fa fa-check"></i><b>10</b> Sampled sex ratio</a></li>
+<li class="chapter" data-level="11" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><i class="fa fa-check"></i><b>11</b> Difference in diet by sex within <em>H. curtus</em> and <em>H. schsistosus</em></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#prey-preference-1"><i class="fa fa-check"></i><b>11.1</b> Prey Preference</a></li>
+<li class="chapter" data-level="11.2" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#range-of-prey-found-in-h.-curtus-and-h.-shistosus-gut-1"><i class="fa fa-check"></i><b>11.2</b> Range of prey found in <em>H. curtus</em> and <em>H. shistosus</em> gut</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#prey-richness-1"><i class="fa fa-check"></i><b>11.2.1</b> Prey richness</a></li>
+<li class="chapter" data-level="11.2.2" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#prey-family-diversity-1"><i class="fa fa-check"></i><b>11.2.2</b> Prey family diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#diet-overlap-between-males-and-females"><i class="fa fa-check"></i><b>11.3</b> Diet overlap between Males and Females</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#testing-segregation-in-prey-between-sexes"><i class="fa fa-check"></i><b>11.3.1</b> Testing segregation in prey between sexes</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#difference-in-size-selectivity-of-prey-between-h.-curtus-and-h.-schistosus-1"><i class="fa fa-check"></i><b>11.4</b> Difference in size selectivity of prey between <em>H. curtus</em> and <em>H. schistosus</em></a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -837,95 +853,95 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="does-fishing-intensity-affect-the-distribution-of-h.-curtus-and-h.-schistosus" class="section level1" number="6">
 <h1><span class="header-section-number">6</span> Does fishing intensity affect the distribution of <em>H. curtus</em> and <em>H. schistosus</em>?</h1>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loading required libraries</span></span>
-<span id="cb52-2"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
-<span id="cb52-4"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb52-5"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-6"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="co"># importing data</span></span>
-<span id="cb52-7"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-8"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-8" aria-hidden="true" tabindex="-1"></a>dep_int <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./Data/Fishing intensity_dep.csv&quot;</span>) <span class="co"># geocoded fishing effort</span></span>
-<span id="cb52-9"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-10"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-10" aria-hidden="true" tabindex="-1"></a>snakes_den <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./Data/snakes-density.csv&quot;</span>) <span class="co"># sea snake occurence in bycatch</span></span>
-<span id="cb52-11"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-12"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-12" aria-hidden="true" tabindex="-1"></a>ext <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(<span class="st">&quot;./Data/sampling_extent.tif&quot;</span>) <span class="co"># sampling grid</span></span>
-<span id="cb52-13"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-14"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="co"># importing required scripts</span></span>
-<span id="cb52-15"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-16"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-16" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/intensity extract.R&quot;</span>)</span>
-<span id="cb52-17"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/raster to df.R&quot;</span>)</span>
-<span id="cb52-18"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-19"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating fishing intensity</span></span>
-<span id="cb52-20"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-21"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-21" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> dep_int<span class="sc">%&gt;%</span></span>
-<span id="cb52-22"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gear.Type)<span class="sc">%&gt;%</span></span>
-<span id="cb52-23"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb52-24"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;effort&quot;</span>, <span class="at">func =</span> <span class="st">&#39;sum&#39;</span>)),</span>
-<span id="cb52-25"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">mdf =</span> <span class="fu">map</span>(m, map.df))<span class="sc">%&gt;%</span></span>
-<span id="cb52-26"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-26" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mdf)<span class="sc">%&gt;%</span></span>
-<span id="cb52-27"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb52-28"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(Gear.Type, layer)</span>
-<span id="cb52-29"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-30"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating sea snake CPUE</span></span>
-<span id="cb52-31"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-32"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-32" aria-hidden="true" tabindex="-1"></a>den <span class="ot">&lt;-</span> snakes_den<span class="sc">%&gt;%</span></span>
-<span id="cb52-33"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species)<span class="sc">%&gt;%</span></span>
-<span id="cb52-34"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb52-35"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;n&quot;</span>, <span class="at">func =</span> <span class="st">&#39;sum&#39;</span>)),</span>
-<span id="cb52-36"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-36" aria-hidden="true" tabindex="-1"></a>         <span class="at">mdf =</span> <span class="fu">map</span>(m, map.df))<span class="sc">%&gt;%</span></span>
-<span id="cb52-37"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-37" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mdf)<span class="sc">%&gt;%</span></span>
-<span id="cb52-38"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb52-39"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(Species, layer)</span>
-<span id="cb52-40"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-41"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating mean depth in cell</span></span>
-<span id="cb52-42"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-43"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-43" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marmap)</span>
-<span id="cb52-44"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-45"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-45" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">&lt;-</span> <span class="fu">readGEBCO.bathy</span>(<span class="st">&quot;./Data/gebco_2020_n16.7_s15.5_w72.0_e73.9.nc&quot;</span>)</span>
-<span id="cb52-46"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-47"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-47" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">=</span> <span class="fu">fortify.bathy</span>(depth)<span class="sc">%&gt;%</span> <span class="co"># converting to usable data frame</span></span>
-<span id="cb52-48"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-48" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">lon =</span> x, <span class="at">lat =</span> y, <span class="at">depth =</span> z)<span class="sc">%&gt;%</span></span>
-<span id="cb52-49"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(depth <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
-<span id="cb52-50"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-51"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-52"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-52" aria-hidden="true" tabindex="-1"></a>dep <span class="ot">&lt;-</span> depth<span class="sc">%&gt;%</span></span>
-<span id="cb52-53"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb52-54"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;depth&quot;</span>, <span class="at">func =</span> mean)),</span>
-<span id="cb52-55"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-55" aria-hidden="true" tabindex="-1"></a>         <span class="at">mdf =</span> <span class="fu">map</span>(m, map.df))<span class="sc">%&gt;%</span></span>
-<span id="cb52-56"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-56" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mdf)<span class="sc">%&gt;%</span></span>
-<span id="cb52-57"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb52-58"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">mean.depth =</span> layer)</span>
-<span id="cb52-59"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-60"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Joining creating combined data frame </span></span>
-<span id="cb52-61"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-62"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-62" aria-hidden="true" tabindex="-1"></a>fi_den<span class="ot">&lt;-</span> <span class="fu">inner_join</span>(fi, den, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb52-63"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(dep, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb52-64"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-64" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculating relative abaundance of sea snakes in each grid cell</span></span>
-<span id="cb52-65"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rel.prop =</span> HC<span class="sc">/</span>(HC<span class="sc">+</span>HS))</span>
-<span id="cb52-66"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-67"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-67" aria-hidden="true" tabindex="-1"></a><span class="co"># saving fi_den for analysis</span></span>
-<span id="cb52-68"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-69"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb52-69" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(fi, <span class="st">&quot;./Data/Fishing intensity_grid.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loading required libraries</span></span>
+<span id="cb53-2"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb53-4"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb53-5"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co"># importing data</span></span>
+<span id="cb53-7"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-8" aria-hidden="true" tabindex="-1"></a>dep_int <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./Data/Fishing intensity_dep.csv&quot;</span>) <span class="co"># geocoded fishing effort</span></span>
+<span id="cb53-9"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-10"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-10" aria-hidden="true" tabindex="-1"></a>snakes_den <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./Data/snakes-density.csv&quot;</span>) <span class="co"># sea snake occurence in bycatch</span></span>
+<span id="cb53-11"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-12"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-12" aria-hidden="true" tabindex="-1"></a>ext <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(<span class="st">&quot;./Data/sampling_extent.tif&quot;</span>) <span class="co"># sampling grid</span></span>
+<span id="cb53-13"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-14"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-14" aria-hidden="true" tabindex="-1"></a><span class="co"># importing required scripts</span></span>
+<span id="cb53-15"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-16"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-16" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/intensity extract.R&quot;</span>)</span>
+<span id="cb53-17"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-17" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/raster to df.R&quot;</span>)</span>
+<span id="cb53-18"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-19"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating fishing intensity</span></span>
+<span id="cb53-20"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-21"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-21" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> dep_int<span class="sc">%&gt;%</span></span>
+<span id="cb53-22"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gear.Type)<span class="sc">%&gt;%</span></span>
+<span id="cb53-23"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb53-24"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;effort&quot;</span>, <span class="at">func =</span> <span class="st">&#39;sum&#39;</span>)),</span>
+<span id="cb53-25"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">mdf =</span> <span class="fu">map</span>(m, map.df))<span class="sc">%&gt;%</span></span>
+<span id="cb53-26"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-26" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mdf)<span class="sc">%&gt;%</span></span>
+<span id="cb53-27"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb53-28"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(Gear.Type, layer)</span>
+<span id="cb53-29"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-30"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating sea snake CPUE</span></span>
+<span id="cb53-31"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-32"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-32" aria-hidden="true" tabindex="-1"></a>den <span class="ot">&lt;-</span> snakes_den<span class="sc">%&gt;%</span></span>
+<span id="cb53-33"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species)<span class="sc">%&gt;%</span></span>
+<span id="cb53-34"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb53-35"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;n&quot;</span>, <span class="at">func =</span> <span class="st">&#39;sum&#39;</span>)),</span>
+<span id="cb53-36"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-36" aria-hidden="true" tabindex="-1"></a>         <span class="at">mdf =</span> <span class="fu">map</span>(m, map.df))<span class="sc">%&gt;%</span></span>
+<span id="cb53-37"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-37" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mdf)<span class="sc">%&gt;%</span></span>
+<span id="cb53-38"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb53-39"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(Species, layer)</span>
+<span id="cb53-40"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-41"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating mean depth in cell</span></span>
+<span id="cb53-42"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-43"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-43" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marmap)</span>
+<span id="cb53-44"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-45"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-45" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">&lt;-</span> <span class="fu">readGEBCO.bathy</span>(<span class="st">&quot;./Data/gebco_2020_n16.7_s15.5_w72.0_e73.9.nc&quot;</span>)</span>
+<span id="cb53-46"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-47"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-47" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">=</span> <span class="fu">fortify.bathy</span>(depth)<span class="sc">%&gt;%</span> <span class="co"># converting to usable data frame</span></span>
+<span id="cb53-48"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-48" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">lon =</span> x, <span class="at">lat =</span> y, <span class="at">depth =</span> z)<span class="sc">%&gt;%</span></span>
+<span id="cb53-49"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(depth <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
+<span id="cb53-50"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-51"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-52"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-52" aria-hidden="true" tabindex="-1"></a>dep <span class="ot">&lt;-</span> depth<span class="sc">%&gt;%</span></span>
+<span id="cb53-53"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb53-54"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;depth&quot;</span>, <span class="at">func =</span> mean)),</span>
+<span id="cb53-55"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-55" aria-hidden="true" tabindex="-1"></a>         <span class="at">mdf =</span> <span class="fu">map</span>(m, map.df))<span class="sc">%&gt;%</span></span>
+<span id="cb53-56"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-56" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mdf)<span class="sc">%&gt;%</span></span>
+<span id="cb53-57"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb53-58"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">mean.depth =</span> layer)</span>
+<span id="cb53-59"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-60"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Joining creating combined data frame </span></span>
+<span id="cb53-61"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-62"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-62" aria-hidden="true" tabindex="-1"></a>fi_den<span class="ot">&lt;-</span> <span class="fu">inner_join</span>(fi, den, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb53-63"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(dep, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb53-64"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-64" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculating relative abaundance of sea snakes in each grid cell</span></span>
+<span id="cb53-65"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rel.prop =</span> HC<span class="sc">/</span>(HC<span class="sc">+</span>HS))</span>
+<span id="cb53-66"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-67"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-67" aria-hidden="true" tabindex="-1"></a><span class="co"># saving fi_den for analysis</span></span>
+<span id="cb53-68"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-69"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-69" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(fi, <span class="st">&quot;./Data/Fishing intensity_grid.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
 <div id="spatial-overlap-between-fisheries-and-sea-snakes" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Spatial overlap between fisheries and sea snakes</h2>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating spatial overlap between sea snakes and fisheries</span></span>
-<span id="cb53-2"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-3"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-3" aria-hidden="true" tabindex="-1"></a>sp.ovlp <span class="ot">&lt;-</span> fi_den<span class="sc">%&gt;%</span></span>
-<span id="cb53-4"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="fu">c</span>(<span class="st">&quot;HS&quot;</span>, <span class="st">&quot;HC&quot;</span>), <span class="at">key =</span> Species, <span class="at">value =</span> CPUE)<span class="sc">%&gt;%</span></span>
-<span id="cb53-5"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="fu">c</span>(<span class="st">&quot;GillNet&quot;</span>, <span class="st">&quot;Trawler&quot;</span>), <span class="at">key =</span> Gear, <span class="at">value =</span> intensity)<span class="sc">%&gt;%</span></span>
-<span id="cb53-6"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gear, Species)<span class="sc">%&gt;%</span></span>
-<span id="cb53-7"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">overlap =</span> <span class="fu">sum</span>(CPUE <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> intensity <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="at">na.rm =</span> T),</span>
-<span id="cb53-8"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">extent.sp =</span> <span class="fu">sum</span>(CPUE<span class="sc">&gt;</span><span class="dv">0</span>),</span>
-<span id="cb53-9"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">rel.ovlp =</span> overlap<span class="sc">/</span>extent.sp)</span>
-<span id="cb53-10"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-11"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating pretty table</span></span>
-<span id="cb53-12"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-13"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-13" aria-hidden="true" tabindex="-1"></a>sp.ovlp<span class="sc">%&gt;%</span></span>
-<span id="cb53-14"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>extent.sp)<span class="sc">%&gt;%</span></span>
-<span id="cb53-15"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rel.ovlp =</span> <span class="dv">100</span><span class="sc">*</span>rel.ovlp,</span>
-<span id="cb53-16"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">Species =</span> <span class="fu">ifelse</span>(Species <span class="sc">==</span> <span class="st">&quot;HC&quot;</span>, <span class="st">&quot;Hydrophis curtus&quot;</span>, <span class="st">&quot;Hydrophis schistosus&quot;</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb53-17"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">`</span><span class="at">Relative Overlap %</span><span class="st">`</span> <span class="ot">=</span> rel.ovlp,</span>
-<span id="cb53-18"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb53-18" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Spatial Overlap</span><span class="st">`</span> <span class="ot">=</span> overlap)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating spatial overlap between sea snakes and fisheries</span></span>
+<span id="cb54-2"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-3" aria-hidden="true" tabindex="-1"></a>sp.ovlp <span class="ot">&lt;-</span> fi_den<span class="sc">%&gt;%</span></span>
+<span id="cb54-4"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="fu">c</span>(<span class="st">&quot;HS&quot;</span>, <span class="st">&quot;HC&quot;</span>), <span class="at">key =</span> Species, <span class="at">value =</span> CPUE)<span class="sc">%&gt;%</span></span>
+<span id="cb54-5"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="fu">c</span>(<span class="st">&quot;GillNet&quot;</span>, <span class="st">&quot;Trawler&quot;</span>), <span class="at">key =</span> Gear, <span class="at">value =</span> intensity)<span class="sc">%&gt;%</span></span>
+<span id="cb54-6"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gear, Species)<span class="sc">%&gt;%</span></span>
+<span id="cb54-7"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">overlap =</span> <span class="fu">sum</span>(CPUE <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> intensity <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="at">na.rm =</span> T),</span>
+<span id="cb54-8"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">extent.sp =</span> <span class="fu">sum</span>(CPUE<span class="sc">&gt;</span><span class="dv">0</span>),</span>
+<span id="cb54-9"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">rel.ovlp =</span> overlap<span class="sc">/</span>extent.sp)</span>
+<span id="cb54-10"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-11"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating pretty table</span></span>
+<span id="cb54-12"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-13"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-13" aria-hidden="true" tabindex="-1"></a>sp.ovlp<span class="sc">%&gt;%</span></span>
+<span id="cb54-14"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>extent.sp)<span class="sc">%&gt;%</span></span>
+<span id="cb54-15"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rel.ovlp =</span> <span class="dv">100</span><span class="sc">*</span>rel.ovlp,</span>
+<span id="cb54-16"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">Species =</span> <span class="fu">ifelse</span>(Species <span class="sc">==</span> <span class="st">&quot;HC&quot;</span>, <span class="st">&quot;Hydrophis curtus&quot;</span>, <span class="st">&quot;Hydrophis schistosus&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb54-17"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">`</span><span class="at">Relative Overlap %</span><span class="st">`</span> <span class="ot">=</span> rel.ovlp,</span>
+<span id="cb54-18"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-18" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Spatial Overlap</span><span class="st">`</span> <span class="ot">=</span> overlap)</span></code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -947,7 +963,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">GillNet</td>
 <td align="left">Hydrophis schistosus</td>
 <td align="right">49</td>
-<td align="right">81.66667</td>
+<td align="right">79.03226</td>
 </tr>
 <tr class="odd">
 <td align="left">Trawler</td>
@@ -958,8 +974,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tr class="even">
 <td align="left">Trawler</td>
 <td align="left">Hydrophis schistosus</td>
-<td align="right">41</td>
-<td align="right">68.33333</td>
+<td align="right">45</td>
+<td align="right">72.58065</td>
 </tr>
 </tbody>
 </table>
@@ -967,18 +983,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="testing-spatial-overlap-between-sea-snakes-and-fisheries" class="section level3" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> Testing spatial overlap between sea snakes and fisheries</h3>
 <p>We tested the spatial overlap between sea snakes and fisheries along the Sindhudurg coast as the difference in relative proportion of overlap among species and gear.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-1" aria-hidden="true" tabindex="-1"></a>sp.ovlp<span class="sc">%&gt;%</span></span>
-<span id="cb54-2"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Species =</span> <span class="fu">ifelse</span>(Species <span class="sc">==</span> <span class="st">&quot;HC&quot;</span>, <span class="st">&quot;Hydrophis curtus&quot;</span>, <span class="st">&quot;Hydrophis schistosus&quot;</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb54-3"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species)<span class="sc">%&gt;%</span></span>
-<span id="cb54-4"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb54-5"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ptest =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">prop.test</span>(.<span class="sc">$</span>overlap, .<span class="sc">$</span>extent.sp)), <span class="co"># Z - test of proportion</span></span>
-<span id="cb54-6"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">sumry =</span> <span class="fu">map</span>(ptest, broom<span class="sc">::</span>tidy),</span>
-<span id="cb54-7"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">h =</span> <span class="fu">map</span>(sumry, <span class="sc">~</span>pwr<span class="sc">::</span><span class="fu">ES.h</span>(.<span class="sc">$</span>estimate2, .<span class="sc">$</span>estimate1)))<span class="sc">%&gt;%</span> <span class="co"># effect size</span></span>
-<span id="cb54-8"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sumry, h)<span class="sc">%&gt;%</span></span>
-<span id="cb54-9"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb54-10"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Species<span class="sc">:</span>p.value, h)<span class="sc">%&gt;%</span></span>
-<span id="cb54-11"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">Gill Net</span><span class="st">`</span> <span class="ot">=</span> estimate1,</span>
-<span id="cb54-12"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb54-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">Trawler =</span> estimate2)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-1" aria-hidden="true" tabindex="-1"></a>sp.ovlp<span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Species =</span> <span class="fu">ifelse</span>(Species <span class="sc">==</span> <span class="st">&quot;HC&quot;</span>, <span class="st">&quot;Hydrophis curtus&quot;</span>, <span class="st">&quot;Hydrophis schistosus&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species)<span class="sc">%&gt;%</span></span>
+<span id="cb55-4"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb55-5"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ptest =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">prop.test</span>(.<span class="sc">$</span>overlap, .<span class="sc">$</span>extent.sp)), <span class="co"># Z - test of proportion</span></span>
+<span id="cb55-6"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">sumry =</span> <span class="fu">map</span>(ptest, broom<span class="sc">::</span>tidy),</span>
+<span id="cb55-7"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">h =</span> <span class="fu">map</span>(sumry, <span class="sc">~</span>pwr<span class="sc">::</span><span class="fu">ES.h</span>(.<span class="sc">$</span>estimate2, .<span class="sc">$</span>estimate1)))<span class="sc">%&gt;%</span> <span class="co"># effect size</span></span>
+<span id="cb55-8"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sumry, h)<span class="sc">%&gt;%</span></span>
+<span id="cb55-9"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb55-10"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Species<span class="sc">:</span>p.value, h)<span class="sc">%&gt;%</span></span>
+<span id="cb55-11"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">Gill Net</span><span class="st">`</span> <span class="ot">=</span> estimate1,</span>
+<span id="cb55-12"><a href="does-fishing-intensity-affect-the-distribution-of-h-curtus-and-h-schistosus.html#cb55-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">Trawler =</span> estimate2)</span></code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -996,17 +1012,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">Hydrophis curtus</td>
 <td align="right">0.7037037</td>
 <td align="right">0.9629630</td>
-<td align="right">11.266667</td>
+<td align="right">11.2666667</td>
 <td align="right">0.0007891</td>
 <td align="right">0.7638663</td>
 </tr>
 <tr class="even">
 <td align="left">Hydrophis schistosus</td>
-<td align="right">0.8166667</td>
-<td align="right">0.6833333</td>
-<td align="right">2.177778</td>
-<td align="right">0.1400165</td>
-<td align="right">-0.3104294</td>
+<td align="right">0.7903226</td>
+<td align="right">0.7258065</td>
+<td align="right">0.3957447</td>
+<td align="right">0.5292951</td>
+<td align="right">-0.1509486</td>
 </tr>
 </tbody>
 </table>

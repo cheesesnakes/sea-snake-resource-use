@@ -32,6 +32,8 @@ library(raster)
 
 # importing data
 
+snakes <- read.csv(file ="Data/Sea-snakes_fish-dep_2018-19_250720.csv") # snake data
+
 dep_int <- read.csv("./Data/Fishing intensity_dep.csv") # geocoded fishing effort
 
 snakes_den <- read.csv("./Data/snakes-density.csv") # sea snake occurence in bycatch
@@ -118,7 +120,7 @@ sia_snakes = sia%>%
   left_join(snakes, 'Field.Code')%>%
   mutate(Lab = "CEAS")%>%
   rename(Delta.Carbon = d13C..vpdb. , Delta.Nitrogen = d15N..N2.air.)%>%
-  dplyr::select(Field.Code, Species, Snout.to.Vent..cm., Sex, Gravid, Class,
+  dplyr::select(Field.Code, Species, Snout.to.Vent..cm., Sex, Class,
                 Gear.Type, Fishing.Location, Location.encountered, Depth.Caught..m.,
                 Plasma.Color, Delta.Carbon, Delta.Nitrogen, Lab, 
                 Tissue.type, Month, Year)%>%

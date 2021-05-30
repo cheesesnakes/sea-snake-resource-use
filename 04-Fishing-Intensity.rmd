@@ -67,7 +67,7 @@ dep_int <- geocode.trips(dep_int, fl = 'Fishing.Location', dep = 'Depth.m')
 
 # removing duplicates introduced by fuzzy joining
 
-dep_int <- distinct(dep_int, Date, Boat.name, Fishing.Location, Gear.Type, Depth.m, .keep_all = T)
+dep_int <- distinct(dep_int, Date, Boat.name, .keep_all = T)
 
 # saving output
 

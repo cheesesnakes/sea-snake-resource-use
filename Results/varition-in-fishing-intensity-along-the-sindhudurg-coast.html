@@ -24,7 +24,7 @@
 <meta name="author" content="Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker" />
 
 
-<meta name="date" content="2021-05-29" />
+<meta name="date" content="2021-05-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -818,6 +818,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.6.4" data-path="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#visualising-difference-in-niche-width-across-gradiet-of-fishing-intensity"><i class="fa fa-check"></i><b>8.6.4</b> Visualising difference in niche width across gradiet of fishing intensity</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="sampled-svl-distribution.html"><a href="sampled-svl-distribution.html"><i class="fa fa-check"></i><b>9</b> Sampled SVL distribution</a></li>
+<li class="chapter" data-level="10" data-path="sampled-sex-ratio.html"><a href="sampled-sex-ratio.html"><i class="fa fa-check"></i><b>10</b> Sampled sex ratio</a></li>
+<li class="chapter" data-level="11" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><i class="fa fa-check"></i><b>11</b> Difference in diet by sex within <em>H. curtus</em> and <em>H. schsistosus</em></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#prey-preference-1"><i class="fa fa-check"></i><b>11.1</b> Prey Preference</a></li>
+<li class="chapter" data-level="11.2" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#range-of-prey-found-in-h.-curtus-and-h.-shistosus-gut-1"><i class="fa fa-check"></i><b>11.2</b> Range of prey found in <em>H. curtus</em> and <em>H. shistosus</em> gut</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#prey-richness-1"><i class="fa fa-check"></i><b>11.2.1</b> Prey richness</a></li>
+<li class="chapter" data-level="11.2.2" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#prey-family-diversity-1"><i class="fa fa-check"></i><b>11.2.2</b> Prey family diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#diet-overlap-between-males-and-females"><i class="fa fa-check"></i><b>11.3</b> Diet overlap between Males and Females</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#testing-segregation-in-prey-between-sexes"><i class="fa fa-check"></i><b>11.3.1</b> Testing segregation in prey between sexes</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#difference-in-size-selectivity-of-prey-between-h.-curtus-and-h.-schistosus-1"><i class="fa fa-check"></i><b>11.4</b> Difference in size selectivity of prey between <em>H. curtus</em> and <em>H. schistosus</em></a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -837,17 +853,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="varition-in-fishing-intensity-along-the-sindhudurg-coast" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Varition in fishing intensity along the sindhudurg coast</h1>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;Functions/setup.R&quot;</span>)</span>
-<span id="cb43-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># importing effort data</span></span>
-<span id="cb43-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb43-5" aria-hidden="true" tabindex="-1"></a>effort <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;./Data/Fishing-Effort_250720.csv&quot;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb43-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Date, Gear.Type)<span class="sc">%&gt;%</span></span>
-<span id="cb43-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Boat.name, <span class="at">.keep_all =</span> T)<span class="sc">%&gt;%</span> <span class="co"># fixing repetitions in effort data</span></span>
-<span id="cb43-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">factor</span>(<span class="fu">months</span>(<span class="fu">dmy</span>(Date)), </span>
-<span id="cb43-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb43-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> month.name),</span>
-<span id="cb43-10"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb43-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">Year =</span> <span class="fu">year</span>(<span class="fu">dmy</span>(Date)))<span class="sc">%&gt;%</span></span>
-<span id="cb43-11"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gear.Type <span class="sc">==</span> <span class="st">&quot;Trawler&quot;</span> <span class="sc">|</span> Gear.Type <span class="sc">==</span> <span class="st">&quot;GillNet&quot;</span>) <span class="co"># removing beach seines and purse seines</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;Functions/setup.R&quot;</span>)</span>
+<span id="cb44-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># importing effort data</span></span>
+<span id="cb44-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-5" aria-hidden="true" tabindex="-1"></a>effort <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;./Data/Fishing-Effort_250720.csv&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb44-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Date, Gear.Type)<span class="sc">%&gt;%</span></span>
+<span id="cb44-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Boat.name, <span class="at">.keep_all =</span> T)<span class="sc">%&gt;%</span> <span class="co"># fixing repetitions in effort data</span></span>
+<span id="cb44-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">factor</span>(<span class="fu">months</span>(<span class="fu">dmy</span>(Date)), </span>
+<span id="cb44-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> month.name),</span>
+<span id="cb44-10"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">Year =</span> <span class="fu">year</span>(<span class="fu">dmy</span>(Date)))<span class="sc">%&gt;%</span></span>
+<span id="cb44-11"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gear.Type <span class="sc">==</span> <span class="st">&quot;Trawler&quot;</span> <span class="sc">|</span> Gear.Type <span class="sc">==</span> <span class="st">&quot;GillNet&quot;</span>) <span class="co"># removing beach seines and purse seines</span></span></code></pre></div>
 <div id="calculating-effort-with-depth" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Calculating effort with depth</h2>
 <p><strong>Fishing intensity</strong>: Vessel effort (Number of days fishing x No. of hauls x Average time per haul) is calculated for each boat on each day. This is then totaled for the sampling duration at each site.</p>
@@ -855,24 +871,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Should fishing intensity be analysed seperately by fishing gear.</li>
 <li>Should calculation of fishing intensity factor in Gears.</li>
 </ul>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-1" aria-hidden="true" tabindex="-1"></a>dep_int <span class="ot">=</span> effort<span class="sc">%&gt;%</span> </span>
-<span id="cb44-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fishing.Location <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)<span class="sc">%&gt;%</span> <span class="co">#removing missing location data</span></span>
-<span id="cb44-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Date, Gear.Type, Fishing.Location, Boat.name,</span>
-<span id="cb44-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-4" aria-hidden="true" tabindex="-1"></a>                No..of.Hauls, Average.Haul.Time..Hours., No..of.Days.fishing, Depth..wav.)<span class="sc">%&gt;%</span></span>
-<span id="cb44-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gear.Type)<span class="sc">%&gt;%</span></span>
-<span id="cb44-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># interpolating missing data with medians</span></span>
-<span id="cb44-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n.days =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(No..of.Days.fishing),</span>
-<span id="cb44-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-8" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">median</span>(No..of.Days.fishing, <span class="at">na.rm =</span> T), No..of.Days.fishing),</span>
-<span id="cb44-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">n.hauls =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(No..of.Hauls), </span>
-<span id="cb44-10"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-10" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">median</span>(No..of.Hauls, <span class="at">na.rm =</span> T), No..of.Hauls),</span>
-<span id="cb44-11"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">haul.time =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Average.Haul.Time..Hours.), </span>
-<span id="cb44-12"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-12" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">median</span>(Average.Haul.Time..Hours., <span class="at">na.rm =</span> T), Average.Haul.Time..Hours.))<span class="sc">%&gt;%</span></span>
-<span id="cb44-13"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb44-14"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculating fihsing effort per trip</span></span>
-<span id="cb44-15"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">effort =</span> (n.days)<span class="sc">*</span>(n.hauls)<span class="sc">*</span>(haul.time),</span>
-<span id="cb44-16"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">Depth.m =</span> Depth..wav.<span class="sc">*</span><span class="fl">1.87</span>)<span class="sc">%&gt;%</span> <span class="co"># converting depth to meters</span></span>
-<span id="cb44-17"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Date, Boat.name, Gear.Type, Fishing.Location, Depth.m, effort)<span class="sc">%&gt;%</span> <span class="co"># selecting relevant variables</span></span>
-<span id="cb44-18"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb44-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="co"># remving missing values</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-1" aria-hidden="true" tabindex="-1"></a>dep_int <span class="ot">=</span> effort<span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fishing.Location <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)<span class="sc">%&gt;%</span> <span class="co">#removing missing location data</span></span>
+<span id="cb45-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Date, Gear.Type, Fishing.Location, Boat.name,</span>
+<span id="cb45-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-4" aria-hidden="true" tabindex="-1"></a>                No..of.Hauls, Average.Haul.Time..Hours., No..of.Days.fishing, Depth..wav.)<span class="sc">%&gt;%</span></span>
+<span id="cb45-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gear.Type)<span class="sc">%&gt;%</span></span>
+<span id="cb45-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># interpolating missing data with medians</span></span>
+<span id="cb45-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n.days =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(No..of.Days.fishing),</span>
+<span id="cb45-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-8" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">median</span>(No..of.Days.fishing, <span class="at">na.rm =</span> T), No..of.Days.fishing),</span>
+<span id="cb45-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">n.hauls =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(No..of.Hauls), </span>
+<span id="cb45-10"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-10" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">median</span>(No..of.Hauls, <span class="at">na.rm =</span> T), No..of.Hauls),</span>
+<span id="cb45-11"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">haul.time =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Average.Haul.Time..Hours.), </span>
+<span id="cb45-12"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-12" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">median</span>(Average.Haul.Time..Hours., <span class="at">na.rm =</span> T), Average.Haul.Time..Hours.))<span class="sc">%&gt;%</span></span>
+<span id="cb45-13"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb45-14"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculating fihsing effort per trip</span></span>
+<span id="cb45-15"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">effort =</span> (n.days)<span class="sc">*</span>(n.hauls)<span class="sc">*</span>(haul.time),</span>
+<span id="cb45-16"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">Depth.m =</span> Depth..wav.<span class="sc">*</span><span class="fl">1.87</span>)<span class="sc">%&gt;%</span> <span class="co"># converting depth to meters</span></span>
+<span id="cb45-17"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Date, Boat.name, Gear.Type, Fishing.Location, Depth.m, effort)<span class="sc">%&gt;%</span> <span class="co"># selecting relevant variables</span></span>
+<span id="cb45-18"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="co"># remving missing values</span></span></code></pre></div>
 </div>
 <div id="geocoding-fishing-trips" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Geocoding fishing trips</h2>
@@ -885,51 +901,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Extract final longitude from GEBCO data</li>
 </ul>
 <p>The protocol is encoded in <code>Function/geocode.R</code></p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/geocode.R&quot;</span>)</span>
-<span id="cb45-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-3" aria-hidden="true" tabindex="-1"></a>dep_int <span class="ot">&lt;-</span> <span class="fu">geocode.trips</span>(dep_int, <span class="at">fl =</span> <span class="st">&#39;Fishing.Location&#39;</span>, <span class="at">dep =</span> <span class="st">&#39;Depth.m&#39;</span>)</span>
-<span id="cb45-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># removing duplicates introduced by fuzzy joining</span></span>
-<span id="cb45-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-7" aria-hidden="true" tabindex="-1"></a>dep_int <span class="ot">&lt;-</span> <span class="fu">distinct</span>(dep_int, Date, Boat.name, Fishing.Location, Gear.Type, Depth.m, <span class="at">.keep_all =</span> T)</span>
-<span id="cb45-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="co"># savinf output</span></span>
-<span id="cb45-10"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-11"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dep_int, <span class="st">&quot;./Data/Fishing intensity_dep.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/geocode.R&quot;</span>)</span>
+<span id="cb46-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-3" aria-hidden="true" tabindex="-1"></a>dep_int <span class="ot">&lt;-</span> <span class="fu">geocode.trips</span>(dep_int, <span class="at">fl =</span> <span class="st">&#39;Fishing.Location&#39;</span>, <span class="at">dep =</span> <span class="st">&#39;Depth.m&#39;</span>)</span>
+<span id="cb46-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co"># removing duplicates introduced by fuzzy joining</span></span>
+<span id="cb46-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-7" aria-hidden="true" tabindex="-1"></a>dep_int <span class="ot">&lt;-</span> <span class="fu">distinct</span>(dep_int, Date, Boat.name, <span class="at">.keep_all =</span> T)</span>
+<span id="cb46-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="co"># saving output</span></span>
+<span id="cb46-10"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-11"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dep_int, <span class="st">&quot;./Data/Fishing intensity_dep.csv&quot;</span>)</span></code></pre></div>
 <p><strong>Note:</strong> <code>fuzzyjoin::fuzzy_inner_join()</code> introduces many duplicates, I have not as yet been able to fix the issue dirrectly. Currently, removing duplicates from output using <code>dplyr::distinct()</code>.</p>
 </div>
 <div id="no.-of-trips-sampled" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> No. of trips sampled</h2>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Sample size</span></span>
-<span id="cb46-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb46-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">table</span>(dep_int<span class="sc">$</span>Gear.Type))</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Sample size</span></span>
+<span id="cb47-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">enframe</span>(<span class="fu">table</span>(dep_int<span class="sc">$</span>Gear.Type))</span></code></pre></div>
+<div class="kable-table">
 <table>
 <thead>
 <tr class="header">
-<th align="left">Var1</th>
-<th align="right">Freq</th>
+<th align="left">name</th>
+<th align="right">value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">GillNet</td>
-<td align="right">178</td>
+<td align="right">175</td>
 </tr>
 <tr class="even">
 <td align="left">Trawler</td>
-<td align="right">103</td>
+<td align="right">104</td>
 </tr>
 </tbody>
 </table>
 </div>
+</div>
 <div id="summarising-fishing-effort-per-trip" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Summarising fishing effort per trip</h2>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># effort per boat</span></span>
-<span id="cb47-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb47-3" aria-hidden="true" tabindex="-1"></a>dep_int<span class="sc">%&gt;%</span></span>
-<span id="cb47-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb47-4" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>(effort)<span class="sc">%&gt;%</span></span>
-<span id="cb47-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb47-5" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">yank</span>(<span class="st">&quot;numeric&quot;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb47-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb47-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>hist)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># effort per boat</span></span>
+<span id="cb48-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-3" aria-hidden="true" tabindex="-1"></a>dep_int<span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-4" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>(effort)<span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-5" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">yank</span>(<span class="st">&quot;numeric&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb48-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>hist)</span></code></pre></div>
 <p><strong>Variable type: numeric</strong></p>
 <table>
 <thead>
@@ -951,8 +969,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">effort</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">7.2</td>
-<td align="right">9.41</td>
+<td align="right">7.28</td>
+<td align="right">9.42</td>
 <td align="right">0.17</td>
 <td align="right">1</td>
 <td align="right">1.5</td>
@@ -964,15 +982,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="testing-difference-in-effort-by-gears" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Testing difference in effort by gears</h2>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># T - test</span></span>
-<span id="cb48-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="fu">t.test</span>(effort <span class="sc">~</span> Gear.Type, <span class="at">data =</span> dep_int))<span class="sc">%&gt;%</span></span>
-<span id="cb48-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(estimate<span class="sc">:</span>p.value)<span class="sc">%&gt;%</span></span>
-<span id="cb48-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Effect size</span></span>
-<span id="cb48-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">d =</span> lsr<span class="sc">::</span><span class="fu">cohensD</span>(effort <span class="sc">~</span> Gear.Type, <span class="at">data =</span> dep_int))<span class="sc">%&gt;%</span></span>
-<span id="cb48-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>estimate)<span class="sc">%&gt;%</span></span>
-<span id="cb48-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">Gill net</span><span class="st">`</span> <span class="ot">=</span> estimate1,</span>
-<span id="cb48-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb48-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">Trawler =</span> estimate2)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># T - test</span></span>
+<span id="cb49-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="fu">t.test</span>(effort <span class="sc">~</span> Gear.Type, <span class="at">data =</span> dep_int))<span class="sc">%&gt;%</span></span>
+<span id="cb49-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(estimate<span class="sc">:</span>p.value)<span class="sc">%&gt;%</span></span>
+<span id="cb49-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Effect size</span></span>
+<span id="cb49-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">d =</span> lsr<span class="sc">::</span><span class="fu">cohensD</span>(effort <span class="sc">~</span> Gear.Type, <span class="at">data =</span> dep_int))<span class="sc">%&gt;%</span></span>
+<span id="cb49-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>estimate)<span class="sc">%&gt;%</span></span>
+<span id="cb49-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">Gill net</span><span class="st">`</span> <span class="ot">=</span> estimate1,</span>
+<span id="cb49-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">Trawler =</span> estimate2)</span></code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -986,11 +1004,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">1.105674</td>
-<td align="right">17.73058</td>
-<td align="right">-20.81102</td>
+<td align="right">1.1132</td>
+<td align="right">17.65625</td>
+<td align="right">-20.81715</td>
 <td align="right">0</td>
-<td align="right">3.378586</td>
+<td align="right">3.335484</td>
 </tr>
 </tbody>
 </table>
@@ -999,71 +1017,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="mapping-fishing-intensity" class="section level2" number="5.6">
 <h2><span class="header-section-number">5.6</span> Mapping fishing intensity</h2>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># required libraries</span></span>
-<span id="cb49-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
-<span id="cb49-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span>
-<span id="cb49-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb49-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmap)</span>
-<span id="cb49-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Sampling grid as raster</span></span>
-<span id="cb49-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-10"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-10" aria-hidden="true" tabindex="-1"></a>ext <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&quot;./Data/sampling_extent.tif&quot;</span>)</span>
-<span id="cb49-11"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-12"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="co"># importing functions for standardising effort</span></span>
-<span id="cb49-13"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-14"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/intensity extract.R&quot;</span>)</span>
-<span id="cb49-15"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-15" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/raster to df.R&quot;</span>)</span>
-<span id="cb49-16"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-17"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating fishing intensity in each grid cell</span></span>
-<span id="cb49-18"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-19"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-19" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> dep_int<span class="sc">%&gt;%</span></span>
-<span id="cb49-20"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb49-21"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;effort&quot;</span>, <span class="at">func =</span> <span class="st">&#39;sum&#39;</span>)),</span>
-<span id="cb49-22"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">mdf =</span> <span class="fu">map</span>(m, map.df))<span class="sc">%&gt;%</span></span>
-<span id="cb49-23"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-23" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mdf)<span class="sc">%&gt;%</span></span>
-<span id="cb49-24"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb49-25"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">intensity =</span> layer)</span>
-<span id="cb49-26"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-27"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting intensity of fishing by gear type</span></span>
-<span id="cb49-28"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-29"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-29" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">get_googlemap</span>(<span class="at">center =</span> <span class="fu">c</span>(<span class="fu">mean</span>(dep_int<span class="sc">$</span>lon),<span class="fu">mean</span>(dep_int<span class="sc">$</span>lat)), </span>
-<span id="cb49-30"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-30" aria-hidden="true" tabindex="-1"></a>                      <span class="at">zoom =</span> <span class="dv">9</span>, <span class="at">scale =</span> <span class="dv">4</span>, <span class="at">maptype =</span> <span class="st">&quot;terrain&quot;</span>)<span class="do">##Getting basemap</span></span>
-<span id="cb49-31"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-32"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-32" aria-hidden="true" tabindex="-1"></a><span class="do">## importing bathymetric data downloaded from GEBCO database</span></span>
-<span id="cb49-33"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-34"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marmap)</span>
-<span id="cb49-35"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-36"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-36" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">&lt;-</span> <span class="fu">readGEBCO.bathy</span>(<span class="st">&quot;./Data/gebco_2020_n16.7_s15.5_w72.0_e73.9.nc&quot;</span>)</span>
-<span id="cb49-37"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-38"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-38" aria-hidden="true" tabindex="-1"></a><span class="do">## converting depth data to usable data frame</span></span>
-<span id="cb49-39"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-40"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-40" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">=</span> <span class="fu">fortify.bathy</span>(depth)<span class="sc">%&gt;%</span></span>
-<span id="cb49-41"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-41" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">lon =</span> x, <span class="at">lat =</span> y, <span class="at">depth =</span> z)<span class="sc">%&gt;%</span></span>
-<span id="cb49-42"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(depth <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
-<span id="cb49-43"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-44"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-44" aria-hidden="true" tabindex="-1"></a><span class="do">## creating plot</span></span>
-<span id="cb49-45"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-45" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(grid)</span>
-<span id="cb49-46"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-46" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(metR)</span>
-<span id="cb49-47"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-47" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(viridis)</span>
-<span id="cb49-48"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-49"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-49" aria-hidden="true" tabindex="-1"></a><span class="fu">ggmap</span>(base)<span class="sc">+</span></span>
-<span id="cb49-50"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-50" aria-hidden="true" tabindex="-1"></a>    metR<span class="sc">::</span><span class="fu">geom_contour2</span>(<span class="at">data =</span> depth, <span class="fu">aes</span>(<span class="at">x =</span> lon, <span class="at">y =</span> lat, <span class="at">z =</span> depth),</span>
-<span id="cb49-51"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-51" aria-hidden="true" tabindex="-1"></a>                        <span class="at">breaks=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">1000</span>, <span class="sc">-</span><span class="dv">10</span>), <span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="fl">0.1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>)<span class="sc">+</span></span>
-<span id="cb49-52"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>(<span class="at">data =</span> fi, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">fill =</span> intensity, <span class="at">alpha =</span> intensity), <span class="at">color =</span> <span class="st">&quot;grey50&quot;</span>)<span class="sc">+</span></span>
-<span id="cb49-53"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_quickmap</span>()<span class="sc">+</span></span>
-<span id="cb49-54"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">72.75</span>, <span class="fl">73.75</span>))<span class="sc">+</span></span>
-<span id="cb49-55"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">15.6</span>, <span class="fl">16.6</span>))<span class="sc">+</span></span>
-<span id="cb49-56"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_viridis</span>(<span class="at">name =</span> <span class="st">&quot;Fishing intensity&quot;</span>, <span class="at">option =</span> <span class="st">&quot;B&quot;</span>, </span>
-<span id="cb49-57"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-57" aria-hidden="true" tabindex="-1"></a>                       <span class="at">guide =</span> <span class="fu">guide_colorbar</span>(<span class="at">direction =</span> <span class="st">&quot;horizontal&quot;</span>,<span class="at">barwidth =</span> <span class="dv">10</span>, </span>
-<span id="cb49-58"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-58" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">title.position =</span> <span class="st">&quot;top&quot;</span>, <span class="at">title.hjust =</span> <span class="fl">0.5</span>))<span class="sc">+</span></span>
-<span id="cb49-59"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_alpha_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.8</span>), <span class="at">guide =</span> F)<span class="sc">+</span></span>
-<span id="cb49-60"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)<span class="sc">+</span></span>
-<span id="cb49-61"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb49-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.9</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># required libraries</span></span>
+<span id="cb50-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb50-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span>
+<span id="cb50-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb50-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmap)</span>
+<span id="cb50-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Sampling grid as raster</span></span>
+<span id="cb50-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-10" aria-hidden="true" tabindex="-1"></a>ext <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&quot;./Data/sampling_extent.tif&quot;</span>)</span>
+<span id="cb50-11"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-12"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="co"># importing functions for standardising effort</span></span>
+<span id="cb50-13"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-14"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-14" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/intensity extract.R&quot;</span>)</span>
+<span id="cb50-15"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-15" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/raster to df.R&quot;</span>)</span>
+<span id="cb50-16"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-17"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating fishing intensity in each grid cell</span></span>
+<span id="cb50-18"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-19"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-19" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> dep_int<span class="sc">%&gt;%</span></span>
+<span id="cb50-20"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb50-21"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;effort&quot;</span>, <span class="at">func =</span> <span class="st">&#39;sum&#39;</span>)),</span>
+<span id="cb50-22"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">mdf =</span> <span class="fu">map</span>(m, map.df))<span class="sc">%&gt;%</span></span>
+<span id="cb50-23"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-23" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mdf)<span class="sc">%&gt;%</span></span>
+<span id="cb50-24"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb50-25"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">intensity =</span> layer)</span>
+<span id="cb50-26"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-27"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting intensity of fishing by gear type</span></span>
+<span id="cb50-28"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-29"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-29" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">get_googlemap</span>(<span class="at">center =</span> <span class="fu">c</span>(<span class="fu">mean</span>(dep_int<span class="sc">$</span>lon),<span class="fu">mean</span>(dep_int<span class="sc">$</span>lat)), </span>
+<span id="cb50-30"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-30" aria-hidden="true" tabindex="-1"></a>                      <span class="at">zoom =</span> <span class="dv">9</span>, <span class="at">scale =</span> <span class="dv">4</span>, <span class="at">maptype =</span> <span class="st">&quot;terrain&quot;</span>)<span class="do">##Getting basemap</span></span>
+<span id="cb50-31"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-32"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-32" aria-hidden="true" tabindex="-1"></a><span class="do">## importing bathymetric data downloaded from GEBCO database</span></span>
+<span id="cb50-33"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-34"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marmap)</span>
+<span id="cb50-35"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-36"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-36" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">&lt;-</span> <span class="fu">readGEBCO.bathy</span>(<span class="st">&quot;./Data/gebco_2020_n16.7_s15.5_w72.0_e73.9.nc&quot;</span>)</span>
+<span id="cb50-37"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-38"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-38" aria-hidden="true" tabindex="-1"></a><span class="do">## converting depth data to usable data frame</span></span>
+<span id="cb50-39"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-40"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-40" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">=</span> <span class="fu">fortify.bathy</span>(depth)<span class="sc">%&gt;%</span></span>
+<span id="cb50-41"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-41" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">lon =</span> x, <span class="at">lat =</span> y, <span class="at">depth =</span> z)<span class="sc">%&gt;%</span></span>
+<span id="cb50-42"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(depth <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
+<span id="cb50-43"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-44"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-44" aria-hidden="true" tabindex="-1"></a><span class="do">## creating plot</span></span>
+<span id="cb50-45"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-45" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(grid)</span>
+<span id="cb50-46"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-46" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(metR)</span>
+<span id="cb50-47"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-47" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(viridis)</span>
+<span id="cb50-48"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-49"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-49" aria-hidden="true" tabindex="-1"></a><span class="fu">ggmap</span>(base)<span class="sc">+</span></span>
+<span id="cb50-50"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-50" aria-hidden="true" tabindex="-1"></a>    metR<span class="sc">::</span><span class="fu">geom_contour2</span>(<span class="at">data =</span> depth, <span class="fu">aes</span>(<span class="at">x =</span> lon, <span class="at">y =</span> lat, <span class="at">z =</span> depth),</span>
+<span id="cb50-51"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-51" aria-hidden="true" tabindex="-1"></a>                        <span class="at">breaks=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">1000</span>, <span class="sc">-</span><span class="dv">10</span>), <span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="fl">0.25</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>)<span class="sc">+</span></span>
+<span id="cb50-52"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>(<span class="at">data =</span> fi, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">fill =</span> intensity), <span class="at">color =</span> <span class="st">&quot;grey50&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>)<span class="sc">+</span></span>
+<span id="cb50-53"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_quickmap</span>()<span class="sc">+</span></span>
+<span id="cb50-54"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">72.75</span>, <span class="fl">73.75</span>))<span class="sc">+</span></span>
+<span id="cb50-55"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">15.6</span>, <span class="fl">16.6</span>))<span class="sc">+</span></span>
+<span id="cb50-56"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_viridis</span>(<span class="at">name =</span> <span class="st">&quot;Fishing intensity&quot;</span>, <span class="at">option =</span> <span class="st">&quot;B&quot;</span>, </span>
+<span id="cb50-57"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-57" aria-hidden="true" tabindex="-1"></a>                       <span class="at">guide =</span> <span class="fu">guide_colorbar</span>(<span class="at">direction =</span> <span class="st">&quot;horizontal&quot;</span>,<span class="at">barwidth =</span> <span class="dv">10</span>, </span>
+<span id="cb50-58"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-58" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">title.position =</span> <span class="st">&quot;top&quot;</span>, <span class="at">title.hjust =</span> <span class="fl">0.5</span>))<span class="sc">+</span></span>
+<span id="cb50-59"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_alpha_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.8</span>), <span class="at">guide =</span> F)<span class="sc">+</span></span>
+<span id="cb50-60"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)<span class="sc">+</span></span>
+<span id="cb50-61"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.9</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/fp-1.png" width="2400" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="do">## saving high res figure for publication</span></span>
-<span id="cb50-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-2" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb50-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">last_plot</span>(), <span class="at">filename =</span> <span class="st">&quot;./Figures and Tables/figure4.tiff&quot;</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="do">## saving high res figure for publication</span></span>
+<span id="cb51-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb51-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">last_plot</span>(), <span class="at">filename =</span> <span class="st">&quot;./Figures and Tables/figure4.tiff&quot;</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div>
 <p><strong>Figure 4</strong>: Distribution of fishing intensity of trawlers in gillnets operating from Malvan, Maharashtra. Black lines indicate 10m depth contours</p>
 <p>Each fishing trip is assigned to a cell in the sampling grid of <strong>702 cells</strong> with <strong>27 rows</strong> and <strong>26 columns</strong>. Total fishing effort in each grid cell is then calculated to quatify local fishing intensity.</p>
 <p><em>Are points accurately depicted?</em></p>
@@ -1072,16 +1090,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="spatial-coverage-of-trawlers-and-gillnets-along-the-sindhudurg-coast" class="section level2" number="5.7">
 <h2><span class="header-section-number">5.7</span> Spatial coverage of trawlers and gillnets along the Sindhudurg coast</h2>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-1" aria-hidden="true" tabindex="-1"></a>dep_int<span class="sc">%&gt;%</span></span>
-<span id="cb51-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb51-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Caluclating total effort in each grid cell</span></span>
-<span id="cb51-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;effort&quot;</span>, <span class="at">func =</span> <span class="st">&#39;sum&#39;</span>)),</span>
-<span id="cb51-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-5" aria-hidden="true" tabindex="-1"></a>         <span class="do">## Converting raster to data frame</span></span>
-<span id="cb51-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">mdf =</span> <span class="fu">map</span>(m, map.df))<span class="sc">%&gt;%</span></span>
-<span id="cb51-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mdf)<span class="sc">%&gt;%</span></span>
-<span id="cb51-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Caluclating spatial extent of fisheries as number of raster cells * 10 sq. km.</span></span>
-<span id="cb51-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Extent (sq. km.)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map</span>(mdf, <span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>layer<span class="sc">&gt;</span><span class="dv">0</span>)<span class="sc">*</span><span class="dv">10</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb51-10"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb52-1" aria-hidden="true" tabindex="-1"></a>dep_int<span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb52-3"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Caluclating total effort in each grid cell</span></span>
+<span id="cb52-4"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;effort&quot;</span>, <span class="at">func =</span> <span class="st">&#39;sum&#39;</span>)),</span>
+<span id="cb52-5"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb52-5" aria-hidden="true" tabindex="-1"></a>         <span class="do">## Converting raster to data frame</span></span>
+<span id="cb52-6"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb52-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">mdf =</span> <span class="fu">map</span>(m, map.df))<span class="sc">%&gt;%</span></span>
+<span id="cb52-7"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb52-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mdf)<span class="sc">%&gt;%</span></span>
+<span id="cb52-8"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Caluclating spatial extent of fisheries as number of raster cells * 10 sq. km.</span></span>
+<span id="cb52-9"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Extent (sq. km.)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map</span>(mdf, <span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>layer<span class="sc">&gt;</span><span class="dv">0</span>)<span class="sc">*</span><span class="dv">10</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb52-10"><a href="varition-in-fishing-intensity-along-the-sindhudurg-coast.html#cb52-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()</span></code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -1091,7 +1109,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">1250</td>
+<td align="right">1290</td>
 </tr>
 </tbody>
 </table>

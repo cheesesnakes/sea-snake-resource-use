@@ -60,3 +60,13 @@ maximum-likelihood-estimate-of-sea-1
 bayesian-estimate-of-sea-1
 testing-difference-in-species-niche-area-by-fishing-intensity
 visualising-difference-in-niche-width-across-gradiet-of-fishing-intensity
+sampled-svl-distribution
+sampled-sex-ratio
+difference-in-diet-by-sex-within-h.-curtus-and-h.-schsistosus
+prey-preference-1
+range-of-prey-found-in-h.-curtus-and-h.-shistosus-gut-1
+prey-richness-1
+prey-family-diversity-1
+diet-overlap-between-males-and-females
+testing-segregation-in-prey-between-sexes
+difference-in-size-selectivity-of-prey-between-h.-curtus-and-h.-schistosus-1

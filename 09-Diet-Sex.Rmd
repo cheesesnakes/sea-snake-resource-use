@@ -157,7 +157,7 @@ Morista - Horn overlap for *Hydrophis schistosus*:
 ```{r}
 prey_sim_HS <- SimilarityPair(X = fam_spade_sex[,3:4], datatype = "abundance")
 
-prey_sim_HS$Empirical_relative
+as.data.frame(prey_sim_HS$Empirical_relative)
 ```
 
 There was high overlap in prey between males and females in _H. schistosus_.
