@@ -29,7 +29,7 @@ Species interactions are central to community assembly and ecosystem functioning
   rmarkdown::render_site(input = "index.Rmd", encoding = "UTF")
   ```
   
-  The analysis can also be viewed by opening the `index.html` file in the `Results` folder.
+  The analysis can also be viewed by opening the `View Results.html` file in any browser.
   
   </details>
  
