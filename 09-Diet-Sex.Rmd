@@ -1,0 +1,258 @@
+# Difference in diet by sex within *H. curtus* and *H. schsistosus*
+
+```{r}
+source("./Functions/setup.R")
+
+gc = read.csv("./Data/Sea_snakes_gut_content_2018-19.csv")%>%
+  filter(Source == "Gut content") # removing specimens collected from fisheries landings
+```
+
+The number of samples for conducting a sex wise analysis of feeding preference is limited for *H. curtus*.
+
+## Prey Preference
+
+We modified and used the the Index of relative importance according to Pinkas et al. 1971 to determine the difference in prey preference between males and females in _H. curtus_ and _H. schistosus_
+
+```{r}
+# calulating index of relative importance (Pinkas et al. 1971)
+
+IRI_sex <- gc%>%
+  left_join(snakes, by = c("Field.Code"))%>%
+  filter(Prey.Family != "", Sex != "", Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus")%>%
+  group_by(Snake.Species, Sex)%>%
+  mutate(Fr = length(unique(Field.Code)), # total number of snakes sampled
+         W = sum(Weight..g..x, na.rm = T), # total weight of prey sampled
+         N = n())%>% # total number of prey sampled
+  group_by(Snake.Species, Sex, Prey.Family)%>%
+  summarise(f = length(unique(Field.Code)), # number snakes in which prey family occured
+            Fr = last(Fr),
+            w = sum(Weight..g..x, na.rm = T), # weight of prey family
+            W = last(W),
+            n = n(), # number of individuals of prey family
+            N = last(N))%>%
+  group_by(Snake.Species, Sex, Prey.Family)%>%
+  # caluclating percentages
+  summarise(per.F = f*100/Fr,
+            per.W = w*100/W,
+            per.N = n*100/N,
+            # caluclating IRI
+            IRI = (per.N + per.W)*per.F)%>%
+  arrange(Snake.Species, Sex, desc(IRI))%>%
+  mutate(rank = 1:n())
+
+# clean table
+
+IRI_sex
+```
+
+```{r fig.height=8, fig.width=8}
+
+# plotting prey preference
+
+IRI_sex%>%
+  ggplot(aes(Prey.Family, IRI, fill = Sex))+
+  geom_col(col = "black", position = position_dodge(preserve = "single"))+
+  scale_y_sqrt(name = "IRI (sq.rt.)")+
+  labs(x = "Prey Family")+
+  scale_fill_brewer(palette = "Greys", name = "Snake Species")+
+  theme(axis.text.x = element_text(hjust = 1, angle = 60),
+        strip.text = element_text(face = "italic"))+
+  facet_wrap(~Snake.Species, ncol = 1)
+```
+
+
+## Range of prey found in _H. curtus_ and _H. shistosus_ gut
+
+We compared the dietary breadth between snakes species using the richness and diversity of prey families.
+
+```{r}
+
+# Creating data matrix for prey community analysis analysis
+
+fam_spade_sex = gc%>%
+  left_join(snakes, by = c("Field.Code"))%>%
+  filter(Prey.Family != "Unidentified", Prey.Family !="", Field.Code != "", Sex != "")%>% # removing unidentified specimens
+  group_by(Snake.Species, Sex, Prey.Family)%>%
+  summarise(n = n())%>% # total number of specimens per family in each snake species
+  unite("Species_sex", Snake.Species:Sex)%>%
+  spread(Species_sex, n, fill = 0)%>%
+  column_to_rownames("Prey.Family")
+
+
+```
+
+### Prey richness
+
+```{r}
+
+gc%>%
+  left_join(snakes, by = c("Field.Code"))%>%
+  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
+         Prey.Family != "Unidentified", Prey.Family != "", Sex != "")%>%
+  group_by(Snake.Species, Sex)%>%
+  summarise(Prey.Species = length(unique(Prey.Species)) - 1, # removing unidentified
+            Prey.Families = length(unique(Prey.Family)))
+
+```
+
+### Prey family diversity
+
+```{r}
+
+# loading libraries
+
+library(SpadeR) ## for community indices
+
+# calculating shanon diversity
+
+#HC_f_div = as.data.frame(Diversity(fam_spade_sex[,1])$Shannon_diversity)%>%
+ # rownames_to_column("Estimator")%>%
+  #mutate(Species = "Hydrophis curtus",
+    #     Sex = "Female")
+
+#HC_m_div = as.data.frame(Diversity(fam_spade_sex[,2])$Shannon_diversity)%>%
+ # rownames_to_column("Estimator")%>%
+  #mutate(Species = "Hydrophis curtus",
+   #      Sex = "Male")
+
+HS_f_div = as.data.frame(Diversity(fam_spade_sex[,3])$Shannon_diversity)%>%
+  rownames_to_column("Estimator")%>%
+  mutate(Species = "Hydrophis schistosus",
+         Sex = "Female")
+
+HS_m_div = as.data.frame(Diversity(fam_spade_sex[,4])$Shannon_diversity)%>%
+  rownames_to_column("Estimator")%>%
+  mutate(Species = "Hydrophis schistosus",
+         Sex = "Male")
+
+HS_m_div%>%
+  full_join(HS_f_div)%>%
+  dplyr::select(Species, Sex, everything())%>%
+  arrange(Estimator)
+```
+
+While _H. schistosus_ fed on greater number of prey families, _H. curtus_ showed greater evenness in prey preference.
+
+Statistical comparison is difficult as each individual snake fed on only one type of specimen at time.
+
+## Diet overlap between Males and Females
+
+Number of overlapping prey families:
+
+```{r}
+
+gc%>%
+  left_join(snakes, by = "Field.Code")%>%
+  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus",
+         Prey.Family != "Unidentified", Prey.Family != "", Sex != "")%>%
+  group_by(Snake.Species, Prey.Family)%>%
+  summarise(N_pred = length(unique(Sex)))%>%
+  group_by(Snake.Species)%>%
+  summarise(Overlap = sum(N_pred>1))
+
+```
+
+Morista - Horn overlap for *Hydrophis schistosus*:
+
+```{r}
+prey_sim_HS <- SimilarityPair(X = fam_spade_sex[,3:4], datatype = "abundance")
+
+prey_sim_HS$Empirical_relative
+```
+
+There was high overlap in prey between males and females in _H. schistosus_.
+
+Morista - Horn overlap for *Hydrophis schistosus*:
+
+```{r}
+#prey_sim_HC <- SimilarityPair(X = fam_spade_sex[,1:2], datatype = "abundance")
+
+#prey_sim_HC$Empirical_relative
+```
+
+Very low sample size.
+
+### Testing segregation in prey between sexes
+
+```{r}
+# loading libraries
+
+library(vegan)
+
+# formating data for vegan
+
+fam_simboo_sex <- gc%>%
+  left_join(snakes, by = "Field.Code")%>%
+  filter(Prey.Family != "Unidentified", Prey.Family !="", Field.Code != "", Sex != "")%>%
+  group_by(Snake.Species, Sex, Field.Code, Prey.Family)%>%
+  summarise(n = n())%>%
+  spread(Prey.Family, n, fill = 0)%>%
+  ungroup()
+```
+
+*H. curtus*:
+
+```{r}
+# PERMANOVA to compare composition
+
+set.seed(2)
+
+permanova_hc <- adonis2(fam_simboo_sex[1:14,4:length(fam_simboo_sex)] ~ fam_simboo_sex[1:14,]$Sex,
+                     data = fam_simboo_sex[1:14,2])
+## clean table
+
+broom::tidy(permanova_hc)
+```
+
+No difference in prey preference, however, sample sizes are low.
+
+*H. schistosus*:
+
+```{r}
+permanova_hs <- adonis2(fam_simboo_sex[15:69,4:length(fam_simboo_sex)] ~ fam_simboo_sex[15:69,]$Sex,
+                     data = fam_simboo_sex[15:69,2])
+## clean table
+
+broom::tidy(permanova_hc)
+```
+
+No difference in prey preference across species.
+
+## Difference in size selectivity of prey between _H. curtus_ and _H. schistosus_
+
+```{r}
+
+# summary
+
+gc%>%
+  left_join(snakes, by = c("Field.Code"))%>%
+  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus", Sex != "",
+         Condition < 3)%>% # removing very digested specimens 
+  group_by(Snake.Species, Sex)%>%
+  skimr::skim(Maximum.Body.Girth..cm.)%>%
+  skimr::yank("numeric")%>%
+  dplyr::select(Snake.Species:p100)
+
+
+# testing diff max prey width by species
+
+gc%>%
+  left_join(snakes, by = c("Field.Code"))%>%
+  filter(Snake.Species == "Hydrophis schistosus" | Snake.Species == "Hydrophis curtus", Sex != "",
+         Condition < 3, # removing very digested specimens  
+         !is.na(Maximum.Body.Girth..cm.))%>% # removing unrecorded data
+  dplyr::select(Snake.Species, Sex, Maximum.Body.Girth..cm.)%>%
+  droplevels()%>%
+  group_by(Snake.Species)%>%
+  nest()%>%
+  mutate(test = map(data, ~t.test(Maximum.Body.Girth..cm. ~ Sex, data = .)), # t test
+         sumry = map(test, broom::tidy),
+         d = map(data, ~lsr::cohensD(Maximum.Body.Girth..cm. ~ Sex, data = .)))%>% # effect size
+  dplyr::select(sumry, d)%>%
+  unnest()%>%
+  dplyr::select(estimate1:parameter, d)%>%
+  rename(`Females` = estimate1,
+         `Males` = estimate2)
+```
+
+There were no significant differences in prey girth across sexes in both species. However, females did take slightly larger prey in both cases.
