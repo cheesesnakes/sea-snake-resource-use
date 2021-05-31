@@ -8,6 +8,8 @@ This repo contains the R code for analysis and data  for a study on the diet and
 
 The manuscript is currently under the peer review process. The citation will be updated upon publication.
 
+[![DOI](https://zenodo.org/badge/265837034.svg)](https://zenodo.org/badge/latestdoi/265837034)
+
 ## Core Message
 
 1. Diet and habitat use differ among sympatric sea snake species 
