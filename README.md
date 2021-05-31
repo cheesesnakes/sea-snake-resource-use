@@ -1,4 +1,4 @@
-# Changing mesopredator species dynamics in an anthropogenically dominated seascape.
+# Resource use and the impacts of fisheries on two sympatric sea snake species on the West Coast of India.
 
 **Authors:** Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker
 
