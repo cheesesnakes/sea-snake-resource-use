@@ -1,0 +1,86 @@
+# Comparing diet data to previous studies
+
+Using data compiled by Sherratt et al. (2018)
+
+```{r}
+require(tidyverse)
+
+sherratt <- read.csv("Data/Sea snake diet data_Sherratt et al_2018.csv")
+
+gc <- read.csv("Data/Sea_snakes_gut_content_2018-19.csv")
+```
+
+```{r}
+diet <- gc%>%
+  filter(Source == "Gut content",
+         Snake.Species %in% c("Hydrophis schistosus", "Hydrophis curtus"),
+         Prey.Family != "")%>%
+  group_by(Snake.Species, Prey.Family)%>%
+  summarise(Prey.count = length(unique(GC.Code)),
+            Location = "India",
+            References = "Dsouza et al. 2021")%>%
+  ungroup()%>%
+  rename(Snake.binomial = Snake.Species)%>%
+  full_join(sherratt)
+```
+
+
+## Sample size
+
+```{r}
+diet%>%
+  group_by(Snake.binomial)%>%
+  summarise(N = sum(Prey.count),
+            n.studies = length(unique(References)),
+            n.locations = length(unique(Location)))
+```
+
+## Prey family richness by region
+
+```{r}
+diet%>%
+  group_by(Snake.binomial, Location)%>%
+  summarise(Richness = length(unique(Prey.Family)), N = sum(Prey.count))
+```
+
+## Prey Preference by location
+
+```{r cache=FALSE}
+prey_loc <- diet%>%
+  dplyr::select(Snake.binomial, Location, Prey.Family, Prey.count)%>%
+  group_by(Snake.binomial, Location)%>%
+  mutate(Total.Prey.Count = sum(Prey.count))%>%
+  group_by(Snake.binomial, Location, Prey.Family)%>%
+  summarise(prop = sum(Prey.count)/Total.Prey.Count)%>%
+  distinct(Prey.Family, .keep_all = T)%>%
+  mutate(Prey.Family = ifelse(Prey.Family %in% c("Infraclass Teleost", "Unidentified"), "Unidentified Teleost", Prey.Family))
+
+```
+
+### *H. curtus* 
+
+```{r fig.height = 13.5, cache=FALSE}
+prey_loc%>%
+  filter(Snake.binomial == "Hydrophis curtus")%>%
+  ggplot(aes(reorder(Prey.Family, -prop), prop))+
+  geom_col(col = "black", width = 0.5)+
+  labs(x = "Prey Family", y = "Proportion")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, face = "italic"))+
+  facet_wrap(~Location, scales = "free_y", ncol = 1)
+
+ggsave(last_plot(), filename = "./Figures and Tables/figD1.png", height = 13.5, width = 16)
+```
+
+### _H. schistosus_
+
+```{r fig.height=9, cache=FALSE}
+prey_loc%>%
+  filter(Snake.binomial == "Hydrophis schistosus")%>%
+  ggplot(aes(reorder(Prey.Family, -prop), prop))+
+  geom_col(col = "black", width = 0.5)+
+  labs(x = "Prey Family", y = "Proportion")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, face = "italic"))+
+  facet_wrap(~Location, scales = "free_y", ncol = 1)
+
+ggsave(last_plot(), filename = "./Figures and Tables/figD2.png", height = 9, width = 16)
+```

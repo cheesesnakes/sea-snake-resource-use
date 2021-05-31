@@ -4,9 +4,16 @@
 ## No. of samples collected by sea snake species
 
 ```{r}
-
 source("./Functions/setup.R")
 
+# importing gut content data
+
+gc = read.csv("./Data/Sea_snakes_gut_content_2018-19.csv")%>%
+  filter(Source == "Gut content") # removing specimens collected from fisheries landings
+```
+
+
+```{r}
 snakes%>%
   filter(Species == "Hydrophis curtus" | Species == "Hydrophis schistosus")%>%
   group_by(Species)%>%
@@ -20,14 +27,18 @@ snakes%>%
 
 A very low proportion of individuals had gut content present at the time of sampling. Sampling across species and sexes may be adequate for comparison.
 
+## Total number of prey specimens collected
+
+```{r}
+gc%>%
+  group_by(Snake.Species)%>%
+  summarise(N = length(unique(GC.Code)))
+```
+
+
 ## Proportion of unidentified specimens
 
 ```{r}
-
-# importing gut content data
-
-gc = read.csv("./Data/Sea_snakes_gut_content_2018-19.csv")%>%
-  filter(Source == "Gut content") # removing specimens collected from fisheries landings
 
 # calculating richness
 
@@ -39,7 +50,7 @@ gc%>%
             unid_fam = sum(Prey.Family == "Unidentified" | Prey.Family == "", na.rm = T)*100/n())%>% ## family
   # creating clean table
   gather()%>%
-  mutate(Metric = ifelse(substr(key, 1, 1) == "N", "N", "% Unidentified"),
+  mutate(Metric = ifelse(substr(key, 1, 1) == "N", "Richness", "% Unidentified"),
          Unit = ifelse(grepl(key, pattern = "sp", fixed = T), "Prey Species", "Prey Family"))%>%
   dplyr::select(Unit, Metric, value)%>%
   spread(Metric, value)
@@ -85,12 +96,16 @@ IRI <- gc%>%
             per.N = n*100/N,
             # caluclating IRI
             IRI = (per.N + per.W)*per.F)%>%
+  ungroup()%>%
+  complete(Prey.Family, nesting(Snake.Species), fill = list(0))%>%
+  replace_na(replace = list(IRI = 0, per.F = 0, per.W = 0, per.N = 0))%>%
   arrange(Snake.Species, desc(IRI))%>%
   mutate(rank = 1:n())
 
 # clean table
 
-IRI
+IRI%>%
+  filter(IRI > 0)
 
 ```
 
@@ -99,7 +114,7 @@ IRI
 # plotting prey preference
 
 IRI%>%
-  ggplot(aes(Prey.Family, IRI, fill = Snake.Species))+
+  ggplot(aes(reorder(Prey.Family, IRI), IRI, fill = Snake.Species))+
   geom_col(col = "black", position = position_dodge(preserve = "single"))+
   scale_y_sqrt(name = "IRI (sq.rt.)")+
   labs(x = "Prey Family")+

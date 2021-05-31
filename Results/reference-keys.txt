@@ -12,7 +12,9 @@ spatial-segregation-by-species
 modelling-depth-use-by-species
 difference-in-diet-between-h.-curtus-and-h.-schsitosus
 no.-of-samples-collected-by-sea-snake-species
+total-number-of-prey-specimens-collected
 proportion-of-unidentified-specimens
+no.-of-snakes-with-mode-than-one-prey-specimen
 prey-preference
 range-of-prey-found-in-h.-curtus-and-h.-shistosus-gut
 prey-richness
@@ -71,3 +73,9 @@ prey-family-diversity-1
 diet-overlap-between-males-and-females
 testing-segregation-in-prey-between-sexes
 difference-in-size-selectivity-of-prey-between-h.-curtus-and-h.-schistosus-1
+comparing-diet-data-to-previous-studies
+sample-size-2
+prey-family-richness-by-region
+prey-preference-by-location
+h.-curtus
+h.-schistosus

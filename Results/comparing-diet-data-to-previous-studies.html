@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape</title>
-  <meta name="description" content="Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
+  <title>11 Comparing diet data to previous studies | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape</title>
+  <meta name="description" content="11 Comparing diet data to previous studies | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
+  <meta property="og:title" content="11 Comparing diet data to previous studies | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
+  <meta name="twitter:title" content="11 Comparing diet data to previous studies | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html"/>
 
-<link rel="next" href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -866,29 +866,208 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape</h1>
-<p class="author"><em>Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-05-31</em></p>
+<div id="comparing-diet-data-to-previous-studies" class="section level1" number="11">
+<h1><span class="header-section-number">11</span> Comparing diet data to previous studies</h1>
+<p>Using data compiled by Sherratt et al. (2018)</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="comparing-diet-data-to-previous-studies.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(tidyverse)</span>
+<span id="cb100-2"><a href="comparing-diet-data-to-previous-studies.html#cb100-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-3"><a href="comparing-diet-data-to-previous-studies.html#cb100-3" aria-hidden="true" tabindex="-1"></a>sherratt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Sea snake diet data_Sherratt et al_2018.csv&quot;</span>)</span>
+<span id="cb100-4"><a href="comparing-diet-data-to-previous-studies.html#cb100-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-5"><a href="comparing-diet-data-to-previous-studies.html#cb100-5" aria-hidden="true" tabindex="-1"></a>gc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Sea_snakes_gut_content_2018-19.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="comparing-diet-data-to-previous-studies.html#cb101-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> gc <span class="sc">%&gt;%</span></span>
+<span id="cb101-2"><a href="comparing-diet-data-to-previous-studies.html#cb101-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Source <span class="sc">==</span> <span class="st">&quot;Gut content&quot;</span>, Snake.Species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Hydrophis schistosus&quot;</span>, </span>
+<span id="cb101-3"><a href="comparing-diet-data-to-previous-studies.html#cb101-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Hydrophis curtus&quot;</span>), Prey.Family <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb101-4"><a href="comparing-diet-data-to-previous-studies.html#cb101-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Snake.Species, Prey.Family) <span class="sc">%&gt;%</span></span>
+<span id="cb101-5"><a href="comparing-diet-data-to-previous-studies.html#cb101-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Prey.count =</span> <span class="fu">length</span>(<span class="fu">unique</span>(GC.Code)), <span class="at">Location =</span> <span class="st">&quot;India&quot;</span>, <span class="at">References =</span> <span class="st">&quot;Dsouza et al. 2021&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb101-6"><a href="comparing-diet-data-to-previous-studies.html#cb101-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb101-7"><a href="comparing-diet-data-to-previous-studies.html#cb101-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">Snake.binomial =</span> Snake.Species) <span class="sc">%&gt;%</span></span>
+<span id="cb101-8"><a href="comparing-diet-data-to-previous-studies.html#cb101-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">full_join</span>(sherratt)</span></code></pre></div>
+<div id="sample-size-2" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Sample size</h2>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="comparing-diet-data-to-previous-studies.html#cb102-1" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
+<span id="cb102-2"><a href="comparing-diet-data-to-previous-studies.html#cb102-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Snake.binomial) <span class="sc">%&gt;%</span></span>
+<span id="cb102-3"><a href="comparing-diet-data-to-previous-studies.html#cb102-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">N =</span> <span class="fu">sum</span>(Prey.count), <span class="at">n.studies =</span> <span class="fu">length</span>(<span class="fu">unique</span>(References)), <span class="at">n.locations =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Location)))</span></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Snake.binomial
+</th>
+<th style="text-align:right;">
+N
+</th>
+<th style="text-align:right;">
+n.studies
+</th>
+<th style="text-align:right;">
+n.locations
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:right;">
+280
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:right;">
+260
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="introduction" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>This file contains the code for analysis in R for a study about resources use in sea snakes on the west coast of India.</p>
-<p>The core message of this manuscripts are as follows:</p>
-<ul>
-<li>Resource use differs between <em>H. curtus</em> and <em>H. schistosus</em></li>
-<li>Variation in fishing intensity of trawlers and gillnets affects patterns of resource use</li>
-</ul>
-<p>We used a combination of approaches including:</p>
-<ol style="list-style-type: lower-alpha">
-<li><p>fisheries dependent methods to characterise distribution and habitat use of the two species, and spatial overlap with fishing;</p></li>
-<li><p>visual gut content analysis to characterise diet and trophic niche of the species, and overlap between fisheries catch and sea snake diet;</p></li>
-<li><p>stable isotope analysis to characterise overall resource use in terms of isotopic niche, as well as the effect of fishing intensity on the niche width of both species.</p></li>
-</ol>
-<div id="citation" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Citation</h2>
-<p><span style="color: red;"> <strong>Add link/citation</strong> </span></p>
+</div>
+<div id="prey-family-richness-by-region" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> Prey family richness by region</h2>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="comparing-diet-data-to-previous-studies.html#cb103-1" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
+<span id="cb103-2"><a href="comparing-diet-data-to-previous-studies.html#cb103-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Snake.binomial, Location) <span class="sc">%&gt;%</span></span>
+<span id="cb103-3"><a href="comparing-diet-data-to-previous-studies.html#cb103-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Richness =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Prey.Family)), <span class="at">N =</span> <span class="fu">sum</span>(Prey.count))</span></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Snake.binomial
+</th>
+<th style="text-align:left;">
+Location
+</th>
+<th style="text-align:right;">
+Richness
+</th>
+<th style="text-align:right;">
+N
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:left;">
+Australia
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+118
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:left;">
+India
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:left;">
+Malaysia
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+130
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+India
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+88
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Malaysia
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+172
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="prey-preference-by-location" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> Prey Preference by location</h2>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="comparing-diet-data-to-previous-studies.html#cb104-1" aria-hidden="true" tabindex="-1"></a>prey_loc <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb104-2"><a href="comparing-diet-data-to-previous-studies.html#cb104-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Snake.binomial, Location, Prey.Family, Prey.count) <span class="sc">%&gt;%</span></span>
+<span id="cb104-3"><a href="comparing-diet-data-to-previous-studies.html#cb104-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Snake.binomial, Location) <span class="sc">%&gt;%</span></span>
+<span id="cb104-4"><a href="comparing-diet-data-to-previous-studies.html#cb104-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Total.Prey.Count =</span> <span class="fu">sum</span>(Prey.count)) <span class="sc">%&gt;%</span></span>
+<span id="cb104-5"><a href="comparing-diet-data-to-previous-studies.html#cb104-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Snake.binomial, Location, Prey.Family) <span class="sc">%&gt;%</span></span>
+<span id="cb104-6"><a href="comparing-diet-data-to-previous-studies.html#cb104-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">sum</span>(Prey.count)<span class="sc">/</span>Total.Prey.Count) <span class="sc">%&gt;%</span></span>
+<span id="cb104-7"><a href="comparing-diet-data-to-previous-studies.html#cb104-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>(Prey.Family, <span class="at">.keep_all =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb104-8"><a href="comparing-diet-data-to-previous-studies.html#cb104-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Prey.Family =</span> <span class="fu">ifelse</span>(Prey.Family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Infraclass Teleost&quot;</span>, <span class="st">&quot;Unidentified&quot;</span>), </span>
+<span id="cb104-9"><a href="comparing-diet-data-to-previous-studies.html#cb104-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Unidentified Teleost&quot;</span>, Prey.Family))</span></code></pre></div>
+<div id="h.-curtus" class="section level3" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> <em>H. curtus</em></h3>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="comparing-diet-data-to-previous-studies.html#cb105-1" aria-hidden="true" tabindex="-1"></a>prey_loc <span class="sc">%&gt;%</span></span>
+<span id="cb105-2"><a href="comparing-diet-data-to-previous-studies.html#cb105-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Snake.binomial <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb105-3"><a href="comparing-diet-data-to-previous-studies.html#cb105-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(Prey.Family, <span class="sc">-</span>prop), prop)) <span class="sc">+</span> <span class="fu">geom_col</span>(<span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb105-4"><a href="comparing-diet-data-to-previous-studies.html#cb105-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Prey Family&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Proportion&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb105-5"><a href="comparing-diet-data-to-previous-studies.html#cb105-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">face =</span> <span class="st">&quot;italic&quot;</span>)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Location, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-87-1.png" width="2400" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="comparing-diet-data-to-previous-studies.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">last_plot</span>(), <span class="at">filename =</span> <span class="st">&quot;./Figures and Tables/figD1.png&quot;</span>, <span class="at">height =</span> <span class="fl">13.5</span>, <span class="at">width =</span> <span class="dv">16</span>)</span></code></pre></div>
+</div>
+<div id="h.-schistosus" class="section level3" number="11.3.2">
+<h3><span class="header-section-number">11.3.2</span> <em>H. schistosus</em></h3>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="comparing-diet-data-to-previous-studies.html#cb107-1" aria-hidden="true" tabindex="-1"></a>prey_loc <span class="sc">%&gt;%</span></span>
+<span id="cb107-2"><a href="comparing-diet-data-to-previous-studies.html#cb107-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Snake.binomial <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb107-3"><a href="comparing-diet-data-to-previous-studies.html#cb107-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(Prey.Family, <span class="sc">-</span>prop), prop)) <span class="sc">+</span> <span class="fu">geom_col</span>(<span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb107-4"><a href="comparing-diet-data-to-previous-studies.html#cb107-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Prey Family&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Proportion&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb107-5"><a href="comparing-diet-data-to-previous-studies.html#cb107-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">face =</span> <span class="st">&quot;italic&quot;</span>)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Location, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-88-1.png" width="2400" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="comparing-diet-data-to-previous-studies.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">last_plot</span>(), <span class="at">filename =</span> <span class="st">&quot;./Figures and Tables/figD2.png&quot;</span>, <span class="at">height =</span> <span class="dv">9</span>, <span class="at">width =</span> <span class="dv">16</span>)</span></code></pre></div>
 
+</div>
 </div>
 </div>
             </section>
@@ -896,8 +1075,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
+<a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
