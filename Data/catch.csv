@@ -1,0 +1,1398 @@
+"Gear.Type","Sample","Family","Weight.g","Class","Haul.time","No.hauls"
+"Gill Net","deb74eeb","Clupeidae",664,"Target Catch",90,1
+"Gill Net","deb74eeb","Lactariidae",56,"Bycatch",90,1
+"Gill Net","deb74eeb","Scombridae",45,"Bycatch",90,1
+"Gill Net","deb74eeb","NA",347,"Bycatch",90,1
+"Gill Net","47be1f51","Clupeidae",541,"Target Catch",20,1
+"Gill Net","47be1f51","Leiognathidae",20,"Bycatch",20,1
+"Gill Net","47be1f51","Scombridae",56,"Bycatch",20,1
+"Gill Net","47be1f51","Sphyraenidae",92,"Bycatch",20,1
+"Gill Net","47be1f51","NA",183,"Bycatch",20,1
+"Gill Net","30b92fc7","Clupeidae",663,"Target Catch",30,1
+"Gill Net","30b92fc7","Scombridae",84,"Bycatch",30,1
+"Gill Net","30b92fc7","Sphyraenidae",180,"Bycatch",30,1
+"Gill Net","30b92fc7","Synodontidae",54,"Bycatch",30,1
+"Gill Net","30b92fc7","Terapontidae",52,"Discard",30,1
+"Gill Net","30b92fc7","Tetraodontidae",70,"Discard",30,1
+"Gill Net","30b92fc7","NA",198,"Bycatch",30,1
+"Gill Net","aeddba64","Carangidae",63,"Bycatch",30,1
+"Gill Net","aeddba64","Clupeidae",688,"Target Catch",30,1
+"Gill Net","aeddba64","Portunidae",82,"Discard",30,1
+"Gill Net","aeddba64","Scombridae",168,"Bycatch",30,1
+"Gill Net","aeddba64","Sphyraenidae",52,"Discard",30,1
+"Gill Net","aeddba64","Synodontidae",86,"Bycatch",30,1
+"Gill Net","aeddba64","Terapontidae",30,"Discard",30,1
+"Gill Net","aeddba64","NA",286,"Bycatch",30,1
+"Gill Net","d9da8af2","Clupeidae",640,"Target Catch",30,1
+"Gill Net","d9da8af2","Engraulidae",199,"Discard",30,1
+"Gill Net","d9da8af2","Scombridae",58,"Bycatch",30,1
+"Gill Net","d9da8af2","Tetraodontidae",10,"Discard",30,1
+"Gill Net","d9da8af2","NA",400,"Discard",30,1
+"Gill Net","40d3db48","Carangidae",18,"Bycatch",20,1
+"Gill Net","40d3db48","Clupeidae",972,"Target Catch",20,1
+"Gill Net","40d3db48","Engraulidae",0,"Bycatch",20,1
+"Gill Net","40d3db48","Portunidae",75,"Bycatch",20,1
+"Gill Net","40d3db48","Scombridae",216,"Bycatch",20,1
+"Gill Net","40d3db48","NA",1392,"Bycatch",20,1
+"Gill Net","37d4ebde","Clupeidae",1670,"Target Catch",45,1
+"Gill Net","37d4ebde","Engraulidae",42,"Discard",45,1
+"Gill Net","37d4ebde","Leiognathidae",22,"Discard",45,1
+"Gill Net","37d4ebde","Scombridae",209,"Bycatch",45,1
+"Gill Net","37d4ebde","Serranidae",216,"Discard",45,1
+"Gill Net","37d4ebde","Sphyraenidae",0,"Bycatch",45,1
+"Gill Net","37d4ebde","NA",487,"Bycatch",45,1
+"Gill Net","a76bf64f","Carangidae",133,"Bycatch",120,1
+"Gill Net","a76bf64f","Clupeidae",175,"Target Catch",120,1
+"Gill Net","a76bf64f","Scombridae",112,"Bycatch",120,1
+"Gill Net","a76bf64f","Sphyraenidae",118,"Bycatch",120,1
+"Gill Net","a76bf64f","NA",148,"Bycatch",120,1
+"Gill Net","d06cc6d9","Clupeidae",272,"Target Catch",45,1
+"Gill Net","d06cc6d9","Scombridae",0,"Bycatch",45,1
+"Gill Net","d06cc6d9","Tetraodontidae",0,"Bycatch",45,1
+"Gill Net","d06cc6d9","NA",277,"Bycatch",45,1
+"Gill Net","b0ab4f3c","Clupeidae",167,"Target Catch",30,1
+"Gill Net","b0ab4f3c","Engraulidae",37,"Bycatch",30,1
+"Gill Net","b0ab4f3c","Scombridae",407,"Bycatch",30,1
+"Gill Net","b0ab4f3c","Sphyraenidae",99,"Bycatch",30,1
+"Gill Net","b0ab4f3c","NA",459,"Bycatch",30,1
+"Gill Net","c7ac7faa","Clupeidae",290,"Bycatch","NA",1
+"Gill Net","c7ac7faa","Scombridae",89,"Bycatch","NA",1
+"Gill Net","c7ac7faa","Tetraodontidae",21,"Discard","NA",1
+"Gill Net","c7ac7faa","NA",71,"Bycatch","NA",1
+"Gill Net","5ea52e10","Clupeidae",1052,"Target Catch",15,1
+"Gill Net","5ea52e10","NA",320,"Bycatch",15,1
+"Gill Net","29a21e86","Carangidae",57,"Bycatch",75,1
+"Gill Net","29a21e86","Clupeidae",428,"Target Catch",75,1
+"Gill Net","29a21e86","Lactariidae",263,"Target Catch",75,1
+"Gill Net","29a21e86","Leiognathidae",92,"Bycatch",75,1
+"Gill Net","29a21e86","Scombridae",94,"Target Catch",75,1
+"Gill Net","29a21e86","Terapontidae",130,"Discard",75,1
+"Gill Net","29a21e86","Tetraodontidae",99,"Discard",75,1
+"Gill Net","29a21e86","NA",319,"Discard",75,1
+"Gill Net","b7c68b25","Carangidae",184,"Bycatch",145,1
+"Gill Net","b7c68b25","Clupeidae",819,"Target Catch",145,1
+"Gill Net","b7c68b25","Engraulidae",38,"Bycatch",145,1
+"Gill Net","b7c68b25","Lactariidae",141,"Target Catch",145,1
+"Gill Net","b7c68b25","Leiognathidae",63,"Discard",145,1
+"Gill Net","b7c68b25","Serranidae",55,"Discard",145,1
+"Gill Net","b7c68b25","Synodontidae",120,"Bycatch",145,1
+"Gill Net","b7c68b25","Terapontidae",129,"Bycatch",145,1
+"Gill Net","b7c68b25","Tetraodontidae",125,"Discard",145,1
+"Gill Net","b7c68b25","NA",402,"Bycatch",145,1
+"Gill Net","c0c1bbb3","Clupeidae",345,"Target Catch",30,1
+"Gill Net","c0c1bbb3","Lactariidae",440,"Target Catch",30,1
+"Gill Net","c0c1bbb3","Leiognathidae",97,"Discard",30,1
+"Gill Net","c0c1bbb3","Scombridae",1194,"Target Catch",30,1
+"Gill Net","c0c1bbb3","Serranidae",72,"Discard",30,1
+"Gill Net","c0c1bbb3","Synodontidae",126,"Bycatch",30,1
+"Gill Net","c0c1bbb3","Terapontidae",64,"Bycatch",30,1
+"Gill Net","c0c1bbb3","Tetraodontidae",92,"Discard",30,1
+"Gill Net","c0c1bbb3","NA",5032,"Discard",30,1
+"Gill Net","59c8ea09","Carangidae",311,"Bycatch",30,1
+"Gill Net","59c8ea09","Clupeidae",755,"Target Catch",30,1
+"Gill Net","59c8ea09","Engraulidae",91,"Bycatch",30,1
+"Gill Net","59c8ea09","Lactariidae",862,"Target Catch",30,1
+"Gill Net","59c8ea09","Synodontidae",40,"Bycatch",30,1
+"Gill Net","59c8ea09","Terapontidae",83,"Bycatch",30,1
+"Gill Net","59c8ea09","NA",981,"Discard",30,1
+"Gill Net","2ecfda9f","Carangidae",80,"Bycatch",30,1
+"Gill Net","2ecfda9f","Clupeidae",940,"Target Catch",30,1
+"Gill Net","2ecfda9f","Leiognathidae",378,"Discard",30,1
+"Gill Net","2ecfda9f","Synanceiidae",61,"Discard",30,1
+"Gill Net","2ecfda9f","Synodontidae",42,"Bycatch",30,1
+"Gill Net","2ecfda9f","NA",179,"Discard",30,1
+"Gill Net","be70c70e","Engraulidae",85,"Bycatch",30,1
+"Gill Net","be70c70e","Lactariidae",197,"Target Catch",30,1
+"Gill Net","be70c70e","Portunidae",121,"Bycatch",30,1
+"Gill Net","be70c70e","Scombridae",415,"Target Catch",30,1
+"Gill Net","be70c70e","Synanceiidae",18,"Discard",30,1
+"Gill Net","be70c70e","Tetraodontidae",199,"Discard",30,1
+"Gill Net","be70c70e","NA",1497,"Target Catch",30,1
+"Gill Net","c977f798","Carangidae",67,"Target Catch",60,1
+"Gill Net","c977f798","Clupeidae",820,"Target Catch",60,1
+"Gill Net","c977f798","Engraulidae",34,"Bycatch",60,1
+"Gill Net","c977f798","Lactariidae",146,"Target Catch",60,1
+"Gill Net","c977f798","Leiognathidae",112,"Discard",60,1
+"Gill Net","c977f798","Scombridae",244,"Target Catch",60,1
+"Gill Net","c977f798","Serranidae",188,"Discard",60,1
+"Gill Net","c977f798","Sphyraenidae",184,"Bycatch",60,1
+"Gill Net","c977f798","Synodontidae",149,"Bycatch",60,1
+"Gill Net","c977f798","Terapontidae",57,"Bycatch",60,1
+"Gill Net","c977f798","NA",1082,"Bycatch",60,1
+"Gill Net","9b861cff","Clupeidae",125,"Bycatch",60,1
+"Gill Net","9b861cff","Portunidae",348,"Bycatch",60,1
+"Gill Net","9b861cff","Scombridae",607,"Target Catch",60,1
+"Gill Net","9b861cff","Synodontidae",197,"Bycatch",60,1
+"Gill Net","9b861cff","Tetraodontidae",53,"Bycatch",60,1
+"Gill Net","9b861cff","NA",211,"Bycatch",60,1
+"Gill Net","ec812c69","Clupeidae",411,"Target Catch",90,1
+"Gill Net","ec812c69","Engraulidae",53,"Bycatch",90,1
+"Gill Net","ec812c69","Lactariidae",410,"Target Catch",90,1
+"Gill Net","ec812c69","Leiognathidae",41,"Discard",90,1
+"Gill Net","ec812c69","Polynemidae",44,"Bycatch",90,1
+"Gill Net","ec812c69","Scombridae",552,"Target Catch",90,1
+"Gill Net","ec812c69","Synodontidae",71,"Bycatch",90,1
+"Gill Net","ec812c69","NA",1113,"Bycatch",90,1
+"Gill Net","75887dd3","Clupeidae",673,"Target Catch",60,1
+"Gill Net","75887dd3","Lactariidae",964,"Target Catch",60,1
+"Gill Net","75887dd3","Leiognathidae",28,"Discard",60,1
+"Gill Net","75887dd3","Polynemidae",48,"Bycatch",60,1
+"Gill Net","75887dd3","Scombridae",890,"Target Catch",60,1
+"Gill Net","75887dd3","Serranidae",91,"Bycatch",60,1
+"Gill Net","75887dd3","Synanceiidae",83,"Discard",60,1
+"Gill Net","75887dd3","Synodontidae",111,"Bycatch",60,1
+"Gill Net","75887dd3","NA",1761,"Bycatch",60,1
+"Gill Net","028f4d45","Carangidae",561,"Bycatch",60,1
+"Gill Net","028f4d45","Clupeidae",788,"Target Catch",60,1
+"Gill Net","028f4d45","Lactariidae",660,"Target Catch",60,1
+"Gill Net","028f4d45","Leiognathidae",79,"Discard",60,1
+"Gill Net","028f4d45","Portunidae",223,"Bycatch",60,1
+"Gill Net","028f4d45","Scombridae",764,"Target Catch",60,1
+"Gill Net","028f4d45","Synodontidae",159,"Bycatch",60,1
+"Gill Net","028f4d45","Terapontidae",563,"Discard",60,1
+"Gill Net","028f4d45","NA",2659,"Bycatch",60,1
+"Gill Net","9cebd8e6","Clupeidae",298,"Target Catch",30,1
+"Gill Net","9cebd8e6","Engraulidae",26,"Bycatch",30,1
+"Gill Net","9cebd8e6","Leiognathidae",67,"Discard",30,1
+"Gill Net","9cebd8e6","Scombridae",483,"Target Catch",30,1
+"Gill Net","9cebd8e6","NA",2268,"Bycatch",30,1
+"Gill Net","ebece870","Carangidae",70,"Bycatch",45,1
+"Gill Net","ebece870","Clupeidae",507,"Bycatch",45,1
+"Gill Net","ebece870","Engraulidae",70,"Bycatch",45,1
+"Gill Net","ebece870","Lactariidae",420,"Target Catch",45,1
+"Gill Net","ebece870","Leiognathidae",32,"Discard",45,1
+"Gill Net","ebece870","Portunidae",89,"Bycatch",45,1
+"Gill Net","ebece870","Scombridae",780,"Target Catch",45,1
+"Gill Net","ebece870","Synanceiidae",45,"Discard",45,1
+"Gill Net","ebece870","NA",1622,"Bycatch",45,1
+"Gill Net","72e5b9ca","Carangidae",343,"Bycatch",30,1
+"Gill Net","72e5b9ca","Clupeidae",1144,"Bycatch",30,1
+"Gill Net","72e5b9ca","Engraulidae",105,"Bycatch",30,1
+"Gill Net","72e5b9ca","Lactariidae",289,"Target Catch",30,1
+"Gill Net","72e5b9ca","Scombridae",510,"Target Catch",30,1
+"Gill Net","72e5b9ca","Serranidae",75,"Discard",30,1
+"Gill Net","72e5b9ca","Terapontidae",55,"Discard",30,1
+"Gill Net","72e5b9ca","NA",1024,"Target Catch",30,1
+"Gill Net","05e2895c","Clupeidae",873,"Target Catch",60,1
+"Gill Net","05e2895c","Engraulidae",140,"Bycatch",60,1
+"Gill Net","05e2895c","Lactariidae",283,"Target Catch",60,1
+"Gill Net","05e2895c","Leiognathidae",9,"Discard",60,1
+"Gill Net","05e2895c","Paralichthyidae",70,"Bycatch",60,1
+"Gill Net","05e2895c","Scombridae",824,"Target Catch",60,1
+"Gill Net","05e2895c","Synanceiidae",67,"Discard",60,1
+"Gill Net","05e2895c","Synodontidae",135,"Bycatch",60,1
+"Gill Net","05e2895c","NA",1462,"Bycatch",60,1
+"Gill Net","955d94cd","Clupeidae",150,"Target Catch",60,1
+"Gill Net","955d94cd","Engraulidae",150,"Bycatch",60,1
+"Gill Net","955d94cd","Lactariidae",198,"Target Catch",60,1
+"Gill Net","955d94cd","Leiognathidae",25,"Discard",60,1
+"Gill Net","955d94cd","Portunidae",295,"Bycatch",60,1
+"Gill Net","955d94cd","Serranidae",48,"Bycatch",60,1
+"Gill Net","955d94cd","Synodontidae",80,"Bycatch",60,1
+"Gill Net","955d94cd","NA",1064,"Bycatch",60,1
+"Gill Net","e25aa45b","Carangidae",248,"Bycatch",120,1
+"Gill Net","e25aa45b","Portunidae",412,"Bycatch",120,1
+"Gill Net","e25aa45b","Scombridae",1901,"Target Catch",120,1
+"Gill Net","e25aa45b","Serranidae",170,"Discard",120,1
+"Gill Net","e25aa45b","Tetraodontidae",64,"Discard",120,1
+"Gill Net","e25aa45b","NA",217,"Bycatch",120,1
+"Gill Net","829d2dbe","Carangidae",34,"Bycatch",60,1
+"Gill Net","829d2dbe","Clupeidae",49,"Target Catch",60,1
+"Gill Net","829d2dbe","Leiognathidae",33,"Discard",60,1
+"Gill Net","829d2dbe","Scombridae",1231,"Target Catch",60,1
+"Gill Net","829d2dbe","NA",246,"Bycatch",60,1
+"Gill Net","f59a1d28","Carangidae",176,"Bycatch",60,1
+"Gill Net","f59a1d28","Clupeidae",65,"Bycatch",60,1
+"Gill Net","f59a1d28","Engraulidae",30,"Bycatch",60,1
+"Gill Net","f59a1d28","Lactariidae",61,"Target Catch",60,1
+"Gill Net","f59a1d28","Scombridae",508,"Target Catch",60,1
+"Gill Net","f59a1d28","Synodontidae",89,"Bycatch",60,1
+"Gill Net","f59a1d28","NA",306,"Bycatch",60,1
+"Gill Net","6c934c92","Clupeidae",1577,"Bycatch",15,1
+"Gill Net","6c934c92","Lactariidae",30,"Target Catch",15,1
+"Gill Net","6c934c92","Leiognathidae",16,"Discard",15,1
+"Gill Net","6c934c92","NA",27,"Discard",15,1
+"Gill Net","1b947c04","Clupeidae",979,"Target Catch",60,1
+"Gill Net","1b947c04","Lactariidae",156,"Bycatch",60,1
+"Gill Net","1b947c04","Leiognathidae",45,"Discard",60,1
+"Gill Net","1b947c04","Scombridae",554,"Bycatch",60,1
+"Gill Net","1b947c04","NA",38,"Bycatch",60,1
+"Gill Net","85f0e9a7","Carangidae",35,"Bycatch",20,1
+"Gill Net","85f0e9a7","Clupeidae",607,"Target Catch",20,1
+"Gill Net","85f0e9a7","Engraulidae",99,"Bycatch",20,1
+"Gill Net","85f0e9a7","Leiognathidae",98,"Bycatch",20,1
+"Gill Net","85f0e9a7","Scombridae",106,"Bycatch",20,1
+"Gill Net","85f0e9a7","Sphyraenidae",141,"Bycatch",20,1
+"Gill Net","85f0e9a7","NA",64,"Bycatch",20,1
+"Gill Net","f2f7d931","Carangidae",81,"Bycatch",30,1
+"Gill Net","f2f7d931","Clupeidae",1856,"Target Catch",30,1
+"Gill Net","f2f7d931","Scombridae",67,"Bycatch",30,1
+"Gill Net","f2f7d931","NA",54,"Bycatch",30,1
+"Gill Net","6bfe888b","Clupeidae",313,"Bycatch",240,1
+"Gill Net","6bfe888b","Lactariidae",155,"Bycatch",240,1
+"Gill Net","6bfe888b","Leiognathidae",22,"Discard",240,1
+"Gill Net","6bfe888b","Scombridae",193,"Bycatch",240,1
+"Gill Net","6bfe888b","Sphyraenidae",180,"Bycatch",240,1
+"Gill Net","6bfe888b","NA",37,"Bycatch",240,1
+"Gill Net","1cf9b81d","Clupeidae",44,"Bycatch",30,1
+"Gill Net","1cf9b81d","Leiognathidae",987,"Target Catch",30,1
+"Gill Net","1cf9b81d","NA",106,"Target Catch",30,1
+"Gill Net","8c46a58c","Clupeidae",2046,"Target Catch",120,1
+"Gill Net","8c46a58c","Lactariidae",30,"Bycatch",120,1
+"Gill Net","8c46a58c","Scombridae",109,"Bycatch",120,1
+"Gill Net","8c46a58c","NA",134,"Bycatch",120,1
+"Trawler","42642165","Ariidae",305,"Trash","NA","NA"
+"Trawler","42642165","Engraulidae",70,"Trash","NA","NA"
+"Trawler","42642165","Leiognathidae",515,"Trash","NA","NA"
+"Trawler","42642165","Muraenesocidae",190,"Trash","NA","NA"
+"Trawler","42642165","Platycephalidae",110,"Trash","NA","NA"
+"Trawler","42642165","Sciaenidae",85,"Trash","NA","NA"
+"Trawler","42642165","Serranidae",245,"Trash","NA","NA"
+"Trawler","42642165","Terapontidae",200,"Trash","NA","NA"
+"Trawler","d8e9a4b1","Clupeidae",85,"Trash","NA","NA"
+"Trawler","d8e9a4b1","Engraulidae",70,"Trash","NA","NA"
+"Trawler","d8e9a4b1","Leiognathidae",280,"Trash","NA","NA"
+"Trawler","d8e9a4b1","Mugilidae",70,"Trash","NA","NA"
+"Trawler","d8e9a4b1","Platycephalidae",120,"Trash","NA","NA"
+"Trawler","d8e9a4b1","Serranidae",110,"Trash","NA","NA"
+"Trawler","d8e9a4b1","Sphyraenidae",85,"Trash","NA","NA"
+"Trawler","d8e9a4b1","Synodontidae",70,"Trash","NA","NA"
+"Trawler","aaa182a2","Clupeidae",85,"Trash","NA","NA"
+"Trawler","aaa182a2","Engraulidae",350,"Trash","NA","NA"
+"Trawler","aaa182a2","Leiognathidae",80,"Trash","NA","NA"
+"Trawler","aaa182a2","Sciaenidae",55,"Trash","NA","NA"
+"Trawler","aaa182a2","Serranidae",50,"Trash","NA","NA"
+"Trawler","aaa182a2","Tetraodontidae",60,"Trash","NA","NA"
+"Trawler","aaa182a2","Trichiuridae",170,"Trash","NA","NA"
+"Trawler","3741c36f","Clupeidae",0,"Trash","NA","NA"
+"Trawler","3741c36f","Engraulidae",23,"Trash","NA","NA"
+"Trawler","3741c36f","Leiognathidae",63,"Trash","NA","NA"
+"Trawler","3741c36f","Platycephalidae",184,"Trash","NA","NA"
+"Trawler","3741c36f","Serranidae",138,"Trash","NA","NA"
+"Trawler","3741c36f","Terapontidae",40,"Trash","NA","NA"
+"Trawler","4046f3f9","Nemipteridae",100,"Trash","NA","NA"
+"Trawler","d94fa243","Carangidae",70,"Trash","NA","NA"
+"Trawler","d94fa243","Carcharhinidae",66,"Trash","NA","NA"
+"Trawler","d94fa243","Clupeidae",68,"Trash","NA","NA"
+"Trawler","d94fa243","Engraulidae",16,"Trash","NA","NA"
+"Trawler","d94fa243","Platycephalidae",132,"Trash","NA","NA"
+"Trawler","d94fa243","Synodontidae",22,"Trash","NA","NA"
+"Trawler","d94fa243","Terapontidae",16,"Trash","NA","NA"
+"Trawler","d94fa243","Trichiuridae",224,"Trash","NA","NA"
+"Trawler","f8cea863","Nemipteridae",100,"Trash","NA","NA"
+"Trawler","af8af8e2","Nemipteridae",100,"Trash","NA","NA"
+"Trawler","3f35e573","Carangidae",118,"Trash","NA","NA"
+"Trawler","3f35e573","Clupeidae",9,"Trash","NA","NA"
+"Trawler","3f35e573","Engraulidae",23,"Trash","NA","NA"
+"Trawler","3f35e573","Hemiscylliidae",177,"Trash","NA","NA"
+"Trawler","3f35e573","Paralichthyidae",83,"Trash","NA","NA"
+"Trawler","3f35e573","Platycephalidae",147,"Trash","NA","NA"
+"Trawler","3f35e573","Serranidae",52,"Trash","NA","NA"
+"Trawler","3f35e573","Squillidae",7,"Trash","NA","NA"
+"Trawler","2fd3a7cc","Carangidae",27,"Trash","NA","NA"
+"Trawler","2fd3a7cc","Cynoglossidae",0,"Trash","NA","NA"
+"Trawler","2fd3a7cc","Leiognathidae",10,"Trash","NA","NA"
+"Trawler","2fd3a7cc","Loliginidae",22,"Trash","NA","NA"
+"Trawler","2fd3a7cc","Platycephalidae",173,"Trash","NA","NA"
+"Trawler","2fd3a7cc","Portunidae",45,"Trash","NA","NA"
+"Trawler","2fd3a7cc","Sciaenidae",41,"Trash","NA","NA"
+"Trawler","2fd3a7cc","Tetraodontidae",46,"Trash","NA","NA"
+"Trawler","9f12b5a0","Clupeidae",40,"Trash","NA","NA"
+"Trawler","9f12b5a0","Paralichthyidae",68,"Trash","NA","NA"
+"Trawler","9f12b5a0","Platycephalidae",92,"Trash","NA","NA"
+"Trawler","9f12b5a0","Scombridae",40,"Trash","NA","NA"
+"Trawler","9f12b5a0","Serranidae",147,"Trash","NA","NA"
+"Trawler","9f12b5a0","Squillidae",3,"Trash","NA","NA"
+"Trawler","9f12b5a0","Terapontidae",195,"Trash","NA","NA"
+"Trawler","6845890d","Carangidae",54,"Trash","NA","NA"
+"Trawler","6845890d","Clupeidae",55,"Trash","NA","NA"
+"Trawler","6845890d","Engraulidae",536,"Trash","NA","NA"
+"Trawler","6845890d","Serranidae",21,"Trash","NA","NA"
+"Trawler","6845890d","Terapontidae",111,"Trash","NA","NA"
+"Trawler","6845890d","Tetraodontidae",10,"Trash","NA","NA"
+"Trawler","dafa05d3","Carangidae",31,"Trash","NA","NA"
+"Trawler","dafa05d3","Engraulidae",495,"Trash","NA","NA"
+"Trawler","dafa05d3","Leiognathidae",17,"Trash","NA","NA"
+"Trawler","dafa05d3","Nemipteridae",5,"Trash","NA","NA"
+"Trawler","dafa05d3","Serranidae",162,"Trash","NA","NA"
+"Trawler","dafa05d3","Terapontidae",40,"Trash","NA","NA"
+"Trawler","dafa05d3","Trichiuridae",84,"Trash","NA","NA"
+"Trawler","984044f5","Carangidae",216,"Trash","NA","NA"
+"Trawler","984044f5","Clupeidae",301,"Trash","NA","NA"
+"Trawler","984044f5","Engraulidae",334,"Trash","NA","NA"
+"Trawler","984044f5","Tetraodontidae",34,"Trash","NA","NA"
+"Trawler","9d3668f4","Priacanthidae",431,"Trash","NA","NA"
+"Trawler","79109e48","Leiognathidae",100,"Trash","NA","NA"
+"Trawler","2b5df310","Clupeidae",22,"Trash","NA","NA"
+"Trawler","2b5df310","Cynoglossidae",10,"Trash","NA","NA"
+"Trawler","2b5df310","Gerreidae",30,"Trash","NA","NA"
+"Trawler","2b5df310","Leiognathidae",6,"Trash","NA","NA"
+"Trawler","2b5df310","Loliginidae",61,"Trash","NA","NA"
+"Trawler","2b5df310","Nemipteridae",4,"Trash","NA","NA"
+"Trawler","2b5df310","Plotosidae",113,"Trash","NA","NA"
+"Trawler","2b5df310","Sciaenidae",11,"Trash","NA","NA"
+"Trawler","2b5df310","Serranidae",173,"Trash","NA","NA"
+"Trawler","2b5df310","Terapontidae",5,"Trash","NA","NA"
+"Trawler","2b5df310","Tetraodontidae",220,"Trash","NA","NA"
+"Trawler","ae3a5035","Carangidae",67,"Trash","NA","NA"
+"Trawler","ae3a5035","Engraulidae",164,"Trash","NA","NA"
+"Trawler","ae3a5035","Leiognathidae",266,"Trash","NA","NA"
+"Trawler","ae3a5035","Trichiuridae",87,"Trash","NA","NA"
+"Trawler","003b574e","Nemipteridae",100,"Trash","NA","NA"
+"Trawler","759549c5","Engraulidae",78,"Trash","NA","NA"
+"Trawler","759549c5","Leiognathidae",10,"Trash","NA","NA"
+"Trawler","759549c5","Loliginidae",69,"Trash","NA","NA"
+"Trawler","759549c5","Menidae",50,"Trash","NA","NA"
+"Trawler","759549c5","Nemipteridae",93,"Trash","NA","NA"
+"Trawler","759549c5","Penaeidae",9,"Trash","NA","NA"
+"Trawler","759549c5","Tetraodontidae",210,"Trash","NA","NA"
+"Trawler","759549c5","Trichiuridae",87,"Trash","NA","NA"
+"Trawler","f53eafb4",,100,"Trash","NA","NA"
+"Trawler","f53eafb4","Nemipteridae",100,"Trash","NA","NA"
+"Trawler","e4c136a9","Engraulidae",3,"Trash","NA","NA"
+"Trawler","e4c136a9","Leiognathidae",0,"Trash","NA","NA"
+"Trawler","e4c136a9","Loliginidae",15,"Trash","NA","NA"
+"Trawler","e4c136a9","Menidae",207,"Trash","NA","NA"
+"Trawler","e4c136a9","Nemipteridae",15,"Trash","NA","NA"
+"Trawler","e4c136a9","Penaeidae",0,"Trash","NA","NA"
+"Trawler","e4c136a9","Tetraodontidae",310,"Trash","NA","NA"
+"Trawler","e72d1ab1","Bregmacerotidae",0,"Trash","NA","NA"
+"Trawler","e72d1ab1","Carangidae",369,"Trash","NA","NA"
+"Trawler","e72d1ab1","Lactariidae",16,"Trash","NA","NA"
+"Trawler","e72d1ab1","Loliginidae",8,"Trash","NA","NA"
+"Trawler","e72d1ab1","Menidae",52,"Trash","NA","NA"
+"Trawler","e72d1ab1","Penaeidae",3,"Trash","NA","NA"
+"Trawler","e72d1ab1","Sepiidae",57,"Trash","NA","NA"
+"Trawler","e72d1ab1","Terapontidae",26,"Trash","NA","NA"
+"Trawler","e72d1ab1","Tetraodontidae",21,"Trash","NA","NA"
+"Trawler","e72d1ab1","Trichiuridae",38,"Trash","NA","NA"
+"Trawler","263c552d","Engraulidae",469,"Trash","NA","NA"
+"Trawler","263c552d","Lactariidae",0,"Trash","NA","NA"
+"Trawler","263c552d","Leiognathidae",8,"Trash","NA","NA"
+"Trawler","263c552d","Menidae",84,"Trash","NA","NA"
+"Trawler","263c552d","Tetraodontidae",34,"Trash","NA","NA"
+"Trawler","263c552d","Trichiuridae",13,"Trash","NA","NA"
+"Trawler","9bf452b8","Carangidae",100,"Trash","NA","NA"
+"Trawler","ea9655b3","Carangidae",150,"Trash","NA","NA"
+"Trawler","ea9655b3","Clupeidae",59,"Trash","NA","NA"
+"Trawler","ea9655b3","Engraulidae",229,"Trash","NA","NA"
+"Trawler","ea9655b3","Leiognathidae",0,"Trash","NA","NA"
+"Trawler","ea9655b3","Loliginidae",12,"Trash","NA","NA"
+"Trawler","ea9655b3","Tetraodontidae",366,"Trash","NA","NA"
+"Trawler","5d8167b2","Carangidae",100,"Trash","NA","NA"
+"Trawler","00ec46cc","Nemipteridae",398,"Trash","NA","NA"
+"Trawler","c743f285","Carangidae",815,"Trash","NA","NA"
+"Trawler","c743f285","Engraulidae",223,"Trash","NA","NA"
+"Trawler","c743f285","Leiognathidae",0,"Trash","NA","NA"
+"Trawler","c743f285","Loliginidae",25,"Trash","NA","NA"
+"Trawler","c743f285","Menidae",28,"Trash","NA","NA"
+"Trawler","c743f285","Nemipteridae",21,"Trash","NA","NA"
+"Trawler","c743f285","Sciaenidae",14,"Trash","NA","NA"
+"Trawler","c743f285","Sepiidae",124,"Trash","NA","NA"
+"Trawler","c743f285","Synodontidae",26,"Trash","NA","NA"
+"Trawler","c743f285","Tetraodontidae",79,"Trash","NA","NA"
+"Trawler","c743f285","Trichiuridae",182,"Trash","NA","NA"
+"Trawler","15621550","Carangidae",585,"Trash",180,4
+"Trawler","1b348031","Leiognathidae",94,"Trash",180,3
+"Trawler","1b348031","Nemipteridae",270,"Trash",180,3
+"Trawler","ab2ab260","Carangidae",326,"Trash",240,3
+"Trawler","ab2ab260","Clupeidae",7,"Trash",240,3
+"Trawler","ab2ab260","Engraulidae",63,"Trash",240,3
+"Trawler","ab2ab260","Lactariidae",26,"Trash",240,3
+"Trawler","ab2ab260","Leiognathidae",15,"Trash",240,3
+"Trawler","ab2ab260","Menidae",126,"Trash",240,3
+"Trawler","ab2ab260","Nemipteridae",32,"Trash",240,3
+"Trawler","ab2ab260","Priacanthidae",4,"Trash",240,3
+"Trawler","ab2ab260","Sciaenidae",14,"Trash",240,3
+"Trawler","ab2ab260","Tetraodontidae",217,"Trash",240,3
+"Trawler","ab2ab260","Trichiuridae",73,"Trash",240,3
+"Trawler","0439045a","Carangidae",17,"Trash",150,4
+"Trawler","0439045a","Clupeidae",49,"Trash",150,4
+"Trawler","0439045a","Leiognathidae",45,"Trash",150,4
+"Trawler","0439045a","Penaeidae",0,"Trash",150,4
+"Trawler","0439045a","Platycephalidae",36,"Trash",150,4
+"Trawler","0439045a","Sepiidae",87,"Trash",150,4
+"Trawler","0439045a","Tetraodontidae",426,"Trash",150,4
+"Trawler","91281baa","Ariidae",81,"Trash",180,4
+"Trawler","91281baa","Carangidae",264,"Trash",180,4
+"Trawler","91281baa","Clupeidae",113,"Trash",180,4
+"Trawler","91281baa","Engraulidae",21,"Trash",180,4
+"Trawler","91281baa","Haemulidae",22,"Trash",180,4
+"Trawler","91281baa","Leiognathidae",25,"Trash",180,4
+"Trawler","91281baa","Loliginidae",12,"Trash",180,4
+"Trawler","91281baa","Plotosidae",37,"Trash",180,4
+"Trawler","91281baa","Sepiidae",49,"Trash",180,4
+"Trawler","91281baa","Tetraodontidae",527,"Trash",180,4
+"Trawler","91281baa","Triacanthidae",53,"Trash",180,4
+"Trawler","84a20998","Carangidae",301,"Trash",180,4
+"Trawler","84a20998","Clupeidae",42,"Trash",180,4
+"Trawler","84a20998","Drepaneidae",17,"Trash",180,4
+"Trawler","84a20998","Engraulidae",127,"Trash",180,4
+"Trawler","84a20998","Leiognathidae",14,"Trash",180,4
+"Trawler","84a20998","Terapontidae",72,"Trash",180,4
+"Trawler","84a20998","Tetraodontidae",46,"Trash",180,4
+"Trawler","84a20998","Triacanthidae",67,"Trash",180,4
+"Trawler","84a20998","Trichiuridae",31,"Trash",180,4
+"Trawler","68ba0858","Congridae",40,"Trash",195,3
+"Trawler","68ba0858","Cynoglossidae",0,"Trash",195,3
+"Trawler","68ba0858","Leiognathidae",14,"Trash",195,3
+"Trawler","68ba0858","Nemipteridae",201,"Trash",195,3
+"Trawler","68ba0858","Platycephalidae",49,"Trash",195,3
+"Trawler","68ba0858","Terapontidae",26,"Trash",195,3
+"Trawler","68ba0858","Tetraodontidae",654,"Trash",195,3
+"Trawler","68ba0858","Trichiuridae",168,"Trash",195,3
+"Trawler","403c066e","Carangidae",496,"Trash",180,3
+"Trawler","403c066e","Clupeidae",65,"Trash",180,3
+"Trawler","403c066e","Engraulidae",375,"Trash",180,3
+"Trawler","403c066e","Lactariidae",11,"Trash",180,3
+"Trawler","403c066e","Leiognathidae",63,"Trash",180,3
+"Trawler","403c066e","Priacanthidae",3,"Trash",180,3
+"Trawler","403c066e","Terapontidae",16,"Trash",180,3
+"Trawler","403c066e","Tetraodontidae",201,"Trash",180,3
+"Trawler","d8735304","Cynoglossidae",10,"Trash",135,3
+"Trawler","d8735304","Leiognathidae",19,"Trash",135,3
+"Trawler","d8735304","Platycephalidae",73,"Trash",135,3
+"Trawler","d8735304","Sciaenidae",30,"Trash",135,3
+"Trawler","d8735304","Sepiidae",124,"Trash",135,3
+"Trawler","d8735304","Tetraodontidae",649,"Trash",135,3
+"Trawler","4cf347eb","Carangidae",285,"Trash",180,3
+"Trawler","4cf347eb","Carcharhinidae",41,"Trash",180,3
+"Trawler","4cf347eb","Clupeidae",192,"Trash",180,3
+"Trawler","4cf347eb","Engraulidae",74,"Trash",180,3
+"Trawler","4cf347eb","Haemulidae",17,"Trash",180,3
+"Trawler","4cf347eb","Lactariidae",29,"Trash",180,3
+"Trawler","4cf347eb","Leiognathidae",26,"Trash",180,3
+"Trawler","4cf347eb","Paralichthyidae",22,"Trash",180,3
+"Trawler","4cf347eb","Platycephalidae",42,"Trash",180,3
+"Trawler","4cf347eb","Serranidae",99,"Trash",180,3
+"Trawler","4cf347eb","Sillaginidae",7,"Trash",180,3
+"Trawler","4cf347eb","Terapontidae",0,"Trash",180,3
+"Trawler","4cf347eb","Tetraodontidae",1065,"Trash",180,3
+"Trawler","4cf347eb","Trichiuridae",130,"Trash",180,3
+"Trawler","1d10f152","Carangidae",506,"Trash","NA",3
+"Trawler","4af90f77","Carangidae",66,"Trash",180,3
+"Trawler","4af90f77","Clupeidae",148,"Trash",180,3
+"Trawler","4af90f77","Engraulidae",193,"Trash",180,3
+"Trawler","4af90f77","Haemulidae",36,"Trash",180,3
+"Trawler","4af90f77","Lactariidae",75,"Trash",180,3
+"Trawler","4af90f77","Leiognathidae",622,"Trash",180,3
+"Trawler","4af90f77","Sciaenidae",8,"Trash",180,3
+"Trawler","4af90f77","Tetraodontidae",235,"Trash",180,3
+"Trawler","4af90f77","Trichiuridae",4,"Trash",180,3
+"Trawler","cf22fd08","Cynoglossidae",0,"Trash",150,3
+"Trawler","cf22fd08","Haemulidae",21,"Trash",150,3
+"Trawler","cf22fd08","Loliginidae",13,"Trash",150,3
+"Trawler","cf22fd08","Sepiidae",21,"Trash",150,3
+"Trawler","cf22fd08","Squillidae",4,"Trash",150,3
+"Trawler","cf22fd08","Tetraodontidae",745,"Trash",150,3
+"Trawler","f35cb848","Cynoglossidae",8,"Trash",180,3.5
+"Trawler","f35cb848","Leiognathidae",444,"Trash",180,3.5
+"Trawler","f35cb848","Menidae",68,"Trash",180,3.5
+"Trawler","f35cb848","Platycephalidae",139,"Trash",180,3.5
+"Trawler","f35cb848","Serranidae",26,"Trash",180,3.5
+"Trawler","f35cb848","Synodontidae",0,"Trash",180,3.5
+"Trawler","f35cb848","Tetraodontidae",177,"Trash",180,3.5
+"Trawler","f35cb848","Trichiuridae",73,"Trash",180,3.5
+"Trawler","5a63cd73","Carangidae",461,"Trash",210,3
+"Trawler","5a63cd73","Clupeidae",56,"Trash",210,3
+"Trawler","5a63cd73","Engraulidae",15,"Trash",210,3
+"Trawler","5a63cd73","Leiognathidae",321,"Trash",210,3
+"Trawler","2f595bdc","Carangidae",168,"Trash",210,3
+"Trawler","2f595bdc","Clupeidae",112,"Trash",210,3
+"Trawler","2f595bdc","Engraulidae",207,"Trash",210,3
+"Trawler","2f595bdc","Lactariidae",7,"Trash",210,3
+"Trawler","2f595bdc","Leiognathidae",16,"Trash",210,3
+"Trawler","2f595bdc","Loliginidae",13,"Trash",210,3
+"Trawler","2f595bdc","Menidae",527,"Trash",210,3
+"Trawler","2f595bdc","Monacanthidae",201,"Trash",210,3
+"Trawler","2f595bdc","Polynemidae",50,"Trash",210,3
+"Trawler","2f595bdc","Sepiidae",4,"Trash",210,3
+"Trawler","2f595bdc","Tetraodontidae",7,"Trash",210,3
+"Trawler","7acd8da0","Carangidae",103,"Trash",135,3
+"Trawler","7acd8da0","Clupeidae",53,"Trash",135,3
+"Trawler","7acd8da0","Engraulidae",61,"Trash",135,3
+"Trawler","7acd8da0","Leiognathidae",113,"Trash",135,3
+"Trawler","7acd8da0","Platycephalidae",134,"Trash",135,3
+"Trawler","7acd8da0","Sciaenidae",25,"Trash",135,3
+"Trawler","7acd8da0","Terapontidae",26,"Trash",135,3
+"Trawler","d2a0a3a9","Carangidae",65,"Trash",240,3.5
+"Trawler","d2a0a3a9","Clupeidae",40,"Trash",240,3.5
+"Trawler","d2a0a3a9","Engraulidae",242,"Trash",240,3.5
+"Trawler","d2a0a3a9","Lactariidae",0,"Trash",240,3.5
+"Trawler","d2a0a3a9","Leiognathidae",484,"Trash",240,3.5
+"Trawler","d2a0a3a9","Loliginidae",29,"Trash",240,3.5
+"Trawler","d2a0a3a9","Menidae",248,"Trash",240,3.5
+"Trawler","d2a0a3a9","Nemipteridae",25,"Trash",240,3.5
+"Trawler","d2a0a3a9","Sepiidae",12,"Trash",240,3.5
+"Trawler","d2a0a3a9","Terapontidae",75,"Trash",240,3.5
+"Trawler","d2a0a3a9","Tetraodontidae",266,"Trash",240,3.5
+"Trawler","d2a0a3a9","Trichiuridae",8,"Trash",240,3.5
+"Trawler","71655aa6","Carangidae",25,"Trash",135,3
+"Trawler","71655aa6","Clupeidae",126,"Trash",135,3
+"Trawler","71655aa6","Congridae",92,"Trash",135,3
+"Trawler","71655aa6","Cynoglossidae",0,"Trash",135,3
+"Trawler","71655aa6","Engraulidae",26,"Trash",135,3
+"Trawler","71655aa6","Lactariidae",18,"Trash",135,3
+"Trawler","71655aa6","Leiognathidae",31,"Trash",135,3
+"Trawler","71655aa6","Platycephalidae",265,"Trash",135,3
+"Trawler","71655aa6","Portunidae",40,"Trash",135,3
+"Trawler","71655aa6","Sciaenidae",8,"Trash",135,3
+"Trawler","71655aa6","Serranidae",38,"Trash",135,3
+"Trawler","71655aa6","Terapontidae",288,"Trash",135,3
+"Trawler","71655aa6","Tetraodontidae",479,"Trash",135,3
+"Trawler","452cd658","Carangidae",5,"Trash",180,4
+"Trawler","452cd658","Clupeidae",13,"Trash",180,4
+"Trawler","452cd658","Echeneidae",28,"Trash",180,4
+"Trawler","452cd658","Engraulidae",202,"Trash",180,4
+"Trawler","452cd658","Lactariidae",23,"Trash",180,4
+"Trawler","452cd658","Leiognathidae",335,"Trash",180,4
+"Trawler","452cd658","Loliginidae",30,"Trash",180,4
+"Trawler","452cd658","Menidae",286,"Trash",180,4
+"Trawler","452cd658","Terapontidae",162,"Trash",180,4
+"Trawler","452cd658","Tetraodontidae",26,"Trash",180,4
+"Trawler","452cd658","Triacanthidae",96,"Trash",180,4
+"Trawler","452cd658","Trichiuridae",23,"Trash",180,4
+"Trawler","f7608bc6","Carangidae",45,"Trash",180,3
+"Trawler","f7608bc6","Clupeidae",30,"Trash",180,3
+"Trawler","f7608bc6","Congridae",89,"Trash",180,3
+"Trawler","f7608bc6","Cynoglossidae",24,"Trash",180,3
+"Trawler","f7608bc6","Engraulidae",23,"Trash",180,3
+"Trawler","f7608bc6","Leiognathidae",325,"Trash",180,3
+"Trawler","f7608bc6","Sciaenidae",37,"Trash",180,3
+"Trawler","f7608bc6","Serranidae",152,"Trash",180,3
+"Trawler","f7608bc6","Sphyraenidae",18,"Trash",180,3
+"Trawler","f7608bc6","Terapontidae",477,"Trash",180,3
+"Trawler","f7608bc6","Tetraodontidae",191,"Trash",180,3
+"Trawler","ad2f0df8","Carangidae",151,"Trash",180,3
+"Trawler","ad2f0df8","Clupeidae",98,"Trash",180,3
+"Trawler","ad2f0df8","Cynoglossidae",100,"Trash",180,3
+"Trawler","ad2f0df8","Engraulidae",41,"Trash",180,3
+"Trawler","ad2f0df8","Leiognathidae",397,"Trash",180,3
+"Trawler","ad2f0df8","Nemipteridae",217,"Trash",180,3
+"Trawler","ad2f0df8","Platycephalidae",153,"Trash",180,3
+"Trawler","ad2f0df8","Serranidae",70,"Trash",180,3
+"Trawler","ad2f0df8","Terapontidae",28,"Trash",180,3
+"Trawler","0f3dde4d","Ariidae",376,"Trash",180,4
+"Trawler","0f3dde4d","Carangidae",217,"Trash",180,4
+"Trawler","0f3dde4d","Clupeidae",38,"Trash",180,4
+"Trawler","0f3dde4d","Engraulidae",155,"Trash",180,4
+"Trawler","0f3dde4d","Haemulidae",38,"Trash",180,4
+"Trawler","0f3dde4d","Lactariidae",11,"Trash",180,4
+"Trawler","0f3dde4d","Leiognathidae",151,"Trash",180,4
+"Trawler","0f3dde4d","Loliginidae",4,"Trash",180,4
+"Trawler","0f3dde4d","Nemipteridae",12,"Trash",180,4
+"Trawler","0f3dde4d","Penaeidae",0,"Trash",180,4
+"Trawler","0f3dde4d","Squillidae",18,"Trash",180,4
+"Trawler","0f3dde4d","Terapontidae",306,"Trash",180,4
+"Trawler","0f3dde4d","Tetraodontidae",14,"Trash",180,4
+"Trawler","0f3dde4d","Trichiuridae",44,"Trash",180,4
+"Trawler","c952d7ca","Clupeidae",42,"Trash",180,4
+"Trawler","c952d7ca","Congridae",11,"Trash",180,4
+"Trawler","c952d7ca","Engraulidae",91,"Trash",180,4
+"Trawler","c952d7ca","Haemulidae",17,"Trash",180,4
+"Trawler","c952d7ca","Leiognathidae",31,"Trash",180,4
+"Trawler","c952d7ca","Platycephalidae",69,"Trash",180,4
+"Trawler","c952d7ca","Synanceiidae",13,"Trash",180,4
+"Trawler","c952d7ca","Terapontidae",668,"Trash",180,4
+"Trawler","39af1917","Carangidae",122,"Trash",180,3
+"Trawler","39af1917","Clupeidae",611,"Trash",180,3
+"Trawler","39af1917","Congridae",16,"Trash",180,3
+"Trawler","39af1917","Engraulidae",332,"Trash",180,3
+"Trawler","39af1917","Leiognathidae",535,"Trash",180,3
+"Trawler","39af1917","Penaeidae",0,"Trash",180,3
+"Trawler","39af1917","Platycephalidae",46,"Trash",180,3
+"Trawler","39af1917","Terapontidae",28,"Trash",180,3
+"Trawler","39af1917","Tetraodontidae",13,"Trash",180,3
+"Trawler","baa6b098","Cynoglossidae",3,"Trash",180,3
+"Trawler","baa6b098","Nemipteridae",1289,"Trash",180,3
+"Trawler","baa6b098","Portunidae",0,"Trash",180,3
+"Trawler","baa6b098","Sepiidae",0,"Trash",180,3
+"Trawler","e12b3db0","Clupeidae",54,"Trash",126,1.5
+"Trawler","e12b3db0","Leiognathidae",522,"Trash",126,1.5
+"Trawler","e12b3db0","Nemipteridae",95,"Trash",126,1.5
+"Trawler","e12b3db0","Platycephalidae",61,"Trash",126,1.5
+"Trawler","e12b3db0","Serranidae",48,"Trash",126,1.5
+"Trawler","e12b3db0","Terapontidae",15,"Trash",126,1.5
+"Trawler","1cfc4ede","Carangidae",243,"Trash",180,2
+"Trawler","1cfc4ede","Clupeidae",76,"Trash",180,2
+"Trawler","1cfc4ede","Cynoglossidae",8,"Trash",180,2
+"Trawler","1cfc4ede","Engraulidae",306,"Trash",180,2
+"Trawler","1cfc4ede","Leiognathidae",107,"Trash",180,2
+"Trawler","1cfc4ede","Sciaenidae",22,"Trash",180,2
+"Trawler","1cfc4ede","Sepiidae",0,"Trash",180,2
+"Trawler","1cfc4ede","Serranidae",85,"Trash",180,2
+"Trawler","1cfc4ede","Tetraodontidae",27,"Trash",180,2
+"Trawler","83d48d37","Ariidae",51,"Trash",240,2.5
+"Trawler","83d48d37","Carangidae",57,"Trash",240,2.5
+"Trawler","83d48d37","Clupeidae",103,"Trash",240,2.5
+"Trawler","83d48d37","Engraulidae",96,"Trash",240,2.5
+"Trawler","83d48d37","Leiognathidae",116,"Trash",240,2.5
+"Trawler","83d48d37","Nemipteridae",15,"Trash",240,2.5
+"Trawler","83d48d37","Penaeidae",0,"Trash",240,2.5
+"Trawler","83d48d37","Terapontidae",19,"Trash",240,2.5
+"Trawler","83d48d37","Trichiuridae",234,"Trash",240,2.5
+"Trawler","7358d8f0","Carangidae",44,"Trash","NA",3
+"Trawler","7358d8f0","Clupeidae",37,"Trash","NA",3
+"Trawler","7358d8f0","Engraulidae",91,"Trash","NA",3
+"Trawler","7358d8f0","Lactariidae",38,"Trash","NA",3
+"Trawler","7358d8f0","Leiognathidae",332,"Trash","NA",3
+"Trawler","7358d8f0","Loliginidae",31,"Trash","NA",3
+"Trawler","5ecef62d","Carangidae",186,"Trash",180,3
+"Trawler","5ecef62d","Clupeidae",47,"Trash",180,3
+"Trawler","5ecef62d","Congridae",45,"Trash",180,3
+"Trawler","5ecef62d","Dasyatidae",48,"Trash",180,3
+"Trawler","5ecef62d","Engraulidae",123,"Trash",180,3
+"Trawler","5ecef62d","Lactariidae",4,"Trash",180,3
+"Trawler","5ecef62d","Muraenesocidae",71,"Trash",180,3
+"Trawler","5ecef62d","Platycephalidae",57,"Trash",180,3
+"Trawler","5ecef62d","Synanceiidae",50,"Trash",180,3
+"Trawler","5ecef62d","Terapontidae",41,"Trash",180,3
+"Trawler","5ecef62d","Trichiuridae",19,"Trash",180,3
+"Trawler","827e7494","Engraulidae",60,"Trash",180,2
+"Trawler","827e7494","Leiognathidae",11,"Trash",180,2
+"Trawler","827e7494","Nemipteridae",25,"Trash",180,2
+"Trawler","827e7494","Penaeidae",0,"Trash",180,2
+"Trawler","827e7494","Platycephalidae",41,"Trash",180,2
+"Trawler","827e7494","Sepiidae",153,"Trash",180,2
+"Trawler","827e7494","Tetraodontidae",525,"Trash",180,2
+"Trawler","827e7494","Trichiuridae",44,"Trash",180,2
+"Trawler","3e7f867e","Apogonidae",0,"Trash",180,3
+"Trawler","3e7f867e","Carangidae",20,"Trash",180,3
+"Trawler","3e7f867e","Clupeidae",269,"Trash",180,3
+"Trawler","3e7f867e","Engraulidae",223,"Trash",180,3
+"Trawler","3e7f867e","Lactariidae",35,"Trash",180,3
+"Trawler","3e7f867e","Leiognathidae",324,"Trash",180,3
+"Trawler","3e7f867e","Loliginidae",127,"Trash",180,3
+"Trawler","3e7f867e","Sciaenidae",12,"Trash",180,3
+"Trawler","3e7f867e","Squillidae",6,"Trash",180,3
+"Trawler","3e7f867e","Tetraodontidae",34,"Trash",180,3
+"Trawler","3e7f867e","Trichiuridae",37,"Trash",180,3
+"Trawler","a0bdc345","Carangidae",70,"Trash","NA",3
+"Trawler","a0bdc345","Engraulidae",215,"Trash","NA",3
+"Trawler","a0bdc345","Lactariidae",4,"Trash","NA",3
+"Trawler","a0bdc345","Leiognathidae",398,"Trash","NA",3
+"Trawler","a0bdc345","Loliginidae",11,"Trash","NA",3
+"Trawler","a0bdc345","Mugilidae",32,"Trash","NA",3
+"Trawler","a0bdc345","Trichiuridae",28,"Trash","NA",3
+"Trawler","2e4e56c2","Carangidae",156,"Trash","NA","NA"
+"Trawler","2e4e56c2","Haemulidae",30,"Trash","NA","NA"
+"Trawler","2e4e56c2","Lactariidae",30,"Trash","NA","NA"
+"Trawler","2e4e56c2","Leiognathidae",248,"Trash","NA","NA"
+"Trawler","2e4e56c2","Nemipteridae",100,"Trash","NA","NA"
+"Trawler","2e4e56c2","Sciaenidae",0,"Trash","NA","NA"
+"Trawler","2e4e56c2","Terapontidae",46,"Trash","NA","NA"
+"Trawler","2e4e56c2","Trichiuridae",142,"Trash","NA","NA"
+"Trawler","04e56582","Apogonidae",8,"Trash",180,2.5
+"Trawler","04e56582","Clupeidae",35,"Trash",180,2.5
+"Trawler","04e56582","Engraulidae",30,"Trash",180,2.5
+"Trawler","04e56582","Haemulidae",24,"Trash",180,2.5
+"Trawler","04e56582","Leiognathidae",20,"Trash",180,2.5
+"Trawler","04e56582","Platycephalidae",307,"Trash",180,2.5
+"Trawler","04e56582","Sepiidae",0,"Trash",180,2.5
+"Trawler","04e56582","Synanceiidae",23,"Trash",180,2.5
+"Trawler","04e56582","Terapontidae",28,"Trash",180,2.5
+"Trawler","04e56582","Triacanthidae",82,"Trash",180,2.5
+"Trawler","04e56582","Trichiuridae",85,"Trash",180,2.5
+"Trawler","50489f4f","Clupeidae",46,"Trash",180,2.5
+"Trawler","50489f4f","Engraulidae",677,"Trash",180,2.5
+"Trawler","50489f4f","Sciaenidae",15,"Trash",180,2.5
+"Trawler","50489f4f","Sepiidae",89,"Trash",180,2.5
+"Trawler","50489f4f","Trichiuridae",77,"Trash",180,2.5
+"Trawler","d64d4e2f","Nemipteridae",215,"Trash","NA",3.5
+"Trawler","5daef076","Carangidae",30,"Trash",165,4
+"Trawler","5daef076","Clupeidae",95,"Trash",165,4
+"Trawler","5daef076","Engraulidae",119,"Trash",165,4
+"Trawler","5daef076","Haemulidae",66,"Trash",165,4
+"Trawler","5daef076","Leiognathidae",441,"Trash",165,4
+"Trawler","5daef076","Loliginidae",33,"Trash",165,4
+"Trawler","5daef076","Menidae",9,"Trash",165,4
+"Trawler","5daef076","Scombridae",0,"Trash",165,4
+"Trawler","5daef076","Sphyraenidae",0,"Trash",165,4
+"Trawler","6c36da0f","Nemipteridae",207,"Trash",180,3
+"Trawler","0561bd8e","Engraulidae",46,"Trash",240,4
+"Trawler","0561bd8e","Leiognathidae",199,"Trash",240,4
+"Trawler","0561bd8e","Loliginidae",64,"Trash",240,4
+"Trawler","0561bd8e","Menidae",54,"Trash",240,4
+"Trawler","0561bd8e","Scombridae",0,"Trash",240,4
+"Trawler","0561bd8e","Squillidae",6,"Trash",240,4
+"Trawler","0561bd8e","Tetraodontidae",7,"Trash",240,4
+"Trawler","0561bd8e","Trichiuridae",45,"Trash",240,4
+"Trawler","8b5422d9","Carangidae",103,"Trash",300,3
+"Trawler","8b5422d9","Engraulidae",64,"Trash",300,3
+"Trawler","8b5422d9","Leiognathidae",77,"Trash",300,3
+"Trawler","8b5422d9","Loliginidae",37,"Trash",300,3
+"Trawler","8b5422d9","Menidae",87,"Trash",300,3
+"Trawler","8b5422d9","Nemipteridae",22,"Trash",300,3
+"Trawler","8b5422d9","Penaeidae",3,"Trash",300,3
+"Trawler","8b5422d9","Scombridae",3,"Trash",300,3
+"Trawler","8b5422d9","Sepiidae",30,"Trash",300,3
+"Trawler","8b5422d9","Tetraodontidae",97,"Trash",300,3
+"Trawler","8b5422d9","Trichiuridae",59,"Trash",300,3
+"Trawler","f0f3004d","Carangidae",230,"Trash","NA",4
+"Trawler","74b90eb7","Carangidae",197,"Trash","NA",4
+"Trawler","74b90eb7","Clupeidae",58,"Trash","NA",4
+"Trawler","74b90eb7","Engraulidae",160,"Trash","NA",4
+"Trawler","74b90eb7","Lactariidae",226,"Trash","NA",4
+"Trawler","74b90eb7","Leiognathidae",140,"Trash","NA",4
+"Trawler","74b90eb7","Loliginidae",130,"Trash","NA",4
+"Trawler","74b90eb7","Penaeidae",0,"Trash","NA",4
+"Trawler","74b90eb7","Scombridae",29,"Trash","NA",4
+"Trawler","74b90eb7","Sepiidae",15,"Trash","NA",4
+"Trawler","74b90eb7","Terapontidae",12,"Trash","NA",4
+"Trawler","74b90eb7","Tetraodontidae",33,"Trash","NA",4
+"Trawler","74b90eb7","Trichiuridae",14,"Trash","NA",4
+"Trawler","015d8e00","Trichiuridae",100,"Trash",180,3
+"Trawler","2e238e46","Carangidae",706,"Trash",210,4
+"Trawler","2e238e46","Clupeidae",119,"Trash",210,4
+"Trawler","2e238e46","Engraulidae",51,"Trash",210,4
+"Trawler","2e238e46","Loliginidae",27,"Trash",210,4
+"Trawler","2e238e46","Menidae",76,"Trash",210,4
+"Trawler","2e238e46","Scatophagidae",73,"Trash",210,4
+"Trawler","2e238e46","Sphyraenidae",41,"Trash",210,4
+"Trawler","2e238e46","Trichiuridae",86,"Trash",210,4
+"Trawler","ff9470eb","Carangidae",425,"Trash",120,3.5
+"Trawler","ff9470eb","Clupeidae",70,"Trash",120,3.5
+"Trawler","ff9470eb","Engraulidae",109,"Trash",120,3.5
+"Trawler","ff9470eb","Lactariidae",3,"Trash",120,3.5
+"Trawler","ff9470eb","Leiognathidae",11,"Trash",120,3.5
+"Trawler","ff9470eb","Loliginidae",46,"Trash",120,3.5
+"Trawler","ff9470eb","Scombridae",50,"Trash",120,3.5
+"Trawler","ff9470eb","Terapontidae",134,"Trash",120,3.5
+"Trawler","ff9470eb","Trichiuridae",97,"Trash",120,3.5
+"Trawler","0325ee8f","Carangidae",224,"Trash",150,3
+"Trawler","0325ee8f","Clupeidae",108,"Trash",150,3
+"Trawler","0325ee8f","Engraulidae",361,"Trash",150,3
+"Trawler","0325ee8f","Lactariidae",4,"Trash",150,3
+"Trawler","0325ee8f","Loliginidae",15,"Trash",150,3
+"Trawler","0325ee8f","Penaeidae",1,"Trash",150,3
+"Trawler","0325ee8f","Trichiuridae",36,"Trash",150,3
+"Trawler","be2911e7","Carangidae",1001,"Trash",180,3
+"Trawler","be2911e7","Scombridae",27,"Trash",180,3
+"Trawler","49de011e","Ariidae",44,"Trash",240,3
+"Trawler","49de011e","Carangidae",748,"Trash",240,3
+"Trawler","49de011e","Engraulidae",96,"Trash",240,3
+"Trawler","49de011e","Lactariidae",1,"Trash",240,3
+"Trawler","49de011e","Loliginidae",23,"Trash",240,3
+"Trawler","49de011e","Scombridae",21,"Trash",240,3
+"Trawler","49de011e","Serranidae",64,"Trash",240,3
+"Trawler","c6205928","Carangidae",6,"Trash",240,3
+"Trawler","c6205928","Engraulidae",174,"Trash",240,3
+"Trawler","c6205928","Sergestidae",40,"Trash",240,3
+"Trawler","89ef334c","Carangidae",196,"Trash",240,3
+"Trawler","89ef334c","Engraulidae",144,"Trash",240,3
+"Trawler","89ef334c","Leiognathidae",51,"Trash",240,3
+"Trawler","89ef334c","Priacanthidae",285,"Trash",240,3
+"Trawler","89ef334c","Scombridae",106,"Trash",240,3
+"Trawler","89ef334c","Tetraodontidae",191,"Trash",240,3
+"Trawler","89ef334c","Trichiuridae",100,"Trash",240,3
+"Trawler","6681bc40","Clupeidae",100,"Trash",180,3
+"Trawler","6681bc40","Sergestidae",100,"Trash",180,3
+"Trawler","285b0c16","Carangidae",199,"Trash",180,3
+"Trawler","285b0c16","Clupeidae",571,"Trash",180,3
+"Trawler","285b0c16","Engraulidae",67,"Trash",180,3
+"Trawler","285b0c16","Terapontidae",26,"Trash",180,3
+"Trawler","285b0c16","Trichiuridae",11,"Trash",180,3
+"Trawler","e829fc49","Ariidae",70,"Trash",180,3
+"Trawler","e829fc49","Carangidae",139,"Trash",180,3
+"Trawler","e829fc49","Haemulidae",19,"Trash",180,3
+"Trawler","e829fc49","Leiognathidae",13,"Trash",180,3
+"Trawler","e829fc49","Sciaenidae",18,"Trash",180,3
+"Trawler","e829fc49","Serranidae",30,"Trash",180,3
+"Trawler","e829fc49","Terapontidae",58,"Trash",180,3
+"Trawler","e829fc49","Tetraodontidae",221,"Trash",180,3
+"Trawler","84142587","Nemipteridae",21,"Discards","NA","NA"
+"Trawler","84142587","Penaeidae",30,"Discards","NA","NA"
+"Trawler","84142587","Portunidae",12,"Discards","NA","NA"
+"Trawler","84142587","Serranidae",14,"Discards","NA","NA"
+"Trawler","84142587","Squillidae",130,"Discards","NA","NA"
+"Trawler","caca9139","Carangidae",7,"Trash","NA","NA"
+"Trawler","caca9139","Cynoglossidae",33,"Trash","NA","NA"
+"Trawler","caca9139","Hemiscylliidae",141,"Trash","NA","NA"
+"Trawler","caca9139","Leiognathidae",14,"Trash","NA","NA"
+"Trawler","caca9139","Platycephalidae",148,"Trash","NA","NA"
+"Trawler","caca9139","Sciaenidae",184,"Trash","NA","NA"
+"Trawler","caca9139","Scombridae",22,"Trash","NA","NA"
+"Trawler","caca9139","Serranidae",21,"Trash","NA","NA"
+"Trawler","caca9139","Squillidae",3,"Trash","NA","NA"
+"Trawler","caca9139","Synanceiidae",26,"Trash","NA","NA"
+"Trawler","caca9139","Terapontidae",4,"Trash","NA","NA"
+"Trawler","caca9139","Trichiuridae",58,"Trash","NA","NA"
+"Trawler","ffbc1e3f","Carangidae",30,"Trash","NA",4
+"Trawler","ffbc1e3f","Clupeidae",67,"Trash","NA",4
+"Trawler","ffbc1e3f","Cynoglossidae",21,"Trash","NA",4
+"Trawler","ffbc1e3f","Engraulidae",420,"Trash","NA",4
+"Trawler","ffbc1e3f","Portunidae",27,"Trash","NA",4
+"Trawler","ffbc1e3f","Terapontidae",106,"Trash","NA",4
+"Trawler","ffbc1e3f","Tetraodontidae",153,"Trash","NA",4
+"Trawler","d93e0bfa","Carangidae",362,"Trash","NA","NA"
+"Trawler","d93e0bfa","Clupeidae",141,"Trash","NA","NA"
+"Trawler","d93e0bfa","Engraulidae",21,"Trash","NA","NA"
+"Trawler","d93e0bfa","Lactariidae",30,"Trash","NA","NA"
+"Trawler","137a4b89","Carangidae",604,"Trash",180,3
+"Trawler","137a4b89","Clupeidae",110,"Trash",180,3
+"Trawler","137a4b89","Engraulidae",86,"Trash",180,3
+"Trawler","137a4b89","Lactariidae",23,"Trash",180,3
+"Trawler","137a4b89","Trichiuridae",1,"Trash",180,3
+"Trawler","664dd930","Carangidae",728,"Trash",180,3
+"Trawler","664dd930","Priacanthidae",156,"Trash",180,3
+"Trawler","664dd930","Scombridae",4,"Trash",180,3
+"Trawler","664dd930","Sepiidae",16,"Trash",180,3
+"Trawler","664dd930","Serranidae",63,"Trash",180,3
+"Trawler","664dd930","Sphyraenidae",21,"Trash",180,3
+"Trawler","0eb95a98","Carangidae",110,"Trash",180,2
+"Trawler","0eb95a98","Clupeidae",87,"Trash",180,2
+"Trawler","0eb95a98","Dasyatidae",113,"Trash",180,2
+"Trawler","0eb95a98","Engraulidae",178,"Trash",180,2
+"Trawler","0eb95a98","Leiognathidae",23,"Trash",180,2
+"Trawler","0eb95a98","Nemipteridae",18,"Trash",180,2
+"Trawler","0eb95a98","Platycephalidae",49,"Trash",180,2
+"Trawler","0eb95a98","Serranidae",149,"Trash",180,2
+"Trawler","0eb95a98","Terapontidae",108,"Trash",180,2
+"Trawler","c6c4e8f9","Carangidae",23,"Trash",240,2
+"Trawler","c6c4e8f9","Clupeidae",418,"Trash",240,2
+"Trawler","c6c4e8f9","Engraulidae",149,"Trash",240,2
+"Trawler","c6c4e8f9","Loliginidae",0,"Trash",240,2
+"Trawler","c6c4e8f9","Nemipteridae",19,"Trash",240,2
+"Trawler","c6c4e8f9","Priacanthidae",71,"Trash",240,2
+"Trawler","c6c4e8f9","Trichiuridae",39,"Trash",240,2
+"Trawler","67fb97de","Cynoglossidae",100,"Trash",120,3
+"Trawler","366ccedf","Carangidae",46,"Trash",150,3.4
+"Trawler","366ccedf","Engraulidae",34,"Trash",150,3.4
+"Trawler","366ccedf","Haemulidae",18,"Trash",150,3.4
+"Trawler","366ccedf","Nemipteridae",70,"Trash",150,3.4
+"Trawler","366ccedf","Platycephalidae",128,"Trash",150,3.4
+"Trawler","366ccedf","Sciaenidae",71,"Trash",150,3.4
+"Trawler","366ccedf","Serranidae",36,"Trash",150,3.4
+"Trawler","366ccedf","Sphyraenidae",60,"Trash",150,3.4
+"Trawler","366ccedf","Terapontidae",154,"Trash",150,3.4
+"Trawler","366ccedf","Tetraodontidae",18,"Trash",150,3.4
+"Trawler","366ccedf","Trichiuridae",161,"Trash",150,3.4
+"Trawler","de166e17","Carangidae",100,"Trash","NA","NA"
+"Trawler","de166e17","Nemipteridae",100,"Trash","NA","NA"
+"Trawler","a23edb4b","Carangidae",40,"Trash",180,3
+"Trawler","a23edb4b","Clupeidae",99,"Trash",180,3
+"Trawler","a23edb4b","Engraulidae",21,"Trash",180,3
+"Trawler","a23edb4b","Lactariidae",12,"Trash",180,3
+"Trawler","a23edb4b","Nemipteridae",121,"Trash",180,3
+"Trawler","a23edb4b","Platycephalidae",67,"Trash",180,3
+"Trawler","a23edb4b","Sciaenidae",74,"Trash",180,3
+"Trawler","a23edb4b","Serranidae",51,"Trash",180,3
+"Trawler","a23edb4b","Terapontidae",60,"Trash",180,3
+"Trawler","a23edb4b","Trichiuridae",71,"Trash",180,3
+"Trawler","87d22d41","Carangidae",147,"Trash","NA",2.5
+"Trawler","87d22d41","Cynoglossidae",1,"Trash","NA",2.5
+"Trawler","87d22d41","Engraulidae",16,"Trash","NA",2.5
+"Trawler","87d22d41","Haemulidae",40,"Trash","NA",2.5
+"Trawler","87d22d41","Nemipteridae",79,"Trash","NA",2.5
+"Trawler","87d22d41","Platycephalidae",185,"Trash","NA",2.5
+"Trawler","87d22d41","Serranidae",102,"Trash","NA",2.5
+"Trawler","87d22d41","Synodontidae",13,"Trash","NA",2.5
+"Trawler","87d22d41","Terapontidae",201,"Trash","NA",2.5
+"Trawler","6c4a1306","Carangidae",65,"Trash",120,3
+"Trawler","6c4a1306","Clupeidae",45,"Trash",120,3
+"Trawler","6c4a1306","Congridae",51,"Trash",120,3
+"Trawler","6c4a1306","Engraulidae",71,"Trash",120,3
+"Trawler","6c4a1306","Haemulidae",17,"Trash",120,3
+"Trawler","6c4a1306","Leiognathidae",14,"Trash",120,3
+"Trawler","6c4a1306","Nemipteridae",100,"Trash",120,3
+"Trawler","6c4a1306","Penaeidae",18,"Trash",120,3
+"Trawler","6c4a1306","Platycephalidae",271,"Trash",120,3
+"Trawler","6c4a1306","Serranidae",283,"Trash",120,3
+"Trawler","6c4a1306","Terapontidae",57,"Trash",120,3
+"Trawler","6c4a1306","Tetraodontidae",40,"Trash",120,3
+"Trawler","9c8b8eb3","Carangidae",132,"Trash",180,3
+"Trawler","9c8b8eb3","Clupeidae",114,"Trash",180,3
+"Trawler","9c8b8eb3","Congridae",19,"Trash",180,3
+"Trawler","9c8b8eb3","Engraulidae",20,"Trash",180,3
+"Trawler","9c8b8eb3","Nemipteridae",109,"Trash",180,3
+"Trawler","9c8b8eb3","Platycephalidae",66,"Trash",180,3
+"Trawler","9c8b8eb3","Sciaenidae",8,"Trash",180,3
+"Trawler","9c8b8eb3","Serranidae",33,"Trash",180,3
+"Trawler","9c8b8eb3","Tetraodontidae",234,"Trash",180,3
+"Trawler","f04ed4e9",,17,"Trash",180,3
+"Trawler","f04ed4e9","Carangidae",108,"Trash",180,3
+"Trawler","f04ed4e9","Clupeidae",173,"Trash",180,3
+"Trawler","f04ed4e9","Congridae",80,"Trash",180,3
+"Trawler","f04ed4e9","Engraulidae",19,"Trash",180,3
+"Trawler","f04ed4e9","Lactariidae",12,"Trash",180,3
+"Trawler","f04ed4e9","Loliginidae",42,"Trash",180,3
+"Trawler","f04ed4e9","Nemipteridae",9,"Trash",180,3
+"Trawler","f04ed4e9","Serranidae",146,"Trash",180,3
+"Trawler","f04ed4e9","Squillidae",12,"Trash",180,3
+"Trawler","f04ed4e9","Terapontidae",63,"Trash",180,3
+"Trawler","f04ed4e9","Tetraodontidae",153,"Trash",180,3
+"Trawler","4221cf70","Carangidae",319,"Trash",180,1
+"Trawler","4221cf70","Clupeidae",177,"Trash",180,1
+"Trawler","4221cf70","Engraulidae",188,"Trash",180,1
+"Trawler","4221cf70","Leiognathidae",3,"Trash",180,1
+"Trawler","4221cf70","Loliginidae",23,"Trash",180,1
+"Trawler","4221cf70","Nemipteridae",22,"Trash",180,1
+"Trawler","4221cf70","Sciaenidae",21,"Trash",180,1
+"Trawler","4221cf70","Squillidae",6,"Trash",180,1
+"Trawler","4221cf70","Tetraodontidae",1,"Trash",180,1
+"Trawler","41ab5167","Carangidae",560,"Trash","NA",3
+"Trawler","41ab5167","Clupeidae",68,"Trash","NA",3
+"Trawler","41ab5167","Congridae",33,"Trash","NA",3
+"Trawler","41ab5167","Dasyatidae",34,"Trash","NA",3
+"Trawler","41ab5167","Engraulidae",32,"Trash","NA",3
+"Trawler","41ab5167","Nemipteridae",100,"Trash","NA",3
+"Trawler","41ab5167","Platycephalidae",43,"Trash","NA",3
+"Trawler","41ab5167","Plotosidae",90,"Trash","NA",3
+"Trawler","41ab5167","Sphyraenidae",13,"Trash","NA",3
+"Trawler","41ab5167","Terapontidae",30,"Trash","NA",3
+"Trawler","c8fd3958","Carangidae",343,"Trash",270,2
+"Trawler","c8fd3958","Clupeidae",38,"Trash",270,2
+"Trawler","c8fd3958","Congridae",16,"Trash",270,2
+"Trawler","c8fd3958","Engraulidae",94,"Trash",270,2
+"Trawler","c8fd3958","Leiognathidae",27,"Trash",270,2
+"Trawler","c8fd3958","Nemipteridae",100,"Trash",270,2
+"Trawler","c8fd3958","Platycephalidae",39,"Trash",270,2
+"Trawler","c8fd3958","Priacanthidae",3,"Trash",270,2
+"Trawler","c8fd3958","Serranidae",25,"Trash",270,2
+"Trawler","c8fd3958","Synodontidae",1,"Trash",270,2
+"Trawler","c8fd3958","Tetraodontidae",313,"Trash",270,2
+"Trawler","d4ea35e2","Bregmacerotidae",1,"Trash",210,3.5
+"Trawler","d4ea35e2","Carangidae",111,"Trash",210,3.5
+"Trawler","d4ea35e2","Clupeidae",27,"Trash",210,3.5
+"Trawler","d4ea35e2","Engraulidae",51,"Trash",210,3.5
+"Trawler","d4ea35e2","Menidae",95,"Trash",210,3.5
+"Trawler","d4ea35e2","Sciaenidae",13,"Trash",210,3.5
+"Trawler","bb95636b","Carangidae",625,"Trash","NA",3
+"Trawler","bb95636b","Engraulidae",194,"Trash","NA",3
+"Trawler","bb95636b","Menidae",29,"Trash","NA",3
+"Trawler","038027cb","Carangidae",211,"Trash","NA","NA"
+"Trawler","038027cb","Clupeidae",73,"Trash","NA","NA"
+"Trawler","038027cb","Congridae",78,"Trash","NA","NA"
+"Trawler","038027cb","Engraulidae",53,"Trash","NA","NA"
+"Trawler","038027cb","Leiognathidae",36,"Trash","NA","NA"
+"Trawler","038027cb","Nemipteridae",8,"Trash","NA","NA"
+"Trawler","038027cb","Platycephalidae",9,"Trash","NA","NA"
+"Trawler","038027cb","Serranidae",14,"Trash","NA","NA"
+"Trawler","038027cb","Sphyraenidae",28,"Trash","NA","NA"
+"Trawler","038027cb","Squillidae",11,"Trash","NA","NA"
+"Trawler","038027cb","Tetraodontidae",193,"Trash","NA","NA"
+"Trawler","0da95918","Carangidae",214,"Trash","NA",3
+"Trawler","0da95918","Congridae",53,"Trash","NA",3
+"Trawler","0da95918","Cynoglossidae",1,"Trash","NA",3
+"Trawler","0da95918","Haemulidae",25,"Trash","NA",3
+"Trawler","0da95918","Leiognathidae",13,"Trash","NA",3
+"Trawler","0da95918","Mullidae",30,"Trash","NA",3
+"Trawler","0da95918","Nemipteridae",100,"Trash","NA",3
+"Trawler","0da95918","Platycephalidae",65,"Trash","NA",3
+"Trawler","0da95918","Plotosidae",146,"Trash","NA",3
+"Trawler","0da95918","Serranidae",43,"Trash","NA",3
+"Trawler","0da95918","Terapontidae",9,"Trash","NA",3
+"Trawler","0da95918","Tetraodontidae",286,"Trash","NA",3
+"Trawler","0da95918","Trichiuridae",31,"Trash","NA",3
+"Trawler","3259206e","Carangidae",183,"Trash",180,1
+"Trawler","3259206e","Clupeidae",168,"Trash",180,1
+"Trawler","3259206e","Engraulidae",64,"Trash",180,1
+"Trawler","3259206e","Leiognathidae",13,"Trash",180,1
+"Trawler","3259206e","Loliginidae",6,"Trash",180,1
+"Trawler","3259206e","Menidae",114,"Trash",180,1
+"Trawler","3259206e","Priacanthidae",21,"Trash",180,1
+"Trawler","3259206e","Sepiidae",16,"Trash",180,1
+"Trawler","3259206e","Tetraodontidae",143,"Trash",180,1
+"Trawler","2144f389","Carangidae",530,"Trash",180,3
+"Trawler","2144f389","Clupeidae",12,"Trash",180,3
+"Trawler","2144f389","Engraulidae",26,"Trash",180,3
+"Trawler","2144f389","Loliginidae",12,"Trash",180,3
+"Trawler","2144f389","Scombridae",26,"Trash",180,3
+"Trawler","d0064394",,1,"Trash","NA",3
+"Trawler","d0064394","Congridae",101,"Trash","NA",3
+"Trawler","d0064394","Cynoglossidae",59,"Trash","NA",3
+"Trawler","d0064394","Engraulidae",15,"Trash","NA",3
+"Trawler","d0064394","Nemipteridae",100,"Trash","NA",3
+"Trawler","d0064394","Platycephalidae",12,"Trash","NA",3
+"Trawler","d0064394","Synanceiidae",58,"Trash","NA",3
+"Trawler","d0064394","Terapontidae",25,"Trash","NA",3
+"Trawler","d0064394","Tetraodontidae",592,"Trash","NA",3
+"Trawler","35d22e4d","Carangidae",264,"Trash","NA","NA"
+"Trawler","35d22e4d","Engraulidae",15,"Trash","NA","NA"
+"Trawler","35d22e4d","Leiognathidae",1,"Trash","NA","NA"
+"Trawler","35d22e4d","Loliginidae",116,"Trash","NA","NA"
+"Trawler","35d22e4d","Menidae",12,"Trash","NA","NA"
+"Trawler","35d22e4d","Terapontidae",19,"Trash","NA","NA"
+"Trawler","35d22e4d","Tetraodontidae",456,"Trash","NA","NA"
+"Trawler","35d22e4d","Trichiuridae",101,"Trash","NA","NA"
+"Trawler","56577783",,224,"Trash","NA",2.5
+"Trawler","56577783","Congridae",163,"Trash","NA",2.5
+"Trawler","56577783","Cynoglossidae",8,"Trash","NA",2.5
+"Trawler","56577783","Serranidae",42,"Trash","NA",2.5
+"Trawler","56577783","Synodontidae",82,"Trash","NA",2.5
+"Trawler","56577783","Terapontidae",30,"Trash","NA",2.5
+"Trawler","56577783","Tetraodontidae",257,"Trash","NA",2.5
+"Trawler","05664668","Carangidae",126,"Trash",195,3
+"Trawler","05664668","Congridae",46,"Trash",195,3
+"Trawler","05664668","Cynoglossidae",4,"Trash",195,3
+"Trawler","05664668","Platycephalidae",16,"Trash",195,3
+"Trawler","05664668","Serranidae",51,"Trash",195,3
+"Trawler","05664668","Synodontidae",11,"Trash",195,3
+"Trawler","05664668","Terapontidae",37,"Trash",195,3
+"Trawler","05664668","Tetraodontidae",630,"Trash",195,3
+"Trawler","1712786a","Carangidae",274,"Trash",180,3
+"Trawler","1712786a","Engraulidae",73,"Trash",180,3
+"Trawler","1712786a","Leiognathidae",43,"Trash",180,3
+"Trawler","1712786a","Loliginidae",24,"Trash",180,3
+"Trawler","1712786a","Sepiidae",340,"Trash",180,3
+"Trawler","1712786a","Squillidae",1,"Trash",180,3
+"Trawler","1712786a","Terapontidae",17,"Trash",180,3
+"Trawler","2d1a4906","Ariidae",53,"Trash","NA",2.5
+"Trawler","2d1a4906","Clupeidae",28,"Trash","NA",2.5
+"Trawler","2d1a4906","Congridae",25,"Trash","NA",2.5
+"Trawler","2d1a4906","Cynoglossidae",19,"Trash","NA",2.5
+"Trawler","2d1a4906","Sepiidae",18,"Trash","NA",2.5
+"Trawler","2d1a4906","Serranidae",165,"Trash","NA",2.5
+"Trawler","2d1a4906","Terapontidae",10,"Trash","NA",2.5
+"Trawler","2d1a4906","Tetraodontidae",499,"Trash","NA",2.5
+"Trawler","cefd8fa5","Clupeidae",202,"Trash","NA","NA"
+"Trawler","cefd8fa5","Engraulidae",44,"Trash","NA","NA"
+"Trawler","cefd8fa5","Menidae",499,"Trash","NA","NA"
+"Trawler","e327bfc1","Carangidae",76,"Trash","NA","NA"
+"Trawler","e327bfc1","Congridae",28,"Trash","NA","NA"
+"Trawler","e327bfc1","Cynoglossidae",1,"Trash","NA","NA"
+"Trawler","e327bfc1","Haemulidae",23,"Trash","NA","NA"
+"Trawler","e327bfc1","Leiognathidae",62,"Trash","NA","NA"
+"Trawler","e327bfc1","Loliginidae",1,"Trash","NA","NA"
+"Trawler","e327bfc1","Platycephalidae",95,"Trash","NA","NA"
+"Trawler","e327bfc1","Sciaenidae",1,"Trash","NA","NA"
+"Trawler","e327bfc1","Serranidae",4,"Trash","NA","NA"
+"Trawler","e327bfc1","Squillidae",5,"Trash","NA","NA"
+"Trawler","e327bfc1","Terapontidae",231,"Trash","NA","NA"
+"Trawler","e327bfc1","Tetraodontidae",253,"Trash","NA","NA"
+"Trawler","e327bfc1","Triacanthidae",63,"Trash","NA","NA"
+"Trawler","9110d6f1","Carangidae",13,"Trash","NA",3
+"Trawler","9110d6f1","Clupeidae",39,"Trash","NA",3
+"Trawler","9110d6f1","Engraulidae",33,"Trash","NA",3
+"Trawler","9110d6f1","Haemulidae",156,"Trash","NA",3
+"Trawler","9110d6f1","Loliginidae",1,"Trash","NA",3
+"Trawler","9110d6f1","Nemipteridae",100,"Trash","NA",3
+"Trawler","9110d6f1","Platycephalidae",57,"Trash","NA",3
+"Trawler","9110d6f1","Serranidae",72,"Trash","NA",3
+"Trawler","9110d6f1","Terapontidae",67,"Trash","NA",3
+"Trawler","9110d6f1","Tetraodontidae",404,"Trash","NA",3
+"Trawler","39c9db39","Carangidae",169,"Trash",180,3
+"Trawler","39c9db39","Clupeidae",15,"Trash",180,3
+"Trawler","39c9db39","Engraulidae",69,"Trash",180,3
+"Trawler","39c9db39","Leiognathidae",7,"Trash",180,3
+"Trawler","39c9db39","Menidae",507,"Trash",180,3
+"Trawler","a83f912c","Ariidae",61,"Trash","NA",3
+"Trawler","a83f912c","Clupeidae",66,"Trash","NA",3
+"Trawler","a83f912c","Congridae",89,"Trash","NA",3
+"Trawler","a83f912c","Engraulidae",19,"Trash","NA",3
+"Trawler","a83f912c","Gerreidae",24,"Trash","NA",3
+"Trawler","a83f912c","Haemulidae",19,"Trash","NA",3
+"Trawler","a83f912c","Serranidae",59,"Trash","NA",3
+"Trawler","a83f912c","Terapontidae",37,"Trash","NA",3
+"Trawler","a83f912c","Tetraodontidae",467,"Trash","NA",3
+"Trawler","4309dda0","Menidae",100,"Trash",180,3
+"Trawler","62ea188f","Astropectinidae",1,"Trash","NA",3
+"Trawler","62ea188f","Carangidae",81,"Trash","NA",3
+"Trawler","62ea188f","Congridae",160,"Trash","NA",3
+"Trawler","62ea188f","Cynoglossidae",217,"Trash","NA",3
+"Trawler","62ea188f","Engraulidae",17,"Trash","NA",3
+"Trawler","62ea188f","Platycephalidae",25,"Trash","NA",3
+"Trawler","62ea188f","Sciaenidae",76,"Trash","NA",3
+"Trawler","18b6b3d2",,160,"Trash","NA","NA"
+"Trawler","18b6b3d2","Clupeidae",32,"Trash","NA","NA"
+"Trawler","18b6b3d2","Congridae",68,"Trash","NA","NA"
+"Trawler","18b6b3d2","Platycephalidae",79,"Trash","NA","NA"
+"Trawler","18b6b3d2","Portunidae",19,"Trash","NA","NA"
+"Trawler","18b6b3d2","Squillidae",7,"Trash","NA","NA"
+"Trawler","18b6b3d2","Tetraodontidae",382,"Trash","NA","NA"
+"Trawler","18b6b3d2","Trichiuridae",50,"Trash","NA","NA"
+"Trawler","6d3f1a30",,123,"Trash","NA","NA"
+"Trawler","6d3f1a30","Apogonidae",20,"Trash","NA","NA"
+"Trawler","6d3f1a30","Congridae",116,"Trash","NA","NA"
+"Trawler","6d3f1a30","Cynoglossidae",122,"Trash","NA","NA"
+"Trawler","6d3f1a30","Engraulidae",5,"Trash","NA","NA"
+"Trawler","6d3f1a30","Gobiidae",206,"Trash","NA","NA"
+"Trawler","6d3f1a30","Nemipteridae",23,"Trash","NA","NA"
+"Trawler","6d3f1a30","Platycephalidae",13,"Trash","NA","NA"
+"Trawler","6d3f1a30","Serranidae",64,"Trash","NA","NA"
+"Trawler","6d3f1a30","Terapontidae",15,"Trash","NA","NA"
+"Trawler","c6205928","Engraulidae",24000,"High Value Species","NA","NA"
+"Trawler","c6205928","Loliginidae",5000,"Shrimp","NA","NA"
+"Trawler","c6205928","Scombridae",5500,"High Value Species","NA","NA"
+"Trawler","c6205928","Sergestidae",224000,"High Value Species","NA","NA"
+"Trawler","c6205928","NA",103000,"High Value Species","NA","NA"
+"Trawler","89ef334c","Engraulidae",36000,"High Value Species","NA","NA"
+"Trawler","89ef334c","Lactariidae",2000,"High Value Species","NA","NA"
+"Trawler","89ef334c","Scombridae",45000,"High Value Species","NA","NA"
+"Trawler","89ef334c","Sphyraenidae",4000,"High Value Species","NA","NA"
+"Trawler","89ef334c","NA",610500,"High Value Species","NA","NA"
+"Trawler","6681bc40","Carangidae",56000,"High Value Species","NA","NA"
+"Trawler","6681bc40","Engraulidae",28000,"High Value Species","NA","NA"
+"Trawler","6681bc40","Loliginidae",10000,"Shrimp","NA","NA"
+"Trawler","6681bc40","Scombridae",22000,"High Value Species","NA","NA"
+"Trawler","6681bc40","Sergestidae",18000,"High Value Species","NA","NA"
+"Trawler","6681bc40","Sphyraenidae",2000,"High Value Species","NA","NA"
+"Trawler","6681bc40","NA",49500,"High Value Species","NA","NA"
+"Trawler","66ca4a36","NA",1089000,"High Value Species","NA","NA"
+"Trawler","6c5d2f08","Scombridae",168000,"High Value Species","NA","NA"
+"Trawler","6c5d2f08","NA",1019500,"High Value Species","NA","NA"
+"Trawler","15c5429d","Loliginidae",1500,"Shrimp","NA","NA"
+"Trawler","15c5429d","Scombridae",72000,"High Value Species","NA","NA"
+"Trawler","15c5429d","NA",807000,"High Value Species","NA","NA"
+"Trawler","285b0c16","Lactariidae",5000,"High Value Species","NA","NA"
+"Trawler","285b0c16","Loliginidae",9000,"Shrimp","NA","NA"
+"Trawler","285b0c16","Scombridae",126000,"High Value Species","NA","NA"
+"Trawler","285b0c16","Sphyraenidae",2000,"High Value Species","NA","NA"
+"Trawler","285b0c16","NA",435500,"High Value Species","NA","NA"
+"Trawler","e829fc49","Carcharhinidae",2500,"Shrimp","NA","NA"
+"Trawler","e829fc49","Cynoglossidae",40000,"High Value Species","NA","NA"
+"Trawler","e829fc49","Lactariidae",3000,"High Value Species","NA","NA"
+"Trawler","e829fc49","Loliginidae",1000,"Shrimp","NA","NA"
+"Trawler","e829fc49","Scombridae",14000,"High Value Species","NA","NA"
+"Trawler","e829fc49","Sergestidae",252000,"High Value Species","NA","NA"
+"Trawler","e829fc49","NA",412500,"High Value Species","NA","NA"
+"Trawler","84142587","NA",89000,"Shrimp","NA","NA"
+"Trawler","ef8e746f","Sphyraenidae",1000,"High Value Species","NA","NA"
+"Trawler","ef8e746f","NA",45500,"Elasmobranchs","NA","NA"
+"Trawler","b9e0e4bc","Cynoglossidae",220000,"High Value Species","NA","NA"
+"Trawler","b9e0e4bc","NA",45100,"High Value Species","NA","NA"
+"Trawler","ffbc1e3f","Cynoglossidae",0,"High Value Species","NA","NA"
+"Trawler","ffbc1e3f","Scombridae",1000,"High Value Species","NA","NA"
+"Trawler","ffbc1e3f","Sphyraenidae",2000,"High Value Species","NA","NA"
+"Trawler","ffbc1e3f","NA",151000,"High Value Species","NA","NA"
+"Trawler","d93e0bfa","Carcharhinidae",3000,"Shrimp","NA","NA"
+"Trawler","d93e0bfa","Clupeidae",29000,"High Value Species","NA","NA"
+"Trawler","d93e0bfa","Lactariidae",31000,"High Value Species","NA","NA"
+"Trawler","d93e0bfa","Loliginidae",12000,"Shrimp","NA","NA"
+"Trawler","d93e0bfa","Scombridae",17000,"High Value Species","NA","NA"
+"Trawler","d93e0bfa","Sphyraenidae",5000,"High Value Species","NA","NA"
+"Trawler","d93e0bfa","NA",756000,"High Value Species","NA","NA"
+"Trawler","137a4b89","Carcharhinidae",4500,"Shrimp","NA","NA"
+"Trawler","137a4b89","Lactariidae",2000,"High Value Species","NA","NA"
+"Trawler","137a4b89","Loliginidae",2000,"Shrimp","NA","NA"
+"Trawler","137a4b89","Scombridae",40000,"High Value Species","NA","NA"
+"Trawler","137a4b89","NA",965500,"Elasmobranchs","NA","NA"
+"Trawler","a4ef80b0","Carangidae",10500,"High Value Species","NA","NA"
+"Trawler","a4ef80b0","Cynoglossidae",3000,"High Value Species","NA","NA"
+"Trawler","a4ef80b0","Lactariidae",14000,"High Value Species","NA","NA"
+"Trawler","a4ef80b0","Loliginidae",3000,"Shrimp","NA","NA"
+"Trawler","a4ef80b0","Scombridae",81500,"High Value Species","NA","NA"
+"Trawler","a4ef80b0","Sphyraenidae",5000,"High Value Species","NA","NA"
+"Trawler","a4ef80b0","NA",1006500,"High Value Species","NA","NA"
+"Trawler","664dd930","Lactariidae",5000,"High Value Species","NA","NA"
+"Trawler","664dd930","Loliginidae",212000,"Shrimp","NA","NA"
+"Trawler","664dd930","Scombridae",12000,"High Value Species","NA","NA"
+"Trawler","664dd930","NA",75500,"High Value Species","NA","NA"
+"Trawler","fc2170e9","Loliginidae",1000,"Shrimp","NA","NA"
+"Trawler","fc2170e9","NA",42300,"High Value Species","NA","NA"
+"Trawler","0eb95a98","Cynoglossidae",11000,"High Value Species","NA","NA"
+"Trawler","0eb95a98","Loliginidae",3000,"Shrimp","NA","NA"
+"Trawler","0eb95a98","Scombridae",1000,"High Value Species","NA","NA"
+"Trawler","0eb95a98","Sphyraenidae",500,"High Value Species","NA","NA"
+"Trawler","0eb95a98","NA",43000,"High Value Species","NA","NA"
+"Trawler","c6c4e8f9","Carangidae",56000,"High Value Species","NA","NA"
+"Trawler","c6c4e8f9","Lactariidae",2000,"High Value Species","NA","NA"
+"Trawler","c6c4e8f9","Loliginidae",10000,"Shrimp","NA","NA"
+"Trawler","c6c4e8f9","Nemipteridae",1000,"High Value Species","NA","NA"
+"Trawler","c6c4e8f9","Scombridae",5500,"High Value Species","NA","NA"
+"Trawler","c6c4e8f9","Sphyraenidae",1000,"High Value Species","NA","NA"
+"Trawler","c6c4e8f9","NA",111500,"High Value Species","NA","NA"
+"Trawler","67fb97de","Cynoglossidae",5500,"High Value Species","NA","NA"
+"Trawler","67fb97de","NA",67000,"High Value Species","NA","NA"
+"Trawler","700aae9e","Clupeidae",500,"High Value Species","NA","NA"
+"Trawler","700aae9e","Cynoglossidae",56000,"High Value Species","NA","NA"
+"Trawler","700aae9e","Sphyraenidae",1000,"High Value Species","NA","NA"
+"Trawler","700aae9e","NA",146000,"Shrimp","NA","NA"
+"Trawler","366ccedf","Cynoglossidae",90000,"High Value Species","NA","NA"
+"Trawler","366ccedf","Lactariidae",2000,"High Value Species","NA","NA"
+"Trawler","366ccedf","Loliginidae",25500,"Shrimp","NA","NA"
+"Trawler","366ccedf","Scombridae",5000,"High Value Species","NA","NA"
+"Trawler","366ccedf","NA",112000,"Shrimp","NA","NA"
+"Trawler","de166e17","Carangidae",105000,"High Value Species","NA","NA"
+"Trawler","de166e17","Lactariidae",35000,"High Value Species","NA","NA"
+"Trawler","de166e17","Loliginidae",83000,"Shrimp","NA","NA"
+"Trawler","de166e17","Nemipteridae",56000,"Low Value Bycatch","NA","NA"
+"Trawler","de166e17","Scombridae",65500,"High Value Species","NA","NA"
+"Trawler","de166e17","Serranidae",1000,"Shrimp","NA","NA"
+"Trawler","de166e17","Sphyraenidae",10000,"High Value Species","NA","NA"
+"Trawler","de166e17","NA",65500,"High Value Species","NA","NA"
+"Trawler","a23edb4b","Cynoglossidae",41000,"High Value Species","NA","NA"
+"Trawler","a23edb4b","Lactariidae",1000,"High Value Species","NA","NA"
+"Trawler","a23edb4b","Loliginidae",6000,"Shrimp","NA","NA"
+"Trawler","a23edb4b","Nemipteridae",7000,"High Value Species","NA","NA"
+"Trawler","a23edb4b","Scombridae",1000,"High Value Species","NA","NA"
+"Trawler","a23edb4b","NA",97000,"High Value Species","NA","NA"
+"Trawler","87d22d41","Carangidae",54000,"Low Value Bycatch","NA","NA"
+"Trawler","87d22d41","Cynoglossidae",16500,"High Value Species","NA","NA"
+"Trawler","87d22d41","Loliginidae",6000,"Shrimp","NA","NA"
+"Trawler","87d22d41","Nemipteridae",2000,"High Value Species","NA","NA"
+"Trawler","87d22d41","Scombridae",4500,"High Value Species","NA","NA"
+"Trawler","87d22d41","NA",51300,"High Value Species","NA","NA"
+"Trawler","6fd7affc","Cynoglossidae",5000,"High Value Species","NA","NA"
+"Trawler","6fd7affc","Loliginidae",8000,"Shrimp","NA","NA"
+"Trawler","6fd7affc","Nemipteridae",2000,"High Value Species","NA","NA"
+"Trawler","6fd7affc","Scombridae",34000,"High Value Species","NA","NA"
+"Trawler","6fd7affc","Sphyraenidae",1000,"High Value Species","NA","NA"
+"Trawler","6fd7affc","NA",276000,"High Value Species","NA","NA"
+"Trawler","119ee9f5","NA",29000,"Shrimp","NA","NA"
+"Trawler","5b9e9a32","Leiognathidae",56000,"High Value Species","NA","NA"
+"Trawler","6c4a1306","Cynoglossidae",140000,"High Value Species","NA","NA"
+"Trawler","6c4a1306","Lactariidae",1000,"High Value Species","NA","NA"
+"Trawler","6c4a1306","Loliginidae",2000,"Shrimp","NA","NA"
+"Trawler","6c4a1306","Nemipteridae",40000,"Low Value Bycatch","NA","NA"
+"Trawler","6c4a1306","Sepiidae",10000,"High Value Species","NA","NA"
+"Trawler","6c4a1306","NA",125250,"Elasmobranchs","NA","NA"
+"Trawler","9c8b8eb3","Hemiscylliidae",2000,"Elasmobranchs","NA","NA"
+"Trawler","9c8b8eb3","NA",116500,"Shrimp","NA","NA"
+"Trawler","0b0a7e2f","Carangidae",56000,"High Value Species","NA","NA"
+"Trawler","0b0a7e2f","Lactariidae",3000,"High Value Species","NA","NA"
+"Trawler","0b0a7e2f","Loliginidae",19600,"Shrimp","NA","NA"
+"Trawler","0b0a7e2f","Nemipteridae",14000,"High Value Species","NA","NA"
+"Trawler","0b0a7e2f","Scombridae",30000,"High Value Species","NA","NA"
+"Trawler","0b0a7e2f","NA",335000,"High Value Species","NA","NA"
+"Trawler","4221cf70","Carcharhinidae",500,"Shrimp","NA","NA"
+"Trawler","4221cf70","Loliginidae",6000,"Shrimp","NA","NA"
+"Trawler","4221cf70","Nemipteridae",9000,"High Value Species","NA","NA"
+"Trawler","4221cf70","Scombridae",4000,"High Value Species","NA","NA"
+"Trawler","4221cf70","NA",77000,"High Value Species","NA","NA"
+"Trawler","b10cf02f","Clupeidae",2000,"High Value Species","NA","NA"
+"Trawler","b10cf02f","Cynoglossidae",40000,"High Value Species","NA","NA"
+"Trawler","b10cf02f","Lactariidae",3000,"High Value Species","NA","NA"
+"Trawler","b10cf02f","Nemipteridae",1000,"High Value Species","NA","NA"
+"Trawler","b10cf02f","NA",42600,"High Value Species","NA","NA"
+"Trawler","41ab5167","Carangidae",1000,"High Value Species","NA","NA"
+"Trawler","41ab5167","Clupeidae",2000,"High Value Species","NA","NA"
+"Trawler","41ab5167","Cynoglossidae",45000,"High Value Species","NA","NA"
+"Trawler","41ab5167","Hemiscylliidae",1000,"Elasmobranchs","NA","NA"
+"Trawler","41ab5167","Lactariidae",4500,"High Value Species","NA","NA"
+"Trawler","41ab5167","Loliginidae",5200,"Shrimp","NA","NA"
+"Trawler","41ab5167","Nemipteridae",14000,"High Value Species","NA","NA"
+"Trawler","41ab5167","Sphyraenidae",1000,"High Value Species","NA","NA"
+"Trawler","41ab5167","NA",107000,"High Value Species","NA","NA"
+"Trawler","c8fd3958","Carangidae",9000,"High Value Species","NA","NA"
+"Trawler","c8fd3958","Lactariidae",18000,"High Value Species","NA","NA"
+"Trawler","c8fd3958","Loliginidae",12000,"Shrimp","NA","NA"
+"Trawler","c8fd3958","Nemipteridae",14000,"High Value Species","NA","NA"
+"Trawler","c8fd3958","Scombridae",72000,"High Value Species","NA","NA"
+"Trawler","c8fd3958","Sphyraenidae",7000,"High Value Species","NA","NA"
+"Trawler","c8fd3958","NA",304300,"High Value Species","NA","NA"
+"Trawler","d4ea35e2","Clupeidae",2000,"High Value Species","NA","NA"
+"Trawler","d4ea35e2","Nemipteridae",7000,"High Value Species","NA","NA"
+"Trawler","d4ea35e2","Scombridae",14000,"High Value Species","NA","NA"
+"Trawler","d4ea35e2","NA",185000,"High Value Species","NA","NA"
+"Trawler","bb95636b","Lactariidae",2000,"High Value Species","NA","NA"
+"Trawler","bb95636b","Loliginidae",40800,"Shrimp","NA","NA"
+"Trawler","bb95636b","Nemipteridae",20000,"High Value Species","NA","NA"
+"Trawler","bb95636b","Scombridae",18000,"High Value Species","NA","NA"
+"Trawler","bb95636b","Sepiidae",6000,"High Value Species","NA","NA"
+"Trawler","bb95636b","NA",309200,"High Value Species","NA","NA"
+"Trawler","0da95918","Cynoglossidae",30000,"High Value Species","NA","NA"
+"Trawler","0da95918","Loliginidae",27000,"Shrimp","NA","NA"
+"Trawler","0da95918","Nemipteridae",14000,"High Value Species","NA","NA"
+"Trawler","0da95918","Scombridae",2500,"High Value Species","NA","NA"
+"Trawler","0da95918","Sepiidae",4000,"High Value Species","NA","NA"
+"Trawler","0da95918","NA",100900,"High Value Species","NA","NA"
+"Trawler","3259206e","Engraulidae",28000,"High Value Species","NA","NA"
+"Trawler","3259206e","Loliginidae",18000,"Shrimp","NA","NA"
+"Trawler","3259206e","Nemipteridae",30000,"High Value Species","NA","NA"
+"Trawler","3259206e","Scombridae",4500,"High Value Species","NA","NA"
+"Trawler","3259206e","Serranidae",1500,"Shrimp","NA","NA"
+"Trawler","3259206e","NA",47000,"High Value Species","NA","NA"
+"Trawler","d0064394","Lactariidae",7000,"High Value Species","NA","NA"
+"Trawler","d0064394","Loliginidae",25000,"Shrimp","NA","NA"
+"Trawler","d0064394","Nemipteridae",30000,"High Value Species","NA","NA"
+"Trawler","d0064394","Scombridae",3000,"High Value Species","NA","NA"
+"Trawler","d0064394","Sepiidae",5500,"High Value Species","NA","NA"
+"Trawler","d0064394","Serranidae",3000,"Shrimp","NA","NA"
+"Trawler","d0064394","Sphyraenidae",1000,"High Value Species","NA","NA"
+"Trawler","d0064394","NA",135300,"Elasmobranchs","NA","NA"
+"Trawler","35d22e4d","Loliginidae",9500,"Shrimp","NA","NA"
+"Trawler","35d22e4d","Nemipteridae",3000,"High Value Species","NA","NA"
+"Trawler","35d22e4d","Scombridae",5500,"High Value Species","NA","NA"
+"Trawler","35d22e4d","Serranidae",1000,"Shrimp","NA","NA"
+"Trawler","35d22e4d","NA",109000,"High Value Species","NA","NA"
+"Trawler","56577783","Carangidae",7000,"High Value Species","NA","NA"
+"Trawler","56577783","Hemiscylliidae",1000,"Elasmobranchs","NA","NA"
+"Trawler","56577783","Lactariidae",1000,"High Value Species","NA","NA"
+"Trawler","56577783","Nemipteridae",21500,"High Value Species","NA","NA"
+"Trawler","56577783","Scombridae",2000,"High Value Species","NA","NA"
+"Trawler","56577783","NA",197100,"Elasmobranchs","NA","NA"
+"Trawler","05664668","Carangidae",500,"High Value Species","NA","NA"
+"Trawler","05664668","Cynoglossidae",7000,"High Value Species","NA","NA"
+"Trawler","05664668","Loliginidae",33200,"Shrimp","NA","NA"
+"Trawler","05664668","Nemipteridae",8000,"High Value Species","NA","NA"
+"Trawler","05664668","Scombridae",1000,"High Value Species","NA","NA"
+"Trawler","05664668","NA",163500,"Shrimp","NA","NA"
+"Trawler","1712786a","Carangidae",14000,"High Value Species","NA","NA"
+"Trawler","1712786a","Clupeidae",1000,"High Value Species","NA","NA"
+"Trawler","1712786a","Engraulidae",37000,"High Value Species","NA","NA"
+"Trawler","1712786a","Hemiscylliidae",500,"Elasmobranchs","NA","NA"
+"Trawler","1712786a","Loliginidae",27500,"Shrimp","NA","NA"
+"Trawler","1712786a","Scombridae",10000,"High Value Species","NA","NA"
+"Trawler","1712786a","Sphyraenidae",1000,"High Value Species","NA","NA"
+"Trawler","1712786a","NA",131750,"High Value Species","NA","NA"
+"Trawler","2d1a4906","Cynoglossidae",28000,"High Value Species","NA","NA"
+"Trawler","2d1a4906","Lactariidae",4000,"High Value Species","NA","NA"
+"Trawler","2d1a4906","Loliginidae",1000,"Shrimp","NA","NA"
+"Trawler","2d1a4906","Nemipteridae",28000,"High Value Species","NA","NA"
+"Trawler","2d1a4906","NA",183000,"High Value Species","NA","NA"
+"Trawler","cefd8fa5","Carangidae",25000,"High Value Species","NA","NA"
+"Trawler","cefd8fa5","Engraulidae",5000,"High Value Species","NA","NA"
+"Trawler","cefd8fa5","Lactariidae",2000,"High Value Species","NA","NA"
+"Trawler","cefd8fa5","Loliginidae",47500,"Shrimp","NA","NA"
+"Trawler","cefd8fa5","Nemipteridae",4500,"High Value Species","NA","NA"
+"Trawler","cefd8fa5","Scombridae",9000,"High Value Species","NA","NA"
+"Trawler","cefd8fa5","NA",70000,"High Value Species","NA","NA"
+"Trawler","e327bfc1","Carangidae",3000,"High Value Species","NA","NA"
+"Trawler","e327bfc1","Clupeidae",1000,"High Value Species","NA","NA"
+"Trawler","e327bfc1","Cynoglossidae",15000,"High Value Species","NA","NA"
+"Trawler","e327bfc1","Hemiscylliidae",500,"Elasmobranchs","NA","NA"
+"Trawler","e327bfc1","Lactariidae",2000,"High Value Species","NA","NA"
+"Trawler","e327bfc1","Loliginidae",27800,"Shrimp","NA","NA"
+"Trawler","e327bfc1","Nemipteridae",9000,"High Value Species","NA","NA"
+"Trawler","e327bfc1","Scombridae",3000,"High Value Species","NA","NA"
+"Trawler","e327bfc1","Serranidae",3500,"Shrimp","NA","NA"
+"Trawler","e327bfc1","NA",280000,"High Value Species","NA","NA"
+"Trawler","9110d6f1","Carangidae",5000,"High Value Species","NA","NA"
+"Trawler","9110d6f1","Cynoglossidae",13000,"High Value Species","NA","NA"
+"Trawler","9110d6f1","Hemiscylliidae",500,"Elasmobranchs","NA","NA"
+"Trawler","9110d6f1","Loliginidae",2500,"Shrimp","NA","NA"
+"Trawler","9110d6f1","Nemipteridae",21000,"High Value Species","NA","NA"
+"Trawler","9110d6f1","Scombridae",2000,"High Value Species","NA","NA"
+"Trawler","9110d6f1","NA",91200,"High Value Species","NA","NA"
+"Trawler","39c9db39","Carangidae",9000,"High Value Species","NA","NA"
+"Trawler","39c9db39","Clupeidae",56000,"High Value Species","NA","NA"
+"Trawler","39c9db39","Loliginidae",10000,"Shrimp","NA","NA"
+"Trawler","39c9db39","Menidae",56000,"High Value Species","NA","NA"
+"Trawler","39c9db39","Nemipteridae",7000,"High Value Species","NA","NA"
+"Trawler","39c9db39","Scombridae",84500,"High Value Species","NA","NA"
+"Trawler","39c9db39","NA",768000,"High Value Species","NA","NA"
+"Trawler","4309dda0","Clupeidae",1000,"High Value Species","NA","NA"
+"Trawler","4309dda0","Hemiscylliidae",1000,"Elasmobranchs","NA","NA"
+"Trawler","4309dda0","Lactariidae",14000,"High Value Species","NA","NA"
+"Trawler","4309dda0","Loliginidae",7800,"Shrimp","NA","NA"
+"Trawler","4309dda0","Menidae",28000,"Low Value Bycatch","NA","NA"
+"Trawler","4309dda0","Scombridae",2000,"High Value Species","NA","NA"
+"Trawler","4309dda0","NA",260500,"Elasmobranchs","NA","NA"
+"Trawler","3415449f","Cynoglossidae",23000,"High Value Species","NA","NA"
+"Trawler","3415449f","Loliginidae",1200,"Shrimp","NA","NA"
+"Trawler","3415449f","Menidae",9000,"High Value Species","NA","NA"
+"Trawler","3415449f","Scombridae",2000,"High Value Species","NA","NA"
+"Trawler","3415449f","Sphyraenidae",2000,"High Value Species","NA","NA"
+"Trawler","3415449f","NA",124700,"Elasmobranchs","NA","NA"
+"Trawler","62ea188f","Clupeidae",500,"High Value Species","NA","NA"
+"Trawler","62ea188f","Cynoglossidae",70000,"High Value Species","NA","NA"
+"Trawler","62ea188f","Lactariidae",1000,"High Value Species","NA","NA"
+"Trawler","62ea188f","Loliginidae",1000,"Shrimp","NA","NA"
+"Trawler","62ea188f","NA",108000,"High Value Species","NA","NA"
+"Trawler","18b6b3d2","Carcharhinidae",250,"Shrimp","NA","NA"
+"Trawler","18b6b3d2","Cynoglossidae",46000,"High Value Species","NA","NA"
+"Trawler","18b6b3d2","Lactariidae",1000,"High Value Species","NA","NA"
+"Trawler","18b6b3d2","Nemipteridae",19500,"High Value Species","NA","NA"
+"Trawler","18b6b3d2","NA",91500,"High Value Species","NA","NA"
+"Trawler","6d3f1a30","Cynoglossidae",64000,"High Value Species","NA","NA"
+"Trawler","6d3f1a30","Hemiscylliidae",1500,"Elasmobranchs","NA","NA"
+"Trawler","6d3f1a30","Lactariidae",1000,"High Value Species","NA","NA"
+"Trawler","6d3f1a30","Loliginidae",750,"Shrimp","NA","NA"
+"Trawler","6d3f1a30","Nemipteridae",1000,"High Value Species","NA","NA"
+"Trawler","6d3f1a30","NA",96500,"Elasmobranchs","NA","NA"
+"Trawler","e2dfead5","Loliginidae",8000,"Shrimp","NA","NA"
+"Trawler","e2dfead5","NA",76000,"High Value Species","NA","NA"
+"Trawler","cb293dca","Loliginidae",28500,"Shrimp","NA","NA"
+"Trawler","cb293dca","Scombridae",14000,"High Value Species","NA","NA"
+"Trawler","cb293dca","NA",126000,"High Value Species","NA","NA"
