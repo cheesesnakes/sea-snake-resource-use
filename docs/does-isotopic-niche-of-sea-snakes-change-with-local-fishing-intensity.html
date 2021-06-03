@@ -24,7 +24,7 @@
 <meta name="author" content="Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker" />
 
 
-<meta name="date" content="2021-06-02" />
+<meta name="date" content="2021-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -912,21 +912,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb68-24"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-24" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> dep_int <span class="sc">%&gt;%</span></span>
 <span id="cb68-25"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Gear.Type) <span class="sc">%&gt;%</span></span>
 <span id="cb68-26"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nest</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb68-27"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;effort&quot;</span>, <span class="at">func =</span> <span class="st">&quot;sum&quot;</span>)), <span class="at">mdf =</span> <span class="fu">map</span>(m, </span>
-<span id="cb68-28"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-28" aria-hidden="true" tabindex="-1"></a>        map.df)) <span class="sc">%&gt;%</span></span>
-<span id="cb68-29"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-29" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(mdf) <span class="sc">%&gt;%</span></span>
-<span id="cb68-30"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb68-31"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">spread</span>(Gear.Type, layer)</span>
-<span id="cb68-32"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-33"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-33" aria-hidden="true" tabindex="-1"></a><span class="do">## creating distance matrix</span></span>
-<span id="cb68-34"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-35"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-35" aria-hidden="true" tabindex="-1"></a>dist_fi <span class="ot">&lt;-</span> <span class="fu">dist</span>(fi)</span>
-<span id="cb68-36"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-37"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Hierarchical clustering</span></span>
-<span id="cb68-38"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-39"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-39" aria-hidden="true" tabindex="-1"></a>clust_fi <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dist_fi)</span>
-<span id="cb68-40"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-41"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-41" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(clust_fi, <span class="at">hang =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">labels =</span> F)</span></code></pre></div>
+<span id="cb68-27"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">map.extract</span>(<span class="at">df =</span> ., <span class="at">var =</span> <span class="st">&quot;effort&quot;</span>, <span class="at">func =</span> <span class="st">&quot;sum&quot;</span>)), <span class="at">mdf =</span> <span class="fu">map</span>(m, map.df)) <span class="sc">%&gt;%</span></span>
+<span id="cb68-28"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-28" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(mdf) <span class="sc">%&gt;%</span></span>
+<span id="cb68-29"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb68-30"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">spread</span>(Gear.Type, layer)</span>
+<span id="cb68-31"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-32"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-32" aria-hidden="true" tabindex="-1"></a><span class="do">## creating distance matrix</span></span>
+<span id="cb68-33"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-34"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-34" aria-hidden="true" tabindex="-1"></a>dist_fi <span class="ot">&lt;-</span> <span class="fu">dist</span>(fi)</span>
+<span id="cb68-35"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-36"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Hierarchical clustering</span></span>
+<span id="cb68-37"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-38"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-38" aria-hidden="true" tabindex="-1"></a>clust_fi <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dist_fi)</span>
+<span id="cb68-39"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-40"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb68-40" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(clust_fi, <span class="at">hang =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">labels =</span> F)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-54-1.png" width="2400" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Assigning fishing intensity classes</span></span>
 <span id="cb69-2"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -941,8 +940,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb69-11"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb69-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">class =</span> <span class="fu">fct_relevel</span>(class, <span class="fu">c</span>(<span class="st">&quot;High&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;Low&quot;</span>)))</span></code></pre></div>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Plotting grid</span></span>
 <span id="cb70-2"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-3"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fi, <span class="fu">aes</span>(x, y, <span class="at">fill =</span> class)) <span class="sc">+</span> <span class="fu">geom_tile</span>(<span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>, </span>
-<span id="cb70-4"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb70-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Fishing intensity&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>))</span></code></pre></div>
+<span id="cb70-3"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fi, <span class="fu">aes</span>(x, y, <span class="at">fill =</span> class)) <span class="sc">+</span> <span class="fu">geom_tile</span>(<span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>, <span class="at">name =</span> <span class="st">&quot;Fishing intensity&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb70-4"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb70-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-55-1.png" width="1200" style="display: block; margin: auto;" /></p>
 </div>
 <div id="determining-capture-grid-cell-for-individual-snakes" class="section level2" number="8.2">
@@ -967,51 +966,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb71-9"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(snakes, <span class="st">&quot;Field.Code&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb71-10"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Lab =</span> <span class="st">&quot;CEAS&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb71-11"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">Delta.Carbon =</span> d13C..vpdb., <span class="at">Delta.Nitrogen =</span> d15N..N2.air.) <span class="sc">%&gt;%</span></span>
-<span id="cb71-12"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-12" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Field.Code, Species, Snout.to.Vent..cm., Sex, Class, Gear.Type, </span>
-<span id="cb71-13"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-13" aria-hidden="true" tabindex="-1"></a>        Fishing.Location, Location.encountered, Depth.Caught..m., Plasma.Color, Delta.Carbon, </span>
-<span id="cb71-14"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-14" aria-hidden="true" tabindex="-1"></a>        Delta.Nitrogen, Lab, Tissue.type, Month, Year) <span class="sc">%&gt;%</span></span>
-<span id="cb71-15"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># using location encountered where fishing location is unavailable</span></span>
-<span id="cb71-16"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">Fishing.Location =</span> <span class="fu">ifelse</span>(Fishing.Location <span class="sc">==</span> <span class="st">&quot;&quot;</span>, Location.encountered, Fishing.Location)) <span class="sc">%&gt;%</span></span>
-<span id="cb71-17"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Fishing.Location =</span> <span class="fu">ifelse</span>(Fishing.Location <span class="sc">==</span> <span class="st">&quot;Dandi&quot;</span> <span class="sc">|</span> Fishing.Location <span class="sc">==</span> </span>
-<span id="cb71-18"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Dandi Beach&quot;</span>, <span class="st">&quot;Wayari&quot;</span>, Fishing.Location))</span>
+<span id="cb71-12"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-12" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Field.Code, Species, Snout.to.Vent..cm., Sex, Class, Gear.Type, Fishing.Location, Location.encountered, Depth.Caught..m., Plasma.Color, Delta.Carbon, </span>
+<span id="cb71-13"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-13" aria-hidden="true" tabindex="-1"></a>        Delta.Nitrogen, Lab, Tissue.type, Month, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb71-14"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># using location encountered where fishing location is unavailable</span></span>
+<span id="cb71-15"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-15" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">Fishing.Location =</span> <span class="fu">ifelse</span>(Fishing.Location <span class="sc">==</span> <span class="st">&quot;&quot;</span>, Location.encountered, Fishing.Location)) <span class="sc">%&gt;%</span></span>
+<span id="cb71-16"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Fishing.Location =</span> <span class="fu">ifelse</span>(Fishing.Location <span class="sc">==</span> <span class="st">&quot;Dandi&quot;</span> <span class="sc">|</span> Fishing.Location <span class="sc">==</span> <span class="st">&quot;Dandi Beach&quot;</span>, <span class="st">&quot;Wayari&quot;</span>, Fishing.Location))</span>
+<span id="cb71-17"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-18"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-18" aria-hidden="true" tabindex="-1"></a><span class="co"># selecting relavant variables</span></span>
 <span id="cb71-19"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-20"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-20" aria-hidden="true" tabindex="-1"></a><span class="co"># selecting relavant variables</span></span>
-<span id="cb71-21"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-22"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-22" aria-hidden="true" tabindex="-1"></a>sia_li <span class="ot">=</span> sia_snakes <span class="sc">%&gt;%</span></span>
-<span id="cb71-23"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-23" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Field.Code, Species, Fishing.Location, Depth.Caught..m., Tissue.type, </span>
-<span id="cb71-24"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-24" aria-hidden="true" tabindex="-1"></a>        Delta.Carbon, Delta.Nitrogen) <span class="sc">%&gt;%</span></span>
-<span id="cb71-25"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fishing.Location <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb71-26"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb71-27"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">droplevels</span>()</span>
-<span id="cb71-28"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-29"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Geocoding si data</span></span>
-<span id="cb71-30"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-31"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-31" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/geocode.R&quot;</span>)</span>
-<span id="cb71-32"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-33"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-33" aria-hidden="true" tabindex="-1"></a>sia_li <span class="ot">&lt;-</span> <span class="fu">geocode.trips</span>(sia_li, <span class="at">fl =</span> <span class="st">&quot;Fishing.Location&quot;</span>, <span class="at">dep =</span> <span class="st">&quot;Depth.Caught..m.&quot;</span>)</span>
-<span id="cb71-34"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-35"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-35" aria-hidden="true" tabindex="-1"></a><span class="do">## removing duplicates introduced by fuzzy joining</span></span>
+<span id="cb71-20"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-20" aria-hidden="true" tabindex="-1"></a>sia_li <span class="ot">=</span> sia_snakes <span class="sc">%&gt;%</span></span>
+<span id="cb71-21"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-21" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Field.Code, Species, Fishing.Location, Depth.Caught..m., Tissue.type, Delta.Carbon, Delta.Nitrogen) <span class="sc">%&gt;%</span></span>
+<span id="cb71-22"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fishing.Location <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb71-23"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb71-24"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">droplevels</span>()</span>
+<span id="cb71-25"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-26"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Geocoding si data</span></span>
+<span id="cb71-27"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-28"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-28" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/geocode.R&quot;</span>)</span>
+<span id="cb71-29"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-30"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-30" aria-hidden="true" tabindex="-1"></a>sia_li <span class="ot">&lt;-</span> <span class="fu">geocode.trips</span>(sia_li, <span class="at">fl =</span> <span class="st">&quot;Fishing.Location&quot;</span>, <span class="at">dep =</span> <span class="st">&quot;Depth.Caught..m.&quot;</span>)</span>
+<span id="cb71-31"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-32"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-32" aria-hidden="true" tabindex="-1"></a><span class="do">## removing duplicates introduced by fuzzy joining</span></span>
+<span id="cb71-33"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-34"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-34" aria-hidden="true" tabindex="-1"></a>sia_li <span class="ot">&lt;-</span> <span class="fu">distinct</span>(sia_li, Field.Code, Tissue.type, <span class="at">.keep_all =</span> T)</span>
+<span id="cb71-35"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb71-36"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-37"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-37" aria-hidden="true" tabindex="-1"></a>sia_li <span class="ot">&lt;-</span> <span class="fu">distinct</span>(sia_li, Field.Code, Tissue.type, <span class="at">.keep_all =</span> T)</span>
+<span id="cb71-37"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Assigning grid cells to snakes</span></span>
 <span id="cb71-38"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-39"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-40"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-40" aria-hidden="true" tabindex="-1"></a><span class="do">## Assigning grid cells to snakes</span></span>
-<span id="cb71-41"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-42"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-42" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/find cell.R&quot;</span>)  <span class="co"># importing cell.ext function</span></span>
-<span id="cb71-43"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-44"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-44" aria-hidden="true" tabindex="-1"></a>ext <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(<span class="st">&quot;./Data/sampling_extent.tif&quot;</span>)  <span class="co"># sampling grid</span></span>
-<span id="cb71-45"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-46"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-46" aria-hidden="true" tabindex="-1"></a>sia_fi <span class="ot">&lt;-</span> sia_li <span class="sc">%&gt;%</span></span>
-<span id="cb71-47"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Field.Code, Species, Tissue.type, Delta.Carbon, Delta.Nitrogen) <span class="sc">%&gt;%</span></span>
-<span id="cb71-48"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nest</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb71-49"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">cell =</span> <span class="fu">map</span>(data, cell.ext), <span class="at">celldf =</span> <span class="fu">map</span>(cell, as.data.frame)) <span class="sc">%&gt;%</span></span>
-<span id="cb71-50"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-50" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(celldf) <span class="sc">%&gt;%</span></span>
-<span id="cb71-51"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb71-52"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
-<span id="cb71-53"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-54"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-54" aria-hidden="true" tabindex="-1"></a><span class="do">## Saving data to save time</span></span>
-<span id="cb71-55"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-56"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-56" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(sia_li, <span class="st">&quot;./Data/SIA_fishing intensity.csv&quot;</span>)</span></code></pre></div>
+<span id="cb71-39"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-39" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/find cell.R&quot;</span>)  <span class="co"># importing cell.ext function</span></span>
+<span id="cb71-40"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-41"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-41" aria-hidden="true" tabindex="-1"></a>ext <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(<span class="st">&quot;./Data/sampling_extent.tif&quot;</span>)  <span class="co"># sampling grid</span></span>
+<span id="cb71-42"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-43"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-43" aria-hidden="true" tabindex="-1"></a>sia_fi <span class="ot">&lt;-</span> sia_li <span class="sc">%&gt;%</span></span>
+<span id="cb71-44"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Field.Code, Species, Tissue.type, Delta.Carbon, Delta.Nitrogen) <span class="sc">%&gt;%</span></span>
+<span id="cb71-45"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nest</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb71-46"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">cell =</span> <span class="fu">map</span>(data, cell.ext), <span class="at">celldf =</span> <span class="fu">map</span>(cell, as.data.frame)) <span class="sc">%&gt;%</span></span>
+<span id="cb71-47"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-47" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(celldf) <span class="sc">%&gt;%</span></span>
+<span id="cb71-48"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb71-49"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb71-50"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-51"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-51" aria-hidden="true" tabindex="-1"></a><span class="do">## Saving data to save time</span></span>
+<span id="cb71-52"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-53"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb71-53" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(sia_li, <span class="st">&quot;./Data/SIA_fishing intensity.csv&quot;</span>)</span></code></pre></div>
 <p><strong>Note:</strong> <code>fuzzyjoin::fuzzy_inner_join()</code> introduces many duplicates, I have not as yet been able to fix the issue dirrectly. Currently, removing duplicates from output using <code>dplyr::distinct()</code>.</p>
 </div>
 <div id="sample-size-1" class="section level2" number="8.3">
@@ -1032,77 +1028,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="kable-table">
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Species
-</th>
-<th style="text-align:left;">
-Tissue
-</th>
-<th style="text-align:right;">
-High
-</th>
-<th style="text-align:right;">
-Low
-</th>
+<tr class="header">
+<th align="left">Species</th>
+<th align="left">Tissue</th>
+<th align="right">High</th>
+<th align="right">Low</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:left;">
-Plasma
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-7
-</td>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Plasma</td>
+<td align="right">9</td>
+<td align="right">7</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:left;">
-Scales
-</td>
-<td style="text-align:right;">
-13
-</td>
-<td style="text-align:right;">
-10
-</td>
+<tr class="even">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Scales</td>
+<td align="right">13</td>
+<td align="right">10</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:left;">
-Plasma
-</td>
-<td style="text-align:right;">
-26
-</td>
-<td style="text-align:right;">
-14
-</td>
+<tr class="odd">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Plasma</td>
+<td align="right">26</td>
+<td align="right">14</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:left;">
-Scales
-</td>
-<td style="text-align:right;">
-19
-</td>
-<td style="text-align:right;">
-18
-</td>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Scales</td>
+<td align="right">19</td>
+<td align="right">18</td>
 </tr>
 </tbody>
 </table>
@@ -1114,10 +1070,8 @@ Scales
 <span id="cb73-2"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb73-3"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb73-3" aria-hidden="true" tabindex="-1"></a>sia_li <span class="sc">%&gt;%</span></span>
 <span id="cb73-4"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb73-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gather</span>(<span class="at">key =</span> Isotope, <span class="fu">c</span>(Delta.Carbon, Delta.Nitrogen), <span class="at">value =</span> ratio) <span class="sc">%&gt;%</span></span>
-<span id="cb73-5"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb73-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(intensity, ratio, <span class="at">col =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span> </span>
-<span id="cb73-6"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb73-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Fishing intensity&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Isotope ratio&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb73-7"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb73-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;italic&quot;</span>)) <span class="sc">+</span> <span class="fu">facet_grid</span>(Isotope <span class="sc">~</span> Tissue.type, </span>
-<span id="cb73-8"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb73-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
+<span id="cb73-5"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb73-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(intensity, ratio, <span class="at">col =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span> <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Fishing intensity&quot;</span>, </span>
+<span id="cb73-6"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb73-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Isotope ratio&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;italic&quot;</span>)) <span class="sc">+</span> <span class="fu">facet_grid</span>(Isotope <span class="sc">~</span> Tissue.type, <span class="at">scale =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-58-1.png" width="2400" style="display: block; margin: auto;" /></p>
 <p>Both <span class="math inline">\(\delta^{15}N\)</span> and <span class="math inline">\(\delta^{13}C\)</span> show strong negatice relationship with increasing fishing intensity.</p>
 </div>
@@ -1127,26 +1081,23 @@ Scales
 <span id="cb74-2"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gather</span>(<span class="at">key =</span> Isotope, <span class="fu">c</span>(Delta.Carbon, Delta.Nitrogen), <span class="at">value =</span> ratio) <span class="sc">%&gt;%</span></span>
 <span id="cb74-3"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Species, Isotope, Tissue.type) <span class="sc">%&gt;%</span></span>
 <span id="cb74-4"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nest</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb74-5"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mod1 =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">lm</span>(ratio <span class="sc">~</span> intensity, <span class="at">data =</span> .)), <span class="at">summ1 =</span> <span class="fu">map</span>(mod1, </span>
-<span id="cb74-6"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-6" aria-hidden="true" tabindex="-1"></a>        broom<span class="sc">::</span>tidy), <span class="at">r2 =</span> <span class="fu">map</span>(mod1, broom<span class="sc">::</span>glance)) <span class="sc">%&gt;%</span></span>
-<span id="cb74-7"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-7" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(summ1, r2) <span class="sc">%&gt;%</span></span>
-<span id="cb74-8"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb74-9"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-9" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Species<span class="sc">:</span>p.value, adj.r.squared) <span class="sc">%&gt;%</span></span>
-<span id="cb74-10"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Species, Tissue.type, adj.r.squared)</span>
-<span id="cb74-11"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-12"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb74-13"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb74-14"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-15"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-15" aria-hidden="true" tabindex="-1"></a>sia_fi_lm <span class="ot">&lt;-</span> sia_fi_lm <span class="sc">%&gt;%</span></span>
-<span id="cb74-16"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">`</span><span class="at">Tissue type</span><span class="st">`</span> <span class="ot">=</span> Tissue.type, <span class="at">Parameter =</span> term, <span class="at">Coefficient =</span> estimate, </span>
-<span id="cb74-17"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">Standard Error</span><span class="st">`</span> <span class="ot">=</span> std.error, <span class="at">T =</span> statistic, <span class="at">p =</span> p.value, <span class="st">`</span><span class="at">r_adj^2</span><span class="st">`</span> <span class="ot">=</span> adj.r.squared) <span class="sc">%&gt;%</span></span>
-<span id="cb74-18"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Parameter =</span> <span class="fu">ifelse</span>(Parameter <span class="sc">==</span> <span class="st">&quot;(Intercept)&quot;</span>, <span class="st">&quot;Intercept&quot;</span>, <span class="st">&quot;Fishing intensity&quot;</span>), </span>
-<span id="cb74-19"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">T =</span> <span class="fu">ifelse</span>(Parameter <span class="sc">==</span> <span class="st">&quot;Intercept&quot;</span>, <span class="cn">NA</span>, T), <span class="at">p =</span> <span class="fu">ifelse</span>(Parameter <span class="sc">==</span> <span class="st">&quot;Intercept&quot;</span>, </span>
-<span id="cb74-20"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-20" aria-hidden="true" tabindex="-1"></a>            <span class="cn">NA</span>, p))</span>
-<span id="cb74-21"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-22"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-22" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(sia_fi_lm, <span class="at">booktabs =</span> T, <span class="at">digits =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb74-23"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">italic =</span> T) <span class="sc">%&gt;%</span></span>
-<span id="cb74-24"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">collapse_rows</span>(<span class="at">columns =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">row_group_label_position =</span> <span class="st">&quot;stack&quot;</span>)</span></code></pre></div>
+<span id="cb74-5"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mod1 =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">lm</span>(ratio <span class="sc">~</span> intensity, <span class="at">data =</span> .)), <span class="at">summ1 =</span> <span class="fu">map</span>(mod1, broom<span class="sc">::</span>tidy), <span class="at">r2 =</span> <span class="fu">map</span>(mod1, broom<span class="sc">::</span>glance)) <span class="sc">%&gt;%</span></span>
+<span id="cb74-6"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-6" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(summ1, r2) <span class="sc">%&gt;%</span></span>
+<span id="cb74-7"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb74-8"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Species<span class="sc">:</span>p.value, adj.r.squared) <span class="sc">%&gt;%</span></span>
+<span id="cb74-9"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Species, Tissue.type, adj.r.squared)</span>
+<span id="cb74-10"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-11"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb74-12"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb74-13"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-14"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-14" aria-hidden="true" tabindex="-1"></a>sia_fi_lm <span class="ot">&lt;-</span> sia_fi_lm <span class="sc">%&gt;%</span></span>
+<span id="cb74-15"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">`</span><span class="at">Tissue type</span><span class="st">`</span> <span class="ot">=</span> Tissue.type, <span class="at">Parameter =</span> term, <span class="at">Coefficient =</span> estimate, <span class="st">`</span><span class="at">Standard Error</span><span class="st">`</span> <span class="ot">=</span> std.error, <span class="at">T =</span> statistic, <span class="at">p =</span> p.value, <span class="st">`</span><span class="at">r_adj^2</span><span class="st">`</span> <span class="ot">=</span> adj.r.squared) <span class="sc">%&gt;%</span></span>
+<span id="cb74-16"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Parameter =</span> <span class="fu">ifelse</span>(Parameter <span class="sc">==</span> <span class="st">&quot;(Intercept)&quot;</span>, <span class="st">&quot;Intercept&quot;</span>, <span class="st">&quot;Fishing intensity&quot;</span>), <span class="at">T =</span> <span class="fu">ifelse</span>(Parameter <span class="sc">==</span> <span class="st">&quot;Intercept&quot;</span>, <span class="cn">NA</span>, T), <span class="at">p =</span> <span class="fu">ifelse</span>(Parameter <span class="sc">==</span> <span class="st">&quot;Intercept&quot;</span>, </span>
+<span id="cb74-17"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-17" aria-hidden="true" tabindex="-1"></a>        <span class="cn">NA</span>, p))</span>
+<span id="cb74-18"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-19"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-19" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(sia_fi_lm, <span class="at">booktabs =</span> T, <span class="at">digits =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb74-20"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">italic =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb74-21"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb74-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">collapse_rows</span>(<span class="at">columns =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">row_group_label_position =</span> <span class="st">&quot;stack&quot;</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1956,13 +1907,13 @@ Plasma
 High
 </td>
 <td style="text-align:right;">
-1.792718
+1.791498
 </td>
 <td style="text-align:right;">
-0.6800683
+0.6713751
 </td>
 <td style="text-align:right;">
-0.0107528
+0.0106154
 </td>
 </tr>
 <tr>
@@ -1976,13 +1927,13 @@ Plasma
 Low
 </td>
 <td style="text-align:right;">
-1.639357
+1.614469
 </td>
 <td style="text-align:right;">
-0.7233713
+0.6800886
 </td>
 <td style="text-align:right;">
-0.0114375
+0.0107531
 </td>
 </tr>
 <tr>
@@ -1996,13 +1947,13 @@ Scale
 High
 </td>
 <td style="text-align:right;">
-3.225478
+3.205167
 </td>
 <td style="text-align:right;">
-0.9586597
+0.9449341
 </td>
 <td style="text-align:right;">
-0.0151577
+0.0149407
 </td>
 </tr>
 <tr>
@@ -2016,13 +1967,13 @@ Scale
 Low
 </td>
 <td style="text-align:right;">
-1.182960
+1.170616
 </td>
 <td style="text-align:right;">
-0.4167936
+0.4103433
 </td>
 <td style="text-align:right;">
-0.0065901
+0.0064881
 </td>
 </tr>
 <tr>
@@ -2036,13 +1987,13 @@ Plasma
 High
 </td>
 <td style="text-align:right;">
-2.702578
+2.707260
 </td>
 <td style="text-align:right;">
-0.5598805
+0.5618308
 </td>
 <td style="text-align:right;">
-0.0088525
+0.0088833
 </td>
 </tr>
 <tr>
@@ -2056,13 +2007,13 @@ Plasma
 Low
 </td>
 <td style="text-align:right;">
-2.354014
+2.331352
 </td>
 <td style="text-align:right;">
-0.6821653
+0.6639599
 </td>
 <td style="text-align:right;">
-0.0107860
+0.0104981
 </td>
 </tr>
 <tr>
@@ -2076,13 +2027,13 @@ Scale
 High
 </td>
 <td style="text-align:right;">
-6.739347
+6.728280
 </td>
 <td style="text-align:right;">
-1.6119695
+1.6373112
 </td>
 <td style="text-align:right;">
-0.0254875
+0.0258882
 </td>
 </tr>
 <tr>
@@ -2096,13 +2047,13 @@ Scale
 Low
 </td>
 <td style="text-align:right;">
-3.498023
+3.500772
 </td>
 <td style="text-align:right;">
-0.8674974
+0.8649369
 </td>
 <td style="text-align:right;">
-0.0137163
+0.0136759
 </td>
 </tr>
 </tbody>
@@ -2139,7 +2090,7 @@ Hydrophis curtus
 Plasma
 </td>
 <td style="text-align:right;">
-0.59100
+0.58950
 </td>
 </tr>
 <tr>
@@ -2150,7 +2101,7 @@ Hydrophis curtus
 Scale
 </td>
 <td style="text-align:right;">
-0.99100
+0.99025
 </td>
 </tr>
 <tr>
@@ -2161,7 +2112,7 @@ Hydrophis schistosus
 Plasma
 </td>
 <td style="text-align:right;">
-0.68025
+0.69125
 </td>
 </tr>
 <tr>
@@ -2172,14 +2123,13 @@ Hydrophis schistosus
 Scale
 </td>
 <td style="text-align:right;">
-0.97325
+0.97400
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Currently no medium cells `P(Medium &gt; Low)` = sum(`Medium` &gt; `Low`)/n(),</span></span>
-<span id="cb80-2"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="co"># `P(High &gt; Medium)` = sum(`High` &gt; `Medium`)/n())</span></span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Currently no medium cells `P(Medium &gt; Low)` = sum(`Medium` &gt; `Low`)/n(), `P(High &gt; Medium)` = sum(`High` &gt; `Medium`)/n())</span></span></code></pre></div>
 </div>
 <div id="visualising-difference-in-niche-width-across-gradiet-of-fishing-intensity" class="section level3" number="8.6.4">
 <h3><span class="header-section-number">8.6.4</span> Visualising difference in niche width across gradiet of fishing intensity</h3>
@@ -2188,13 +2138,11 @@ Scale
 <span id="cb81-3"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb81-3" aria-hidden="true" tabindex="-1"></a>SEA.B_snakes.fi.df <span class="sc">%&gt;%</span></span>
 <span id="cb81-4"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb81-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># reordering classes</span></span>
 <span id="cb81-5"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">FI.Class =</span> <span class="fu">fct_relevel</span>(FI.Class, <span class="fu">c</span>(<span class="st">&quot;High&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;Low&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb81-6"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb81-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(Species, SEA.B, <span class="at">fill =</span> FI.Class)) <span class="sc">+</span> <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.4</span>), </span>
-<span id="cb81-7"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb81-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">width =</span> <span class="fl">0.05</span>, <span class="at">outlier.alpha =</span> <span class="dv">0</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.4</span>)) <span class="sc">+</span> </span>
-<span id="cb81-8"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb81-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Standard Ellispes Area&quot;</span>, <span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">n.dodge =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb81-9"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb81-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Fishing Intensity&quot;</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Tissue) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;italic&quot;</span>))</span></code></pre></div>
+<span id="cb81-6"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb81-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(Species, SEA.B, <span class="at">fill =</span> FI.Class)) <span class="sc">+</span> <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.4</span>), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">width =</span> <span class="fl">0.05</span>, <span class="at">outlier.alpha =</span> <span class="dv">0</span>, </span>
+<span id="cb81-7"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb81-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.4</span>)) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Standard Ellispes Area&quot;</span>, <span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">n.dodge =</span> <span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Fishing Intensity&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb81-8"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb81-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Tissue) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;italic&quot;</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-65-1.png" width="3000" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">last_plot</span>(), <span class="at">filename =</span> <span class="st">&quot;./Figures and Tables/figure6.png&quot;</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">width =</span> <span class="dv">10</span>, </span>
-<span id="cb82-2"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb82-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">device =</span> <span class="st">&quot;png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="does-isotopic-niche-of-sea-snakes-change-with-local-fishing-intensity.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">last_plot</span>(), <span class="at">filename =</span> <span class="st">&quot;./Figures and Tables/figure6.png&quot;</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">device =</span> <span class="st">&quot;png&quot;</span>)</span></code></pre></div>
 <p>Currently many outliers from 5 - 15 on y - axis</p>
 
 </div>

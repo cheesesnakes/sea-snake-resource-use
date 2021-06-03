@@ -30,10 +30,10 @@ Species interactions are central to community assembly and ecosystem functioning
   
   
   ```R
-  rmarkdown::render_site(input = "index.Rmd", encoding = "UTF")
+  bookdown::render_book(input = ".")
   ```
   
-  The analysis can also be viewed by opening the `View Results.html` file in any browser.
+  The analysis can also be viewed at https://cheesesnakes.github.io/sea-snake-resource-use/
   
   </details>
  
@@ -46,7 +46,7 @@ Species interactions are central to community assembly and ecosystem functioning
     
    - Some of the analysis refer to custom functions that are included in the `Functions` folder.
    
-   - Before working with the file locally a portable local environment can be activated to make sure you have all the dependencies by running `renv::activate()` and `renv::restore()`. You will need to intall the `renv` package for this. For more information please refer to https://rstudio.github.io/renv/articles/renv.html.
+   - Before working with the file locally a portable local environment can be activated to make sure you have all the dependencies by running `renv::activate()` and `renv::restore()`. You will need to install the `renv` package for this. For more information please refer to https://rstudio.github.io/renv/articles/renv.html.
    
    </details>
  

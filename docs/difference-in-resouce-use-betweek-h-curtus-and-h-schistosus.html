@@ -24,7 +24,7 @@
 <meta name="author" content="Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker" />
 
 
-<meta name="date" content="2021-06-02" />
+<meta name="date" content="2021-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -905,40 +905,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="kable-table">
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Species
-</th>
-<th style="text-align:right;">
-Plasma
-</th>
-<th style="text-align:right;">
-Scales
-</th>
+<tr class="header">
+<th align="left">Species</th>
+<th align="right">Plasma</th>
+<th align="right">Scales</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:right;">
-28
-</td>
-<td style="text-align:right;">
-35
-</td>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="right">28</td>
+<td align="right">35</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:right;">
-68
-</td>
-<td style="text-align:right;">
-52
-</td>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="right">68</td>
+<td align="right">52</td>
 </tr>
 </tbody>
 </table>
@@ -952,86 +934,45 @@ Hydrophis schistosus
 <span id="cb35-3"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span> <span class="sc">|</span> Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb35-4"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gather</span>(<span class="fu">c</span>(<span class="st">&quot;Delta.Carbon&quot;</span>, <span class="st">&quot;Delta.Nitrogen&quot;</span>), <span class="at">key =</span> <span class="st">&quot;Isotope&quot;</span>, <span class="at">value =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb35-5"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Species, Tissue.type, Isotope) <span class="sc">%&gt;%</span></span>
-<span id="cb35-6"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(value, <span class="at">na.rm =</span> T), <span class="dv">2</span>), <span class="at">sd =</span> <span class="fu">round</span>(<span class="fu">sd</span>(value, <span class="at">na.rm =</span> T), </span>
-<span id="cb35-7"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-7" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>), <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(value))) <span class="sc">%&gt;%</span></span>
-<span id="cb35-8"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unite</span>(<span class="st">&quot;Mean.sd&quot;</span>, Mean<span class="sc">:</span>sd, <span class="at">sep =</span> <span class="st">&quot;±&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb35-9"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-9" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
-<span id="cb35-10"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">spread</span>(Isotope, Mean.sd) <span class="sc">%&gt;%</span></span>
-<span id="cb35-11"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Tissue.type, Species)</span></code></pre></div>
+<span id="cb35-6"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(value, <span class="at">na.rm =</span> T), <span class="dv">2</span>), <span class="at">sd =</span> <span class="fu">round</span>(<span class="fu">sd</span>(value, <span class="at">na.rm =</span> T), <span class="dv">2</span>), <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(value))) <span class="sc">%&gt;%</span></span>
+<span id="cb35-7"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unite</span>(<span class="st">&quot;Mean.sd&quot;</span>, Mean<span class="sc">:</span>sd, <span class="at">sep =</span> <span class="st">&quot;±&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-8"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
+<span id="cb35-9"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">spread</span>(Isotope, Mean.sd) <span class="sc">%&gt;%</span></span>
+<span id="cb35-10"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Tissue.type, Species)</span></code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Species
-</th>
-<th style="text-align:left;">
-Tissue.type
-</th>
-<th style="text-align:left;">
-Delta.Carbon
-</th>
-<th style="text-align:left;">
-Delta.Nitrogen
-</th>
+<tr class="header">
+<th align="left">Species</th>
+<th align="left">Tissue.type</th>
+<th align="left">Delta.Carbon</th>
+<th align="left">Delta.Nitrogen</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:left;">
-Plasma
-</td>
-<td style="text-align:left;">
--16.98±1.08
-</td>
-<td style="text-align:left;">
-13.92±0.76
-</td>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Plasma</td>
+<td align="left">-16.98±1.08</td>
+<td align="left">13.92±0.76</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:left;">
-Plasma
-</td>
-<td style="text-align:left;">
--16.74±0.92
-</td>
-<td style="text-align:left;">
-14.73±1.25
-</td>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Plasma</td>
+<td align="left">-16.74±0.92</td>
+<td align="left">14.73±1.25</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:left;">
-Scales
-</td>
-<td style="text-align:left;">
--14.68±0.99
-</td>
-<td style="text-align:left;">
-14.44±1.02
-</td>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Scales</td>
+<td align="left">-14.68±0.99</td>
+<td align="left">14.44±1.02</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:left;">
-Scales
-</td>
-<td style="text-align:left;">
--14.52±1.29
-</td>
-<td style="text-align:left;">
-14.69±1.18
-</td>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Scales</td>
+<td align="left">-14.52±1.29</td>
+<td align="left">14.69±1.18</td>
 </tr>
 </tbody>
 </table>
@@ -1078,92 +1019,42 @@ Scales
 <div class="kable-table">
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Species
-</th>
-<th style="text-align:left;">
-Tissue
-</th>
-<th style="text-align:right;">
-TA
-</th>
-<th style="text-align:right;">
-SEA
-</th>
-<th style="text-align:right;">
-SEAc
-</th>
+<tr class="header">
+<th align="left">Species</th>
+<th align="left">Tissue</th>
+<th align="right">TA</th>
+<th align="right">SEA</th>
+<th align="right">SEAc</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:left;">
-Plasma
-</td>
-<td style="text-align:right;">
-5.12750
-</td>
-<td style="text-align:right;">
-1.734842
-</td>
-<td style="text-align:right;">
-1.813699
-</td>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Plasma</td>
+<td align="right">5.12750</td>
+<td align="right">1.734842</td>
+<td align="right">1.813699</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:left;">
-Plasma
-</td>
-<td style="text-align:right;">
-11.77120
-</td>
-<td style="text-align:right;">
-2.467868
-</td>
-<td style="text-align:right;">
-2.520375
-</td>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Plasma</td>
+<td align="right">11.77120</td>
+<td align="right">2.467868</td>
+<td align="right">2.520375</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:left;">
-Scales
-</td>
-<td style="text-align:right;">
-12.21050
-</td>
-<td style="text-align:right;">
-3.126758
-</td>
-<td style="text-align:right;">
-3.247018
-</td>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Scales</td>
+<td align="right">12.21050</td>
+<td align="right">3.126758</td>
+<td align="right">3.247018</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:left;">
-Scales
-</td>
-<td style="text-align:right;">
-25.89415
-</td>
-<td style="text-align:right;">
-4.550803
-</td>
-<td style="text-align:right;">
-4.656636
-</td>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Scales</td>
+<td align="right">25.89415</td>
+<td align="right">4.550803</td>
+<td align="right">4.656636</td>
 </tr>
 </tbody>
 </table>
@@ -1222,77 +1113,37 @@ Scales
 <div class="kable-table">
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Species
-</th>
-<th style="text-align:left;">
-Tissue
-</th>
-<th style="text-align:right;">
-Mean SEAb
-</th>
-<th style="text-align:right;">
-Standard deviation
-</th>
+<tr class="header">
+<th align="left">Species</th>
+<th align="left">Tissue</th>
+<th align="right">Mean SEAb</th>
+<th align="right">Standard deviation</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:left;">
-Plasma
-</td>
-<td style="text-align:right;">
-1.805123
-</td>
-<td style="text-align:right;">
-0.3822110
-</td>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Plasma</td>
+<td align="right">1.812821</td>
+<td align="right">0.3907886</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:left;">
-Plasma
-</td>
-<td style="text-align:right;">
-2.526484
-</td>
-<td style="text-align:right;">
-0.3712415
-</td>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Plasma</td>
+<td align="right">2.520315</td>
+<td align="right">0.3645563</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:left;">
-Scales
-</td>
-<td style="text-align:right;">
-3.236868
-</td>
-<td style="text-align:right;">
-0.6478227
-</td>
+<tr class="odd">
+<td align="left">Hydrophis curtus</td>
+<td align="left">Scales</td>
+<td align="right">3.211524</td>
+<td align="right">0.6430074</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:left;">
-Scales
-</td>
-<td style="text-align:right;">
-4.645202
-</td>
-<td style="text-align:right;">
-0.7123726
-</td>
+<tr class="even">
+<td align="left">Hydrophis schistosus</td>
+<td align="left">Scales</td>
+<td align="right">4.644490</td>
+<td align="right">0.7101473</td>
 </tr>
 </tbody>
 </table>
@@ -1307,31 +1158,19 @@ Scales
 <div class="kable-table">
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Tissue
-</th>
-<th style="text-align:right;">
-P(HS &gt; HC)
-</th>
+<tr class="header">
+<th align="left">Tissue</th>
+<th align="right">P(HS &gt; HC)</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Plasma
-</td>
-<td style="text-align:right;">
-0.91500
-</td>
+<tr class="odd">
+<td align="left">Plasma</td>
+<td align="right">0.91050</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Scales
-</td>
-<td style="text-align:right;">
-0.93175
-</td>
+<tr class="even">
+<td align="left">Scales</td>
+<td align="right">0.94325</td>
 </tr>
 </tbody>
 </table>
@@ -1406,28 +1245,24 @@ Scales
 <span id="cb41-63"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-63" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-64"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-64" aria-hidden="true" tabindex="-1"></a><span class="co"># split them and conver to a matrix, NB byrow = T</span></span>
 <span id="cb41-65"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-66"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-66" aria-hidden="true" tabindex="-1"></a>split_group_comm <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">unlist</span>(<span class="fu">strsplit</span>(group_comm_names, <span class="st">&quot;[.]&quot;</span>)), <span class="fu">nrow</span>(snake.ellipses), </span>
-<span id="cb41-67"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-67" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)  <span class="co"># splitting communit and group</span></span>
-<span id="cb41-68"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-69"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-69" aria-hidden="true" tabindex="-1"></a>snake.ellipses<span class="sc">$</span>community <span class="ot">&lt;-</span> split_group_comm[, <span class="dv">1</span>]</span>
-<span id="cb41-70"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-71"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-71" aria-hidden="true" tabindex="-1"></a>snake.ellipses<span class="sc">$</span>group <span class="ot">&lt;-</span> split_group_comm[, <span class="dv">2</span>]</span>
-<span id="cb41-72"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-73"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-73" aria-hidden="true" tabindex="-1"></a>snake.ellipses <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(snake.ellipses, <span class="at">iso1 =</span> x, <span class="at">iso2 =</span> y, <span class="at">Species =</span> community, </span>
-<span id="cb41-74"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">Tissue =</span> group)</span>
+<span id="cb41-66"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-66" aria-hidden="true" tabindex="-1"></a>split_group_comm <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">unlist</span>(<span class="fu">strsplit</span>(group_comm_names, <span class="st">&quot;[.]&quot;</span>)), <span class="fu">nrow</span>(snake.ellipses), <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)  <span class="co"># splitting communit and group</span></span>
+<span id="cb41-67"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-68"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-68" aria-hidden="true" tabindex="-1"></a>snake.ellipses<span class="sc">$</span>community <span class="ot">&lt;-</span> split_group_comm[, <span class="dv">1</span>]</span>
+<span id="cb41-69"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-70"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-70" aria-hidden="true" tabindex="-1"></a>snake.ellipses<span class="sc">$</span>group <span class="ot">&lt;-</span> split_group_comm[, <span class="dv">2</span>]</span>
+<span id="cb41-71"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-72"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-72" aria-hidden="true" tabindex="-1"></a>snake.ellipses <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(snake.ellipses, <span class="at">iso1 =</span> x, <span class="at">iso2 =</span> y, <span class="at">Species =</span> community, <span class="at">Tissue =</span> group)</span>
+<span id="cb41-73"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-74"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting 10 randomly sampled ellipses</span></span>
 <span id="cb41-75"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-76"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting 10 randomly sampled ellipses</span></span>
-<span id="cb41-77"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-78"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-78" aria-hidden="true" tabindex="-1"></a>siber_snakes <span class="sc">%&gt;%</span></span>
-<span id="cb41-79"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-79" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">Species =</span> community, <span class="at">Tissue =</span> group) <span class="sc">%&gt;%</span></span>
-<span id="cb41-80"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-80" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(iso1, iso2, <span class="at">col =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> Species), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb41-81"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(delta<span class="sc">^</span>{</span>
-<span id="cb41-82"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-82" aria-hidden="true" tabindex="-1"></a>        <span class="dv">15</span></span>
-<span id="cb41-83"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-83" aria-hidden="true" tabindex="-1"></a>    }, <span class="st">&quot;N (‰)&quot;</span>))) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(delta<span class="sc">^</span>{</span>
-<span id="cb41-84"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-84" aria-hidden="true" tabindex="-1"></a>    <span class="dv">13</span></span>
-<span id="cb41-85"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-85" aria-hidden="true" tabindex="-1"></a>}, <span class="st">&quot;C (‰)&quot;</span>))) <span class="sc">+</span> <span class="fu">geom_polygon</span>(<span class="at">data =</span> snake.ellipses, <span class="at">mapping =</span> <span class="fu">aes</span>(iso1, iso2, <span class="at">group =</span> rep, </span>
-<span id="cb41-86"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-86" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> Species, <span class="at">col =</span> Species), <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb41-87"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-87" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Tissue) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;italic&quot;</span>))</span></code></pre></div>
+<span id="cb41-76"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-76" aria-hidden="true" tabindex="-1"></a>siber_snakes <span class="sc">%&gt;%</span></span>
+<span id="cb41-77"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-77" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">Species =</span> community, <span class="at">Tissue =</span> group) <span class="sc">%&gt;%</span></span>
+<span id="cb41-78"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-78" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(iso1, iso2, <span class="at">col =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> Species), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(delta<span class="sc">^</span>{</span>
+<span id="cb41-79"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-79" aria-hidden="true" tabindex="-1"></a>    <span class="dv">15</span></span>
+<span id="cb41-80"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-80" aria-hidden="true" tabindex="-1"></a>}, <span class="st">&quot;N (‰)&quot;</span>))) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(delta<span class="sc">^</span>{</span>
+<span id="cb41-81"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-81" aria-hidden="true" tabindex="-1"></a>    <span class="dv">13</span></span>
+<span id="cb41-82"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-82" aria-hidden="true" tabindex="-1"></a>}, <span class="st">&quot;C (‰)&quot;</span>))) <span class="sc">+</span> <span class="fu">geom_polygon</span>(<span class="at">data =</span> snake.ellipses, <span class="at">mapping =</span> <span class="fu">aes</span>(iso1, iso2, <span class="at">group =</span> rep, <span class="at">linetype =</span> Species, <span class="at">col =</span> Species), <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb41-83"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb41-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Tissue) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;italic&quot;</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-33-1.png" width="2400" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">last_plot</span>(), <span class="at">filename =</span> <span class="st">&quot;./Figures and Tables/figure3.tiff&quot;</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">width =</span> <span class="dv">8</span>)</span></code></pre></div>
 <p><strong>Figure 3</strong>: Bayesian ellipses in isotopic space describing difference in niche width and resource use between H. curtus and H. schistosus.</p>
@@ -1479,40 +1314,22 @@ Scales
 <div class="kable-table">
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Turnover
-</th>
-<th style="text-align:right;">
-Average overlap
-</th>
-<th style="text-align:right;">
-Standard deviation
-</th>
+<tr class="header">
+<th align="left">Turnover</th>
+<th align="right">Average overlap</th>
+<th align="right">Standard deviation</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Long-term
-</td>
-<td style="text-align:right;">
-0.6284995
-</td>
-<td style="text-align:right;">
-0.1045393
-</td>
+<tr class="odd">
+<td align="left">Long-term</td>
+<td align="right">0.6294089</td>
+<td align="right">0.0958336</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Short-term
-</td>
-<td style="text-align:right;">
-0.4181294
-</td>
-<td style="text-align:right;">
-0.0571730
-</td>
+<tr class="even">
+<td align="left">Short-term</td>
+<td align="right">0.4305321</td>
+<td align="right">0.0716637</td>
 </tr>
 </tbody>
 </table>
