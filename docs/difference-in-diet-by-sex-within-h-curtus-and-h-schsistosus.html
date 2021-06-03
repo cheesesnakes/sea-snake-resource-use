@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 DIfference in diet between H. curtus and H. schsitosus | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape</title>
-  <meta name="description" content="3 DIfference in diet between H. curtus and H. schsitosus | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
+  <title>10 Difference in diet by sex within H. curtus and H. schsistosus | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape</title>
+  <meta name="description" content="10 Difference in diet by sex within H. curtus and H. schsistosus | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 DIfference in diet between H. curtus and H. schsitosus | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
+  <meta property="og:title" content="10 Difference in diet by sex within H. curtus and H. schsistosus | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 DIfference in diet between H. curtus and H. schsitosus | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
+  <meta name="twitter:title" content="10 Difference in diet by sex within H. curtus and H. schsistosus | Resouce use in two sympatric species of sea snakes in anthropogenically dominated seascape" />
   
   
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Shawn Dsouza, Chetan Rao, Muralidharan M., and Kartik Shanker" />
 
 
-<meta name="date" content="2021-05-31" />
+<meta name="date" content="2021-06-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html"/>
-<link rel="next" href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html"/>
+<link rel="prev" href="demogrpahic-information-of-sampled-individuals.html"/>
+<link rel="next" href="comparing-diet-data-to-previous-studies.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -866,99 +866,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="difference-in-diet-between-h.-curtus-and-h.-schsitosus" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> DIfference in diet between <em>H. curtus</em> and <em>H. schsitosus</em></h1>
-<div id="no.-of-samples-collected-by-sea-snake-species" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> No. of samples collected by sea snake species</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/setup.R&quot;</span>)</span>
-<span id="cb13-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># importing gut content data</span></span>
-<span id="cb13-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb13-5" aria-hidden="true" tabindex="-1"></a>gc <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;./Data/Sea_snakes_gut_content_2018-19.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Source <span class="sc">==</span> <span class="st">&quot;Gut content&quot;</span>)  <span class="co"># removing specimens collected from fisheries landings</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb14-1" aria-hidden="true" tabindex="-1"></a>snakes<span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span> <span class="sc">|</span> Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species)<span class="sc">%&gt;%</span></span>
-<span id="cb14-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">N =</span> <span class="fu">n</span>(), <span class="co"># total number of individuals sampled</span></span>
-<span id="cb14-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb14-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">sum</span>((Gut.Content) <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>), <span class="co"># number of individuals with gut content</span></span>
-<span id="cb14-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_male =</span> <span class="fu">sum</span>((Gut.Content) <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span> <span class="sc">&amp;</span> Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>), <span class="co"># males with gut content</span></span>
-<span id="cb14-7"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb14-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_female =</span> <span class="fu">sum</span>((Gut.Content) <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span> <span class="sc">&amp;</span> Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>), <span class="co"># females with content</span></span>
-<span id="cb14-8"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb14-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">prop.gc =</span> n<span class="sc">/</span>N) <span class="co"># propotion of individuals with gut content</span></span></code></pre></div>
-<div class="kable-table">
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-Species
-</th>
-<th style="text-align:right;">
-N
-</th>
-<th style="text-align:right;">
-n
-</th>
-<th style="text-align:right;">
-n_male
-</th>
-<th style="text-align:right;">
-n_female
-</th>
-<th style="text-align:right;">
-prop.gc
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:right;">
-179
-</td>
-<td style="text-align:right;">
-36
-</td>
-<td style="text-align:right;">
-18
-</td>
-<td style="text-align:right;">
-18
-</td>
-<td style="text-align:right;">
-0.2011173
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:right;">
-605
-</td>
-<td style="text-align:right;">
-93
-</td>
-<td style="text-align:right;">
-55
-</td>
-<td style="text-align:right;">
-36
-</td>
-<td style="text-align:right;">
-0.1537190
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>A very low proportion of individuals had gut content present at the time of sampling. Sampling across species and sexes may be adequate for comparison.</p>
-</div>
-<div id="total-number-of-prey-specimens-collected" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Total number of prey specimens collected</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb15-1" aria-hidden="true" tabindex="-1"></a>gc <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Snake.Species) <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">N =</span> <span class="fu">length</span>(<span class="fu">unique</span>(GC.Code)))</span></code></pre></div>
+<div id="difference-in-diet-by-sex-within-h.-curtus-and-h.-schsistosus" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> Difference in diet by sex within <em>H. curtus</em> and <em>H. schsistosus</em></h1>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./Functions/setup.R&quot;</span>)</span>
+<span id="cb86-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb86-3" aria-hidden="true" tabindex="-1"></a>gc <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;./Data/Sea_snakes_gut_content_2018-19.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb86-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb86-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Source <span class="sc">==</span> <span class="st">&quot;Gut content&quot;</span>)  <span class="co"># removing specimens collected from fisheries landings</span></span></code></pre></div>
+<p>The number of samples for conducting a sex wise analysis of feeding preference is limited for <em>H. curtus</em>.</p>
+<div id="prey-preference-1" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Prey Preference</h2>
+<p>We modified and used the the Index of relative importance according to Pinkas et al. 1971 to determine the difference in prey preference between males and females in <em>H. curtus</em> and <em>H. schistosus</em></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calulating index of relative importance (Pinkas et al. 1971)</span></span>
+<span id="cb87-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-3" aria-hidden="true" tabindex="-1"></a>IRI_sex <span class="ot">&lt;-</span> gc<span class="sc">%&gt;%</span></span>
+<span id="cb87-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(snakes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Field.Code&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb87-5"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Prey.Family <span class="sc">!=</span> <span class="st">&quot;&quot;</span>, Sex <span class="sc">!=</span> <span class="st">&quot;&quot;</span>, Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span> <span class="sc">|</span> Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb87-6"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species, Sex)<span class="sc">%&gt;%</span></span>
+<span id="cb87-7"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fr =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Field.Code)), <span class="co"># total number of snakes sampled</span></span>
+<span id="cb87-8"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">W =</span> <span class="fu">sum</span>(Weight..g..x, <span class="at">na.rm =</span> T), <span class="co"># total weight of prey sampled</span></span>
+<span id="cb87-9"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">N =</span> <span class="fu">n</span>())<span class="sc">%&gt;%</span> <span class="co"># total number of prey sampled</span></span>
+<span id="cb87-10"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species, Sex, Prey.Family)<span class="sc">%&gt;%</span></span>
+<span id="cb87-11"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">f =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Field.Code)), <span class="co"># number snakes in which prey family occured</span></span>
+<span id="cb87-12"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">Fr =</span> <span class="fu">last</span>(Fr),</span>
+<span id="cb87-13"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">w =</span> <span class="fu">sum</span>(Weight..g..x, <span class="at">na.rm =</span> T), <span class="co"># weight of prey family</span></span>
+<span id="cb87-14"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">W =</span> <span class="fu">last</span>(W),</span>
+<span id="cb87-15"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>(), <span class="co"># number of individuals of prey family</span></span>
+<span id="cb87-16"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">N =</span> <span class="fu">last</span>(N))<span class="sc">%&gt;%</span></span>
+<span id="cb87-17"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species, Sex, Prey.Family)<span class="sc">%&gt;%</span></span>
+<span id="cb87-18"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># caluclating percentages</span></span>
+<span id="cb87-19"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">per.F =</span> f<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span>Fr,</span>
+<span id="cb87-20"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">per.W =</span> w<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span>W,</span>
+<span id="cb87-21"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">per.N =</span> n<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span>N,</span>
+<span id="cb87-22"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-22" aria-hidden="true" tabindex="-1"></a>            <span class="co"># caluclating IRI</span></span>
+<span id="cb87-23"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">IRI =</span> (per.N <span class="sc">+</span> per.W)<span class="sc">*</span>per.F)<span class="sc">%&gt;%</span></span>
+<span id="cb87-24"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Snake.Species, Sex, <span class="fu">desc</span>(IRI))<span class="sc">%&gt;%</span></span>
+<span id="cb87-25"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())</span>
+<span id="cb87-26"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-27"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-27" aria-hidden="true" tabindex="-1"></a><span class="co"># clean table</span></span>
+<span id="cb87-28"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-29"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb87-29" aria-hidden="true" tabindex="-1"></a>IRI_sex</span></code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -966,175 +912,11 @@ Hydrophis schistosus
 <th style="text-align:left;">
 Snake.Species
 </th>
-<th style="text-align:right;">
-N
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:right;">
-35
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:right;">
-89
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="proportion-of-unidentified-specimens" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Proportion of unidentified specimens</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating richness</span></span>
-<span id="cb16-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-3" aria-hidden="true" tabindex="-1"></a>gc<span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">N_sp =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Prey.Species)), <span class="co"># number of prey species</span></span>
-<span id="cb16-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">N_fam =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Prey.Family)), <span class="co"># number of prey families</span></span>
-<span id="cb16-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-6" aria-hidden="true" tabindex="-1"></a>            <span class="co"># proportion of unidentitified specimens</span></span>
-<span id="cb16-7"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">unid_sp =</span> <span class="fu">sum</span>(Prey.Species <span class="sc">==</span> <span class="st">&quot;Unidentified&quot;</span> <span class="sc">|</span> Prey.Species <span class="sc">==</span> <span class="st">&quot;&quot;</span>, <span class="at">na.rm =</span> T)<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span><span class="fu">n</span>(), <span class="do">## species</span></span>
-<span id="cb16-8"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">unid_fam =</span> <span class="fu">sum</span>(Prey.Family <span class="sc">==</span> <span class="st">&quot;Unidentified&quot;</span> <span class="sc">|</span> Prey.Family <span class="sc">==</span> <span class="st">&quot;&quot;</span>, <span class="at">na.rm =</span> T)<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span><span class="fu">n</span>())<span class="sc">%&gt;%</span> <span class="do">## family</span></span>
-<span id="cb16-9"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># creating clean table</span></span>
-<span id="cb16-10"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb16-11"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Metric =</span> <span class="fu">ifelse</span>(<span class="fu">substr</span>(key, <span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">==</span> <span class="st">&quot;N&quot;</span>, <span class="st">&quot;Richness&quot;</span>, <span class="st">&quot;% Unidentified&quot;</span>),</span>
-<span id="cb16-12"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">Unit =</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span>(key, <span class="at">pattern =</span> <span class="st">&quot;sp&quot;</span>, <span class="at">fixed =</span> T), <span class="st">&quot;Prey Species&quot;</span>, <span class="st">&quot;Prey Family&quot;</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb16-13"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Unit, Metric, value)<span class="sc">%&gt;%</span></span>
-<span id="cb16-14"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(Metric, value)</span></code></pre></div>
-<div class="kable-table">
-<table>
-<thead>
-<tr>
 <th style="text-align:left;">
-Unit
+Sex
 </th>
-<th style="text-align:right;">
-% Unidentified
-</th>
-<th style="text-align:right;">
-Richness
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Prey Family
-</td>
-<td style="text-align:right;">
-29.45736
-</td>
-<td style="text-align:right;">
-17
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Prey Species
-</td>
-<td style="text-align:right;">
-40.31008
-</td>
-<td style="text-align:right;">
-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>A large portion of gut content specimens were unidentifiable. This is an unavoidable consquence of VGCA.</p>
-</div>
-<div id="no.-of-snakes-with-mode-than-one-prey-specimen" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> No. of snakes with mode than one prey specimen</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb17-1" aria-hidden="true" tabindex="-1"></a>gc <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Field.Code <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(Field.Code, <span class="at">name =</span> <span class="st">&quot;Prey&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(Prey <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code></pre></div>
-<div class="kable-table">
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-Prey &gt; 1
-</th>
-<th style="text-align:right;">
-n
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-96
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-8
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="prey-preference" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> Prey preference</h2>
-<p>We modified and used the the Index of relative importance according to Pinkas et al. 1971 to determine the difference in prey preference between <em>H. curtus</em> and <em>H. schistosus</em></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calulating index of relative importance (Pinkas et al. 1971)</span></span>
-<span id="cb18-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-3" aria-hidden="true" tabindex="-1"></a>IRI <span class="ot">&lt;-</span> gc<span class="sc">%&gt;%</span></span>
-<span id="cb18-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Prey.Family <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb18-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span> <span class="sc">|</span> Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb18-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species)<span class="sc">%&gt;%</span></span>
-<span id="cb18-7"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fr =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Field.Code)), <span class="co"># total number of snakes sampled</span></span>
-<span id="cb18-8"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">W =</span> <span class="fu">sum</span>(Weight..g., <span class="at">na.rm =</span> T), <span class="co"># total weight of prey sampled</span></span>
-<span id="cb18-9"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">N =</span> <span class="fu">n</span>())<span class="sc">%&gt;%</span> <span class="co"># total number of prey sampled</span></span>
-<span id="cb18-10"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species, Prey.Family)<span class="sc">%&gt;%</span></span>
-<span id="cb18-11"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">f =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Field.Code)), <span class="co"># number snakes in which prey family occured</span></span>
-<span id="cb18-12"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">Fr =</span> <span class="fu">last</span>(Fr),</span>
-<span id="cb18-13"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">w =</span> <span class="fu">sum</span>(Weight..g., <span class="at">na.rm =</span> T), <span class="co"># weight of prey family</span></span>
-<span id="cb18-14"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">W =</span> <span class="fu">last</span>(W),</span>
-<span id="cb18-15"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>(), <span class="co"># number of individuals of prey family</span></span>
-<span id="cb18-16"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">N =</span> <span class="fu">last</span>(N))<span class="sc">%&gt;%</span></span>
-<span id="cb18-17"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species, Prey.Family)<span class="sc">%&gt;%</span></span>
-<span id="cb18-18"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># caluclating percentages</span></span>
-<span id="cb18-19"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">per.F =</span> f<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span>Fr,</span>
-<span id="cb18-20"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">per.W =</span> w<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span>W,</span>
-<span id="cb18-21"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">per.N =</span> n<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span>N,</span>
-<span id="cb18-22"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-22" aria-hidden="true" tabindex="-1"></a>            <span class="co"># caluclating IRI</span></span>
-<span id="cb18-23"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">IRI =</span> (per.N <span class="sc">+</span> per.W)<span class="sc">*</span>per.F)<span class="sc">%&gt;%</span></span>
-<span id="cb18-24"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb18-25"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(Prey.Family, <span class="fu">nesting</span>(Snake.Species), <span class="at">fill =</span> <span class="fu">list</span>(<span class="dv">0</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb18-26"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_na</span>(<span class="at">replace =</span> <span class="fu">list</span>(<span class="at">IRI =</span> <span class="dv">0</span>, <span class="at">per.F =</span> <span class="dv">0</span>, <span class="at">per.W =</span> <span class="dv">0</span>, <span class="at">per.N =</span> <span class="dv">0</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb18-27"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Snake.Species, <span class="fu">desc</span>(IRI))<span class="sc">%&gt;%</span></span>
-<span id="cb18-28"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())</span>
-<span id="cb18-29"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-30"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="co"># clean table</span></span>
-<span id="cb18-31"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-32"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-32" aria-hidden="true" tabindex="-1"></a>IRI<span class="sc">%&gt;%</span></span>
-<span id="cb18-33"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb18-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(IRI <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
-<div class="kable-table">
-<table>
-<thead>
-<tr>
 <th style="text-align:left;">
 Prey.Family
-</th>
-<th style="text-align:left;">
-Snake.Species
 </th>
 <th style="text-align:right;">
 per.F
@@ -1156,22 +938,25 @@ rank
 <tbody>
 <tr>
 <td style="text-align:left;">
-Unidentified
-</td>
-<td style="text-align:left;">
 Hydrophis curtus
 </td>
-<td style="text-align:right;">
-44.827586
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Unidentified
 </td>
 <td style="text-align:right;">
-15.2823920
+38.461539
 </td>
 <td style="text-align:right;">
-40.625000
+19.5402299
 </td>
 <td style="text-align:right;">
-2506.193436
+38.461539
+</td>
+<td style="text-align:right;">
+2230.837244
 </td>
 <td style="text-align:right;">
 1
@@ -1179,22 +964,25 @@ Hydrophis curtus
 </tr>
 <tr>
 <td style="text-align:left;">
-Clupeidae
-</td>
-<td style="text-align:left;">
 Hydrophis curtus
 </td>
-<td style="text-align:right;">
-6.896552
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Engraulidae
 </td>
 <td style="text-align:right;">
-29.9003322
+15.384615
 </td>
 <td style="text-align:right;">
-9.375000
+16.6666667
 </td>
 <td style="text-align:right;">
-270.864360
+15.384615
+</td>
+<td style="text-align:right;">
+493.096647
 </td>
 <td style="text-align:right;">
 2
@@ -1202,22 +990,25 @@ Hydrophis curtus
 </tr>
 <tr>
 <td style="text-align:left;">
-Engraulidae
-</td>
-<td style="text-align:left;">
 Hydrophis curtus
 </td>
-<td style="text-align:right;">
-10.344828
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Serranidae
 </td>
 <td style="text-align:right;">
-11.9601329
+7.692308
 </td>
 <td style="text-align:right;">
-9.375000
+28.7356322
 </td>
 <td style="text-align:right;">
-220.708271
+7.692308
+</td>
+<td style="text-align:right;">
+280.214922
 </td>
 <td style="text-align:right;">
 3
@@ -1225,22 +1016,25 @@ Hydrophis curtus
 </tr>
 <tr>
 <td style="text-align:left;">
-Carangidae
-</td>
-<td style="text-align:left;">
 Hydrophis curtus
 </td>
-<td style="text-align:right;">
-13.793103
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Carangidae
 </td>
 <td style="text-align:right;">
-3.3222591
+15.384615
 </td>
 <td style="text-align:right;">
-12.500000
+1.7241379
 </td>
 <td style="text-align:right;">
-218.238057
+15.384615
+</td>
+<td style="text-align:right;">
+263.211590
 </td>
 <td style="text-align:right;">
 4
@@ -1248,22 +1042,25 @@ Hydrophis curtus
 </tr>
 <tr>
 <td style="text-align:left;">
-Scombridae
-</td>
-<td style="text-align:left;">
 Hydrophis curtus
 </td>
-<td style="text-align:right;">
-6.896552
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Clupeidae
 </td>
 <td style="text-align:right;">
-6.6445183
+7.692308
 </td>
 <td style="text-align:right;">
-6.250000
+20.1149425
 </td>
 <td style="text-align:right;">
-88.927712
+7.692308
+</td>
+<td style="text-align:right;">
+213.901925
 </td>
 <td style="text-align:right;">
 5
@@ -1271,22 +1068,25 @@ Hydrophis curtus
 </tr>
 <tr>
 <td style="text-align:left;">
-Cynoglossidae
-</td>
-<td style="text-align:left;">
 Hydrophis curtus
 </td>
-<td style="text-align:right;">
-6.896552
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Tetraodontidae
 </td>
 <td style="text-align:right;">
-3.9867110
+7.692308
 </td>
 <td style="text-align:right;">
-6.250000
+13.2183908
 </td>
 <td style="text-align:right;">
-70.598007
+7.692308
+</td>
+<td style="text-align:right;">
+160.851527
 </td>
 <td style="text-align:right;">
 6
@@ -1294,22 +1094,25 @@ Hydrophis curtus
 </tr>
 <tr>
 <td style="text-align:left;">
-Serranidae
-</td>
-<td style="text-align:left;">
 Hydrophis curtus
 </td>
-<td style="text-align:right;">
-3.448276
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Leiognathidae
 </td>
 <td style="text-align:right;">
-16.6112957
+7.692308
 </td>
 <td style="text-align:right;">
-3.125000
+0.0000000
 </td>
 <td style="text-align:right;">
-68.056192
+7.692308
+</td>
+<td style="text-align:right;">
+59.171598
 </td>
 <td style="text-align:right;">
 7
@@ -1317,22 +1120,363 @@ Hydrophis curtus
 </tr>
 <tr>
 <td style="text-align:left;">
-Leiognathidae
+Hydrophis curtus
 </td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Unidentified
+</td>
+<td style="text-align:right;">
+61.538461
+</td>
+<td style="text-align:right;">
+10.8108108
+</td>
+<td style="text-align:right;">
+53.333333
+</td>
+<td style="text-align:right;">
+3947.331947
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
 <td style="text-align:left;">
 Hydrophis curtus
 </td>
-<td style="text-align:right;">
-6.896552
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Clupeidae
 </td>
 <td style="text-align:right;">
-2.9900332
+7.692308
 </td>
 <td style="text-align:right;">
-6.250000
+49.5495495
 </td>
 <td style="text-align:right;">
-63.724367
+13.333333
+</td>
+<td style="text-align:right;">
+483.714484
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Cynoglossidae
+</td>
+<td style="text-align:right;">
+15.384615
+</td>
+<td style="text-align:right;">
+10.8108108
+</td>
+<td style="text-align:right;">
+13.333333
+</td>
+<td style="text-align:right;">
+371.448371
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Scombridae
+</td>
+<td style="text-align:right;">
+7.692308
+</td>
+<td style="text-align:right;">
+18.0180180
+</td>
+<td style="text-align:right;">
+6.666667
+</td>
+<td style="text-align:right;">
+189.882190
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Engraulidae
+</td>
+<td style="text-align:right;">
+7.692308
+</td>
+<td style="text-align:right;">
+6.3063063
+</td>
+<td style="text-align:right;">
+6.666667
+</td>
+<td style="text-align:right;">
+99.792100
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Nemipteridae
+</td>
+<td style="text-align:right;">
+7.692308
+</td>
+<td style="text-align:right;">
+4.5045045
+</td>
+<td style="text-align:right;">
+6.666667
+</td>
+<td style="text-align:right;">
+85.932086
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Tetraodontidae
+</td>
+<td style="text-align:right;">
+36.000000
+</td>
+<td style="text-align:right;">
+33.6644592
+</td>
+<td style="text-align:right;">
+34.615385
+</td>
+<td style="text-align:right;">
+2458.074376
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Plotosidae
+</td>
+<td style="text-align:right;">
+12.000000
+</td>
+<td style="text-align:right;">
+11.1754967
+</td>
+<td style="text-align:right;">
+11.538462
+</td>
+<td style="text-align:right;">
+272.567499
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Unidentified
+</td>
+<td style="text-align:right;">
+8.000000
+</td>
+<td style="text-align:right;">
+12.5551876
+</td>
+<td style="text-align:right;">
+11.538462
+</td>
+<td style="text-align:right;">
+192.749193
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Ariidae
+</td>
+<td style="text-align:right;">
+8.000000
+</td>
+<td style="text-align:right;">
+10.2097130
+</td>
+<td style="text-align:right;">
+7.692308
+</td>
+<td style="text-align:right;">
+143.216166
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Serranidae
+</td>
+<td style="text-align:right;">
+8.000000
+</td>
+<td style="text-align:right;">
+9.6578366
+</td>
+<td style="text-align:right;">
+7.692308
+</td>
+<td style="text-align:right;">
+138.801155
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Clupeidae
+</td>
+<td style="text-align:right;">
+8.000000
+</td>
+<td style="text-align:right;">
+8.8300221
+</td>
+<td style="text-align:right;">
+7.692308
+</td>
+<td style="text-align:right;">
+132.178638
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Teraponidae
+</td>
+<td style="text-align:right;">
+8.000000
+</td>
+<td style="text-align:right;">
+3.5596026
+</td>
+<td style="text-align:right;">
+7.692308
+</td>
+<td style="text-align:right;">
+90.015283
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Sillaginidae
+</td>
+<td style="text-align:right;">
+4.000000
+</td>
+<td style="text-align:right;">
+6.3465784
+</td>
+<td style="text-align:right;">
+3.846154
+</td>
+<td style="text-align:right;">
+40.770929
 </td>
 <td style="text-align:right;">
 8
@@ -1340,22 +1484,25 @@ Hydrophis curtus
 </tr>
 <tr>
 <td style="text-align:left;">
-Tetraodontidae
+Hydrophis schistosus
 </td>
 <td style="text-align:left;">
-Hydrophis curtus
+Female
+</td>
+<td style="text-align:left;">
+Scombridae
 </td>
 <td style="text-align:right;">
-3.448276
+4.000000
 </td>
 <td style="text-align:right;">
-7.6411960
+3.1732892
 </td>
 <td style="text-align:right;">
-3.125000
+3.846154
 </td>
 <td style="text-align:right;">
-37.124814
+28.077772
 </td>
 <td style="text-align:right;">
 9
@@ -1363,22 +1510,25 @@ Hydrophis curtus
 </tr>
 <tr>
 <td style="text-align:left;">
-Nemipteridae
+Hydrophis schistosus
 </td>
 <td style="text-align:left;">
-Hydrophis curtus
+Female
+</td>
+<td style="text-align:left;">
+Carangidae
 </td>
 <td style="text-align:right;">
-3.448276
+4.000000
 </td>
 <td style="text-align:right;">
-1.6611296
+0.8278146
 </td>
 <td style="text-align:right;">
-3.125000
+3.846154
 </td>
 <td style="text-align:right;">
-16.503895
+18.695874
 </td>
 <td style="text-align:right;">
 10
@@ -1386,346 +1536,307 @@ Hydrophis curtus
 </tr>
 <tr>
 <td style="text-align:left;">
-Tetraodontidae
-</td>
-<td style="text-align:left;">
 Hydrophis schistosus
 </td>
-<td style="text-align:right;">
-34.246575
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Tetraodontidae
 </td>
 <td style="text-align:right;">
-38.7307267
+32.608696
 </td>
 <td style="text-align:right;">
-35.869565
+45.4308094
 </td>
 <td style="text-align:right;">
-2554.804519
+37.735849
 </td>
 <td style="text-align:right;">
-17
+2711.956254
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Male
+</td>
 <td style="text-align:left;">
 Unidentified
 </td>
-<td style="text-align:left;">
-Hydrophis schistosus
+<td style="text-align:right;">
+30.434783
 </td>
 <td style="text-align:right;">
-23.287671
+13.3681462
 </td>
 <td style="text-align:right;">
-12.9453244
+28.301887
 </td>
 <td style="text-align:right;">
-21.739130
+1268.218396
 </td>
 <td style="text-align:right;">
-807.720182
-</td>
-<td style="text-align:right;">
-18
+2
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Ariidae
-</td>
-<td style="text-align:left;">
 Hydrophis schistosus
 </td>
-<td style="text-align:right;">
-9.589041
-</td>
-<td style="text-align:right;">
-8.8407094
-</td>
-<td style="text-align:right;">
-8.695652
-</td>
-<td style="text-align:right;">
-168.156891
-</td>
-<td style="text-align:right;">
-19
-</td>
-</tr>
-<tr>
 <td style="text-align:left;">
-Clupeidae
+Male
 </td>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:right;">
-6.849315
-</td>
-<td style="text-align:right;">
-10.9456402
-</td>
-<td style="text-align:right;">
-6.521739
-</td>
-<td style="text-align:right;">
-119.639584
-</td>
-<td style="text-align:right;">
-20
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plotosidae
-</td>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:right;">
-8.219178
-</td>
-<td style="text-align:right;">
-7.7882440
-</td>
-<td style="text-align:right;">
-6.521739
-</td>
-<td style="text-align:right;">
-117.616299
-</td>
-<td style="text-align:right;">
-21
-</td>
-</tr>
-<tr>
 <td style="text-align:left;">
 Teraponidae
 </td>
-<td style="text-align:left;">
-Hydrophis schistosus
+<td style="text-align:right;">
+6.521739
 </td>
 <td style="text-align:right;">
-6.849315
+10.3394256
 </td>
 <td style="text-align:right;">
-6.5673841
+5.660377
 </td>
 <td style="text-align:right;">
-5.434783
+104.346541
 </td>
 <td style="text-align:right;">
-82.206621
-</td>
-<td style="text-align:right;">
-22
+3
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Serranidae
-</td>
-<td style="text-align:left;">
 Hydrophis schistosus
 </td>
-<td style="text-align:right;">
-5.479452
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Clupeidae
 </td>
 <td style="text-align:right;">
-7.6303742
+4.347826
 </td>
 <td style="text-align:right;">
-5.434783
+13.6814621
 </td>
 <td style="text-align:right;">
-71.589900
+5.660377
 </td>
 <td style="text-align:right;">
-23
+84.094954
+</td>
+<td style="text-align:right;">
+4
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Male
+</td>
 <td style="text-align:left;">
 Leiognathidae
 </td>
-<td style="text-align:left;">
-Hydrophis schistosus
+<td style="text-align:right;">
+6.521739
 </td>
 <td style="text-align:right;">
-4.109589
+2.0887728
 </td>
 <td style="text-align:right;">
-1.0524654
+5.660377
 </td>
 <td style="text-align:right;">
-3.260870
+50.537936
 </td>
 <td style="text-align:right;">
-17.726034
-</td>
-<td style="text-align:right;">
-24
+5
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Synodontidae
+Hydrophis schistosus
 </td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Ariidae
+</td>
+<td style="text-align:right;">
+6.521739
+</td>
+<td style="text-align:right;">
+1.4621410
+</td>
+<td style="text-align:right;">
+5.660377
+</td>
+<td style="text-align:right;">
+46.451207
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
 <td style="text-align:left;">
 Hydrophis schistosus
 </td>
-<td style="text-align:right;">
-2.739726
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Plotosidae
 </td>
 <td style="text-align:right;">
-1.1840236
+4.347826
+</td>
+<td style="text-align:right;">
+5.3263708
+</td>
+<td style="text-align:right;">
+3.773585
+</td>
+<td style="text-align:right;">
+39.565025
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Synodontidae
+</td>
+<td style="text-align:right;">
+4.347826
+</td>
+<td style="text-align:right;">
+2.3498695
+</td>
+<td style="text-align:right;">
+3.773585
+</td>
+<td style="text-align:right;">
+26.623715
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Serranidae
 </td>
 <td style="text-align:right;">
 2.173913
 </td>
 <td style="text-align:right;">
-9.199826
+5.2219321
 </td>
 <td style="text-align:right;">
-25
+1.886793
+</td>
+<td style="text-align:right;">
+15.453749
+</td>
+<td style="text-align:right;">
+9
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Sillaginidae
-</td>
 <td style="text-align:left;">
 Hydrophis schistosus
 </td>
-<td style="text-align:right;">
-1.369863
-</td>
-<td style="text-align:right;">
-2.4206704
-</td>
-<td style="text-align:right;">
-1.086957
-</td>
-<td style="text-align:right;">
-4.804968
-</td>
-<td style="text-align:right;">
-26
-</td>
-</tr>
-<tr>
 <td style="text-align:left;">
-Scombridae
+Male
 </td>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:right;">
-1.369863
-</td>
-<td style="text-align:right;">
-1.2103352
-</td>
-<td style="text-align:right;">
-1.086957
-</td>
-<td style="text-align:right;">
-3.146975
-</td>
-<td style="text-align:right;">
-27
-</td>
-</tr>
-<tr>
 <td style="text-align:left;">
 Pleuronectidae
 </td>
-<td style="text-align:left;">
-Hydrophis schistosus
+<td style="text-align:right;">
+2.173913
 </td>
 <td style="text-align:right;">
-1.369863
+0.7310705
 </td>
 <td style="text-align:right;">
-0.3683629
+1.886793
 </td>
 <td style="text-align:right;">
-1.086957
+5.691006
 </td>
 <td style="text-align:right;">
-1.993588
-</td>
-<td style="text-align:right;">
-28
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Carangidae
-</td>
-<td style="text-align:left;">
-Hydrophis schistosus
-</td>
-<td style="text-align:right;">
-1.369863
-</td>
-<td style="text-align:right;">
-0.3157396
-</td>
-<td style="text-align:right;">
-1.086957
-</td>
-<td style="text-align:right;">
-1.921502
-</td>
-<td style="text-align:right;">
-29
+10
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting prey preference</span></span>
-<span id="cb19-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb19-3" aria-hidden="true" tabindex="-1"></a>IRI <span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(Prey.Family, IRI), IRI, <span class="at">fill =</span> Snake.Species)) <span class="sc">+</span> <span class="fu">geom_col</span>(<span class="at">col =</span> <span class="st">&quot;black&quot;</span>, </span>
-<span id="cb19-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">preserve =</span> <span class="st">&quot;single&quot;</span>)) <span class="sc">+</span> <span class="fu">scale_y_sqrt</span>(<span class="at">name =</span> <span class="st">&quot;IRI (sq.rt.)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb19-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Prey Family&quot;</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Greys&quot;</span>, <span class="at">name =</span> <span class="st">&quot;Snake Species&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb19-7"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">angle =</span> <span class="dv">60</span>), <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;italic&quot;</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-17-1.png" width="2400" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># saving high res plot</span></span>
-<span id="cb20-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">last_plot</span>(), <span class="at">filename =</span> <span class="st">&quot;./Figures and Tables/figure2.tiff&quot;</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>, </span>
-<span id="cb20-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div>
-<p><strong>Figure 2</strong>: Index of relative importance (IRI, square root transformed) (Pinkas et al., 1970) of prey families in sea snake diet.</p>
-<p><em>H. schistosus</em> showed preference for the Tetraodontid fish, while <em>H. curtus</em> did not exhibit any prey preference.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting prey preference</span></span>
+<span id="cb88-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb88-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb88-3" aria-hidden="true" tabindex="-1"></a>IRI_sex <span class="sc">%&gt;%</span></span>
+<span id="cb88-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb88-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(Prey.Family, IRI, <span class="at">fill =</span> Sex)) <span class="sc">+</span> <span class="fu">geom_col</span>(<span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">preserve =</span> <span class="st">&quot;single&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb88-5"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb88-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_sqrt</span>(<span class="at">name =</span> <span class="st">&quot;IRI (sq.rt.)&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Prey Family&quot;</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Greys&quot;</span>, </span>
+<span id="cb88-6"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb88-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Snake Species&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">angle =</span> <span class="dv">60</span>), </span>
+<span id="cb88-7"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb88-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;italic&quot;</span>)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Snake.Species, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-71-1.png" width="2400" style="display: block; margin: auto;" /></p>
 </div>
-<div id="range-of-prey-found-in-h.-curtus-and-h.-shistosus-gut" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Range of prey found in <em>H. curtus</em> and <em>H. shistosus</em> gut</h2>
+<div id="range-of-prey-found-in-h.-curtus-and-h.-shistosus-gut-1" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Range of prey found in <em>H. curtus</em> and <em>H. shistosus</em> gut</h2>
 <p>We compared the dietary breadth between snakes species using the richness and diversity of prey families.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating data matrix for prey community analysis analysis</span></span>
-<span id="cb21-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb21-3" aria-hidden="true" tabindex="-1"></a>fam_spade <span class="ot">=</span> gc<span class="sc">%&gt;%</span></span>
-<span id="cb21-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Prey.Family <span class="sc">!=</span> <span class="st">&quot;Unidentified&quot;</span>, Prey.Family <span class="sc">!=</span><span class="st">&quot;&quot;</span>, Field.Code <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)<span class="sc">%&gt;%</span> <span class="co"># removing unidentified specimens</span></span>
-<span id="cb21-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species, Prey.Family)<span class="sc">%&gt;%</span></span>
-<span id="cb21-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())<span class="sc">%&gt;%</span> <span class="co"># total number of specimens per family in each snake species</span></span>
-<span id="cb21-7"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(Snake.Species, n, <span class="at">fill =</span> <span class="dv">0</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb21-8"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;Prey.Family&quot;</span>)</span></code></pre></div>
-<div id="prey-richness" class="section level3" number="3.6.1">
-<h3><span class="header-section-number">3.6.1</span> Prey richness</h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb22-1" aria-hidden="true" tabindex="-1"></a>gc<span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span> <span class="sc">|</span> Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span>,</span>
-<span id="cb22-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb22-3" aria-hidden="true" tabindex="-1"></a>         Prey.Family <span class="sc">!=</span> <span class="st">&quot;Unidentified&quot;</span>, Prey.Family <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species)<span class="sc">%&gt;%</span></span>
-<span id="cb22-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prey.Species =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Prey.Species)) <span class="sc">-</span> <span class="dv">1</span>, <span class="co"># removing unidentified</span></span>
-<span id="cb22-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb22-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">Prey.Families =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Prey.Family)))</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating data matrix for prey community analysis analysis</span></span>
+<span id="cb89-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb89-3" aria-hidden="true" tabindex="-1"></a>fam_spade_sex <span class="ot">=</span> gc<span class="sc">%&gt;%</span></span>
+<span id="cb89-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(snakes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Field.Code&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb89-5"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb89-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Prey.Family <span class="sc">!=</span> <span class="st">&quot;Unidentified&quot;</span>, Prey.Family <span class="sc">!=</span><span class="st">&quot;&quot;</span>, Field.Code <span class="sc">!=</span> <span class="st">&quot;&quot;</span>, Sex <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)<span class="sc">%&gt;%</span> <span class="co"># removing unidentified specimens</span></span>
+<span id="cb89-6"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb89-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species, Sex, Prey.Family)<span class="sc">%&gt;%</span></span>
+<span id="cb89-7"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb89-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())<span class="sc">%&gt;%</span> <span class="co"># total number of specimens per family in each snake species</span></span>
+<span id="cb89-8"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb89-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;Species_sex&quot;</span>, Snake.Species<span class="sc">:</span>Sex)<span class="sc">%&gt;%</span></span>
+<span id="cb89-9"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb89-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(Species_sex, n, <span class="at">fill =</span> <span class="dv">0</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb89-10"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb89-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;Prey.Family&quot;</span>)</span></code></pre></div>
+<div id="prey-richness-1" class="section level3" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Prey richness</h3>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb90-1" aria-hidden="true" tabindex="-1"></a>gc<span class="sc">%&gt;%</span></span>
+<span id="cb90-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(snakes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Field.Code&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb90-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span> <span class="sc">|</span> Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span>,</span>
+<span id="cb90-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb90-4" aria-hidden="true" tabindex="-1"></a>         Prey.Family <span class="sc">!=</span> <span class="st">&quot;Unidentified&quot;</span>, Prey.Family <span class="sc">!=</span> <span class="st">&quot;&quot;</span>, Sex <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb90-5"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb90-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species, Sex)<span class="sc">%&gt;%</span></span>
+<span id="cb90-6"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb90-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prey.Species =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Prey.Species)) <span class="sc">-</span> <span class="dv">1</span>, <span class="co"># removing unidentified</span></span>
+<span id="cb90-7"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb90-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">Prey.Families =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Prey.Family)))</span></code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
 <tr>
 <th style="text-align:left;">
 Snake.Species
+</th>
+<th style="text-align:left;">
+Sex
 </th>
 <th style="text-align:right;">
 Prey.Species
@@ -1740,8 +1851,39 @@ Prey.Families
 <td style="text-align:left;">
 Hydrophis curtus
 </td>
+<td style="text-align:left;">
+Female
+</td>
 <td style="text-align:right;">
-11
+6
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:right;">
+12
 </td>
 <td style="text-align:right;">
 9
@@ -1751,43 +1893,57 @@ Hydrophis curtus
 <td style="text-align:left;">
 Hydrophis schistosus
 </td>
-<td style="text-align:right;">
-19
+<td style="text-align:left;">
+Male
 </td>
 <td style="text-align:right;">
-12
+10
+</td>
+<td style="text-align:right;">
+9
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="prey-family-diversity" class="section level3" number="3.6.2">
-<h3><span class="header-section-number">3.6.2</span> Prey family diversity</h3>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loading libraries</span></span>
-<span id="cb23-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SpadeR)  <span class="do">## for community indices</span></span>
-<span id="cb23-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating shanon diversity</span></span>
-<span id="cb23-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-7" aria-hidden="true" tabindex="-1"></a>HC_div <span class="ot">=</span> <span class="fu">as.data.frame</span>(<span class="fu">Diversity</span>(fam_spade[, <span class="dv">1</span>])<span class="sc">$</span>Shannon_diversity) <span class="sc">%&gt;%</span></span>
-<span id="cb23-8"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;Estimator&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-9"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Species =</span> <span class="st">&quot;Hydrophis curtus&quot;</span>)</span>
-<span id="cb23-10"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-11" aria-hidden="true" tabindex="-1"></a>HS_div <span class="ot">=</span> <span class="fu">as.data.frame</span>(<span class="fu">Diversity</span>(fam_spade[, <span class="dv">2</span>])<span class="sc">$</span>Shannon_diversity) <span class="sc">%&gt;%</span></span>
-<span id="cb23-12"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;Estimator&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-13"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Species =</span> <span class="st">&quot;Hydrophis schistosus&quot;</span>)</span>
-<span id="cb23-14"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-15"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-15" aria-hidden="true" tabindex="-1"></a>HC_div <span class="sc">%&gt;%</span></span>
-<span id="cb23-16"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">full_join</span>(HS_div) <span class="sc">%&gt;%</span></span>
-<span id="cb23-17"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-17" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Species, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb23-18"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Estimator)</span></code></pre></div>
+<div id="prey-family-diversity-1" class="section level3" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> Prey family diversity</h3>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loading libraries</span></span>
+<span id="cb91-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SpadeR)  <span class="do">## for community indices</span></span>
+<span id="cb91-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-5"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating shanon diversity</span></span>
+<span id="cb91-6"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-7"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-7" aria-hidden="true" tabindex="-1"></a><span class="co"># HC_f_div = as.data.frame(Diversity(fam_spade_sex[,1])$Shannon_diversity)%&gt;%</span></span>
+<span id="cb91-8"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-8" aria-hidden="true" tabindex="-1"></a><span class="co"># rownames_to_column(&#39;Estimator&#39;)%&gt;% mutate(Species = &#39;Hydrophis curtus&#39;, Sex =</span></span>
+<span id="cb91-9"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-9" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;Female&#39;)</span></span>
+<span id="cb91-10"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-11"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-11" aria-hidden="true" tabindex="-1"></a><span class="co"># HC_m_div = as.data.frame(Diversity(fam_spade_sex[,2])$Shannon_diversity)%&gt;%</span></span>
+<span id="cb91-12"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-12" aria-hidden="true" tabindex="-1"></a><span class="co"># rownames_to_column(&#39;Estimator&#39;)%&gt;% mutate(Species = &#39;Hydrophis curtus&#39;, Sex =</span></span>
+<span id="cb91-13"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-13" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;Male&#39;)</span></span>
+<span id="cb91-14"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-15"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-15" aria-hidden="true" tabindex="-1"></a>HS_f_div <span class="ot">=</span> <span class="fu">as.data.frame</span>(<span class="fu">Diversity</span>(fam_spade_sex[, <span class="dv">3</span>])<span class="sc">$</span>Shannon_diversity) <span class="sc">%&gt;%</span></span>
+<span id="cb91-16"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;Estimator&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb91-17"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Species =</span> <span class="st">&quot;Hydrophis schistosus&quot;</span>, <span class="at">Sex =</span> <span class="st">&quot;Female&quot;</span>)</span>
+<span id="cb91-18"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-19"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-19" aria-hidden="true" tabindex="-1"></a>HS_m_div <span class="ot">=</span> <span class="fu">as.data.frame</span>(<span class="fu">Diversity</span>(fam_spade_sex[, <span class="dv">4</span>])<span class="sc">$</span>Shannon_diversity) <span class="sc">%&gt;%</span></span>
+<span id="cb91-20"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;Estimator&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb91-21"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Species =</span> <span class="st">&quot;Hydrophis schistosus&quot;</span>, <span class="at">Sex =</span> <span class="st">&quot;Male&quot;</span>)</span>
+<span id="cb91-22"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-23"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-23" aria-hidden="true" tabindex="-1"></a>HS_m_div <span class="sc">%&gt;%</span></span>
+<span id="cb91-24"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">full_join</span>(HS_f_div) <span class="sc">%&gt;%</span></span>
+<span id="cb91-25"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-25" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Species, Sex, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb91-26"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb91-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Estimator)</span></code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
 <tr>
 <th style="text-align:left;">
 Species
+</th>
+<th style="text-align:left;">
+Sex
 </th>
 <th style="text-align:left;">
 Estimator
@@ -1809,102 +1965,94 @@ s.e.
 <tbody>
 <tr>
 <td style="text-align:left;">
-Hydrophis curtus
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Male
 </td>
 <td style="text-align:left;">
 Chao &amp; Shen
 </td>
 <td style="text-align:right;">
-11.671
+6.128
 </td>
 <td style="text-align:right;">
-3.361
+1.051
 </td>
 <td style="text-align:right;">
-5.084
+4.067
 </td>
 <td style="text-align:right;">
-18.258
+8.188
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
 </td>
 <td style="text-align:left;">
 Chao &amp; Shen
 </td>
 <td style="text-align:right;">
-7.427
+8.991
 </td>
 <td style="text-align:right;">
-1.205
+1.537
 </td>
 <td style="text-align:right;">
-5.066
+5.979
 </td>
 <td style="text-align:right;">
-9.788
+12.003
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Hydrophis curtus
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Male
 </td>
 <td style="text-align:left;">
 Chao et al. (2013)
 </td>
 <td style="text-align:right;">
-12.029
+5.895
 </td>
 <td style="text-align:right;">
-3.292
+1.083
 </td>
 <td style="text-align:right;">
-5.577
+3.773
 </td>
 <td style="text-align:right;">
-18.481
+8.017
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
 </td>
 <td style="text-align:left;">
 Chao et al. (2013)
 </td>
 <td style="text-align:right;">
-7.509
+8.334
 </td>
 <td style="text-align:right;">
-1.239
+1.672
 </td>
 <td style="text-align:right;">
-5.080
+5.057
 </td>
 <td style="text-align:right;">
-9.938
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:left;">
-Jackknife
-</td>
-<td style="text-align:right;">
-11.776
-</td>
-<td style="text-align:right;">
-2.801
-</td>
-<td style="text-align:right;">
-6.287
-</td>
-<td style="text-align:right;">
-17.266
+11.610
 </td>
 </tr>
 <tr>
@@ -1912,39 +2060,22 @@ Jackknife
 Hydrophis schistosus
 </td>
 <td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
 Jackknife
 </td>
 <td style="text-align:right;">
-7.301
+5.964
 </td>
 <td style="text-align:right;">
-1.191
+1.089
 </td>
 <td style="text-align:right;">
-4.966
+3.830
 </td>
 <td style="text-align:right;">
-9.635
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Hydrophis curtus
-</td>
-<td style="text-align:left;">
-MLE
-</td>
-<td style="text-align:right;">
-8.073
-</td>
-<td style="text-align:right;">
-1.327
-</td>
-<td style="text-align:right;">
-5.473
-</td>
-<td style="text-align:right;">
-10.673
+8.098
 </td>
 </tr>
 <tr>
@@ -1952,19 +2083,68 @@ MLE
 Hydrophis schistosus
 </td>
 <td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Jackknife
+</td>
+<td style="text-align:right;">
+8.616
+</td>
+<td style="text-align:right;">
+1.611
+</td>
+<td style="text-align:right;">
+5.459
+</td>
+<td style="text-align:right;">
+11.774
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
 MLE
 </td>
 <td style="text-align:right;">
-6.428
+5.160
 </td>
 <td style="text-align:right;">
-0.975
+0.916
 </td>
 <td style="text-align:right;">
-4.518
+3.364
 </td>
 <td style="text-align:right;">
-8.338
+6.957
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+MLE
+</td>
+<td style="text-align:right;">
+6.628
+</td>
+<td style="text-align:right;">
+1.128
+</td>
+<td style="text-align:right;">
+4.417
+</td>
+<td style="text-align:right;">
+8.839
 </td>
 </tr>
 </tbody>
@@ -1974,69 +2154,195 @@ MLE
 <p>Statistical comparison is difficult as each individual snake fed on only one type of specimen at time.</p>
 </div>
 </div>
-<div id="diet-overlap-between-h.-curtus-and-h.-shistosus" class="section level2" number="3.7">
-<h2><span class="header-section-number">3.7</span> Diet overlap between <em>H. curtus</em> and <em>H. shistosus</em></h2>
+<div id="diet-overlap-between-males-and-females" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Diet overlap between Males and Females</h2>
 <p>Number of overlapping prey families:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb24-1" aria-hidden="true" tabindex="-1"></a>gc <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span> <span class="sc">|</span> Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span>, </span>
-<span id="cb24-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb24-3" aria-hidden="true" tabindex="-1"></a>        Prey.Family <span class="sc">!=</span> <span class="st">&quot;Unidentified&quot;</span>, Prey.Family <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Prey.Family) <span class="sc">%&gt;%</span></span>
-<span id="cb24-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">N_pred =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Snake.Species))) <span class="sc">%&gt;%</span></span>
-<span id="cb24-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb24-7"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Overlap =</span> <span class="fu">sum</span>(N_pred <span class="sc">&gt;</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb24-8"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.numeric</span>()</span></code></pre></div>
-<pre><code>## [1] 6</code></pre>
-<p>Shoener’s (1971) resource overlap index (D):</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-1" aria-hidden="true" tabindex="-1"></a>gc<span class="sc">%&gt;%</span></span>
-<span id="cb26-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Prey.Species <span class="sc">!=</span> <span class="st">&quot;Unidentified&quot;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species, Prey.Family)<span class="sc">%&gt;%</span></span>
-<span id="cb26-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())<span class="sc">%&gt;%</span> <span class="co"># number of speciemens per prey family in each snake species</span></span>
-<span id="cb26-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species)<span class="sc">%&gt;%</span></span>
-<span id="cb26-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">N =</span> <span class="fu">sum</span>(n))<span class="sc">%&gt;%</span> <span class="co"># total number of specimens collected from each snake species</span></span>
-<span id="cb26-7"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species, Prey.Family)<span class="sc">%&gt;%</span></span>
-<span id="cb26-8"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">p =</span> n<span class="sc">/</span>N)<span class="sc">%&gt;%</span> <span class="co"># relative proportion of each prey family</span></span>
-<span id="cb26-9"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(Snake.Species, p, <span class="at">fill =</span> <span class="dv">0</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb26-10"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;HC&quot;</span> <span class="ot">=</span> <span class="st">&#39;Hydrophis curtus&#39;</span>, <span class="st">&quot;HS&quot;</span> <span class="ot">=</span> <span class="st">&#39;Hydrophis schistosus&#39;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb26-11"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">P =</span> <span class="fu">abs</span>(HC <span class="sc">-</span> HS))<span class="sc">%&gt;%</span> <span class="co"># difference in relactive proportion prey items </span></span>
-<span id="cb26-12"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">D =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.5</span><span class="sc">*</span><span class="fu">sum</span>(P))<span class="sc">%&gt;%</span> <span class="co"># Schoener&#39;s resource overlap index</span></span>
-<span id="cb26-13"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span></code></pre></div>
-<pre><code>## [1] 0.2380952</code></pre>
-<p>Morista - Horn overlap:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb28-1" aria-hidden="true" tabindex="-1"></a>prey_sim <span class="ot">&lt;-</span> <span class="fu">SimilarityPair</span>(<span class="at">X =</span> fam_spade, <span class="at">datatype =</span> <span class="st">&quot;abundance&quot;</span>)</span>
-<span id="cb28-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb28-3" aria-hidden="true" tabindex="-1"></a>prey_sim<span class="sc">$</span>Empirical_relative</span></code></pre></div>
-<pre><code>##                            Estimate       s.e.    95%.LCL   95%.UCL
-## C12=U12(q=1,Horn)         0.4419859 0.10915389 0.22804425 0.6559275
-## C22(q=2,Morisita)         0.2777801 0.09910303 0.08353814 0.4720220
-## U22(q=2,Regional overlap) 0.4347854 0.13446568 0.17123270 0.6983382
-## ChaoJaccard               0.4946000 0.15380000 0.19315200 0.7960480
-## ChaoSorensen              0.6619000 0.17370000 0.32144800 1.0023520</code></pre>
-<p>There was limited overlap in prey between <em>H. schistosus</em> and <em>H. curtus</em></p>
-<div id="testing-segregation-in-prey-between-h.-curtus-and-h.-schistosus" class="section level3" number="3.7.1">
-<h3><span class="header-section-number">3.7.1</span> Testing segregation in prey between <em>H. curtus</em> and <em>H. schistosus</em></h3>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loading libraries</span></span>
-<span id="cb30-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
-<span id="cb30-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># formating data for vegan</span></span>
-<span id="cb30-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-7" aria-hidden="true" tabindex="-1"></a>fam_simboo <span class="ot">&lt;-</span> gc <span class="sc">%&gt;%</span></span>
-<span id="cb30-8"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Prey.Family <span class="sc">!=</span> <span class="st">&quot;Unidentified&quot;</span>, Prey.Family <span class="sc">!=</span> <span class="st">&quot;&quot;</span>, Field.Code <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb30-9"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Snake.Species, Field.Code, Prey.Family) <span class="sc">%&gt;%</span></span>
-<span id="cb30-10"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb30-11"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">spread</span>(Prey.Family, n, <span class="at">fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb30-12"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
-<span id="cb30-13"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-14"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co"># PERMANOVA to compare composition</span></span>
-<span id="cb30-15"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-16"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb30-17"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-18"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-18" aria-hidden="true" tabindex="-1"></a>permanova_sp <span class="ot">&lt;-</span> <span class="fu">adonis2</span>(fam_simboo[, <span class="dv">3</span><span class="sc">:</span><span class="fu">length</span>(fam_simboo)] <span class="sc">~</span> fam_simboo<span class="sc">$</span>Snake.Species, </span>
-<span id="cb30-19"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> fam_simboo[, <span class="dv">1</span>])</span>
-<span id="cb30-20"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-21"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="do">## clean table</span></span>
-<span id="cb30-22"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-23"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb30-23" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(permanova_sp)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb92-1" aria-hidden="true" tabindex="-1"></a>gc <span class="sc">%&gt;%</span></span>
+<span id="cb92-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb92-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(snakes, <span class="at">by =</span> <span class="st">&quot;Field.Code&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb92-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb92-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span> <span class="sc">|</span> Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span>, </span>
+<span id="cb92-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb92-4" aria-hidden="true" tabindex="-1"></a>        Prey.Family <span class="sc">!=</span> <span class="st">&quot;Unidentified&quot;</span>, Prey.Family <span class="sc">!=</span> <span class="st">&quot;&quot;</span>, Sex <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb92-5"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb92-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Snake.Species, Prey.Family) <span class="sc">%&gt;%</span></span>
+<span id="cb92-6"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb92-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">N_pred =</span> <span class="fu">length</span>(<span class="fu">unique</span>(Sex))) <span class="sc">%&gt;%</span></span>
+<span id="cb92-7"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb92-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Snake.Species) <span class="sc">%&gt;%</span></span>
+<span id="cb92-8"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb92-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Overlap =</span> <span class="fu">sum</span>(N_pred <span class="sc">&gt;</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Snake.Species
+</th>
+<th style="text-align:right;">
+Overlap
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Morista - Horn overlap for <em>Hydrophis schistosus</em>:</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb93-1" aria-hidden="true" tabindex="-1"></a>prey_sim_HS <span class="ot">&lt;-</span> <span class="fu">SimilarityPair</span>(<span class="at">X =</span> fam_spade_sex[, <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">datatype =</span> <span class="st">&quot;abundance&quot;</span>)</span>
+<span id="cb93-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(prey_sim_HS<span class="sc">$</span>Empirical_relative)</span></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+s.e.
+</th>
+<th style="text-align:right;">
+95%.LCL
+</th>
+<th style="text-align:right;">
+95%.UCL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+C12=U12(q=1,Horn)
+</td>
+<td style="text-align:right;">
+0.8235676
+</td>
+<td style="text-align:right;">
+0.0790768
+</td>
+<td style="text-align:right;">
+0.6685771
+</td>
+<td style="text-align:right;">
+0.9785581
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C22(q=2,Morisita)
+</td>
+<td style="text-align:right;">
+0.9154857
+</td>
+<td style="text-align:right;">
+0.1054702
+</td>
+<td style="text-align:right;">
+0.7087641
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+U22(q=2,Regional overlap)
+</td>
+<td style="text-align:right;">
+0.9558784
+</td>
+<td style="text-align:right;">
+0.0700792
+</td>
+<td style="text-align:right;">
+0.8185232
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ChaoJaccard
+</td>
+<td style="text-align:right;">
+0.7477000
+</td>
+<td style="text-align:right;">
+0.1038000
+</td>
+<td style="text-align:right;">
+0.5442520
+</td>
+<td style="text-align:right;">
+0.9511480
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ChaoSorensen
+</td>
+<td style="text-align:right;">
+0.8556000
+</td>
+<td style="text-align:right;">
+0.0781000
+</td>
+<td style="text-align:right;">
+0.7025240
+</td>
+<td style="text-align:right;">
+1.0086760
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>There was high overlap in prey between males and females in <em>H. schistosus</em>.</p>
+<p>Morista - Horn overlap for <em>Hydrophis schistosus</em>:</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prey_sim_HC &lt;- SimilarityPair(X = fam_spade_sex[,1:2], datatype =</span></span>
+<span id="cb94-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;abundance&#39;)</span></span>
+<span id="cb94-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="co"># prey_sim_HC$Empirical_relative</span></span></code></pre></div>
+<p>Very low sample size.</p>
+<div id="testing-segregation-in-prey-between-sexes" class="section level3" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Testing segregation in prey between sexes</h3>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loading libraries</span></span>
+<span id="cb95-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb95-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-5"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="co"># formating data for vegan</span></span>
+<span id="cb95-6"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-7"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-7" aria-hidden="true" tabindex="-1"></a>fam_simboo_sex <span class="ot">&lt;-</span> gc <span class="sc">%&gt;%</span></span>
+<span id="cb95-8"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(snakes, <span class="at">by =</span> <span class="st">&quot;Field.Code&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb95-9"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Prey.Family <span class="sc">!=</span> <span class="st">&quot;Unidentified&quot;</span>, Prey.Family <span class="sc">!=</span> <span class="st">&quot;&quot;</span>, Field.Code <span class="sc">!=</span> <span class="st">&quot;&quot;</span>, Sex <span class="sc">!=</span> </span>
+<span id="cb95-10"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb95-11"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Snake.Species, Sex, Field.Code, Prey.Family) <span class="sc">%&gt;%</span></span>
+<span id="cb95-12"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb95-13"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">spread</span>(Prey.Family, n, <span class="at">fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb95-14"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb95-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
+<p><em>H. curtus</em>:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PERMANOVA to compare composition</span></span>
+<span id="cb96-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb96-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb96-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb96-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-5"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb96-5" aria-hidden="true" tabindex="-1"></a>permanova_hc <span class="ot">&lt;-</span> <span class="fu">adonis2</span>(fam_simboo_sex[<span class="dv">1</span><span class="sc">:</span><span class="dv">14</span>, <span class="dv">4</span><span class="sc">:</span><span class="fu">length</span>(fam_simboo_sex)] <span class="sc">~</span> fam_simboo_sex[<span class="dv">1</span><span class="sc">:</span><span class="dv">14</span>, </span>
+<span id="cb96-6"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb96-6" aria-hidden="true" tabindex="-1"></a>    ]<span class="sc">$</span>Sex, <span class="at">data =</span> fam_simboo_sex[<span class="dv">1</span><span class="sc">:</span><span class="dv">14</span>, <span class="dv">2</span>])</span>
+<span id="cb96-7"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="do">## clean table</span></span>
+<span id="cb96-8"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb96-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-9"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb96-9" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(permanova_hc)</span></code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -2064,22 +2370,22 @@ p.value
 <tbody>
 <tr>
 <td style="text-align:left;">
-fam_simboo$Snake.Species
+fam_simboo_sex[1:14, ]$Sex
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-1.556349
+0.4960317
 </td>
 <td style="text-align:right;">
-0.0511228
+0.0815927
 </td>
 <td style="text-align:right;">
-3.771403
+1.066098
 </td>
 <td style="text-align:right;">
-0.001
+0.369
 </td>
 </tr>
 <tr>
@@ -2087,13 +2393,13 @@ fam_simboo$Snake.Species
 Residual
 </td>
 <td style="text-align:right;">
-70
+12
 </td>
 <td style="text-align:right;">
-28.886984
+5.5833333
 </td>
 <td style="text-align:right;">
-0.9488772
+0.9184073
 </td>
 <td style="text-align:right;">
 </td>
@@ -2105,10 +2411,10 @@ Residual
 Total
 </td>
 <td style="text-align:right;">
-71
+13
 </td>
 <td style="text-align:right;">
-30.443333
+6.0793651
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -2121,26 +2427,121 @@ Total
 </tbody>
 </table>
 </div>
-<p>Prey composition was significantly different between the two snake species.</p>
+<p>No difference in prey preference, however, sample sizes are low.</p>
+<p><em>H. schistosus</em>:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb97-1" aria-hidden="true" tabindex="-1"></a>permanova_hs <span class="ot">&lt;-</span> <span class="fu">adonis2</span>(fam_simboo_sex[<span class="dv">15</span><span class="sc">:</span><span class="dv">69</span>, <span class="dv">4</span><span class="sc">:</span><span class="fu">length</span>(fam_simboo_sex)] <span class="sc">~</span> fam_simboo_sex[<span class="dv">15</span><span class="sc">:</span><span class="dv">69</span>, </span>
+<span id="cb97-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb97-2" aria-hidden="true" tabindex="-1"></a>    ]<span class="sc">$</span>Sex, <span class="at">data =</span> fam_simboo_sex[<span class="dv">15</span><span class="sc">:</span><span class="dv">69</span>, <span class="dv">2</span>])</span>
+<span id="cb97-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="do">## clean table</span></span>
+<span id="cb97-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb97-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-5"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb97-5" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(permanova_hc)</span></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:right;">
+SumOfSqs
+</th>
+<th style="text-align:right;">
+R2
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+fam_simboo_sex[1:14, ]$Sex
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.4960317
+</td>
+<td style="text-align:right;">
+0.0815927
+</td>
+<td style="text-align:right;">
+1.066098
+</td>
+<td style="text-align:right;">
+0.369
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residual
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+5.5833333
+</td>
+<td style="text-align:right;">
+0.9184073
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Total
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+6.0793651
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>No difference in prey preference across species.</p>
 </div>
 </div>
-<div id="difference-in-size-selectivity-of-prey-between-h.-curtus-and-h.-schistosus" class="section level2" number="3.8">
-<h2><span class="header-section-number">3.8</span> Difference in size selectivity of prey between <em>H. curtus</em> and <em>H. schistosus</em></h2>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summary</span></span>
-<span id="cb31-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb31-3" aria-hidden="true" tabindex="-1"></a>gc<span class="sc">%&gt;%</span></span>
-<span id="cb31-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span> <span class="sc">|</span> Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span>,</span>
-<span id="cb31-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb31-5" aria-hidden="true" tabindex="-1"></a>         Condition <span class="sc">&lt;</span> <span class="dv">3</span>)<span class="sc">%&gt;%</span> <span class="co"># removing very digested specimens </span></span>
-<span id="cb31-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species)<span class="sc">%&gt;%</span></span>
-<span id="cb31-7"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb31-7" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>(Maximum.Body.Girth..cm.)<span class="sc">%&gt;%</span></span>
-<span id="cb31-8"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb31-8" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">yank</span>(<span class="st">&quot;numeric&quot;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb31-9"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb31-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Snake.Species<span class="sc">:</span>p100)</span></code></pre></div>
+<div id="difference-in-size-selectivity-of-prey-between-h.-curtus-and-h.-schistosus-1" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> Difference in size selectivity of prey between <em>H. curtus</em> and <em>H. schistosus</em></h2>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summary</span></span>
+<span id="cb98-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb98-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb98-3" aria-hidden="true" tabindex="-1"></a>gc<span class="sc">%&gt;%</span></span>
+<span id="cb98-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(snakes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Field.Code&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb98-5"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb98-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span> <span class="sc">|</span> Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span>, Sex <span class="sc">!=</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb98-6"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb98-6" aria-hidden="true" tabindex="-1"></a>         Condition <span class="sc">&lt;</span> <span class="dv">3</span>)<span class="sc">%&gt;%</span> <span class="co"># removing very digested specimens </span></span>
+<span id="cb98-7"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb98-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species, Sex)<span class="sc">%&gt;%</span></span>
+<span id="cb98-8"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb98-8" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>(Maximum.Body.Girth..cm.)<span class="sc">%&gt;%</span></span>
+<span id="cb98-9"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb98-9" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">yank</span>(<span class="st">&quot;numeric&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb98-10"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb98-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Snake.Species<span class="sc">:</span>p100)</span></code></pre></div>
 <p><strong>Variable type: numeric</strong></p>
 <table>
 <thead>
 <tr>
 <th style="text-align:left;">
 Snake.Species
+</th>
+<th style="text-align:left;">
+Sex
 </th>
 <th style="text-align:right;">
 n_missing
@@ -2176,37 +2577,8 @@ p100
 <td style="text-align:left;">
 Hydrophis curtus
 </td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0.86
-</td>
-<td style="text-align:right;">
-2.77
-</td>
-<td style="text-align:right;">
-0.76
-</td>
-<td style="text-align:right;">
-2.0
-</td>
-<td style="text-align:right;">
-2.08
-</td>
-<td style="text-align:right;">
-2.65
-</td>
-<td style="text-align:right;">
-3.2
-</td>
-<td style="text-align:right;">
-4.5
-</td>
-</tr>
-<tr>
 <td style="text-align:left;">
-Hydrophis schistosus
+Female
 </td>
 <td style="text-align:right;">
 0
@@ -2215,55 +2587,165 @@ Hydrophis schistosus
 1.00
 </td>
 <td style="text-align:right;">
-3.46
+3.06
 </td>
 <td style="text-align:right;">
-1.17
+1.04
 </td>
 <td style="text-align:right;">
-0.6
+2.00
 </td>
 <td style="text-align:right;">
-3.00
+2.10
 </td>
 <td style="text-align:right;">
-3.60
+3.2
 </td>
 <td style="text-align:right;">
-4.3
+3.50
 </td>
 <td style="text-align:right;">
-5.5
+4.50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.83
+</td>
+<td style="text-align:right;">
+2.38
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.50
+</td>
+<td style="text-align:right;">
+3.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+3.99
+</td>
+<td style="text-align:right;">
+0.88
+</td>
+<td style="text-align:right;">
+2.50
+</td>
+<td style="text-align:right;">
+3.10
+</td>
+<td style="text-align:right;">
+4.2
+</td>
+<td style="text-align:right;">
+4.70
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis schistosus
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+3.30
+</td>
+<td style="text-align:right;">
+1.21
+</td>
+<td style="text-align:right;">
+1.06
+</td>
+<td style="text-align:right;">
+2.62
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+4.15
+</td>
+<td style="text-align:right;">
+5.50
 </td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># testing diff max prey width by species</span></span>
-<span id="cb32-2"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-3" aria-hidden="true" tabindex="-1"></a>gc<span class="sc">%&gt;%</span></span>
-<span id="cb32-4"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span> <span class="sc">|</span> Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span>,</span>
-<span id="cb32-5"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-5" aria-hidden="true" tabindex="-1"></a>         Condition <span class="sc">&lt;</span> <span class="dv">3</span>, <span class="co"># removing digested specimens </span></span>
-<span id="cb32-6"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-6" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(Maximum.Body.Girth..cm.))<span class="sc">%&gt;%</span> <span class="co"># removing unrecorded data</span></span>
-<span id="cb32-7"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Snake.Species, Maximum.Body.Girth..cm.)<span class="sc">%&gt;%</span></span>
-<span id="cb32-8"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">droplevels</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb32-9"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb32-10"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">test =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">t.test</span>(Maximum.Body.Girth..cm. <span class="sc">~</span> Snake.Species, <span class="at">data =</span> .)), <span class="co"># t test</span></span>
-<span id="cb32-11"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">sumry =</span> <span class="fu">map</span>(test, broom<span class="sc">::</span>tidy),</span>
-<span id="cb32-12"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">d =</span> <span class="fu">map</span>(data, <span class="sc">~</span>lsr<span class="sc">::</span><span class="fu">cohensD</span>(Maximum.Body.Girth..cm. <span class="sc">~</span> Snake.Species, <span class="at">data =</span> .)))<span class="sc">%&gt;%</span> <span class="co"># effect size</span></span>
-<span id="cb32-13"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sumry, d)<span class="sc">%&gt;%</span></span>
-<span id="cb32-14"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb32-15"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(estimate1<span class="sc">:</span>parameter, d)<span class="sc">%&gt;%</span></span>
-<span id="cb32-16"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">Hydrophis curtus</span><span class="st">`</span> <span class="ot">=</span> estimate1,</span>
-<span id="cb32-17"><a href="difference-in-diet-between-h-curtus-and-h-schsitosus.html#cb32-17" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Hydrophis schistosus</span><span class="st">`</span> <span class="ot">=</span> estimate2)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># testing diff max prey width by species</span></span>
+<span id="cb99-2"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-3" aria-hidden="true" tabindex="-1"></a>gc<span class="sc">%&gt;%</span></span>
+<span id="cb99-4"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(snakes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Field.Code&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb99-5"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis schistosus&quot;</span> <span class="sc">|</span> Snake.Species <span class="sc">==</span> <span class="st">&quot;Hydrophis curtus&quot;</span>, Sex <span class="sc">!=</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb99-6"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-6" aria-hidden="true" tabindex="-1"></a>         Condition <span class="sc">&lt;</span> <span class="dv">3</span>, <span class="co"># removing very digested specimens  </span></span>
+<span id="cb99-7"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-7" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(Maximum.Body.Girth..cm.))<span class="sc">%&gt;%</span> <span class="co"># removing unrecorded data</span></span>
+<span id="cb99-8"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Snake.Species, Sex, Maximum.Body.Girth..cm.)<span class="sc">%&gt;%</span></span>
+<span id="cb99-9"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">droplevels</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb99-10"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Snake.Species)<span class="sc">%&gt;%</span></span>
+<span id="cb99-11"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb99-12"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">test =</span> <span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">t.test</span>(Maximum.Body.Girth..cm. <span class="sc">~</span> Sex, <span class="at">data =</span> .)), <span class="co"># t test</span></span>
+<span id="cb99-13"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">sumry =</span> <span class="fu">map</span>(test, broom<span class="sc">::</span>tidy),</span>
+<span id="cb99-14"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">d =</span> <span class="fu">map</span>(data, <span class="sc">~</span>lsr<span class="sc">::</span><span class="fu">cohensD</span>(Maximum.Body.Girth..cm. <span class="sc">~</span> Sex, <span class="at">data =</span> .)))<span class="sc">%&gt;%</span> <span class="co"># effect size</span></span>
+<span id="cb99-15"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sumry, d)<span class="sc">%&gt;%</span></span>
+<span id="cb99-16"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb99-17"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(estimate1<span class="sc">:</span>parameter, d)<span class="sc">%&gt;%</span></span>
+<span id="cb99-18"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">Females</span><span class="st">`</span> <span class="ot">=</span> estimate1,</span>
+<span id="cb99-19"><a href="difference-in-diet-by-sex-within-h-curtus-and-h-schsistosus.html#cb99-19" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Males</span><span class="st">`</span> <span class="ot">=</span> estimate2)</span></code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
 <tr>
-<th style="text-align:right;">
-Hydrophis curtus
+<th style="text-align:left;">
+Snake.Species
 </th>
 <th style="text-align:right;">
-Hydrophis schistosus
+Females
+</th>
+<th style="text-align:right;">
+Males
 </th>
 <th style="text-align:right;">
 statistic
@@ -2281,29 +2763,55 @@ d
 </thead>
 <tbody>
 <tr>
-<td style="text-align:right;">
-2.76775
+<td style="text-align:left;">
+Hydrophis schistosus
 </td>
 <td style="text-align:right;">
-3.463946
+3.989231
 </td>
 <td style="text-align:right;">
--2.386272
+3.304778
 </td>
 <td style="text-align:right;">
-0.0237889
+1.818943
 </td>
 <td style="text-align:right;">
-28.90876
+0.0792649
 </td>
 <td style="text-align:right;">
-0.6420566
+28.989212
+</td>
+<td style="text-align:right;">
+0.6290091
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hydrophis curtus
+</td>
+<td style="text-align:right;">
+3.060000
+</td>
+<td style="text-align:right;">
+2.382600
+</td>
+<td style="text-align:right;">
+1.349915
+</td>
+<td style="text-align:right;">
+0.2321573
+</td>
+<td style="text-align:right;">
+5.267076
+</td>
+<td style="text-align:right;">
+0.8537610
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><em>H. schistosus</em> fed on larger prey than <em>H. curtus</em></p>
+<p>There were no significant differences in prey girth across sexes in both species. However, females did take slightly larger prey in both cases.</p>
 
 </div>
 </div>
@@ -2312,8 +2820,8 @@ d
           </div>
         </div>
       </div>
-<a href="difference-in-distribution-and-habitat-use-between-h-curtus-and-h-shcistosus.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="difference-in-resouce-use-betweek-h-curtus-and-h-schistosus.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="demogrpahic-information-of-sampled-individuals.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="comparing-diet-data-to-previous-studies.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
