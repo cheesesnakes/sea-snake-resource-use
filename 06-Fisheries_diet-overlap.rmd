@@ -197,8 +197,9 @@ Species constituting >10% of the catch on average are represented.
 catch_fam%>%
   gather(c("HC", "HS"), key = "snake", value = "Prey")%>%
   filter(Prey == "Yes")%>%
-  mutate(snake = ifelse(snake == "HC", "Hydrophis curtus",  "Hydrophis schistosus"))%>%
-  group_by(Gear.Type,snake)%>%
+  mutate(snake = ifelse(snake == "HC", "Hydrophis curtus",  "Hydrophis schistosus"),
+         Gear.Type = ifelse(Gear.Type == "Trawler", "Trawl Net",  Gear.Type))%>%
+  group_by(Gear.Type, snake)%>%
   summarise(N = length(unique(Family)),
             p = mean(Rel.biomass, na.rm = T),
             sd = sd(Rel.biomass, na.rm = T)/sqrt(n()))%>%

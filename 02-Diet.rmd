@@ -118,7 +118,7 @@ IRI%>%
   geom_col(col = "black", position = position_dodge(preserve = "single"))+
   scale_y_sqrt(name = "IRI (sq.rt.)")+
   labs(x = "Prey Family")+
-  scale_fill_brewer(palette = "Greys", name = "Snake Species")+
+  scale_fill_brewer(palette = "Greys", name = "Species")+
   theme(axis.text.x = element_text(hjust = 1, angle = 60),
         legend.text = element_text(face = "italic"))
 
